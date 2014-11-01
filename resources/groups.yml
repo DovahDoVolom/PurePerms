@@ -1,0 +1,6 @@
+---
+Guest:
+  permissions: 
+  - pplus.command.ppinfo
+  worlds: []
+...
