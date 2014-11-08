@@ -22,13 +22,13 @@ use pocketmine\IPlayer;
 use pocketmine\plugin\PluginBase;
 
 /*
-    # #    #####  #       ####### #######   ###     ###   
-    # #   #     # #    #  #       #        #   #   #   #  
-  ####### #       #    #  #       #       #     # #     # 
-    # #   ######  #    #  #####   #####   #     # #     # 
-  ####### #     # ####### #       #       #     # #     # 
-    # #   #     #      #  #       #        #   #   #   #  
-    # #    #####       #  #       #         ###     ###                                        
+      # #    #####  #       ####### #######   ###     ###   
+      # #   #     # #    #  #       #        #   #   #   #  
+    ####### #       #    #  #       #       #     # #     # 
+      # #   ######  #    #  #####   #####   #     # #     # 
+    ####### #     # ####### #       #       #     # #     # 
+      # #   #     #      #  #       #        #   #   #   #  
+      # #    #####       #  #       #         ###     ###                                        
                                                                                    
 */
 class PurePerms extends PluginBase
@@ -99,13 +99,13 @@ class PurePerms extends PluginBase
 	
 	/*	
 	
-	     #    ######  ###    ### 
-        # #   #     #  #     ### 
-       #   #  #     #  #     ### 
-      #     # ######   #      #  
-      ####### #        #         
-      #     # #        #     ### 
-      #     # #       ###    ###
+	       #    ######  ###    ### 
+          # #   #     #  #     ### 
+         #   #  #     #  #     ### 
+        #     # ######   #      #  
+        ####### #        #         
+        #     # #        #     ### 
+        #     # #       ###    ###
 	  
 	*/
 	
@@ -137,9 +137,9 @@ class PurePerms extends PluginBase
 	
 	public function reload()
 	{
-		$this->loadConfig();
+		$this->config->reloadConfig();
 		
-		$this->setProvider();
+		$this->provider->init();
 	}
 	
 	public function removeGroup()

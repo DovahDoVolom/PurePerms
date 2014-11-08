@@ -23,8 +23,8 @@ class SetGroup extends Command implements PluginIdentifiableCommand
 	{
 		if(!$this->testPermission($sender))
 		{
-            return false;
-        }
+			return false;
+		}
 		
 		return true;
 	}

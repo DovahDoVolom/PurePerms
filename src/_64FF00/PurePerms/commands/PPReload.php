@@ -8,6 +8,8 @@ use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\command\PluginIdentifiableCommand;
 
+use pocketmine\utils\TextFormat;
+
 class PPReload extends Command implements PluginIdentifiableCommand
 {
 	public function __construct(PurePerms $plugin, $name, $description)
@@ -23,8 +25,12 @@ class PPReload extends Command implements PluginIdentifiableCommand
 	{
 		if(!$this->testPermission($sender))
 		{
-            return false;
-        }
+			return false;
+		}
+		
+		$this->plugin->reload();
+		
+		$sender->sendMessage(TextFormat::BLUE . "[PurePerms] All plugin configurations has been successfully reloaded.");
 		
 		return true;
 	}

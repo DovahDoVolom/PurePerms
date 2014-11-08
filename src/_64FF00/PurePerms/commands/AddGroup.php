@@ -21,10 +21,10 @@ class AddGroup extends Command implements PluginIdentifiableCommand
 	
 	public function execute(CommandSender $sender, $label, array $args)
 	{
-		if(!$this->testPermission($sender))
+	    if(!$this->testPermission($sender))
 		{
-            return false;
-        }
+			return false;
+		}
 		
 		return true;
 	}
