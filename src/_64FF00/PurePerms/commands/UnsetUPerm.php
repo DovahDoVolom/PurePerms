@@ -21,6 +21,11 @@ class UnsetUPerm extends Command implements PluginIdentifiableCommand
 	
 	public function execute(CommandSender $sender, $label, array $args)
 	{
+		if(!$this->testPermission($sender))
+		{
+            return false;
+        }
+		
 		return true;
 	}
 	

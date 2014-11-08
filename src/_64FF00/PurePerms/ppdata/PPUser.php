@@ -16,15 +16,20 @@ class PPUser
 	{
 	}
 	
+	public function getName()
+	{
+		return $this->name;
+	}
+	
 	public function getPermissions()
 	{
 	}
 	
-	public function setGroup()
+	public function getPlayer()
 	{
 	}
 	
-	public function setPermissions()
+	public function setGroup()
 	{
 	}
 }

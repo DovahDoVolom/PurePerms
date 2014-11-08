@@ -6,7 +6,10 @@ use _64FF00\PurePerms\PurePerms;
 
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
+use pocketmine\command\ConsoleCommandSender;
 use pocketmine\command\PluginIdentifiableCommand;
+
+use pocketmine\utils\TextFormat;
 
 class PPInfo extends Command implements PluginIdentifiableCommand
 {
@@ -21,6 +24,23 @@ class PPInfo extends Command implements PluginIdentifiableCommand
 	
 	public function execute(CommandSender $sender, $label, array $args)
 	{
+		if(!$this->testPermission($sender))
+		{
+            return false;
+        }
+		
+		$author = $this->plugin->getDescription()->getAuthors()[0];
+		$version = $this->plugin->getDescription()->getVersion();
+		
+		if($sender instanceof ConsoleCommandSender)
+		{
+			$sender->sendMessage(TextFormat::BLUE . "[PurePerms] You are currently using PurePerms v$version by $author.");
+		}
+		else
+		{
+			$sender->sendMessage(TextFormat::BLUE . "[PurePerms] This server is using PurePerms v$version by $author.");
+		}	
+		
 		return true;
 	}
 	

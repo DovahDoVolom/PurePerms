@@ -12,17 +12,23 @@ use _64FF00\PurePerms\commands\SetGroup;
 use _64FF00\PurePerms\commands\SetUPerm;
 use _64FF00\PurePerms\commands\UnsetGPerm;
 use _64FF00\PurePerms\commands\UnsetUPerm;
+use _64FF00\PurePerms\ppdata\PPGroup;
+use _64FF00\PurePerms\ppdata\PPUser;
 use _64FF00\PurePerms\providers\DefaultProvider;
 use _64FF00\PurePerms\providers\SQLite3Provider;
+
+use pocketmine\IPlayer;
 
 use pocketmine\plugin\PluginBase;
 
 /*
-    _  _    __   _  _   _____ _____ ___   ___  
-  _| || |_ / /_ | || | |  ___|  ___/ _ \ / _ \ 
- |_  ..  _| '_ \| || |_| |_  | |_ | | | | | | |
- |_      _| (_) |__   _|  _| |  _|| |_| | |_| |
-   |_||_|  \___/   |_| |_|   |_|   \___/ \___/                                        
+    # #    #####  #       ####### #######   ###     ###   
+    # #   #     # #    #  #       #        #   #   #   #  
+  ####### #       #    #  #       #       #     # #     # 
+    # #   ######  #    #  #####   #####   #     # #     # 
+  ####### #     # ####### #       #       #     # #     # 
+    # #   #     #      #  #       #        #   #   #   #  
+    # #    #####       #  #       #         ###     ###                                        
                                                                                    
 */
 class PurePerms extends PluginBase
@@ -37,6 +43,7 @@ class PurePerms extends PluginBase
 	public function onEnable()
 	{
 		$this->registerCommands();
+		
 		$this->setProvider();
 		
 		$this->getServer()->getPluginManager()->registerEvents(new PPListener($this), $this);
@@ -65,7 +72,7 @@ class PurePerms extends PluginBase
 		$providerName = $this->config->getValue("data-provider");
 		
 		switch(strtolower($providerName))
-		{				
+		{
 			case "sqlite3":
 			
 				$this->provider = new SQLite3Provider($this);
@@ -87,6 +94,59 @@ class PurePerms extends PluginBase
 				break;				
 		}
 		
-		$this->getLogger()->info("Set data provider to $providerName.");
+		$this->getLogger()->info("Set data provider to " . strtoupper($providerName) . ".");
+	}
+	
+	/*	
+	
+	     #    ######  ###    ### 
+        # #   #     #  #     ### 
+       #   #  #     #  #     ### 
+      #     # ######   #      #  
+      ####### #        #         
+      #     # #        #     ### 
+      #     # #       ###    ###
+	  
+	*/
+	
+	public function createGroup()
+	{
+	}
+	
+	public function getDefaultGroup()
+	{
+	}
+	
+	public function getGroup()
+	{
+	}
+	
+	public function getGroups()
+	{
+	}
+	
+	public function getProvider()
+	{
+		return $this->provider;
+	}
+	
+	public function getUser(IPlayer $player)
+	{
+		return new PPUser($this, $player->getName());
+	}
+	
+	public function reload()
+	{
+		$this->loadConfig();
+		
+		$this->setProvider();
+	}
+	
+	public function removeGroup()
+	{
+	}
+	
+	public function setDefault()
+	{
 	}
 }

@@ -5,5 +5,30 @@ api: [1.6.0]
 load: STARTUP
 author: 64FF00
 website: https://github.com/64FF00/PurePerms
-commands: []
-permissions: []
+permissions:
+  pplus:
+    description: ""
+    children:
+      pplus.command:
+        description: ""
+        children:
+          pplus.command.addgroup:
+            description: ""
+          pplus.command.grouplist:
+            description: ""
+          pplus.command.ppinfo:
+            description: ""
+          pplus.command.ppreload:
+            description: ""
+          pplus.command.removegroup:
+            description: ""
+          pplus.command.setgperm:
+            description: ""
+          pplus.command.setgroup:
+            description: ""
+          pplus.command.setuperm:
+            description: ""
+          pplus.command.unsetgperm:
+            description: ""
+          pplus.command.unsetuperm:
+            description: ""

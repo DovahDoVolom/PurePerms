@@ -2,13 +2,21 @@
 
 namespace _64FF00\PurePerms\providers;
 
+use _64FF00\PurePerms\ppdata\PPUser;
+
 interface ProviderInterface
 {
-	public function getGroupData();
+	public function init();
 	
-	public function getUserData();
+	public function getGroupData($groupName);
 	
-	public function setGroupData();
+	public function getGroupsData();
 	
-	public function setUserData();
+	public function getUserData(PPUser $user);
+	
+	public function setGroupData($groupName, array $groupData);
+	
+	public function setGroupsData(array $data);
+
+	public function setUserData(PPUser $user, array $data);
 }
