@@ -13,7 +13,7 @@ class PPConfig
 		$this->loadConfig();
 	}
 	
-	public function getValue($node)
+	public function getValue($key)
 	{
 		if(!$this->config->get($key))
 		{
