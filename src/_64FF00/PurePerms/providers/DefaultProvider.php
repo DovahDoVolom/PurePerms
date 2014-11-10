@@ -5,22 +5,28 @@ namespace _64FF00\PurePerms\providers;
 use _64FF00\PurePerms\PurePerms;
 use _64FF00\PurePerms\ppdata\PPUser;
 
+use pocketmine\IPlayer;
+
 use pocketmine\utils\Config;
 
 class DefaultProvider implements ProviderInterface
 {
+	public static $DATH_PATH;
+	
 	private $groups;
 	
 	public function __construct(PurePerms $plugin)
 	{
 		$this->plugin = $plugin;
 		
+		$DATH_PATH = $this->plugin->getDataFolder() . "players/";
+		
 		$this->init();
 	}
 	
 	public function init()
 	{
-		@mkdir($this->plugin->getDataFolder() . "players/", 0777, true);
+		@mkdir(self::$DATH_PATH, 0777, true);
 		
 		$this->plugin->saveResource("groups.yml");
 		
@@ -28,11 +34,13 @@ class DefaultProvider implements ProviderInterface
 		));
 	}
 	
-	public function getGroupData($groupName)
+	public function getGroupData(PPGroup $group)
 	{
-		if(isset($this->groups->getAll()[$groupName]) and is_array($this->groups->getAll()[$groupName]))
+		$groupName = $group->getName();
+		
+		if(isset($this->getGroupsData()[$groupName]) and is_array($this->getGroupsData()[$groupName]))
 		{
-			return $this->groups->getAll()[$groupName];
+			return $this->getGroupsData()[$groupName];
 		}
 	}
 	
@@ -43,11 +51,29 @@ class DefaultProvider implements ProviderInterface
 	
 	public function getUserData(PPUser $user)
 	{
+		$userName = $user->getPlayer()->getName();
 		
+		if(!(file_exists(self::$DATH_PATH . strtolower($userName) . ".yml")))
+		{
+			return new Config(self::$DATH_PATH . strtolower($userName) . ".yml", Config::YAML, array(
+				"username" => $userName,
+				"permissions" => array(
+				),
+				"worlds" => array(
+				)
+			));
+		}
+		else
+		{
+			return new Config(self::$DATH_PATH . strtolower($userName) . ".yml", Config::YAML, array(
+			));
+		}
 	}
 	
-	public function setGroupData($groupName, array $groupData)
+	public function setGroupData(PPGroup $group, array $groupData)
 	{
+		$groupName = $group->getName();
+		
 		$this->groups->set($groupName, $groupData);
 		
 		$this->groups->save();
@@ -61,6 +87,15 @@ class DefaultProvider implements ProviderInterface
 	}
 
 	public function setUserData(PPUser $user, array $data)
+	{
+		$userData = $this->getUserData($user);
+		
+		$userData->setAll($data);
+			
+		$userData->save();
+	}
+	
+	public function close()
 	{
 	}
 }

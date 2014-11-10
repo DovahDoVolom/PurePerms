@@ -2,27 +2,28 @@
 Guest:
   def-group: true
   inheritance: []
-  permissions: 
-  - pocketmine.command.list: true
-  - pplus.command.ppinfo: true
+  permissions:
+  - pocketmine.command.list
+  - -pocketmine.command.me
+  - pplus.command.ppinfo
   worlds: []
 Admin:
   inheritance: 
   - Guest
   permissions:
-  - pocketmine.broadcast: true
-  - pocketmine.command.gamemode: true
-  - pocketmine.command.give: true
-  - pocketmine.command.kick: true
-  - pocketmine.command.teleport: true
-  - pocketmine.command.time: true
+  - pocketmine.broadcast
+  - pocketmine.command.gamemode
+  - pocketmine.command.give
+  - pocketmine.command.kick
+  - pocketmine.command.teleport
+  - pocketmine.command.time
   worlds: []
 Owner:
   inheritance: 
   - Guest
   - Admin
   permissions:
-  - pocketmine.command: true
-  - pplus.command: true
+  - pocketmine.command
+  - pplus.command
   worlds: []
 ...

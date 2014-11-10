@@ -19,4 +19,6 @@ interface ProviderInterface
 	public function setGroupsData(array $data);
 
 	public function setUserData(PPUser $user, array $data);
+	
+	public function close();
 }

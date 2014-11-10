@@ -5,6 +5,8 @@ namespace _64FF00\PurePerms\providers;
 use _64FF00\PurePerms\PurePerms;
 use _64FF00\PurePerms\ppdata\PPUser;
 
+use pocketmine\IPlayer;
+
 class SQLite3Provider implements ProviderInterface
 {
 	public function __construct(PurePerms $plugin)
@@ -39,6 +41,10 @@ class SQLite3Provider implements ProviderInterface
 	}
 
 	public function setUserData(PPUser $user, array $data)
+	{
+	}
+	
+	public function close()
 	{
 	}
 }

@@ -19,6 +19,8 @@ use _64FF00\PurePerms\providers\SQLite3Provider;
 
 use pocketmine\IPlayer;
 
+use pocketmine\Player;
+
 use pocketmine\plugin\PluginBase;
 
 /*
@@ -31,8 +33,11 @@ use pocketmine\plugin\PluginBase;
       # #    #####       #  #       #         ###     ###                                        
                                                                                    
 */
+
 class PurePerms extends PluginBase
 {
+	private $attachments = [];
+	
 	private $config, $provider;
 	
 	public function onLoad()
@@ -113,16 +118,50 @@ class PurePerms extends PluginBase
 	{
 	}
 	
-	public function getDefaultGroup()
+	public function getAttachment(Player $player)
 	{
+		if(!isset($this->attachments[$player->getName()]))
+		{
+			$this->attachments[$player->getName()] = $player->addAttachment($this);
+		}
+		
+		return $this->attachments[$player->getName()];
 	}
 	
-	public function getGroup()
+	public function getConfig()
 	{
+		return $this->config;
+	}
+	
+	public function getDefaultGroup()
+	{
+		
+	}
+	
+	public function getGroup($groupName)
+	{
+		if(empty($groupName)) return null;
+		
+		$group = new PPGroup($this, $groupName);
+			
+		if(empty($group->getData()))
+		{
+			$this->getLogger()->critical("Group $groupName is null! Please check if your groups.yml has any errors.");
+		}
+		
+		return $group;
 	}
 	
 	public function getGroups()
 	{
+		$result = [];
+		
+		foreach(array_keys($this->provider->getGroupsData()) as $groupName)
+		{
+			array_push($result, new PPGroup($this, $groupName));
+		}
+		
+		return $result;
 	}
 	
 	public function getProvider()
@@ -142,11 +181,24 @@ class PurePerms extends PluginBase
 		$this->provider->init();
 	}
 	
+	public function removeAttachment(Player $player)
+	{
+		$attachment = $this->getAttachment($player);
+		
+		$player->removeAttachment($attachment);
+		
+		unset($this->attachments[$player->getName()]);
+	}
+	
 	public function removeGroup()
 	{
 	}
 	
-	public function setDefault()
+	public function setDefault(PPGroup $group)
+	{
+	}
+	
+	public function updatePermissions()
 	{
 	}
 }
