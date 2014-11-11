@@ -34,18 +34,18 @@ class PPGroup
 	{
 	}
 	
-	public function getWorldData($worldName = null)
+	public function getWorldData($levelName = null)
 	{
-		if($worldName != null)
+		if($levelName != null)
 		{
-			$worldName = $this->plugin->getServer()->getDefaultLevel()->getName();
+			$levelName = $this->plugin->getServer()->getDefaultLevel()->getName();
 		}
 		
-		if(!isset($this->getData()["worlds"][$worldName]))
+		if(!isset($this->getData()["worlds"][$levelName]))
 		{
 			$tempGroupData = $this->getData();
 			
-			$tempGroupData["worlds"][$worldName] = array(
+			$tempGroupData["worlds"][$levelName] = array(
 				"permissions" => array(
 				)
 			);
@@ -55,7 +55,7 @@ class PPGroup
 			unset($tempGroupData);
 		}
 			
-		return $this->getData()["worlds"][$worldName];
+		return $this->getData()["worlds"][$levelName];
 	}
 	
 	public function isDefault()

@@ -17,17 +17,47 @@ class PPListener implements Listener
 	
 	public function onLevelChange(EntityLevelChangeEvent $event)
 	{
+		$player = $event->getPlayer();
+		
+		$level = $player->getLevel()->getName();
+		
+		$isMultiWorldPermsEnabled = $this->plugin->getPPConfig()->getValue("enable-multiworld-perms");
+		
+		if(!$isMultiWorldPermsEnabled)
+		{		
+			$this->plugin->updatePermissions($player);
+		}
+		
+		$this->plugin->updatePermissions($player, $level);
 	}
 	
 	public function onPlayerJoin(PlayerJoinEvent $event)
 	{
+		$player = $event->getPlayer();
+		
+		$level = $player->getLevel()->getName();
+		
+		$isMultiWorldPermsEnabled = $this->plugin->getPPConfig()->getValue("enable-multiworld-perms");
+		
+		if(!$isMultiWorldPermsEnabled)
+		{		
+			$this->plugin->updatePermissions($player);
+		}
+		
+		$this->plugin->updatePermissions($player, $level);
 	}
 
 	public function onPlayerKick(PlayerKickEvent $event)
 	{
+		$player = $event->getPlayer();
+		
+		$this->plugin->removeAttachment($player);
 	}
 
 	public function onPlayerQuit(PlayerQuitEvent $event)
 	{
+		$player = $event->getPlayer();
+		
+		$this->plugin->removeAttachment($player);
 	}
 }

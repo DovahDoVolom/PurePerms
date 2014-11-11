@@ -128,14 +128,9 @@ class PurePerms extends PluginBase
 		return $this->attachments[$player->getName()];
 	}
 	
-	public function getConfig()
-	{
-		return $this->config;
-	}
-	
 	public function getDefaultGroup()
 	{
-		
+		// TODO
 	}
 	
 	public function getGroup($groupName)
@@ -164,6 +159,11 @@ class PurePerms extends PluginBase
 		return $result;
 	}
 	
+	public function getPPConfig()
+	{
+		return $this->config;
+	}
+	
 	public function getProvider()
 	{
 		return $this->provider;
@@ -171,7 +171,7 @@ class PurePerms extends PluginBase
 	
 	public function getUser(IPlayer $player)
 	{
-		return new PPUser($this, $player->getName());
+		return new PPUser($this, $player);
 	}
 	
 	public function reload()
@@ -190,15 +190,42 @@ class PurePerms extends PluginBase
 		unset($this->attachments[$player->getName()]);
 	}
 	
+	public function removeAttachments()
+	{
+		foreach($this->attachments as $attachment)
+		{
+			unset($this->attachments[$attachment]);
+		}
+	}
+	
 	public function removeGroup()
 	{
 	}
 	
 	public function setDefault(PPGroup $group)
 	{
+		// TODO
 	}
 	
-	public function updatePermissions()
+	public function updatePermissions(Player $player, $levelName = null)
 	{
+		$attachment = $this->getAttachment($player);
+		
+		$originalPermissions = $this->getUser($player)->getPermissions($levelName);
+		
+		$permissions = [];
+		
+		foreach($originalPermissions as $permission)
+		{
+			$value = !(substr($permission, 0, 1) === "-");
+			
+			$permissions[] = $permission;
+			
+			ksort($permissions);
+		}
+		
+		$attachment->clearPermissions();
+		
+		$attachment->setPermissions($permissions);
 	}
 }

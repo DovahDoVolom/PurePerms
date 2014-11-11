@@ -3,6 +3,7 @@
 namespace _64FF00\PurePerms\providers;
 
 use _64FF00\PurePerms\PurePerms;
+use _64FF00\PurePerms\ppdata\PPGroup;
 use _64FF00\PurePerms\ppdata\PPUser;
 
 use pocketmine\IPlayer;
@@ -44,18 +45,20 @@ class DefaultProvider implements ProviderInterface
 		}
 	}
 	
-	public function getGroupsData()
+	public function getGroupsData($isArray = false)
 	{
-		return $this->groups->getAll();
+		if($isArray) return $this->groups->getAll();
+		
+		return $this->groups;
 	}
 	
-	public function getUserData(PPUser $user)
+	public function getUserData(PPUser $user, $isArray = false)
 	{
 		$userName = $user->getPlayer()->getName();
 		
 		if(!(file_exists(self::$DATH_PATH . strtolower($userName) . ".yml")))
 		{
-			return new Config(self::$DATH_PATH . strtolower($userName) . ".yml", Config::YAML, array(
+			$userConfig = new Config(self::$DATH_PATH . strtolower($userName) . ".yml", Config::YAML, array(
 				"username" => $userName,
 				"permissions" => array(
 				),
@@ -65,9 +68,13 @@ class DefaultProvider implements ProviderInterface
 		}
 		else
 		{
-			return new Config(self::$DATH_PATH . strtolower($userName) . ".yml", Config::YAML, array(
+			$userConfig = new Config(self::$DATH_PATH . strtolower($userName) . ".yml", Config::YAML, array(
 			));
 		}
+		
+		if($isArray) return $userConfig->getAll();
+		
+		return $userConfig;
 	}
 	
 	public function setGroupData(PPGroup $group, array $groupData)

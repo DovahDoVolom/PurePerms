@@ -1,11 +1,12 @@
 <?php
-
 namespace _64FF00\PurePerms;
 
 use pocketmine\utils\Config;
 
 class PPConfig
 {
+	private $config;
+	
 	public function __construct(PurePerms $plugin)
 	{
 		$this->plugin = $plugin;

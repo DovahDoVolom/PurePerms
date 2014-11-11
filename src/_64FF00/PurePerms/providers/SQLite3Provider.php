@@ -20,7 +20,7 @@ class SQLite3Provider implements ProviderInterface
 	{
 	}
 	
-	public function getGroupData($groupName)
+	public function getGroupData(PPGroup $group)
 	{
 	}
 	
@@ -32,7 +32,7 @@ class SQLite3Provider implements ProviderInterface
 	{
 	}
 	
-	public function setGroupData($groupName, array $groupData)
+	public function setGroupData(PPGroup $group, array $groupData)
 	{
 	}
 	

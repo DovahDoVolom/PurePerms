@@ -16,29 +16,24 @@ class PPUser
 	
 	public function getData()
 	{
-		return $this->plugin->getProvider()->getUserData($this);
+		return $this->plugin->getProvider()->getUserData($this, true);
 	}
 	
-	public function getGroup($worldName)
+	public function getGroup($levelName)
 	{
-		return $this->getWorldData($worldName)["group"];
+		return $this->getWorldData($levelName)["group"];
 	}
 	
-	public function getPlayer()
+	public function getPermissions($levelName = null)
 	{
-		return $this->player;
-	}
-	
-	public function getPermissions($worldName = null)
-	{
-		$isMultiWorldPermsEnabled = $this->plugin->getConfig()->getValue("enable-multiworld-perms");
+		$isMultiWorldPermsEnabled = $this->plugin->getPPConfig()->getValue("enable-multiworld-perms");
 		
-		if($worldName = null and $isMultiWorldPermsEnabled == false)
+		if($levelName = null and !$isMultiWorldPermsEnabled)
 		{
 			return $this->getNode("permissions");
 		}
 		
-		return $this->getWorldData($worldName)["permissions"];
+		return $this->getWorldData($levelName)["permissions"];
 	}
 	
 	public function getPlayer()
@@ -46,18 +41,18 @@ class PPUser
 		return $this->player;
 	}
 	
-	public function getWorldData($worldName = null)
+	public function getWorldData($levelName = null)
 	{
-		if($worldName != null)
+		if($levelName != null)
 		{
-			$worldName = $this->plugin->getServer()->getDefaultLevel()->getName();
+			$levelName = $this->plugin->getServer()->getDefaultLevel()->getName();
 		}
 			
-		if(!isset($this->getData()["worlds"][$worldName]))
+		if(!isset($this->getData()["worlds"][$levelName]))
 		{
 			$tempUserData = $this->getData();
 			
-			$tempUserData["worlds"][$worldName] = array(
+			$tempUserData["worlds"][$levelName] = array(
 				"group" => $this->plugin->getDefaultGroup()->getName(),
 				"permissions" => array(
 				)
@@ -68,10 +63,10 @@ class PPUser
 			unset($tempUserData);
 		}
 			
-		return $this->getData()["worlds"][$worldName];
+		return $this->getData()["worlds"][$levelName];
 	}
 	
-	public function setGroup(PPGroup $group, $worldName)
+	public function setGroup(PPGroup $group, $levelName)
 	{
 	}
 }
