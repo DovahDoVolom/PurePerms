@@ -59,8 +59,6 @@ class PPUser
 			);
 				
 			$this->setData($tempUserData);
-				
-			unset($tempUserData);
 		}
 			
 		return $this->getData()["worlds"][$levelName];

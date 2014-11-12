@@ -17,6 +17,11 @@ class PPGroup
 		return $this->plugin->getProvider()->getGroupData($this);
 	}
 	
+	public function getInheritedGroups()
+	{
+		return $this->getNode("inheritance");
+	}
+	
 	public function getName()
 	{
 		return $this->name;
@@ -24,14 +29,45 @@ class PPGroup
 	
 	public function getNode($node)
 	{
-		if(isset($this->getData()[$node]))
+		if(!isset($this->getData()[$node]))
 		{
-			return $this->getData()[$node];
+			$tempGroupData = $this->getData();
+			
+			$tempGroupData[$node] = null;
+			
+			$this->setData($tempGroupData);
 		}
+		
+		return $this->getData()[$node];
 	}
 	
+	public function getPermissions($levelName = null)
+	{
+		$isMultiWorldPermsEnabled = $this->plugin->getPPConfig()->getValue("enable-multiworld-perms");
+		
+		$permissions = $this->getWorldData($levelName)["permissions"];
+		
+		if($levelName = null and !$isMultiWorldPermsEnabled)
+		{
+			$permissions = $this->getNode("permissions");
+		}
+		
+		foreach($this->getInheritedGroups() as $inheritedGroupName)
+		{
+			$inheritedGroup = $this->plugin->getGroup($inheritedGroupName);
+			
+			if($permissions == null) $permissions = [];
+			
+			array_merge($permissions, $inheritedGroup->getPermissions($levelName)); 
+		}
+			
+		return $permissions;
+	}
+	
+	// TODO
 	public function getUsers($isActive = false)
 	{
+		
 	}
 	
 	public function getWorldData($levelName = null)
@@ -51,8 +87,6 @@ class PPGroup
 			);
 				
 			$this->setData($tempGroupData);
-				
-			unset($tempGroupData);
 		}
 			
 		return $this->getData()["worlds"][$levelName];
@@ -61,6 +95,18 @@ class PPGroup
 	public function isDefault()
 	{
 		return ($this->getNode("def-group") == true);
+	}
+	
+	public function removeNode($node)
+	{
+		$tempGroupData = $this->getData();
+		
+		if(isset($tempGroupData[$node]))
+		{				
+			unset($tempGroupData[$node]);
+			
+			$this->setData($tempGroupData);
+		}
 	}
 	
 	public function setData(array $groupData)
@@ -76,14 +122,38 @@ class PPGroup
 	public function setNode($node, $value)
 	{
 		$tempGroupData = $this->getData();
-		
-		if(isset($tempGroupData[$node]))
-		{				
-			$tempGroupData[$node] = $value;
+					
+		$tempGroupData[$node] = $value;
 			
-			$this->setData($tempGroupData);
+		$this->setData($tempGroupData);
+	}
+	
+	public function sortPermissions()
+	{
+		$tempGroupData = $this->getData();
 			
-			unset($tempGroupData);
+		if(isset($tempGroupData["permissions"]))
+		{
+			array_unique($tempGroupData["permissions"]);
+			
+			ksort($tempGroupData["permissions"]);
 		}
+			
+		if(isset($tempGroupData["worlds"]))
+		{
+			foreach($this->getServer()->getLevels() as $level)
+			{
+				$levelName = $level->getName();
+					
+				if(isset($tempGroupData["worlds"][$levelName]))
+				{		
+					array_unique($tempGroupData["worlds"][$levelName]["permissions"]);
+					
+					ksort($tempGroupData["worlds"][$levelName]["permissions"]);
+				}
+			}
+		}
+			
+		$this->setData($tempGroupData);
 	}
 }
