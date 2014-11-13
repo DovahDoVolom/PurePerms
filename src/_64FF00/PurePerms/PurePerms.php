@@ -143,12 +143,43 @@ class PurePerms extends PluginBase
 		return $this->attachments[$player->getName()];
 	}
 	
-	// TODO 
 	public function getDefaultGroup()
 	{		
+		$defaultGroups = [];
+		
 		foreach($this->getGroups() as $defaultGroup)
 		{
-			if($defaultGroup->isDefault()) return $defaultGroup;
+			if($defaultGroup->isDefault()) array_push($defaultGroups, $defaultGroup);
+		}
+		
+		if(count($defaultGroups) == 1)
+		{
+			return $defaultGroups[0];
+		}
+		else
+		{
+			if(count($defaultGroups) > 1)
+			{
+				$this->getLogger()->warning("More than one default groups were declared in the groups file.");
+			}
+			elseif(count($defaultGroups) <= 0)
+			{
+				$this->getLogger()->warning("No default group was found in the groups file.");
+				
+				$defaultGroups = $this->getGroups();
+			}
+			
+			$this->getLogger()->warning("Setting the default group automatically...");	
+			
+			foreach($defaultGroups as $defaultGroup)
+			{
+				if(count($defaultGroup->getInheritedGroups()) == 0)
+				{
+					$this->setDefaultGroup($defaultGroup);
+						
+					return $defaultGroup;
+				}
+			}
 		}
 	}
 	

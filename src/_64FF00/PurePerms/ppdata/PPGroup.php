@@ -75,13 +75,8 @@ class PPGroup
 		
 	}
 	
-	public function getWorldData($levelName = null)
-	{
-		if($levelName == null)
-		{
-			$levelName = $this->plugin->getServer()->getDefaultLevel()->getName();
-		}
-		
+	public function getWorldData($levelName)
+	{		
 		if(!isset($this->getData()["worlds"][$levelName]))
 		{
 			$tempGroupData = $this->getData();
