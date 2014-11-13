@@ -19,7 +19,7 @@ class PPListener implements Listener
 	{
 		$player = $event->getPlayer();
 		
-		$level = $player->getLevel()->getName();
+		$levelName = $event->getTarget()->getName();
 		
 		$isMultiWorldPermsEnabled = $this->plugin->getPPConfig()->getValue("enable-multiworld-perms");
 		
@@ -27,15 +27,17 @@ class PPListener implements Listener
 		{		
 			$this->plugin->updatePermissions($player);
 		}
-		
-		$this->plugin->updatePermissions($player, $level);
+		else
+		{
+			$this->plugin->updatePermissions($player, $levelName);
+		}
 	}
 	
 	public function onPlayerJoin(PlayerJoinEvent $event)
 	{
 		$player = $event->getPlayer();
 		
-		$level = $player->getLevel()->getName();
+		$levelName = $player->getLevel()->getName();
 		
 		$isMultiWorldPermsEnabled = $this->plugin->getPPConfig()->getValue("enable-multiworld-perms");
 		
@@ -43,8 +45,10 @@ class PPListener implements Listener
 		{		
 			$this->plugin->updatePermissions($player);
 		}
-		
-		$this->plugin->updatePermissions($player, $level);
+		else
+		{
+			$this->plugin->updatePermissions($player, $levelName);
+		}
 	}
 
 	public function onPlayerKick(PlayerKickEvent $event)

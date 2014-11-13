@@ -12,22 +12,18 @@ use pocketmine\utils\Config;
 
 class DefaultProvider implements ProviderInterface
 {
-	public static $DATH_PATH;
-	
 	private $groups;
 	
 	public function __construct(PurePerms $plugin)
 	{
 		$this->plugin = $plugin;
 		
-		$DATH_PATH = $this->plugin->getDataFolder() . "players/";
-		
 		$this->init();
 	}
 	
 	public function init()
 	{
-		@mkdir(self::$DATH_PATH, 0777, true);
+		@mkdir($this->plugin->getDataFolder() . "players/", 0777, true);
 		
 		$this->plugin->saveResource("groups.yml");
 		
@@ -39,9 +35,9 @@ class DefaultProvider implements ProviderInterface
 	{
 		$groupName = $group->getName();
 		
-		if(isset($this->getGroupsData()[$groupName]) and is_array($this->getGroupsData()[$groupName]))
+		if(isset($this->getGroupsData(true)[$groupName]) and is_array($this->getGroupsData(true)[$groupName]))
 		{
-			return $this->getGroupsData()[$groupName];
+			return $this->getGroupsData(true)[$groupName];
 		}
 	}
 	
@@ -56,9 +52,9 @@ class DefaultProvider implements ProviderInterface
 	{
 		$userName = $user->getPlayer()->getName();
 		
-		if(!(file_exists(self::$DATH_PATH . strtolower($userName) . ".yml")))
+		if(!(file_exists($this->plugin->getDataFolder() . "players/" . strtolower($userName) . ".yml")))
 		{
-			$userConfig = new Config(self::$DATH_PATH . strtolower($userName) . ".yml", Config::YAML, array(
+			$userConfig = new Config($this->plugin->getDataFolder() . "players/" . strtolower($userName) . ".yml", Config::YAML, array(
 				"username" => $userName,
 				"permissions" => array(
 				),
@@ -68,7 +64,7 @@ class DefaultProvider implements ProviderInterface
 		}
 		else
 		{
-			$userConfig = new Config(self::$DATH_PATH . strtolower($userName) . ".yml", Config::YAML, array(
+			$userConfig = new Config($this->plugin->getDataFolder() . "players/" . strtolower($userName) . ".yml", Config::YAML, array(
 			));
 		}
 		

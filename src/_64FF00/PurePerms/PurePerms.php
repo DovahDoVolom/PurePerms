@@ -145,12 +145,10 @@ class PurePerms extends PluginBase
 	
 	// TODO 
 	public function getDefaultGroup()
-	{
-		$result = [];
-		
-		foreach($this->getGroups() as $currentGroup)
+	{		
+		foreach($this->getGroups() as $defaultGroup)
 		{
-			
+			if($defaultGroup->isDefault()) return $defaultGroup;
 		}
 	}
 	
@@ -172,7 +170,7 @@ class PurePerms extends PluginBase
 	{
 		$result = [];
 		
-		foreach(array_keys($this->provider->getGroupsData()) as $groupName)
+		foreach(array_keys($this->provider->getGroupsData(true)) as $groupName)
 		{
 			array_push($result, new PPGroup($this, $groupName));
 		}
@@ -232,7 +230,7 @@ class PurePerms extends PluginBase
 	}
 	
 	// TODO
-	public function setDefault(PPGroup $group)
+	public function setDefaultGroup(PPGroup $group)
 	{
 		foreach($this->getGroups() as $currentGroup)
 		{

@@ -21,24 +21,54 @@ class PPUser
 	
 	public function getGroup($levelName)
 	{
-		return $this->getWorldData($levelName)["group"];
+		$groupName = $this->getWorldData($levelName)["group"];
+		
+		if(isset($groupName))
+		{
+			return $this->plugin->getGroup($groupName);
+		}
+	}
+	
+	public function getGroupPermissions($levelName = null)
+	{
+		return $this->getGroup($levelName)->getPermissions($levelName);
+	}
+	
+	public function getNode($node)
+	{
+		if(!isset($this->getData()[$node]))
+		{
+			$this->setNode($node, null);
+		}
+		
+		return $this->getData()[$node];
 	}
 	
 	public function getPermissions($levelName = null)
 	{
-		$isMultiWorldPermsEnabled = $this->plugin->getPPConfig()->getValue("enable-multiworld-perms");
+		$permissions = array_merge($this->getGroupPermissions($levelName), $this->getUserPermissions($levelName));
 		
-		if($levelName = null and !$isMultiWorldPermsEnabled)
-		{
-			return $this->getNode("permissions");
-		}
+		// DEBUG
+		var_dump($permissions);
 		
-		return $this->getWorldData($levelName)["permissions"];
+		return $permissions;
 	}
 	
 	public function getPlayer()
 	{
 		return $this->player;
+	}
+	
+	public function getUserPermissions($levelName = null)
+	{
+		$isMultiWorldPermsEnabled = $this->plugin->getPPConfig()->getValue("enable-multiworld-perms");
+		
+		if($levelName == null and !$isMultiWorldPermsEnabled)
+		{
+			return $this->getNode("permissions");
+		}
+		
+		return $this->getWorldData($levelName)["permissions"];
 	}
 	
 	public function getWorldData($levelName = null)
@@ -64,7 +94,21 @@ class PPUser
 		return $this->getData()["worlds"][$levelName];
 	}
 	
+	public function setData(array $userData)
+	{
+		$this->plugin->getProvider()->setUserData($this, $userData);
+	}
+	
 	public function setGroup(PPGroup $group, $levelName)
 	{
+	}
+	
+	public function setNode($node, $value)
+	{
+		$tempUserData = $this->getData();
+					
+		$tempUserData[$node] = $value;
+			
+		$this->setData($tempUserData);
 	}
 }

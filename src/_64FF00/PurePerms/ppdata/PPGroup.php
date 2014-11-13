@@ -19,7 +19,16 @@ class PPGroup
 	
 	public function getInheritedGroups()
 	{
-		return $this->getNode("inheritance");
+		$inheritedGroups = [];
+		
+		foreach($this->getNode("inheritance") as $inheritedGroupName)
+		{
+			$inheritedGroup = $this->plugin->getGroup($inheritedGroupName);
+			
+			array_push($inheritedGroups, $inheritedGroup);
+		}
+		
+		return $inheritedGroups;
 	}
 	
 	public function getName()
@@ -31,11 +40,7 @@ class PPGroup
 	{
 		if(!isset($this->getData()[$node]))
 		{
-			$tempGroupData = $this->getData();
-			
-			$tempGroupData[$node] = null;
-			
-			$this->setData($tempGroupData);
+			$this->setNode($node, null);
 		}
 		
 		return $this->getData()[$node];
@@ -45,17 +50,17 @@ class PPGroup
 	{
 		$isMultiWorldPermsEnabled = $this->plugin->getPPConfig()->getValue("enable-multiworld-perms");
 		
-		$permissions = $this->getWorldData($levelName)["permissions"];
-		
-		if($levelName = null and !$isMultiWorldPermsEnabled)
+		if($levelName == null and !$isMultiWorldPermsEnabled)
 		{
 			$permissions = $this->getNode("permissions");
 		}
-		
-		foreach($this->getInheritedGroups() as $inheritedGroupName)
+		else
 		{
-			$inheritedGroup = $this->plugin->getGroup($inheritedGroupName);
-			
+			$permissions = $this->getWorldData($levelName)["permissions"];
+		}
+		
+		foreach($this->getInheritedGroups() as $inheritedGroup)
+		{
 			if($permissions == null) $permissions = [];
 			
 			array_merge($permissions, $inheritedGroup->getPermissions($levelName)); 
@@ -72,7 +77,7 @@ class PPGroup
 	
 	public function getWorldData($levelName = null)
 	{
-		if($levelName != null)
+		if($levelName == null)
 		{
 			$levelName = $this->plugin->getServer()->getDefaultLevel()->getName();
 		}

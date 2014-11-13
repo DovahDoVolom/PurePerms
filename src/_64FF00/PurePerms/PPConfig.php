@@ -16,14 +16,16 @@ class PPConfig
 	
 	public function getValue($key)
 	{
-		if(!$this->config->get($key))
+		$value = $this->config->get($key);
+		
+		if($value === null)
 		{
 			$this->plugin->getLogger()->warning("Key $key not found in config.yml. (NULL)");
 			
 			return null;
 		}
 		
-		return $this->config->get($key);
+		return $value;
 	}
 	
 	public function loadConfig()
