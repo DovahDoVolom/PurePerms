@@ -286,9 +286,13 @@ class PurePerms extends PluginBase
 		
 		foreach($originalPermissions as $permission)
 		{
-			$value = !(substr($permission, 0, 1) === "-");
+			$isNegative = substr($permission, 0, 1) === "-";
 			
-			$permissions[] = $permission;
+			if($isNegative) $permission = substr($permission, 1);
+			
+			$value = !$isNegative;
+			
+			$permissions[$permission] = $value;
 			
 			ksort($permissions);
 		}

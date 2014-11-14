@@ -5,7 +5,7 @@ Guest:
   permissions:
   - pocketmine.command.list
   - -pocketmine.command.me
-  - pplus.command.ppinfo
+  - pperms.command.ppinfo
   worlds: []
 Admin:
   inheritance: 

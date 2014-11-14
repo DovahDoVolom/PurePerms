@@ -6,29 +6,29 @@ load: STARTUP
 author: 64FF00
 website: https://github.com/64FF00/PurePerms
 permissions:
-  pplus:
+  pperms:
     description: ""
     children:
-      pplus.command:
+      pperms.command:
         description: ""
         children:
-          pplus.command.addgroup:
+          pperms.command.addgroup:
             description: ""
-          pplus.command.grouplist:
+          pperms.command.grouplist:
             description: ""
-          pplus.command.ppinfo:
+          pperms.command.ppinfo:
             description: ""
-          pplus.command.ppreload:
+          pperms.command.ppreload:
             description: ""
-          pplus.command.removegroup:
+          pperms.command.removegroup:
             description: ""
-          pplus.command.setgperm:
+          pperms.command.setgperm:
             description: ""
-          pplus.command.setgroup:
+          pperms.command.setgroup:
             description: ""
-          pplus.command.setuperm:
+          pperms.command.setuperm:
             description: ""
-          pplus.command.unsetgperm:
+          pperms.command.unsetgperm:
             description: ""
-          pplus.command.unsetuperm:
+          pperms.command.unsetuperm:
             description: ""
