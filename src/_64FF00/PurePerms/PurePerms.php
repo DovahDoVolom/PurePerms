@@ -54,13 +54,6 @@ class PurePerms extends PluginBase
 		$this->setProvider();
 		
 		$this->getServer()->getPluginManager()->registerEvents(new PPListener($this), $this);
-		
-		$this->tmp();
-	}
-	
-	private function tmp()
-	{
-		var_dump($this->getUser($this->getPlayer("64FF00"))->getUserPermissions());
 	}
 	
 	private function registerCommands()
@@ -78,7 +71,7 @@ class PurePerms extends PluginBase
 		$commandMap->register("setgroup", new SetGroup($this, "setgroup", "Sets group for the user."));
 		$commandMap->register("setuperm", new SetUPerm($this, "setuperm", "Adds a permission to the user."));
 		$commandMap->register("unsetgperm", new UnsetGPerm($this, "unsetgperm", "Removes a permission from the group."));
-		$commandMap->register("unsetuperm", new UnsetUPerm($this, "unsetuperm", "Removes a permission from the user."));		
+		$commandMap->register("unsetuperm", new UnsetUPerm($this, "unsetuperm", "Removes a permission from the user."));
 	}
 	
 	private function setProvider()
@@ -289,12 +282,14 @@ class PurePerms extends PluginBase
 			}
 		}
 		
-		$group->setNode("def-group", true);
+		$group->setDefault();
 	}
 	
 	public function setGroup(IPlayer $player, PPGroup $group, $levelName = null)
 	{
 		$this->getUser($player)->setGroup($group, $levelName);
+		
+		$this->updatePermissions($player, $levelName);
 	}
 	
 	public function updatePermissions(Player $player, $levelName = null)
