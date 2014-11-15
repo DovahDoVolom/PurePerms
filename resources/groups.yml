@@ -24,6 +24,6 @@ Owner:
   - Admin
   permissions:
   - pocketmine.command
-  - pplus.command
+  - pperms.command
   worlds: []
 ...
