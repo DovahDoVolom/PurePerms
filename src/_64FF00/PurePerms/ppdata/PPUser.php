@@ -6,7 +6,7 @@ use _64FF00\PurePerms\PurePerms;
 
 use pocketmine\IPlayer;
 
-class PPUser
+class PPUser implements PPDataInterface
 {	
 	public function __construct(PurePerms $plugin, IPlayer $player)
 	{
