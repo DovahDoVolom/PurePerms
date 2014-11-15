@@ -76,7 +76,9 @@ class PPGroup implements PPDataInterface
 	}
 	
 	public function getWorldData($levelName)
-	{		
+	{
+		if($levelName == null) return null;
+		
 		if(!isset($this->getData()["worlds"][$levelName]))
 		{
 			$tempGroupData = $this->getData();
@@ -126,6 +128,18 @@ class PPGroup implements PPDataInterface
 		$tempGroupData[$node] = $value;
 			
 		$this->setData($tempGroupData);
+	}
+	
+	public function setWorldData($levelName, array $worldData)
+	{
+		if(isset($this->getData()["worlds"][$levelName]))
+		{
+			$tempGroupData = $this->getData();
+			
+			$tempGroupData["worlds"][$levelName] = $worldData;
+				
+			$this->setData($tempGroupData);
+		}
 	}
 	
 	public function sortPermissions()

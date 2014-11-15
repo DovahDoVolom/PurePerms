@@ -80,6 +80,8 @@ class PPUser implements PPDataInterface
 	
 	public function getWorldData($levelName)
 	{
+		if($levelName == null) return null;
+			
 		if(!isset($this->getData()["worlds"][$levelName]))
 		{
 			$tempUserData = $this->getData();
@@ -115,6 +117,20 @@ class PPUser implements PPDataInterface
 	
 	public function setGroup(PPGroup $group, $levelName)
 	{
+		$isMultiWorldPermsEnabled = $this->plugin->getPPConfig()->getValue("enable-multiworld-perms");
+		
+		if($levelName == null and !$isMultiWorldPermsEnabled)
+		{
+			$this->setNode("group", $group->getName());
+		}
+		else
+		{
+			$worldData = $this->getWorldData($levelName);
+			
+			$worldData["group"] = $group->getName();
+			
+			$this->setWorldData($levelName, $worldData);
+		}
 	}
 	
 	public function setNode($node, $value)
@@ -124,5 +140,17 @@ class PPUser implements PPDataInterface
 		$tempUserData[$node] = $value;
 			
 		$this->setData($tempUserData);
+	}
+	
+	public function setWorldData($levelName, array $worldData)
+	{
+		if(isset($this->getData()["worlds"][$levelName]))
+		{
+			$tempUserData = $this->getData();
+			
+			$tempUserData["worlds"][$levelName] = $worldData;
+				
+			$this->setData($tempUserData);
+		}
 	}
 }

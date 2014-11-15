@@ -1,9 +1,12 @@
 ---
+# Broadcasts this message when a player's group has been changed
+msg-on-group-change: Your group has been changed into a / an %group%!
+
 # Sets the data provider for PurePerms :3 
-# - YAML, SQLITE3, ...
+# - yaml, sqlite3, ...
 data-provider: yaml
 
 # Setting this option will enable multiworld permissions to allow per-world permissions
-# - TRUE, FALSE
+# - true / false
 enable-multiworld-perms: false
 ...

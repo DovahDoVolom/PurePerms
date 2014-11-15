@@ -19,6 +19,8 @@ use _64FF00\PurePerms\providers\SQLite3Provider;
 
 use pocketmine\IPlayer;
 
+use pocketmine\OfflinePlayer;
+
 use pocketmine\Player;
 
 use pocketmine\plugin\PluginBase;
@@ -52,6 +54,13 @@ class PurePerms extends PluginBase
 		$this->setProvider();
 		
 		$this->getServer()->getPluginManager()->registerEvents(new PPListener($this), $this);
+		
+		$this->tmp();
+	}
+	
+	private function tmp()
+	{
+		var_dump($this->getUser($this->getPlayer("64FF00"))->getUserPermissions());
 	}
 	
 	private function registerCommands()
@@ -191,7 +200,7 @@ class PurePerms extends PluginBase
 			
 		if(empty($group->getData()))
 		{
-			$this->getLogger()->critical("Group $groupName is null! Please check if your groups.yml has any errors.");
+			return null;
 		}
 		
 		return $group;
@@ -207,6 +216,13 @@ class PurePerms extends PluginBase
 		}
 		
 		return $result;
+	}
+	
+	public function getPlayer($name)
+	{
+		$player = $this->getServer()->getPlayer($name);
+		
+		return $player instanceof Player ? $player : $this->getServer()->getOfflinePlayer($name);
 	}
 	
 	public function getPPConfig()
@@ -274,6 +290,11 @@ class PurePerms extends PluginBase
 		}
 		
 		$group->setNode("def-group", true);
+	}
+	
+	public function setGroup(IPlayer $player, PPGroup $group, $levelName = null)
+	{
+		$this->getUser($player)->setGroup($group, $levelName);
 	}
 	
 	public function updatePermissions(Player $player, $levelName = null)
