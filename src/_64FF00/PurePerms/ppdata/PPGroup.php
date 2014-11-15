@@ -4,7 +4,7 @@ namespace _64FF00\PurePerms\ppdata;
 
 use _64FF00\PurePerms\PurePerms;
 
-class PPGroup
+class PPGroup implements PPDataInterface
 {
 	public function __construct(PurePerms $plugin, $name)
 	{
@@ -109,9 +109,9 @@ class PPGroup
 		}
 	}
 	
-	public function setData(array $groupData)
+	public function setData(array $data)
 	{
-		$this->plugin->getProvider()->setGroupData($this, $groupData);
+		$this->plugin->getProvider()->setGroupData($this, $data);
 	}
 	
 	public function setDefault()

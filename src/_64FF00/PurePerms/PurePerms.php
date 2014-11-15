@@ -298,7 +298,7 @@ class PurePerms extends PluginBase
 		}
 		
 		$attachment->clearPermissions();
-		
+
 		$attachment->setPermissions($permissions);
 	}
 }

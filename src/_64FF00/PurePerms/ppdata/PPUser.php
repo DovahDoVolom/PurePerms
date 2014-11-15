@@ -96,9 +96,21 @@ class PPUser
 		return $this->getData()["worlds"][$levelName];
 	}
 	
-	public function setData(array $userData)
+	public function removeNode($node)
 	{
-		$this->plugin->getProvider()->setUserData($this, $userData);
+		$tempUserData = $this->getData();
+		
+		if(isset($tempUserData[$node]))
+		{				
+			unset($tempUserData[$node]);
+			
+			$this->setData($tempUserData);
+		}
+	}
+	
+	public function setData(array $data)
+	{
+		$this->plugin->getProvider()->setUserData($this, $data);
 	}
 	
 	public function setGroup(PPGroup $group, $levelName)
