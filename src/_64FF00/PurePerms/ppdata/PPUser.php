@@ -19,12 +19,9 @@ class PPUser implements PPDataInterface
 		return $this->plugin->getProvider()->getUserData($this, true);
 	}
 	
-	// TODO
-	public function getGroup($levelName)
+	public function getGroup($levelName = null)
 	{
-		$isMultiWorldPermsEnabled = $this->plugin->getPPConfig()->getValue("enable-multiworld-perms");
-		
-		if(!$isMultiWorldPermsEnabled)
+		if($levelName == null)
 		{
 			$groupName = $this->getNode("group");
 		}
@@ -48,7 +45,7 @@ class PPUser implements PPDataInterface
 	{
 		if(!isset($this->getData()[$node]))
 		{
-			$this->setNode($node, null);
+			return null;
 		}
 		
 		return $this->getData()[$node];
@@ -68,9 +65,7 @@ class PPUser implements PPDataInterface
 	
 	public function getUserPermissions($levelName = null)
 	{
-		$isMultiWorldPermsEnabled = $this->plugin->getPPConfig()->getValue("enable-multiworld-perms");
-		
-		if($levelName == null and !$isMultiWorldPermsEnabled)
+		if($levelName == null)
 		{
 			return $this->getNode("permissions");
 		}
@@ -117,9 +112,7 @@ class PPUser implements PPDataInterface
 	
 	public function setGroup(PPGroup $group, $levelName)
 	{
-		$isMultiWorldPermsEnabled = $this->plugin->getPPConfig()->getValue("enable-multiworld-perms");
-		
-		if($levelName == null and !$isMultiWorldPermsEnabled)
+		if($levelName == null)
 		{
 			$this->setNode("group", $group->getName());
 		}

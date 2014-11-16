@@ -40,7 +40,7 @@ class PPGroup implements PPDataInterface
 	{
 		if(!isset($this->getData()[$node]))
 		{
-			$this->setNode($node, null);
+			return null;
 		}
 		
 		return $this->getData()[$node];
@@ -48,9 +48,7 @@ class PPGroup implements PPDataInterface
 	
 	public function getPermissions($levelName = null)
 	{
-		$isMultiWorldPermsEnabled = $this->plugin->getPPConfig()->getValue("enable-multiworld-perms");
-		
-		if($levelName == null and !$isMultiWorldPermsEnabled)
+		if($levelName == null)
 		{
 			$permissions = $this->getNode("permissions");
 		}
@@ -105,7 +103,7 @@ class PPGroup implements PPDataInterface
 		
 		if(isset($tempGroupData[$node]))
 		{				
-			unset($tempGroupData[$node]);
+			unset($tempGroupData[$node]);	
 			
 			$this->setData($tempGroupData);
 		}
@@ -124,7 +122,7 @@ class PPGroup implements PPDataInterface
 	public function setNode($node, $value)
 	{
 		$tempGroupData = $this->getData();
-					
+		
 		$tempGroupData[$node] = $value;
 			
 		$this->setData($tempGroupData);
@@ -147,27 +145,32 @@ class PPGroup implements PPDataInterface
 		$tempGroupData = $this->getData();
 			
 		if(isset($tempGroupData["permissions"]))
-		{
-			array_unique($tempGroupData["permissions"]);
+		{		
+			array_unique($tempGroupData["permissions"]);	
 			
-			ksort($tempGroupData["permissions"]);
+			sort($tempGroupData["permissions"]);
 		}
-			
-		if(isset($tempGroupData["worlds"]))
-		{
-			foreach($this->getServer()->getLevels() as $level)
+		
+		$isMultiWorldPermsEnabled = $this->plugin->getPPConfig()->getValue("enable-multiworld-perms");
+		
+		if($isMultiWorldPermsEnabled)
+		{				
+			if(isset($tempGroupData["worlds"]))
 			{
-				$levelName = $level->getName();
-					
-				if(isset($tempGroupData["worlds"][$levelName]))
-				{		
-					array_unique($tempGroupData["worlds"][$levelName]["permissions"]);
-					
-					ksort($tempGroupData["worlds"][$levelName]["permissions"]);
+				foreach($this->getServer()->getLevels() as $level)
+				{
+					$levelName = $level->getName();
+						
+					if(isset($tempGroupData["worlds"][$levelName]))
+					{		
+						array_unique($tempGroupData["worlds"][$levelName]["permissions"]);
+						
+						sort($tempGroupData["worlds"][$levelName]["permissions"]);
+					}
 				}
 			}
 		}
-			
+		
 		$this->setData($tempGroupData);
 	}
 }

@@ -8,6 +8,8 @@ use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\command\PluginIdentifiableCommand;
 
+use pocketmine\utils\TextFormat;
+
 class GroupList extends Command implements PluginIdentifiableCommand
 {
 	public function __construct(PurePerms $plugin, $name, $description)
@@ -25,6 +27,13 @@ class GroupList extends Command implements PluginIdentifiableCommand
 		{
 			return false;
 		}
+		
+		foreach($this->plugin->getGroups() as $group)
+		{
+			$result .= $group->getName() . ", ";
+		}
+		
+		$sender->sendMessage(TextFormat::BLUE . "[PurePerms] All registered groups: " . substr($result, 0, -2));
 		
 		return true;
 	}

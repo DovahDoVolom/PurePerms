@@ -53,6 +53,8 @@ class PurePerms extends PluginBase
 		
 		$this->setProvider();
 		
+		$this->sortGroupPermissions();
+		
 		$this->getServer()->getPluginManager()->registerEvents(new PPListener($this), $this);
 	}
 	
@@ -102,6 +104,14 @@ class PurePerms extends PluginBase
 		}
 		
 		$this->getLogger()->info("Set data provider to " . strtoupper($providerName) . ".");
+	}
+	
+	private function sortGroupPermissions()
+	{
+		foreach($this->getGroups() as $group)
+		{
+			$group->sortPermissions();
+		}
 	}
 	
 	/*	
@@ -238,6 +248,8 @@ class PurePerms extends PluginBase
 		$this->config->reloadConfig();
 		
 		$this->provider->init();
+		
+		$this->sortGroupPermissions();
 	}
 	
 	public function removeAttachment(Player $player)
@@ -269,7 +281,6 @@ class PurePerms extends PluginBase
 		$this->provider->setGroupsData($groupsData);
 	}
 	
-	// TODO
 	public function setDefaultGroup(PPGroup $group)
 	{
 		foreach($this->getGroups() as $currentGroup)
@@ -309,8 +320,6 @@ class PurePerms extends PluginBase
 			$value = !$isNegative;
 			
 			$permissions[$permission] = $value;
-			
-			ksort($permissions);
 		}
 		
 		$attachment->clearPermissions();
