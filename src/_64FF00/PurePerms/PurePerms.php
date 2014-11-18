@@ -333,11 +333,5 @@ class PurePerms extends PluginBase
 		$attachment->clearPermissions();
 
 		$attachment->setPermissions($permissions);
-		
-		// DEBUG
-		foreach($player->getEffectivePermissions() as $p)
-		{
-			var_dump($p->getPermission());
-		}
 	}
 }
