@@ -55,7 +55,7 @@ class DefaultProvider implements ProviderInterface
 		if(!(file_exists($this->plugin->getDataFolder() . "players/" . strtolower($userName) . ".yml")))
 		{
 			$userConfig = new Config($this->plugin->getDataFolder() . "players/" . strtolower($userName) . ".yml", Config::YAML, array(
-				"username" => $userName,
+				"userName" => $userName,
 				"group" => $this->plugin->getDefaultGroup()->getName(),
 				"permissions" => array(
 				),

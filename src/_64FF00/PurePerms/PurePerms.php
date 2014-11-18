@@ -58,6 +58,11 @@ class PurePerms extends PluginBase
 		$this->getServer()->getPluginManager()->registerEvents(new PPListener($this), $this);
 	}
 	
+	public function onDisable()
+	{
+		$this->provider->close();
+	}
+	
 	private function registerCommands()
 	{
 		$commandMap = $this->getServer()->getCommandMap();
