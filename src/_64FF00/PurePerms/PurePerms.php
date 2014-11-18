@@ -116,7 +116,7 @@ class PurePerms extends PluginBase
 	
 	/*	
 	
-	   #    ######  ###    ### 
+	       #    ######  ###    ### 
           # #   #     #  #     ### 
          #   #  #     #  #     ### 
         #     # ######   #      #  
@@ -130,19 +130,23 @@ class PurePerms extends PluginBase
 	{
 		$groupsData = $this->provider->getGroupsData(true);
 		
-		if(!isset($groupsData[$groupName]))
+		if(isset($groupsData[$groupName]))
 		{
-			$groupsData[$groupName] = array(
-				"inheritance" => array(
-				), 
-				"permissions" => array(
-				),
-				"worlds" => array(
-				)
-			);
+			return false;
 		}
 		
+		$groupsData[$groupName] = array(
+			"inheritance" => array(
+			), 
+			"permissions" => array(
+			),
+			"worlds" => array(
+			)
+		);
+			
 		$this->provider->setGroupsData($groupsData);
+		
+		return true;
 	}
 	
 	public function getAttachment(Player $player)
@@ -273,12 +277,16 @@ class PurePerms extends PluginBase
 	{
 		$groupsData = $this->provider->getGroupsData(true);
 		
-		if(isset($groupsData[$groupName]))
+		if(!isset($groupsData[$groupName]))
 		{
-			unset($groupsData[$groupName]);
+			return false;
 		}
 		
+		unset($groupsData[$groupName]);
+		
 		$this->provider->setGroupsData($groupsData);
+		
+		return true;
 	}
 	
 	public function setDefaultGroup(PPGroup $group)
@@ -325,5 +333,11 @@ class PurePerms extends PluginBase
 		$attachment->clearPermissions();
 
 		$attachment->setPermissions($permissions);
+		
+		// DEBUG
+		foreach($player->getEffectivePermissions() as $p)
+		{
+			var_dump($p->getPermission());
+		}
 	}
 }
