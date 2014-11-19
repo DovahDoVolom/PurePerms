@@ -19,8 +19,8 @@ class SQLite3Provider implements ProviderInterface
 	
 	public function init()
 	{
-		$this->players = new \SQLite3($this->plugin->getDataFolder() . "players.db", SQLITE3_OPEN_CREATE | SQLITE3_OPEN_READWRITE);
-		$this->groups = new \SQLite3($this->plugin->getDataFolder() . "groups.db", SQLITE3_OPEN_CREATE | SQLITE3_OPEN_READWRITE);
+		$this->players = new \SQLite3($this->plugin->getDataFolder() . "players.db");
+		$this->groups = new \SQLite3($this->plugin->getDataFolder() . "groups.db");
 			
 		$players_query = stream_get_contents($this->plugin->getResource("players.sql"));
 		$groups_query = stream_get_contents($this->plugin->getResource("groups.sql"));
