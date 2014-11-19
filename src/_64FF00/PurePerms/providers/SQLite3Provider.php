@@ -19,26 +19,14 @@ class SQLite3Provider implements ProviderInterface
 	
 	public function init()
 	{
-		if(!file_exists($this->plugin->getDataFolder() . "players.db"))
-		{
-			$this->players = new \SQLite3($this->plugin->getDataFolder() . "players.db", SQLITE3_OPEN_CREATE | SQLITE3_OPEN_READWRITE);
+		$this->players = new \SQLite3($this->plugin->getDataFolder() . "players.db", SQLITE3_OPEN_CREATE | SQLITE3_OPEN_READWRITE);
+		$this->groups = new \SQLite3($this->plugin->getDataFolder() . "groups.db", SQLITE3_OPEN_CREATE | SQLITE3_OPEN_READWRITE);
 			
-			$query = stream_get_contents($this->plugin->getResource("players.sql"));
+		$players_query = stream_get_contents($this->plugin->getResource("players.sql"));
+		$groups_query = stream_get_contents($this->plugin->getResource("groups.sql"));
 			
-			$this->players->exec($query);
-		}
-		
-		if(!file_exists($this->plugin->getDataFolder() . "groups.db"))
-		{
-			$this->groups = new \SQLite3($this->plugin->getDataFolder() . "groups.db", SQLITE3_OPEN_CREATE | SQLITE3_OPEN_READWRITE);
-			
-			$query = stream_get_contents($this->plugin->getResource("groups.sql"));
-			
-			$this->groups->exec($query);
-		}
-		
-		$this->players = new \SQLite3($this->plugin->getDataFolder() . "players.db", SQLITE3_OPEN_READWRITE);
-		$this->groups = new \SQLite3($this->plugin->getDataFolder() . "groups.db", SQLITE3_OPEN_READWRITE);
+		$this->players->exec($players_query);
+		$this->groups->exec($groups_query);	
 	}
 	
 	public function getGroupData(PPGroup $group)
