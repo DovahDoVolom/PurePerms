@@ -1,6 +1,6 @@
 ---
 Guest:
-  def-group: true
+  isDefault: true
   inheritance: []
   permissions:
   - pocketmine.command.list

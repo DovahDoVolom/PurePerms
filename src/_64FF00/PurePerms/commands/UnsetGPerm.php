@@ -8,6 +8,8 @@ use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\command\PluginIdentifiableCommand;
 
+use pocketmine\utils\TextFormat;
+
 class UnsetGPerm extends Command implements PluginIdentifiableCommand
 {
 	public function __construct(PurePerms $plugin, $name, $description)
@@ -25,6 +27,23 @@ class UnsetGPerm extends Command implements PluginIdentifiableCommand
 		{
 			return false;
 		}
+		
+		if(count($args) < 1 || count($args) > 2)
+		{
+			$sender->sendMessage(TextFormat::BLUE . "[PurePerms] Usage: /unsetgperm <group> <permission> [world]");
+			
+			return true;
+		}
+		
+		$group = $this->plugin->getGroup($args[0]);
+		
+		$permission = $args[1];
+		
+		$levelName = isset($args[2]) ?  $this->plugin->getServer()->getLevelByName($args[2]) : null;
+		
+		$group->unsetGroupPermission($permission, $levelName);
+		
+		$sender->sendMessage(TextFormat::BLUE . "[PurePerms] Removed permission " . $permission . " from the group successfully.");
 		
 		return true;
 	}

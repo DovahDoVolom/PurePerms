@@ -10,7 +10,7 @@ use pocketmine\command\PluginIdentifiableCommand;
 
 use pocketmine\utils\TextFormat;
 
-class GroupList extends Command implements PluginIdentifiableCommand
+class Groups extends Command implements PluginIdentifiableCommand
 {
 	public function __construct(PurePerms $plugin, $name, $description)
 	{
@@ -18,7 +18,7 @@ class GroupList extends Command implements PluginIdentifiableCommand
 		
 		parent::__construct($name, $description);
 		
-		$this->setPermission("pperms.command.grouplist");
+		$this->setPermission("pperms.command.groups");
 	}
 	
 	public function execute(CommandSender $sender, $label, array $args)

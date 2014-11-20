@@ -41,6 +41,11 @@ class PPUser implements PPDataInterface
 		return $this->getGroup($levelName)->getPermissions($levelName);
 	}
 	
+	public function getName()
+	{
+		return $this->player->getName();
+	}
+	
 	public function getNode($node)
 	{
 		if(!isset($this->getData()[$node]))
@@ -135,6 +140,26 @@ class PPUser implements PPDataInterface
 		$this->setData($tempUserData);
 	}
 	
+	public function setUserPermission($permission, $levelName = null)
+	{
+		if($levelName == null)
+		{
+			$tempUserData = $this->getData();
+					
+			$tempUserData["permissions"][] = $permission;
+			
+			$this->setData($tempUserData);
+		}
+		else
+		{
+			$worldData = $this->getWorldData($levelName);
+			
+			$worldData["permissions"][] = $permission;
+			
+			$this->setWorldData($levelName, $worldData);
+		}
+	}
+	
 	public function setWorldData($levelName, array $worldData)
 	{
 		if(isset($this->getData()["worlds"][$levelName]))
@@ -144,6 +169,30 @@ class PPUser implements PPDataInterface
 			$tempUserData["worlds"][$levelName] = $worldData;
 				
 			$this->setData($tempUserData);
+		}
+	}
+	
+	public function unsetUserPermission($permission, $levelName = null)
+	{
+		if($levelName == null)
+		{
+			$tempUserData = $this->getData();
+			
+			if(!in_array($permission, $tempUserData["permissions"])) return false;
+
+			$tempUserData["permissions"] = array_diff($tempUserData["permissions"], [$permission]);
+			
+			$this->setData($tempUserData);
+		}
+		else
+		{
+			$worldData = $this->getWorldData($levelName);
+			
+			if(!in_array($permission, $worldData["permissions"])) return false;
+			
+			$worldData["permissions"] = array_diff($worldData["permissions"], [$permission]);
+			
+			$this->setWorldData($levelName, $worldData);
 		}
 	}
 }

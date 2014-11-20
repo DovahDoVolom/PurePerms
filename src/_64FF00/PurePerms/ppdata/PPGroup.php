@@ -94,7 +94,7 @@ class PPGroup implements PPDataInterface
 	
 	public function isDefault()
 	{
-		return ($this->getNode("def-group") == true);
+		return ($this->getNode("isDefault") == true);
 	}
 	
 	public function removeNode($node)
@@ -116,7 +116,27 @@ class PPGroup implements PPDataInterface
 	
 	public function setDefault()
 	{
-		$this->setNode("def-group", true);
+		$this->setNode("isDefault", true);
+	}
+	
+	public function setGroupPermission($permission, $levelName = null)
+	{
+		if($levelName == null)
+		{
+			$tempGroupData = $this->getData();
+					
+			$tempGroupData["permissions"][] = $permission;
+			
+			$this->setData($tempGroupData);
+		}
+		else
+		{
+			$worldData = $this->getWorldData($levelName);
+			
+			$worldData["permissions"][] = $permission;
+			
+			$this->setWorldData($levelName, $worldData);
+		}
 	}
 	
 	public function setNode($node, $value)
@@ -172,5 +192,29 @@ class PPGroup implements PPDataInterface
 		}
 		
 		$this->setData($tempGroupData);
+	}
+	
+	public function unsetGroupPermission($permission, $levelName = null)
+	{
+		if($levelName == null)
+		{
+			$tempGroupData = $this->getData();
+					
+			if(!in_array($permission, $tempGroupData["permissions"])) return false;
+
+			$tempGroupData["permissions"] = array_diff($tempGroupData["permissions"], [$permission]);
+			
+			$this->setData($tempGroupData);
+		}
+		else
+		{
+			$worldData = $this->getWorldData($levelName);
+			
+			if(!in_array($permission, $worldData["permissions"])) return false;
+			
+			$worldData["permissions"] = array_diff($worldData["permissions"], [$permission]);
+			
+			$this->setWorldData($levelName, $worldData);
+		}
 	}
 }

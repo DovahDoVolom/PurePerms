@@ -13,22 +13,22 @@ permissions:
         description: ""
         children:
           pperms.command.addgroup:
-            description: ""
-          pperms.command.grouplist:
-            description: ""
+            description: "Allows you to add a new group to the groups list."
+          pperms.command.groups:
+            description: "Allows you to see a list of all groups."
           pperms.command.ppinfo:
-            description: ""
+            description: "Allows you to see info about PurePerms."
           pperms.command.ppreload:
-            description: ""
+            description: "Allows you to reload all PurePerms configurations."
           pperms.command.removegroup:
-            description: ""
+            description: "Allows you to remove a group from the groups list."
           pperms.command.setgperm:
-            description: ""
+            description: "Allows you to add a permission to the group."
           pperms.command.setgroup:
-            description: ""
+            description: "Allows you to set group for a user."
           pperms.command.setuperm:
-            description: ""
+            description: "Allows you to add a permission to a user."
           pperms.command.unsetgperm:
-            description: ""
+            description: "Allows you to remove a permission from the group."
           pperms.command.unsetuperm:
-            description: ""
+            description: "Allows you to remove a permission from the user."

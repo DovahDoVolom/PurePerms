@@ -3,7 +3,7 @@
 namespace _64FF00\PurePerms;
 
 use _64FF00\PurePerms\commands\AddGroup;
-use _64FF00\PurePerms\commands\GroupList;
+use _64FF00\PurePerms\commands\Groups;
 use _64FF00\PurePerms\commands\PPInfo;
 use _64FF00\PurePerms\commands\PPReload;
 use _64FF00\PurePerms\commands\RemoveGroup;
@@ -69,11 +69,11 @@ class PurePerms extends PluginBase
 		
 		$this->getLogger()->info("Registering PurePerms commands...");
 		
-		$commandMap->register("addgroup", new AddGroup($this, "addgroup", "Adds a new group."));
-		$commandMap->register("grouplist", new GroupList($this, "grouplist", "Allows you to see a list of all groups."));
-		$commandMap->register("ppinfo", new PPInfo($this, "ppinfo", "Shows the info of the PurePerms."));
+		$commandMap->register("addgroup", new AddGroup($this, "addgroup", "Adds a new group to the groups list."));
+		$commandMap->register("groups", new Groups($this, "groups", "Shows a list of all groups."));
+		$commandMap->register("ppinfo", new PPInfo($this, "ppinfo", "Shows info about PurePerms."));
 		$commandMap->register("ppreload", new PPReload($this, "ppreload", "Reloads all PurePerms configurations."));
-		$commandMap->register("removegroup", new RemoveGroup($this, "removegroup", "Removes a group."));
+		$commandMap->register("removegroup", new RemoveGroup($this, "removegroup", "Removes a group from the groups list."));
 		$commandMap->register("setgperm", new SetGPerm($this, "setgperm", "Adds a permission to the group."));
 		$commandMap->register("setgroup", new SetGroup($this, "setgroup", "Sets group for the user."));
 		$commandMap->register("setuperm", new SetUPerm($this, "setuperm", "Adds a permission to the user."));
@@ -87,11 +87,15 @@ class PurePerms extends PluginBase
 		
 		switch(strtolower($providerName))
 		{
+			// Not available right now :'(
+			/*
 			case "sqlite3":
 			
 				$this->provider = new SQLite3Provider($this);
 				
 				break;
+				
+			*/
 				
 			case "yaml":
 			
@@ -298,11 +302,11 @@ class PurePerms extends PluginBase
 	{
 		foreach($this->getGroups() as $currentGroup)
 		{
-			$isDefault = $currentGroup->getNode("def-group");
+			$isDefault = $currentGroup->getNode("isDefault");
 			
 			if($isDefault)
 			{
-				$currentGroup->removeNode("def-group");
+				$currentGroup->removeNode("isDefault");
 			}
 		}
 		
@@ -313,7 +317,10 @@ class PurePerms extends PluginBase
 	{
 		$this->getUser($player)->setGroup($group, $levelName);
 		
-		$this->updatePermissions($player, $levelName);
+		if($player instanceof Player)
+		{
+			$this->updatePermissions($player, $levelName);
+		}
 	}
 	
 	public function updatePermissions(Player $player, $levelName = null)
