@@ -55,6 +55,8 @@ class PurePerms extends PluginBase
 		
 		$this->sortGroupPermissions();
 		
+		$this->updateAllPlayers();
+		
 		$this->getServer()->getPluginManager()->registerEvents(new PPListener($this), $this);
 	}
 	
@@ -263,6 +265,8 @@ class PurePerms extends PluginBase
 		$this->provider->init();
 		
 		$this->sortGroupPermissions();
+		
+		$this->updateAllPlayers();
 	}
 	
 	public function removeAttachment(Player $player)
@@ -316,34 +320,45 @@ class PurePerms extends PluginBase
 	public function setGroup(IPlayer $player, PPGroup $group, $levelName = null)
 	{
 		$this->getUser($player)->setGroup($group, $levelName);
-		
-		if($player instanceof Player)
+	}
+	
+	public function updateAllPlayers()
+	{
+		foreach($this->getServer()->getLevels() as $level)
 		{
-			$this->updatePermissions($player, $levelName);
+			foreach($this->getServer()->getOnlinePlayers() as $player)
+			{
+				$levelName = $level->getName();
+				
+				$this->updatePermissions($player, $levelName);
+			}
 		}
 	}
 	
-	public function updatePermissions(Player $player, $levelName = null)
+	public function updatePermissions(IPlayer $player, $levelName = null)
 	{
-		$attachment = $this->getAttachment($player);
-		
-		$originalPermissions = $this->getUser($player)->getPermissions($levelName);
-		
-		$permissions = [];
-		
-		foreach($originalPermissions as $permission)
+		if($player instanceof Player)
 		{
-			$isNegative = substr($permission, 0, 1) === "-";
+			$attachment = $this->getAttachment($player);
 			
-			if($isNegative) $permission = substr($permission, 1);
+			$originalPermissions = $this->getUser($player)->getPermissions($levelName);
 			
-			$value = !$isNegative;
+			$permissions = [];
 			
-			$permissions[$permission] = $value;
-		}
-		
-		$attachment->clearPermissions();
+			foreach($originalPermissions as $permission)
+			{
+				$isNegative = substr($permission, 0, 1) === "-";
+				
+				if($isNegative) $permission = substr($permission, 1);
+				
+				$value = !$isNegative;
+				
+				$permissions[$permission] = $value;
+			}
+			
+			$attachment->clearPermissions();
 
-		$attachment->setPermissions($permissions);
+			$attachment->setPermissions($permissions);
+		}
 	}
 }

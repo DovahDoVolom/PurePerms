@@ -129,6 +129,8 @@ class PPUser implements PPDataInterface
 			
 			$this->setWorldData($levelName, $worldData);
 		}
+		
+		$this->plugin->updatePermissions($this->player, $levelName);
 	}
 	
 	public function setNode($node, $value)
@@ -158,6 +160,8 @@ class PPUser implements PPDataInterface
 			
 			$this->setWorldData($levelName, $worldData);
 		}
+		
+		$this->plugin->updatePermissions($this->player, $levelName);
 	}
 	
 	public function setWorldData($levelName, array $worldData)
@@ -194,5 +198,7 @@ class PPUser implements PPDataInterface
 			
 			$this->setWorldData($levelName, $worldData);
 		}
+		
+		$this->plugin->updatePermissions($this->player, $levelName);
 	}
 }
