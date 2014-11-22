@@ -339,26 +339,29 @@ class PurePerms extends PluginBase
 	{
 		if($player instanceof Player)
 		{
-			$attachment = $this->getAttachment($player);
-			
-			$originalPermissions = $this->getUser($player)->getPermissions($levelName);
-			
-			$permissions = [];
-			
-			foreach($originalPermissions as $permission)
+			if(!$player->isOp() and $this->config->getValue("override-op-permissions"))
 			{
-				$isNegative = substr($permission, 0, 1) === "-";
+				$attachment = $this->getAttachment($player);
 				
-				if($isNegative) $permission = substr($permission, 1);
+				$originalPermissions = $this->getUser($player)->getPermissions($levelName);
 				
-				$value = !$isNegative;
+				$permissions = [];
 				
-				$permissions[$permission] = $value;
-			}
-			
-			$attachment->clearPermissions();
+				foreach($originalPermissions as $permission)
+				{
+					$isNegative = substr($permission, 0, 1) === "-";
+					
+					if($isNegative) $permission = substr($permission, 1);
+					
+					$value = !$isNegative;
+					
+					$permissions[$permission] = $value;
+				}
+				
+				$attachment->clearPermissions();
 
-			$attachment->setPermissions($permissions);
+				$attachment->setPermissions($permissions);
+			}
 		}
 	}
 }
