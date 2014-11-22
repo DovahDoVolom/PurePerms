@@ -59,18 +59,14 @@ class PPGroup implements PPDataInterface
 		
 		foreach($this->getInheritedGroups() as $inheritedGroup)
 		{
-			if($permissions == null) $permissions = [];
+			$inheritedGroupPermissions = $inheritedGroup->getPermissions($levelName);
 			
-			array_merge($permissions, $inheritedGroup->getPermissions($levelName)); 
+			if($inheritedGroupPermissions == null) $inheritedGroupPermissions = [];
+			
+			$permissions = array_merge($permissions, $inheritedGroupPermissions);
 		}
-			
-		return $permissions;
-	}
-	
-	// TODO
-	public function getUsers($isActive = false)
-	{
 		
+		return $permissions;
 	}
 	
 	public function getWorldData($levelName)

@@ -4,6 +4,8 @@ namespace _64FF00\PurePerms;
 
 use _64FF00\PurePerms\commands\AddGroup;
 use _64FF00\PurePerms\commands\Groups;
+use _64FF00\PurePerms\commands\ListGPerms;
+use _64FF00\PurePerms\commands\ListUPerms;
 use _64FF00\PurePerms\commands\PPInfo;
 use _64FF00\PurePerms\commands\PPReload;
 use _64FF00\PurePerms\commands\RemoveGroup;
@@ -58,6 +60,8 @@ class PurePerms extends PluginBase
 		$this->updateAllPlayers();
 		
 		$this->getServer()->getPluginManager()->registerEvents(new PPListener($this), $this);
+		
+		$this->getGroup("Owner")->getPermissions();
 	}
 	
 	public function onDisable()
@@ -73,6 +77,8 @@ class PurePerms extends PluginBase
 		
 		$commandMap->register("addgroup", new AddGroup($this, "addgroup", "Adds a new group to the groups list."));
 		$commandMap->register("groups", new Groups($this, "groups", "Shows a list of all groups."));
+		$commandMap->register("listgperms", new ListGPerms($this, "listgperms", "Shows a list of all permissions from a group."));
+		$commandMap->register("listuperms", new ListUPerms($this, "listuperms", "Shows a list of all permissions from a user."));
 		$commandMap->register("ppinfo", new PPInfo($this, "ppinfo", "Shows info about PurePerms."));
 		$commandMap->register("ppreload", new PPReload($this, "ppreload", "Reloads all PurePerms configurations."));
 		$commandMap->register("removegroup", new RemoveGroup($this, "removegroup", "Removes a group from the groups list."));

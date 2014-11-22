@@ -16,6 +16,10 @@ permissions:
             description: "Allows you to add a new group to the groups list."
           pperms.command.groups:
             description: "Allows you to see a list of all groups."
+          pperms.command.listgperm:
+            description: "Allows you to see a list of all permissions from a group."
+          pperms.command.listuperm:
+            description: "Allows you to see a list of all permissions from a user."
           pperms.command.ppinfo:
             description: "Allows you to see info about PurePerms."
           pperms.command.ppreload:
