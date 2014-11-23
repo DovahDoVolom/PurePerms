@@ -30,7 +30,7 @@ class ListGPerms extends Command implements PluginIdentifiableCommand
 			return false;
 		}
 		
-		if(count($args) < 2 || count($args) > 3 || !is_numeric($args[1]))
+		if(count($args) < 1 || count($args) > 3)
 		{
 			$sender->sendMessage(TextFormat::BLUE . "[PurePerms] Usage: /listgperms <group> <page> [world]");
 			
@@ -50,13 +50,13 @@ class ListGPerms extends Command implements PluginIdentifiableCommand
 		
 		$permissions = $group->getPermissions($levelName);
 		
-		$pageHeight = $sender instanceof ConsoleCommandSender ? 30 : 6;
+		$pageHeight = $sender instanceof ConsoleCommandSender ? 24 : 6;
 				
 		$chunkedPermissions = array_chunk($permissions, $pageHeight); 
 		
 		$maxPageNumber = count($chunkedPermissions);
-
-		if($args[1] <= 0) 
+		
+		if(!isset($args[1]) || !is_numeric($args[1]) || $args[1] <= 0) 
 		{
 			$pageNumber = 1;
 		}

@@ -29,7 +29,7 @@ class ListUPerms extends Command implements PluginIdentifiableCommand
 			return false;
 		}
 		
-		if(count($args) < 2 || count($args) > 3 || !is_numeric($args[1]))
+		if(count($args) < 1 || count($args) > 3)
 		{
 			$sender->sendMessage(TextFormat::BLUE . "[PurePerms] Usage: /listuperms <player> <page> [world]");
 			
@@ -39,6 +39,34 @@ class ListUPerms extends Command implements PluginIdentifiableCommand
 		$player = $this->plugin->getPlayer($args[0]);
 		
 		$levelName = isset($args[2]) ?  $this->plugin->getServer()->getLevelByName($args[2]) : null;
+		
+		$permissions = $this->plugin->getUser($player)->getUserPermissions($levelName);
+		
+		$pageHeight = $sender instanceof ConsoleCommandSender ? 24 : 6;
+				
+		$chunkedPermissions = array_chunk($permissions, $pageHeight); 
+		
+		$maxPageNumber = count($chunkedPermissions);
+		
+		if(!isset($args[1]) || !is_numeric($args[1]) || $args[1] <= 0) 
+		{
+			$pageNumber = 1;
+		}
+		else if($args[1] > $maxPageNumber)
+		{
+			$pageNumber = $maxPageNumber;	
+		}
+		else 
+		{
+			$pageNumber = $args[1];
+		}
+		
+		$sender->sendMessage(TextFormat::BLUE . "[PurePerms] List of all permissions from " . $player->getName() . " ($pageNumber / $maxPageNumber) : ");
+		
+		foreach($chunkedPermissions[$pageNumber - 1] as $permission)
+		{
+			$sender->sendMessage(TextFormat::BLUE . "[PurePerms] - " . $permission);
+		}
 		
 		return true;
 	}

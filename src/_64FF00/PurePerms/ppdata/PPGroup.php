@@ -173,7 +173,7 @@ class PPGroup implements PPDataInterface
 		{				
 			if(isset($tempGroupData["worlds"]))
 			{
-				foreach($this->getServer()->getLevels() as $level)
+				foreach($this->plugin->getServer()->getLevels() as $level)
 				{
 					$levelName = $level->getName();
 						
