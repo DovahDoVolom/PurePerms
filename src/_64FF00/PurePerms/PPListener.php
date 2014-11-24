@@ -17,19 +17,22 @@ class PPListener implements Listener
 	
 	public function onLevelChange(EntityLevelChangeEvent $event)
 	{
-		$player = $event->getPlayer();
+		$player = $event->getEntity();
 		
 		$levelName = $event->getTarget()->getName();
 		
-		$isMultiWorldPermsEnabled = $this->plugin->getPPConfig()->getValue("enable-multiworld-perms");
-		
-		if(!$isMultiWorldPermsEnabled)
-		{		
-			$this->plugin->updatePermissions($player);
-		}
-		else
+		if($player instanceof Player)
 		{
-			$this->plugin->updatePermissions($player, $levelName);
+			$isMultiWorldPermsEnabled = $this->plugin->getPPConfig()->getValue("enable-multiworld-perms");
+			
+			if(!$isMultiWorldPermsEnabled)
+			{
+					$this->plugin->updatePermissions($player);
+			}
+			else
+			{
+				$this->plugin->updatePermissions($player, $levelName);
+			}
 		}
 	}
 	
