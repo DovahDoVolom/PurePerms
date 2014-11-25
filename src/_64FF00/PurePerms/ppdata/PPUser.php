@@ -38,7 +38,7 @@ class PPUser implements PPDataInterface
 	
 	public function getGroupPermissions($levelName = null)
 	{
-		return $this->getGroup($levelName)->getPermissions($levelName);
+		return $this->plugin->getGroup($levelName)->getPermissions($levelName);
 	}
 	
 	public function getName()
