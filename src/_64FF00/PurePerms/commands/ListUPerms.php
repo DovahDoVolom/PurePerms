@@ -42,6 +42,13 @@ class ListUPerms extends Command implements PluginIdentifiableCommand
 		
 		$permissions = $this->plugin->getUser($player)->getUserPermissions($levelName);
 		
+		if(empty($permissions))
+		{
+			$sender->sendMessage(TextFormat::BLUE . "[PurePerms] Player " . $player->getName() . " doesn't have any user permissions.");
+			
+			return true;
+		}
+		
 		$pageHeight = $sender instanceof ConsoleCommandSender ? 24 : 6;
 				
 		$chunkedPermissions = array_chunk($permissions, $pageHeight); 

@@ -50,6 +50,13 @@ class ListGPerms extends Command implements PluginIdentifiableCommand
 		
 		$permissions = $group->getPermissions($levelName);
 		
+		if(empty($permissions))
+		{
+			$sender->sendMessage(TextFormat::BLUE . "[PurePerms] Group " . $group->getName() . " doesn't have any group permissions.");
+			
+			return true;
+		}
+		
 		$pageHeight = $sender instanceof ConsoleCommandSender ? 24 : 6;
 				
 		$chunkedPermissions = array_chunk($permissions, $pageHeight); 
