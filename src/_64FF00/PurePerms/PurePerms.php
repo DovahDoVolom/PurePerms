@@ -332,7 +332,7 @@ class PurePerms extends PluginBase
 	{
 		foreach($this->getServer()->getOnlinePlayers() as $player)
 		{
-			$isMultiWorldPermsEnabled = $this->plugin->getPPConfig()->getValue("enable-multiworld-perms");
+			$isMultiWorldPermsEnabled = $this->getPPConfig()->getValue("enable-multiworld-perms");
 		
 			if($isMultiWorldPermsEnabled)
 			{
@@ -354,7 +354,7 @@ class PurePerms extends PluginBase
 	{
 		if($player instanceof Player)
 		{
-			if(!$player->isOp() and $this->config->getValue("override-op-permissions"))
+			if(!$player->isOp() and !$this->config->getValue("override-op-permissions"))
 			{
 				$attachment = $this->getAttachment($player);
 				

@@ -45,7 +45,7 @@ class PPListener implements Listener
 		$isMultiWorldPermsEnabled = $this->plugin->getPPConfig()->getValue("enable-multiworld-perms");
 		
 		if(!$isMultiWorldPermsEnabled)
-		{		
+		{
 			$this->plugin->updatePermissions($player);
 		}
 		else
