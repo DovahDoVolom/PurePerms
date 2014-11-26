@@ -3,6 +3,7 @@
 namespace _64FF00\PurePerms\ppdata;
 
 use _64FF00\PurePerms\PurePerms;
+use _64FF00\PurePerms\ppdata\PPGroup;
 
 use pocketmine\IPlayer;
 
@@ -38,7 +39,7 @@ class PPUser implements PPDataInterface
 	
 	public function getGroupPermissions($levelName = null)
 	{
-		return $this->plugin->getGroup($levelName)->getPermissions($levelName);
+		return $this->getGroup($levelName)->getPermissions($levelName);
 	}
 	
 	public function getName()

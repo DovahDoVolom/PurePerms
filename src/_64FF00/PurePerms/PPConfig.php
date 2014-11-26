@@ -20,7 +20,7 @@ class PPConfig
 		
 		if($value === null)
 		{
-			$this->plugin->getLogger()->warning("Key $key not found in config.yml. (NULL)");
+			$this->plugin->getLogger()->warning("Key $key not found in config.yml.");
 			
 			return null;
 		}

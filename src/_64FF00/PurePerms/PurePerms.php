@@ -60,8 +60,6 @@ class PurePerms extends PluginBase
 		$this->updateAllPlayers();
 		
 		$this->getServer()->getPluginManager()->registerEvents(new PPListener($this), $this);
-		
-		$this->getGroup("Owner")->getPermissions();
 	}
 	
 	public function onDisable()
@@ -224,6 +222,8 @@ class PurePerms extends PluginBase
 			
 		if(empty($group->getData()))
 		{
+			$this->getLogger()->warning("Group $groupName is null.");
+			
 			return null;
 		}
 		
