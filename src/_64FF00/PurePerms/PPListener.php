@@ -19,20 +19,13 @@ class PPListener implements Listener
 	{
 		$player = $event->getEntity();
 		
-		$levelName = $event->getTarget()->getName();
+		$isMultiWorldPermsEnabled = $this->plugin->getPPConfig()->getValue("enable-multiworld-perms");
+		
+		$levelName = $isMultiWorldPermsEnabled ? $event->getTarget()->getName() : null;
 		
 		if($player instanceof Player)
 		{
-			$isMultiWorldPermsEnabled = $this->plugin->getPPConfig()->getValue("enable-multiworld-perms");
-			
-			if(!$isMultiWorldPermsEnabled)
-			{
-					$this->plugin->updatePermissions($player);
-			}
-			else
-			{
-				$this->plugin->updatePermissions($player, $levelName);
-			}
+			$this->plugin->updatePermissions($player, $levelName);
 		}
 	}
 	
@@ -40,18 +33,11 @@ class PPListener implements Listener
 	{
 		$player = $event->getPlayer();
 		
-		$levelName = $player->getLevel()->getName();
-		
 		$isMultiWorldPermsEnabled = $this->plugin->getPPConfig()->getValue("enable-multiworld-perms");
 		
-		if(!$isMultiWorldPermsEnabled)
-		{
-			$this->plugin->updatePermissions($player);
-		}
-		else
-		{
-			$this->plugin->updatePermissions($player, $levelName);
-		}
+		$levelName = $isMultiWorldPermsEnabled ? $player->getLevel()->getName() : null;
+		
+		$this->plugin->updatePermissions($player, $levelName);
 	}
 
 	public function onPlayerKick(PlayerKickEvent $event)

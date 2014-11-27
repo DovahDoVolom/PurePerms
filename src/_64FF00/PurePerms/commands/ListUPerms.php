@@ -38,7 +38,7 @@ class ListUPerms extends Command implements PluginIdentifiableCommand
 		
 		$player = $this->plugin->getPlayer($args[0]);
 		
-		$levelName = isset($args[2]) ?  $this->plugin->getServer()->getLevelByName($args[2]) : null;
+		$levelName = isset($args[2]) ?  $this->plugin->getServer()->getLevelByName($args[2])->getName() : null;
 		
 		$permissions = $this->plugin->getUser($player)->getUserPermissions($levelName);
 		

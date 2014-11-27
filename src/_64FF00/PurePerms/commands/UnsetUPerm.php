@@ -39,7 +39,7 @@ class UnsetUPerm extends Command implements PluginIdentifiableCommand
 		
 		$permission = $args[1];
 		
-		$levelName = isset($args[2]) ?  $this->plugin->getServer()->getLevelByName($args[2]) : null;
+		$levelName = isset($args[2]) ?  $this->plugin->getServer()->getLevelByName($args[2])->getName() : null;
 		
 		$this->plugin->getUser($player)->unsetUserPermission($permission, $levelName);
 		

@@ -48,14 +48,7 @@ class PPGroup implements PPDataInterface
 	
 	public function getPermissions($levelName = null)
 	{
-		if($levelName == null)
-		{
-			$permissions = $this->getNode("permissions");
-		}
-		else
-		{
-			$permissions = $this->getWorldData($levelName)["permissions"];
-		}
+		$permissions = $levelName != null ? $this->getWorldData($levelName)["permissions"] : $this->getNode("permissions");
 		
 		foreach($this->getInheritedGroups() as $inheritedGroup)
 		{

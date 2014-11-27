@@ -38,7 +38,7 @@ class PPUser implements PPDataInterface
 	}
 	
 	public function getGroupPermissions($levelName = null)
-	{
+	{		
 		return $this->getGroup($levelName)->getPermissions($levelName);
 	}
 	
@@ -57,6 +57,7 @@ class PPUser implements PPDataInterface
 		return $this->getData()[$node];
 	}
 	
+	// TODO
 	public function getPermissions($levelName = null)
 	{
 		$permissions = array_merge($this->getGroupPermissions($levelName), $this->getUserPermissions($levelName));
@@ -71,18 +72,15 @@ class PPUser implements PPDataInterface
 	
 	public function getUserPermissions($levelName = null)
 	{
-		if($levelName == null)
-		{
-			return $this->getNode("permissions");
-		}
+		$permissions = $levelName != null ? $this->getWorldData($levelName)["permissions"] : $this->getNode("permissions");
 		
-		return $this->getWorldData($levelName)["permissions"];
+		return $permissions;
 	}
 	
 	public function getWorldData($levelName)
 	{
 		if($levelName == null) return null;
-			
+		
 		if(!isset($this->getData()["worlds"][$levelName]))
 		{
 			$tempUserData = $this->getData();
