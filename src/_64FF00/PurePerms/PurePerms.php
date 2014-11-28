@@ -216,8 +216,6 @@ class PurePerms extends PluginBase
 	
 	public function getGroup($groupName)
 	{
-		if(empty($groupName)) return null;
-		
 		$group = new PPGroup($this, $groupName);
 			
 		if(empty($group->getData()))

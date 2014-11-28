@@ -22,24 +22,24 @@ class PPUser implements PPDataInterface
 	
 	public function getGroup($levelName = null)
 	{
-		if($levelName == null)
-		{
-			$groupName = $this->getNode("group");
-		}
-		else
-		{
-			$groupName = $this->getWorldData($levelName)["group"];
-		}
+		$groupName = $levelName != null ? $this->getWorldData($levelName)["group"] : $this->getNode("group");
 		
 		if(isset($groupName))
 		{
 			return $this->plugin->getGroup($groupName);
 		}
+		
+		return null;
 	}
 	
 	public function getGroupPermissions($levelName = null)
-	{		
-		return $this->getGroup($levelName)->getPermissions($levelName);
+	{
+		$group = $this->getGroup($levelName);
+		
+		if($group instanceof PPGroup)
+		{
+			return $group->getPermissions($levelName);
+		}
 	}
 	
 	public function getName()
@@ -57,7 +57,6 @@ class PPUser implements PPDataInterface
 		return $this->getData()[$node];
 	}
 	
-	// TODO
 	public function getPermissions($levelName = null)
 	{
 		$permissions = array_merge($this->getGroupPermissions($levelName), $this->getUserPermissions($levelName));
