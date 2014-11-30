@@ -55,7 +55,7 @@ class PurePerms extends PluginBase
 		
 		$this->setProvider();
 		
-		$this->sortGroupPermissions();
+		$this->cleanUpGroups();
 		
 		$this->updateAllPlayers();
 		
@@ -65,6 +65,14 @@ class PurePerms extends PluginBase
 	public function onDisable()
 	{
 		$this->provider->close();
+	}
+	
+	private function cleanUpGroups()
+	{
+		foreach($this->getGroups() as $group)
+		{
+			$group->sortPermissions();
+		}
 	}
 	
 	private function registerCommands()
@@ -119,14 +127,6 @@ class PurePerms extends PluginBase
 		}
 		
 		$this->getLogger()->info("Set data provider to " . strtoupper($providerName) . ".");
-	}
-	
-	private function sortGroupPermissions()
-	{
-		foreach($this->getGroups() as $group)
-		{
-			$group->sortPermissions();
-		}
 	}
 	
 	/*	
@@ -326,7 +326,6 @@ class PurePerms extends PluginBase
 		$this->getUser($player)->setGroup($group, $levelName);
 	}
 	
-	// TODO
 	public function updateAllPlayers()
 	{
 		foreach($this->getServer()->getOnlinePlayers() as $player)
@@ -345,7 +344,7 @@ class PurePerms extends PluginBase
 		if($player instanceof Player)
 		{
 			if(!$player->isOp() and !$this->config->getValue("override-op-permissions"))
-			{
+			{				
 				$attachment = $this->getAttachment($player);
 				
 				$originalPermissions = $this->getUser($player)->getPermissions($levelName);
@@ -364,7 +363,7 @@ class PurePerms extends PluginBase
 				}
 				
 				$attachment->clearPermissions();
-
+				
 				$attachment->setPermissions($permissions);
 			}
 		}
