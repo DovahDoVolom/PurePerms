@@ -36,3 +36,5 @@ permissions:
             description: "Allows you to remove a permission from the group."
           pperms.command.unsetuperm:
             description: "Allows you to remove a permission from the user."
+          pperms.command.usrinfo:
+            description: "Allows you to see info about a user."

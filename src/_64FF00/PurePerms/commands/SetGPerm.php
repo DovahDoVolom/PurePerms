@@ -28,7 +28,7 @@ class SetGPerm extends Command implements PluginIdentifiableCommand
 			return false;
 		}
 		
-		if(count($args) < 1 || count($args) > 2)
+		if(count($args) < 2 || count($args) > 3)
 		{
 			$sender->sendMessage(TextFormat::BLUE . "[PurePerms] Usage: /setgperm <group> <permission> [world]");
 			

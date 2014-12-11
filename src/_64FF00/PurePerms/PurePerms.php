@@ -14,6 +14,7 @@ use _64FF00\PurePerms\commands\SetGroup;
 use _64FF00\PurePerms\commands\SetUPerm;
 use _64FF00\PurePerms\commands\UnsetGPerm;
 use _64FF00\PurePerms\commands\UnsetUPerm;
+use _64FF00\PurePerms\commands\UsrInfo;
 use _64FF00\PurePerms\ppdata\PPGroup;
 use _64FF00\PurePerms\ppdata\PPUser;
 use _64FF00\PurePerms\providers\DefaultProvider;
@@ -93,6 +94,7 @@ class PurePerms extends PluginBase
 		$commandMap->register("setuperm", new SetUPerm($this, "setuperm", "Adds a permission to the user."));
 		$commandMap->register("unsetgperm", new UnsetGPerm($this, "unsetgperm", "Removes a permission from the group."));
 		$commandMap->register("unsetuperm", new UnsetUPerm($this, "unsetuperm", "Removes a permission from the user."));
+		$commandMap->register("usrinfo", new UsrInfo($this, "usrinfo", "Shows info about a user."));
 	}
 	
 	private function setProvider()

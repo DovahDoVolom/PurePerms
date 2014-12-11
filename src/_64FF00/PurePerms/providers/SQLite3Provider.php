@@ -22,11 +22,19 @@ class SQLite3Provider implements ProviderInterface
 		$this->players = new \SQLite3($this->plugin->getDataFolder() . "players.db");
 		$this->groups = new \SQLite3($this->plugin->getDataFolder() . "groups.db");
 			
-		$players_query = stream_get_contents($this->plugin->getResource("players.sql"));
-		$groups_query = stream_get_contents($this->plugin->getResource("groups.sql"));
-			
-		$this->players->exec($players_query);
-		$this->groups->exec($groups_query);	
+		$this->players->exec("
+			CREATE TABLE IF NOT EXISTS players (
+			  userName TEXT NOT NULL PRIMARY KEY,
+			  group TEXT NOT NULL
+			);
+		");
+		
+		$this->groups->exec("
+			CREATE TABLE IF NOT EXISTS groups (
+			  groupName TEXT NOT NULL PRIMARY KEY,
+			  isDefault INTEGER NOT NULL DEFAULT 1
+			);
+		");	
 	}
 	
 	public function getGroupData(PPGroup $group)
@@ -39,6 +47,7 @@ class SQLite3Provider implements ProviderInterface
 	
 	public function getUserData(PPUser $user, $isArray = false)
 	{
+		
 	}
 	
 	public function setGroupData(PPGroup $group, array $groupData)
