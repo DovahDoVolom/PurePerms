@@ -3,6 +3,10 @@
 # - yaml, sqlite3, ...
 data-provider: yaml
 
+# Enables debug mode to allow you to use special commands for debugging.
+# - true / false
+debug-mode: false
+
 # Setting this option will enable multiworld permissions to allow per-world permissions
 # - true / false
 enable-multiworld-perms: false

@@ -1,0 +1,77 @@
+---
+commands:
+  addgroup:
+    description: "Adds a new group to the groups list."
+    usage: "Usage: /addgroup <group>"
+    messages:
+      msg01: "Added %var1% to the group list successfully."
+      msg02: "Group %var1% already exists."
+  groups:
+    description: "Shows a list of all groups."
+    messages:
+      msg01: "All registered groups: %var1%"
+  listgperms: 
+    description: "Shows a list of all permissions from a group."
+    usage: "Usage: /listgperms <group> <page> [world]"
+    messages:
+      msg01: "ERROR: Group %var1% does NOT exist."
+      msg02: "Group %var1% doesn't have any group permissions."
+      msg03: "List of all permissions from %var1% (%var2% / %var3%) : "
+  listuperms: 
+    description: "Shows a list of all permissions from a user."
+    usage: "Usage: /listuperms <player> <page> [world]"
+    messages:
+      msg01: "Player %var1% doesn't have any user permissions."
+      msg02: "List of all permissions from %var1% (%var2% / %var3%) : " 
+  ppinfo: 
+    description: "Shows info about PurePerms."
+    messages:
+      msg01: "You are currently using PurePerms v%var1% by %var2%."
+      msg02: "This server is using PurePerms v%var1% by %var2%."
+  ppreload: 
+    description: "Reloads all PurePerms configurations."
+    messages: 
+      msg01: "All plugin configurations have been successfully reloaded."
+  removegroup: 
+    description: "Removes a group from the groups list."
+    usage: "Usage: /removegroup <group>"
+    messages:
+      msg01: "Removed %var1% from the group list successfully."
+      msg02: "Group %var1% already exists."
+  setgperm: 
+    description: "Adds a permission to the group."
+    usage: "Usage: /setgperm <group> <permission> [world]"
+    messages:
+      msg01: "Added permission %var1% to the group successfully."
+  setgroup: 
+    description: "Sets group for the user."
+    usage: "Usage: /setgroup <player> <group> [world]"
+    messages: 
+      msg01: "ERROR: Group %var1% does NOT exist."
+      msg02: "Added %var1% to the group successfully."
+  setuperm: 
+    description: "Adds a permission to the user."
+    usage: "Usage: /setuperm <player> <permission> [world]"
+    messages:
+      msg01: "Added permission %var1% to %var2% successfully."
+  unsetgperm: 
+    description: "Removes a permission from the group."
+    usage: "Usage: /unsetgperm <group> <permission> [world]"
+    messages:
+      msg01: "Removed permission %var1% from the group successfully."
+  unsetuperm: 
+    description: "Removes a permission from the user."
+    usage: "Usage: /unsetuperm <player> <permission> [world]"
+    messages: 
+      msg01: "Removed permission %var1% from %var2% successfully."
+  usrinfo: 
+    description: "Shows info about a user."
+    usage: "Usage: /usrinfo <player> [world]"
+    messages:
+      msg01: "ONLINE!"
+      msg02: "OFFLINE..."
+      msg03: "<--- User Information for %var1% --->"
+      msg04: "USERNAME: %var1%"
+      msg05: "STATUS: %var1%"
+      msg06: "GROUP: %var1%"
+...

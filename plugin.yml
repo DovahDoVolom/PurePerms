@@ -7,10 +7,10 @@ author: 64FF00
 website: https://github.com/64FF00/PurePerms
 permissions:
   pperms:
-    description: ""
+    description: "#64FF00"
     children:
       pperms.command:
-        description: ""
+        description: "Allows you to use all PurePerms commands."
         children:
           pperms.command.addgroup:
             description: "Allows you to add a new group to the groups list."

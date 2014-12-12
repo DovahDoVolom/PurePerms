@@ -47,7 +47,6 @@ class SQLite3Provider implements ProviderInterface
 	
 	public function getUserData(PPUser $user, $isArray = false)
 	{
-		
 	}
 	
 	public function setGroupData(PPGroup $group, array $groupData)
