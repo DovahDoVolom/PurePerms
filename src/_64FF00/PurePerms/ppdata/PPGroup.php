@@ -62,6 +62,11 @@ class PPGroup implements PPDataInterface
 		return $permissions;
 	}
 	
+	public function getUsers($levelName = null)
+	{
+		
+	}
+	
 	public function getWorldData($levelName)
 	{
 		if($levelName == null) return null;

@@ -1,6 +1,6 @@
 name: PurePerms
 main: _64FF00\PurePerms\PurePerms
-version: "1.0.0-RC1"
+version: "1.0.0-RC2"
 api: [1.9.0]
 load: STARTUP
 author: 64FF00
