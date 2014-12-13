@@ -30,18 +30,18 @@ class RemoveGroup extends Command implements PluginIdentifiableCommand
 		
 		if(!isset($args[0]) || count($args) > 1)
 		{
-			$sender->sendMessage(TextFormat::BLUE . "[PurePerms] Usage: /removegroup <group>");
+			$sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.removegroup.usage"));
 			
 			return true;
 		}
 		
 		if($this->plugin->removeGroup($args[0]))
 		{
-			$sender->sendMessage(TextFormat::BLUE . "[PurePerms] Removed " . $args[0] . " from the group list successfully.");
+			$sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.removegroup.messages.group_removed_successfully", $args[0]));
 		}
 		else
 		{
-			$sender->sendMessage(TextFormat::RED . "[PurePerms] Group " . $args[0] . " already exists.");
+			$sender->sendMessage(TextFormat::RED . "[PurePerms] " . $this->plugin->getMessage("cmds.removegroup.messages.group_not_exist", $args[0]));
 		}
 		
 		return true;

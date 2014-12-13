@@ -30,7 +30,7 @@ class UnsetGPerm extends Command implements PluginIdentifiableCommand
 		
 		if(count($args) < 2 || count($args) > 3)
 		{
-			$sender->sendMessage(TextFormat::BLUE . "[PurePerms] Usage: /unsetgperm <group> <permission> [world]");
+			$sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.unsetgperm.usage"));
 			
 			return true;
 		}
@@ -43,7 +43,7 @@ class UnsetGPerm extends Command implements PluginIdentifiableCommand
 		
 		$group->unsetGroupPermission($permission, $levelName);
 		
-		$sender->sendMessage(TextFormat::BLUE . "[PurePerms] Removed permission " . $permission . " from the group successfully.");
+		$sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.unsetgperm.messages.gperm_removed_successfully", $permission));
 		
 		return true;
 	}

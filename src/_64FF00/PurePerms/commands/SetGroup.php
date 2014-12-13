@@ -34,7 +34,7 @@ class SetGroup extends Command implements PluginIdentifiableCommand
 		
 		if(count($args) < 2 || count($args) > 3)
 		{
-			$sender->sendMessage(TextFormat::BLUE . "[PurePerms] Usage: /setgroup <player> <group> [world]");
+			$sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.setgroup.usage"));
 			
 			return true;
 		}
@@ -45,7 +45,7 @@ class SetGroup extends Command implements PluginIdentifiableCommand
 		
 		if($group == null) 
 		{
-			$sender->sendMessage(TextFormat::RED . "[PurePerms] ERROR: Group " . $args[1] . " does NOT exist.");
+			$sender->sendMessage(TextFormat::RED . "[PurePerms] " . $this->plugin->getMessage("cmds.setgroup.messages.group_not_exist", $args[1]));
 			
 			return true;
 		}
@@ -54,7 +54,7 @@ class SetGroup extends Command implements PluginIdentifiableCommand
 		
 		$this->plugin->setGroup($player, $group, $levelName);
 		
-		$sender->sendMessage(TextFormat::BLUE . "[PurePerms] Added " . $player->getName() . " to the group successfully.");
+		$sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.setgroup.messages.setgroup_successfully", $player->getName()));
 		
 		if($player instanceof Player)
 		{

@@ -37,7 +37,7 @@ class Groups extends Command implements PluginIdentifiableCommand
 		
 		$result = substr($result, 0, -2);
 		
-		$sender->sendMessage(TextFormat::BLUE . "[PurePerms] All registered groups: " . $result);
+		$sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.groups.messages.all_registered_groups", $result));
 		
 		return true;
 	}

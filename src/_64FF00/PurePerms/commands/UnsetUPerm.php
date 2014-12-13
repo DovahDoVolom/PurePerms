@@ -30,7 +30,7 @@ class UnsetUPerm extends Command implements PluginIdentifiableCommand
 		
 		if(count($args) < 2 || count($args) > 3)
 		{
-			$sender->sendMessage(TextFormat::BLUE . "[PurePerms] Usage: /unsetuperm <player> <permission> [world]");
+			$sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.unsetuperm.usage"));
 			
 			return true;
 		}
@@ -43,7 +43,7 @@ class UnsetUPerm extends Command implements PluginIdentifiableCommand
 		
 		$this->plugin->getUser($player)->unsetUserPermission($permission, $levelName);
 		
-		$sender->sendMessage(TextFormat::BLUE . "[PurePerms] Removed permission " . $permission . " from " . $player->getName() . " successfully.");
+		$sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.unsetuperm.messages.uperm_removed_successfully", $permission, $player->getName()));
 		
 		return true;
 	}

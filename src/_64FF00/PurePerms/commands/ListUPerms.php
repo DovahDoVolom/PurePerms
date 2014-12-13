@@ -31,7 +31,7 @@ class ListUPerms extends Command implements PluginIdentifiableCommand
 		
 		if(count($args) < 1 || count($args) > 3)
 		{
-			$sender->sendMessage(TextFormat::BLUE . "[PurePerms] Usage: /listuperms <player> <page> [world]");
+			$sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.listuperms.usage"));
 			
 			return true;
 		}
@@ -44,7 +44,7 @@ class ListUPerms extends Command implements PluginIdentifiableCommand
 		
 		if(empty($permissions))
 		{
-			$sender->sendMessage(TextFormat::BLUE . "[PurePerms] Player " . $player->getName() . " doesn't have any user permissions.");
+			$sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.listuperms.messages.no_user_perms", $player->getName()));
 			
 			return true;
 		}
@@ -68,7 +68,7 @@ class ListUPerms extends Command implements PluginIdentifiableCommand
 			$pageNumber = $args[1];
 		}
 		
-		$sender->sendMessage(TextFormat::BLUE . "[PurePerms] List of all permissions from " . $player->getName() . " ($pageNumber / $maxPageNumber) : ");
+		$sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.listuperms.messages.user_perms_list", $player->getName(), $pageNumber, $maxPageNumber));
 		
 		foreach($chunkedPermissions[$pageNumber - 1] as $permission)
 		{

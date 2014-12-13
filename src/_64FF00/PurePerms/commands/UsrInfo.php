@@ -30,7 +30,7 @@ class UsrInfo extends Command implements PluginIdentifiableCommand
 		
 		if(count($args) < 1 || count($args) > 2)
 		{
-			$sender->sendMessage(TextFormat::BLUE . "[PurePerms] Usage: /usrinfo <player> [world]");
+			$sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.usrinfo.usage"));
 			
 			return true;
 		}
@@ -41,15 +41,15 @@ class UsrInfo extends Command implements PluginIdentifiableCommand
 		
 		$levelName = isset($args[1]) ?  $this->plugin->getServer()->getLevelByName($args[1])->getName() : null; 
 		
-		$status = $player instanceof Player ? TextFormat::GREEN . "ONLINE!" : TextFormat::RED . "OFFLINE...";
+		$status = $player instanceof Player ? TextFormat::GREEN . $this->plugin->getMessage("cmds.usrinfo.messages.status_online") : TextFormat::RED . $this->plugin->getMessage("cmds.usrinfo.messages.status_offline");
 		
-		$sender->sendMessage(TextFormat::BLUE . "[PurePerms] <--- User Information for " . $player->getName() . " --->");	
-		$sender->sendMessage(TextFormat::BLUE . "[PurePerms] USERNAME: " . $player->getName());
-		$sender->sendMessage(TextFormat::BLUE . "[PurePerms] STATUS: " . $status);
+		$sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.usrinfo.messages.usrinfo_header", $player->getName()));	
+		$sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.usrinfo.messages.usrinfo_username", $player->getName()));
+		$sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.usrinfo.messages.usrinfo_status", $status));
 		
 		$userGroup = $user->getGroup($levelName);
 		
-		$sender->sendMessage(TextFormat::BLUE . "[PurePerms] GROUP: " . $userGroup->getName());
+		$sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.usrinfo.messages.usrinfo_group", $userGroup->getName()));
 		
 		return true;
 	}

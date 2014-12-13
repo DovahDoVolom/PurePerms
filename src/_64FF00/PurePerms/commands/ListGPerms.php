@@ -32,7 +32,7 @@ class ListGPerms extends Command implements PluginIdentifiableCommand
 		
 		if(count($args) < 1 || count($args) > 3)
 		{
-			$sender->sendMessage(TextFormat::BLUE . "[PurePerms] Usage: /listgperms <group> <page> [world]");
+			$sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.listgperms.usage"));
 			
 			return true;
 		}
@@ -41,7 +41,7 @@ class ListGPerms extends Command implements PluginIdentifiableCommand
 		
 		if($group == null) 
 		{
-			$sender->sendMessage(TextFormat::RED . "[PurePerms] ERROR: Group " . $args[0] . " does NOT exist.");
+			$sender->sendMessage(TextFormat::RED . "[PurePerms] " . $this->plugin->getMessage("cmds.listgperms.messages.group_not_exist", $args[0]));
 			
 			return true;
 		}
@@ -52,7 +52,7 @@ class ListGPerms extends Command implements PluginIdentifiableCommand
 		
 		if(empty($permissions))
 		{
-			$sender->sendMessage(TextFormat::BLUE . "[PurePerms] Group " . $group->getName() . " doesn't have any group permissions.");
+			$sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.listgperms.messages.no_group_perms", $group->getName()));
 			
 			return true;
 		}
@@ -76,7 +76,8 @@ class ListGPerms extends Command implements PluginIdentifiableCommand
 			$pageNumber = $args[1];
 		}
 		
-		$sender->sendMessage(TextFormat::BLUE . "[PurePerms] List of all permissions from " . $group->getName() . " ($pageNumber / $maxPageNumber) : ");
+		var_dump($maxPageNumber);
+		$sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.listgperms.messages.group_perms_list", $group->getName(), $pageNumber, $maxPageNumber));
 		
 		foreach($chunkedPermissions[$pageNumber - 1] as $permission)
 		{

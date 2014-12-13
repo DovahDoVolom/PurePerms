@@ -30,18 +30,18 @@ class AddGroup extends Command implements PluginIdentifiableCommand
 		
 		if(!isset($args[0]) || count($args) > 1)
 		{
-			$sender->sendMessage(TextFormat::BLUE . "[PurePerms] Usage: /addgroup <group>");
+			$sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.addgroup.usage"));
 			
 			return true;
 		}
 		
 		if($this->plugin->addGroup($args[0]))
 		{
-			$sender->sendMessage(TextFormat::BLUE . "[PurePerms] Added " . $args[0] . " to the group list successfully.");
+			$sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.addgroup.messages.group_added_successfully", $args[0]));
 		}
 		else
 		{
-			$sender->sendMessage(TextFormat::RED . "[PurePerms] Group " . $args[0] . " already exists.");
+			$sender->sendMessage(TextFormat::RED . "[PurePerms] " . $this->plugin->getMessage("cmds.addgroup.messages.group_already_exists", $args[0]));
 		}
 		
 		return true;

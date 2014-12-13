@@ -30,7 +30,7 @@ class SetGPerm extends Command implements PluginIdentifiableCommand
 		
 		if(count($args) < 2 || count($args) > 3)
 		{
-			$sender->sendMessage(TextFormat::BLUE . "[PurePerms] Usage: /setgperm <group> <permission> [world]");
+			$sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.setgperm.usage"));
 			
 			return true;
 		}
@@ -43,7 +43,7 @@ class SetGPerm extends Command implements PluginIdentifiableCommand
 		
 		$group->setGroupPermission($permission, $levelName);
 		
-		$sender->sendMessage(TextFormat::BLUE . "[PurePerms] Added permission " . $permission . " to the group successfully.");
+		$sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.setgperm.messages.gperm_added_successfully", $permission));
 		
 		return true;
 	}

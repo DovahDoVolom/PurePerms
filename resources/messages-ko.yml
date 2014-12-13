@@ -1,0 +1,78 @@
+---
+messages-version: "INDEV"
+cmds:
+  addgroup:
+    desc: "새로운 그룹을 추가합니다."
+    usage: "사용법: /addgroup <추가할 그룹 이름>"
+    messages:
+      group_added_successfully: "그룹 %var0%이 추가되었습니다."
+      group_already_exists: "%var0%이라는 이름을 가진 그룹이 이미 존재합니다."
+  groups:
+    desc: "모든 그룹들의 목록을 보여줍니다."
+    messages:
+      all_registered_groups: "모든 그룹들: %var0%"
+  listgperms: 
+    desc: "그룹의 모든 퍼미션들을 보여줍니다."
+    usage: "사용법: /listgperms <퍼미션을 볼 그룹> <페이지> [월드 이름]"
+    messages:
+      group_not_exist: "%var0%이라는 이름을 가진 그룹이 존재하지 않습니다."
+      no_group_perms: "그룹 %var0%은 어떠한 퍼미션도 가지고 있지 않습니다."
+      group_perms_list: "그룹 %var0%의 모든 퍼미션 (현재 페이지 %var1% / 전체 페이지 %var2%) : "
+  listuperms: 
+    desc: "플레이어의 모든 고유 퍼미션들을 보여줍니다."
+    usage: "Usage: /listuperms <퍼미션을 볼 플레이어> <페이지> [월드 이름]"
+    messages:
+      no_user_perms: "플레이어 %var0%는 어떠한 퍼미션도 가지고 있지 않습니다."
+      user_perms_list: "플레이어 %var0%의 모든 퍼미션 (현재 페이지 %var1% / 모든 페이지 %var2%) : " 
+  ppinfo: 
+    desc: "PurePerms 플러그인의 정보를 보여줍니다."
+    messages:
+      ppinfo_console: "현재 PurePerms v%var0% 버전을 사용하고 계십니다! (제작자: %var1%)"
+      ppinfo_player: "이 서버는 PurePerms v%var0% 버전을 사용하고 있습니다. (제작자: %var1%)"
+  ppreload: 
+    desc: "모든 PurePerms 설정 파일들을 다시 로드합니다."
+    messages: 
+      successfully_reloaded: "모든 설정 파일들이 다시 로드되었습니다."
+  removegroup: 
+    desc: "그룹을 제거합니다."
+    usage: "Usage: /removegroup <제거할 그룹 이름>"
+    messages:
+      group_removed_successfully: "그룹 %var0%이 제거되었습니다."
+      group_not_exist: "%var0%이라는 이름을 가진 그룹이 존재하지 않습니다."
+  setgperm: 
+    desc: "그룹에 퍼미션을 추가합니다."
+    usage: "사용법: /setgperm <퍼미션을 추가할 그룹> <퍼미션> [월드 이름]"
+    messages:
+      gperm_added_successfully: "퍼미션 %var0%을 그룹에 추가하였습니다."
+  setgroup: 
+    desc: "플레이어의 그룹을 설정합니다."
+    usage: "사용법: /setgroup <그룹을 설정할 플레이어> <그룹 이름> [월드 이름]"
+    messages: 
+      group_not_exist: "%var0%이라는 이름을 가진 그룹이 존재하지 않습니다."
+      setgroup_successfully: "플레이어 %var0%을 그룹에 추가했습니다."
+  setuperm: 
+    desc: "플레이어에 고유 퍼미션을 추가합니다."
+    usage: "사용법: /setuperm <퍼미션을 추가할 플레이어> <퍼미션> [월드 이름]"
+    messages:
+      uperm_added_successfully: "퍼미션 %var0%을 그룹 %var1%에 추가하였습니다."
+  unsetgperm: 
+    desc: "그룹의 퍼미션을 제거합니다."
+    usage: "사용법: /unsetgperm <퍼미션을 제거할 그룹 이름> <퍼미션> [월드 이름]"
+    messages:
+      gperm_removed_successfully: "퍼미션 %var0%이 그룹에서 제거되었습니다."
+  unsetuperm: 
+    desc: "플레이어의 고유 퍼미션을 추가합니다."
+    usage: "사용법: /unsetuperm <퍼미션을 추가할 플레이어> <퍼미션> [월드 이름]"
+    messages: 
+      uperm_removed_successfully: "퍼미션 %var0%을 그룹 %var1%으로부터 제거하였습니다."
+  usrinfo: 
+    desc: "플레이어의 정보를 보여줍니다. (접속 상태, 그룹 등)"
+    usage: "사용법: /usrinfo <정보를 볼 플레이어> [월드 이름]"
+    messages:
+      status_online: "온라인이네요!"
+      status_offline: "오프라인이네요..."
+      usrinfo_header: "<--- %var0%의 플레이어 정보 --->"
+      usrinfo_username: "플레이어 이름: %var0%"
+      usrinfo_status: "접속 상태: %var0%"
+      usrinfo_group: "그룹: %var0%"
+...

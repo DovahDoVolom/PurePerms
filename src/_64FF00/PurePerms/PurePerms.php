@@ -48,6 +48,7 @@ class PurePerms extends PluginBase
 	public function onLoad()
 	{
 		$this->config = new PPConfig($this);
+		$this->messages = new PPMessages($this);
 	}
 	
 	public function onEnable()
@@ -82,19 +83,19 @@ class PurePerms extends PluginBase
 		
 		$this->getLogger()->info("Registering PurePerms commands...");
 		
-		$commandMap->register("addgroup", new AddGroup($this, "addgroup", "Adds a new group to the groups list."));
-		$commandMap->register("groups", new Groups($this, "groups", "Shows a list of all groups."));
-		$commandMap->register("listgperms", new ListGPerms($this, "listgperms", "Shows a list of all permissions from a group."));
-		$commandMap->register("listuperms", new ListUPerms($this, "listuperms", "Shows a list of all permissions from a user."));
-		$commandMap->register("ppinfo", new PPInfo($this, "ppinfo", "Shows info about PurePerms."));
-		$commandMap->register("ppreload", new PPReload($this, "ppreload", "Reloads all PurePerms configurations."));
-		$commandMap->register("removegroup", new RemoveGroup($this, "removegroup", "Removes a group from the groups list."));
-		$commandMap->register("setgperm", new SetGPerm($this, "setgperm", "Adds a permission to the group."));
-		$commandMap->register("setgroup", new SetGroup($this, "setgroup", "Sets group for the user."));
-		$commandMap->register("setuperm", new SetUPerm($this, "setuperm", "Adds a permission to the user."));
-		$commandMap->register("unsetgperm", new UnsetGPerm($this, "unsetgperm", "Removes a permission from the group."));
-		$commandMap->register("unsetuperm", new UnsetUPerm($this, "unsetuperm", "Removes a permission from the user."));
-		$commandMap->register("usrinfo", new UsrInfo($this, "usrinfo", "Shows info about a user."));
+		$commandMap->register("addgroup", new AddGroup($this, "addgroup", $this->getMessage("cmds.addgroup.desc")));
+		$commandMap->register("groups", new Groups($this, "groups", $this->getMessage("cmds.groups.desc")));
+		$commandMap->register("listgperms", new ListGPerms($this, "listgperms", $this->getMessage("cmds.listgperms.desc")));
+		$commandMap->register("listuperms", new ListUPerms($this, "listuperms", $this->getMessage("cmds.listuperms.desc")));
+		$commandMap->register("ppinfo", new PPInfo($this, "ppinfo", $this->getMessage("cmds.ppinfo.desc")));
+		$commandMap->register("ppreload", new PPReload($this, "ppreload", $this->getMessage("cmds.ppreload.desc")));
+		$commandMap->register("removegroup", new RemoveGroup($this, "removegroup", $this->messages->getMessage("cmds.removegroup.desc")));
+		$commandMap->register("setgperm", new SetGPerm($this, "setgperm", $this->getMessage("cmds.setgperm.desc")));
+		$commandMap->register("setgroup", new SetGroup($this, "setgroup", $this->getMessage("cmds.setgroup.desc")));
+		$commandMap->register("setuperm", new SetUPerm($this, "setuperm", $this->getMessage("cmds.setuperm.desc")));
+		$commandMap->register("unsetgperm", new UnsetGPerm($this, "unsetgperm", $this->getMessage("cmds.unsetgperm.desc")));
+		$commandMap->register("unsetuperm", new UnsetUPerm($this, "unsetuperm", $this->getMessage("cmds.unsetuperm.desc")));
+		$commandMap->register("usrinfo", new UsrInfo($this, "usrinfo", $this->getMessage("cmds.usrinfo.desc")));
 	}
 	
 	private function setProvider()
@@ -242,6 +243,11 @@ class PurePerms extends PluginBase
 		return $result;
 	}
 	
+	public function getMessage($node, ...$vars)
+	{
+		return $this->messages->getMessage($node, ...$vars);
+	}
+	
 	public function getPlayer($name)
 	{
 		$player = $this->getServer()->getPlayer($name);
@@ -268,9 +274,11 @@ class PurePerms extends PluginBase
 	{
 		$this->config->reloadConfig();
 		
+		$this->messages->reloadMessages();
+		
 		$this->provider->init();
 		
-		$this->sortGroupPermissions();
+		$this->cleanUpGroups();
 		
 		$this->updateAllPlayers();
 	}
