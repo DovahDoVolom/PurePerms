@@ -81,8 +81,6 @@ class PurePerms extends PluginBase
 	{
 		$commandMap = $this->getServer()->getCommandMap();
 		
-		$this->getLogger()->info("Registering PurePerms commands...");
-		
 		$commandMap->register("addgroup", new AddGroup($this, "addgroup", $this->getMessage("cmds.addgroup.desc")));
 		$commandMap->register("groups", new Groups($this, "groups", $this->getMessage("cmds.groups.desc")));
 		$commandMap->register("listgperms", new ListGPerms($this, "listgperms", $this->getMessage("cmds.listgperms.desc")));
@@ -275,6 +273,8 @@ class PurePerms extends PluginBase
 		$this->config->reloadConfig();
 		
 		$this->messages->reloadMessages();
+		
+		$this->registerCommands();
 		
 		$this->provider->init();
 		
