@@ -35,26 +35,29 @@ class DefaultProvider implements ProviderInterface
 	{
 		$groupName = $group->getName();
 		
-		if(isset($this->getGroupsData(true)[$groupName]) and is_array($this->getGroupsData(true)[$groupName]))
+		if(isset($this->getGroupsData()[$groupName]) and is_array($this->getGroupsData(true)[$groupName]))
 		{
-			return $this->getGroupsData(true)[$groupName];
+			return $this->getGroupsData()[$groupName];
 		}
 	}
 	
-	public function getGroupsData($isArray = false)
+	public function getGroupsConfig()
 	{
-		if($isArray) return $this->groups->getAll();
-		
 		return $this->groups;
 	}
 	
-	public function getUserData(PPUser $user, $isArray = false)
+	public function getGroupsData()
+	{
+		return $this->groups->getAll();
+	}
+	
+	public function getUserConfig(PPUser $user)
 	{
 		$userName = $user->getPlayer()->getName();
 		
 		if(!(file_exists($this->plugin->getDataFolder() . "players/" . strtolower($userName) . ".yml")))
 		{
-			$userConfig = new Config($this->plugin->getDataFolder() . "players/" . strtolower($userName) . ".yml", Config::YAML, array(
+			return new Config($this->plugin->getDataFolder() . "players/" . strtolower($userName) . ".yml", Config::YAML, array(
 				"userName" => $userName,
 				"group" => $this->plugin->getDefaultGroup()->getName(),
 				"permissions" => array(
@@ -65,13 +68,16 @@ class DefaultProvider implements ProviderInterface
 		}
 		else
 		{
-			$userConfig = new Config($this->plugin->getDataFolder() . "players/" . strtolower($userName) . ".yml", Config::YAML, array(
+			return new Config($this->plugin->getDataFolder() . "players/" . strtolower($userName) . ".yml", Config::YAML, array(
 			));
 		}
+	}
+	
+	public function getUserData(PPUser $user)
+	{
+		$userConfig = $this->getUserConfig($user);
 		
-		if($isArray) return $userConfig->getAll();
-		
-		return $userConfig;
+		return $userConfig->getAll();
 	}
 	
 	public function setGroupData(PPGroup $group, array $groupData)
@@ -92,7 +98,7 @@ class DefaultProvider implements ProviderInterface
 
 	public function setUserData(PPUser $user, array $data)
 	{
-		$userData = $this->getUserData($user);
+		$userData = $this->getUserConfig($user);
 		
 		$userData->setAll($data);
 			

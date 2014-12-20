@@ -3,7 +3,7 @@
 # - yaml, sqlite3, ...
 data-provider: yaml
 
-# Setting this option will enable multiworld permissions to allow per-world permissions
+# Setting this option will allow you to use per-world permissions
 # - true / false
 enable-multiworld-perms: false
 
