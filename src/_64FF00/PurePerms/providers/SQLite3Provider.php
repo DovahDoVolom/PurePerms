@@ -109,7 +109,21 @@ class SQLite3Provider implements ProviderInterface
 	{
 		if(!empty($this->groupsData))
 		{
+			$tempGroupsData = $this->groupsData;
 			
+			$inheritance = $tempGroupsData[$groupName]["inheritance"];
+								
+			if(is_array($inheritance)) 
+			{
+				$tempGroupsData[$groupName]["inheritance"] = implode(",", $inheritance);
+			}
+					
+			$permissions = $tempGroupsData[$groupName]["permissions"];
+					
+			if(is_array($permissions))
+			{
+				$tempGroupsData[$groupName]["permissions"] = implode(",", $permissions);
+			}
 		}
 	}
 
@@ -119,5 +133,6 @@ class SQLite3Provider implements ProviderInterface
 	
 	public function close()
 	{
+		$this->db->close();
 	}
 }

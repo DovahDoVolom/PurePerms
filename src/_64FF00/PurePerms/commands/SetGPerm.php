@@ -37,6 +37,13 @@ class SetGPerm extends Command implements PluginIdentifiableCommand
 		
 		$group = $this->plugin->getGroup($args[0]);
 		
+		if($group == null)
+		{
+			$sender->sendMessage(TextFormat::RED . "[PurePerms] " . $this->plugin->getMessage("cmds.setgperm.messages.group_not_exist", $args[0]));
+			
+			return true;
+		}
+		
 		$permission = $args[1];
 		
 		$levelName = isset($args[2]) ?  $this->plugin->getServer()->getLevelByName($args[2])->getName() : null;

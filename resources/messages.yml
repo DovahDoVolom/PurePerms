@@ -43,6 +43,7 @@ cmds:
     usage: "Usage: /setgperm <group> <permission> [world]"
     messages:
       gperm_added_successfully: "Added permission %var0% to the group successfully."
+      group_not_exist: "Group %var0% does NOT exist."
   setgroup: 
     desc: "Sets group for the user."
     usage: "Usage: /setgroup <player> <group> [world]"
@@ -59,6 +60,7 @@ cmds:
     usage: "Usage: /unsetgperm <group> <permission> [world]"
     messages:
       gperm_removed_successfully: "Removed permission %var0% from the group successfully."
+      group_not_exist: "Group %var0% does NOT exist."
   unsetuperm: 
     desc: "Removes a permission from the user."
     usage: "Usage: /unsetuperm <player> <permission> [world]"

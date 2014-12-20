@@ -220,7 +220,7 @@ class PurePerms extends PluginBase
 			
 		if(empty($group->getData()))
 		{
-			$this->getLogger()->warning("Group $groupName is null.");
+			// $this->getLogger()->warning("Group $groupName is null.");
 			
 			return null;
 		}
