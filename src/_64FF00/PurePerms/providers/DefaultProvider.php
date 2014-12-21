@@ -80,27 +80,27 @@ class DefaultProvider implements ProviderInterface
 		return $userConfig->getAll();
 	}
 	
-	public function setGroupData(PPGroup $group, array $groupData)
+	public function setGroupData(PPGroup $group, array $tempGroupData)
 	{
 		$groupName = $group->getName();
 		
-		$this->groups->set($groupName, $groupData);
+		$this->groups->set($groupName, $tempGroupData);
 		
 		$this->groups->save();
 	}
 	
-	public function setGroupsData(array $data)
+	public function setGroupsData(array $tempGroupsData)
 	{
-		$this->groups->setAll($data);
+		$this->groups->setAll($tempGroupsData);
 		
 		$this->groups->save();
 	}
 
-	public function setUserData(PPUser $user, array $data)
+	public function setUserData(PPUser $user, array $tempUserData)
 	{
 		$userData = $this->getUserConfig($user);
 		
-		$userData->setAll($data);
+		$userData->setAll($tempUserData);
 			
 		$userData->save();
 	}

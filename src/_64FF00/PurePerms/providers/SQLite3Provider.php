@@ -43,7 +43,8 @@ class SQLite3Provider implements ProviderInterface
 		if(empty($this->groupsData))
 		{
 			$result = $this->db->query("
-				SELECT groupName, isDefault, inheritance, permissions FROM groups;
+				SELECT groupName, isDefault, inheritance, permissions 
+				FROM groups;
 			");
 			
 			if($result instanceof \SQLite3Result)
@@ -51,6 +52,8 @@ class SQLite3Provider implements ProviderInterface
 				while($currentRow = $result->fetchArray(SQLITE3_ASSOC))
 				{
 					$groupName = $currentRow["groupName"];
+					
+					unset($currentRow["groupName"]);
 					
 					$this->groupsData[$groupName] = $currentRow;
 					
@@ -60,6 +63,8 @@ class SQLite3Provider implements ProviderInterface
 					{
 						$this->groupsData[$groupName]["inheritance"] = explode(",", $inheritance);
 					}
+					
+					if(empty($inheritance)) $this->groupsData[$groupName]["inheritance"] = [];
 					
 					$permissions = $this->groupsData[$groupName]["permissions"];
 					
@@ -73,7 +78,8 @@ class SQLite3Provider implements ProviderInterface
 			}
 			
 			$result_mw = $this->db->query("
-				SELECT groupName, worldName, permissions FROM groups_mw;
+				SELECT groupName, worldName, permissions 
+				FROM groups_mw;
 			");
 			
 			if($result_mw instanceof \SQLite3Result)
@@ -101,33 +107,63 @@ class SQLite3Provider implements ProviderInterface
 	{
 	}
 	
-	public function setGroupData(PPGroup $group, array $groupData)
+	public function setGroupData(PPGroup $group, array $tempGroupData)
 	{
-	}
-	
-	public function setGroupsData(array $data)
-	{
-		if(!empty($this->groupsData))
+		$groupName = $group->getName();
+		
+		if(!empty($this->groupsData[$groupName]))
 		{
-			$tempGroupsData = $this->groupsData;
-			
-			$inheritance = $tempGroupsData[$groupName]["inheritance"];
+			if(isset($tempGroupData["isDefault"])) $isDefault = $tempGroupData["isDefault"];
+				
+			if(isset($tempGroupData["inheritance"])) $inheritance = $tempGroupData["inheritance"];
 								
 			if(is_array($inheritance)) 
 			{
-				$tempGroupsData[$groupName]["inheritance"] = implode(",", $inheritance);
+				$inheritance = implode(",", $inheritance);
 			}
 					
-			$permissions = $tempGroupsData[$groupName]["permissions"];
+			if(isset($tempGroupData["permissions"])) $permissions = $tempGroupData["permissions"];
 					
 			if(is_array($permissions))
 			{
-				$tempGroupsData[$groupName]["permissions"] = implode(",", $permissions);
+				$permissions = implode(",", $permissions);
 			}
+			
+			// http://php.net/manual/en/sqlite3.query.php#111658
+			/*
+				The recommended way to do a SQLite3 query is to use a statement. 
+				For a table creation, a query might be fine (and easier) but for an insert, update or select, 
+				you should really use a statement, it's really easier and safer as SQLite will escape your parameters according to their type. 
+				SQLite will also use less memory than if you created the whole query by yourself. 
+			*/
+			$stmt = $this->db->prepare("
+				UPDATE groups 
+				SET isDefault = :isDefault, inheritance = :inheritance, permissions = :permissions 
+				WHERE groupName = :groupName;
+			");
+				
+			$stmt->bindValue(":groupName", $groupName, SQLITE3_TEXT);
+			$stmt->bindValue(":isDefault", $isDefault, SQLITE3_INTEGER);
+			$stmt->bindValue(":inheritance", $inheritance, SQLITE3_TEXT);
+			$stmt->bindValue(":permissions", $permissions, SQLITE3_TEXT);
+				
+			$result = $stmt->execute();
+			
+			$result->finalize();
+		}
+	}
+	
+	public function setGroupsData(array $tempGroupsData)
+	{
+		foreach(array_keys($tempGroupsData) as $groupName)
+		{
+			$group = $this->plugin->getGroup($groupName);
+			
+			$this->setGroupData($group, $tempGroupsData[$groupName]);
 		}
 	}
 
-	public function setUserData(PPUser $user, array $data)
+	public function setUserData(PPUser $user, array $tempUserData)
 	{
 	}
 	

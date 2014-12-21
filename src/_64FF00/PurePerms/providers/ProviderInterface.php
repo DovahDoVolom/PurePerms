@@ -15,11 +15,11 @@ interface ProviderInterface
 	
 	public function getUserData(PPUser $user);
 	
-	public function setGroupData(PPGroup $group, array $groupData);
+	public function setGroupData(PPGroup $group, array $tempGroupData);
 	
-	public function setGroupsData(array $data);
+	public function setGroupsData(array $tempGroupsData);
 
-	public function setUserData(PPUser $user, array $data);
+	public function setUserData(PPUser $user, array $tempUserData);
 	
 	public function close();
 }

@@ -1,6 +1,5 @@
 CREATE TABLE IF NOT EXISTS groups (
-  id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-  groupName TEXT,
+  groupName TEXT PRIMARY KEY NOT NULL,
   isDefault INTEGER NOT NULL DEFAULT 0,
   inheritance TEXT,
   permissions TEXT
@@ -11,22 +10,19 @@ INSERT OR IGNORE INTO groups (groupName, isDefault, inheritance, permissions) VA
 INSERT OR IGNORE INTO groups (groupName, isDefault, inheritance, permissions) VALUES("Owner", 0, "Guest,Admin", "pocketmine.command,pperms.command");
 
 CREATE TABLE IF NOT EXISTS groups_mw (
-  id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-  groupName TEXT,
+  groupName TEXT PRIMARY KEY NOT NULL,
   worldName TEXT NOT NULL,
   permissions TEXT
 );
 
 CREATE TABLE IF NOT EXISTS players (
-  id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-  userName TEXT,
+  userName TEXT PRIMARY KEY NOT NULL,
   userGroup TEXT NOT NULL,
   permissions TEXT
 );
 
 CREATE TABLE IF NOT EXISTS players_mw (
-  id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-  userName TEXT,
+  userName TEXT PRIMARY KEY NOT NULL,
   worldName TEXT NOT NULL,
   userGroup TEXT NOT NULL,
   permissions TEXT
