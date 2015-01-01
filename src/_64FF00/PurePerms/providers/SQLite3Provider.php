@@ -129,6 +129,14 @@ class SQLite3Provider implements ProviderInterface
 				$permissions = implode(",", $permissions);
 			}
 			
+			if(isset($tempGroupData["worlds"]))
+			{
+				foreach($tempGroupData["worlds"] as $tempWorldData)
+				{
+					
+				}
+			}
+			
 			// http://php.net/manual/en/sqlite3.query.php#111658
 			/*
 				The recommended way to do a SQLite3 query is to use a statement. 

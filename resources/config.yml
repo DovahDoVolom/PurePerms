@@ -1,6 +1,6 @@
 ---
 # Sets the data provider for PurePerms :3 
-# - yaml, sqlite3, ...
+# - yaml, sqlite3
 data-provider: yaml
 
 # Setting this option will allow you to use per-world permissions
