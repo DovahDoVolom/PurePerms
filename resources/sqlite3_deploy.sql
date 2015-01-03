@@ -12,8 +12,12 @@ INSERT OR IGNORE INTO groups (groupName, isDefault, inheritance, permissions) VA
 CREATE TABLE IF NOT EXISTS groups_mw (
   groupName TEXT PRIMARY KEY NOT NULL,
   worldName TEXT NOT NULL,
-  permissions TEXT
+  permissions_mw TEXT
 );
+
+INSERT OR IGNORE INTO groups_mw (groupName, worldName, permissions_mw) VALUES("Guest", "world", "test.permission.guest.world");
+INSERT OR IGNORE INTO groups_mw (groupName, worldName, permissions_mw) VALUES("Admin", "world", "test.permission.admin.world");
+INSERT OR IGNORE INTO groups_mw (groupName, worldName, permissions_mw) VALUES("Owner", "world", "test.permission.owner.world");
 
 CREATE TABLE IF NOT EXISTS players (
   userName TEXT PRIMARY KEY NOT NULL,
@@ -25,5 +29,5 @@ CREATE TABLE IF NOT EXISTS players_mw (
   userName TEXT PRIMARY KEY NOT NULL,
   worldName TEXT NOT NULL,
   userGroup TEXT NOT NULL,
-  permissions TEXT
+  permissions_mw TEXT
 );

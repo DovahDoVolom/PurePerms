@@ -78,7 +78,7 @@ class SQLite3Provider implements ProviderInterface
 			}
 			
 			$result_mw = $this->db->query("
-				SELECT groupName, worldName, permissions 
+				SELECT groupName, worldName, permissions_mw
 				FROM groups_mw;
 			");
 			
@@ -88,11 +88,11 @@ class SQLite3Provider implements ProviderInterface
 				{
 					$groupName = $currentRow["groupName"];
 					$worldName = $currentRow["worldName"];
-					$permissions = $currentRow["permissions"];
+					$permissions_mw = $currentRow["permissions_mw"];
 					
-					if(!is_array($permissions))
+					if(!is_array($permissions_mw))
 					{
-						$this->groupsData[$groupName]["worlds"][$worldName] =  explode(",", $permissions);
+						$this->groupsData[$groupName]["worlds"][$worldName] =  explode(",", $permissions_mw);
 					}
 				}
 				
@@ -131,19 +131,37 @@ class SQLite3Provider implements ProviderInterface
 			
 			if(isset($tempGroupData["worlds"]))
 			{
-				foreach($tempGroupData["worlds"] as $tempWorldData)
+				foreach($tempGroupData["worlds"] as $worldName => $permissions_mw)
 				{
+					if(is_array($permissions_mw))
+					{
+						$permissions_mw = implode(",", $permissions_mw);
+					}
 					
+					// http://php.net/manual/en/sqlite3.query.php#111658
+					/*
+						The recommended way to do a SQLite3 query is to use a statement. 
+						For a table creation, a query might be fine (and easier) but for an insert, update or select, 
+						you should really use a statement, it's really easier and safer as SQLite will escape your parameters according to their type. 
+						SQLite will also use less memory than if you created the whole query by yourself. 
+					*/
+			
+					$stmt_mw = $this->db->prepare("
+						UPDATE groups_mw
+						SET worldName = :worldName, permissions_mw = :permissions_mw
+						WHERE groupName = :groupName;
+					");
+					
+					$stmt_mw->bindValue(":groupName", $groupName, SQLITE3_TEXT);
+					$stmt_mw->bindValue(":worldName", $worldName, SQLITE3_TEXT);
+					$stmt_mw->bindValue(":permissions_mw", $permissions_mw, SQLITE3_TEXT);
+					
+					$result_mw = $stmt_mw->execute();
 				}
+				
+				$result_mw->finalize();
 			}
 			
-			// http://php.net/manual/en/sqlite3.query.php#111658
-			/*
-				The recommended way to do a SQLite3 query is to use a statement. 
-				For a table creation, a query might be fine (and easier) but for an insert, update or select, 
-				you should really use a statement, it's really easier and safer as SQLite will escape your parameters according to their type. 
-				SQLite will also use less memory than if you created the whole query by yourself. 
-			*/
 			$stmt = $this->db->prepare("
 				UPDATE groups 
 				SET isDefault = :isDefault, inheritance = :inheritance, permissions = :permissions 
