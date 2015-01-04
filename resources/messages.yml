@@ -6,6 +6,13 @@ cmds:
     messages:
       group_added_successfully: "Added %var0% to the group list successfully."
       group_already_exists: "Group %var0% already exists."
+  fperms:
+    desc: "Shows a list of all permissions for a specific plugin."
+    usage: "Usage: /fperms <plugin>"
+    messages:
+      no_plugin_perms: "Plugin %var0% doesn't have any permissions."
+      plugin_not_exist: "Plugin %var0% does NOT exist."
+      plugin_perms_list: "List of all plugin permissions from %var0% (%var1% / %var2%) : "
   groups:
     desc: "Shows a list of all groups."
     messages:
@@ -16,13 +23,13 @@ cmds:
     messages:
       group_not_exist: "Group %var0% does NOT exist."
       no_group_perms: "Group %var0% doesn't have any group permissions."
-      group_perms_list: "List of all permissions from %var0% (%var1% / %var2%) : "
+      group_perms_list: "List of all group permissions from %var0% (%var1% / %var2%) : "
   listuperms: 
     desc: "Shows a list of all permissions from a user."
     usage: "Usage: /listuperms <player> <page> [world]"
     messages:
       no_user_perms: "Player %var0% doesn't have any user permissions."
-      user_perms_list: "List of all permissions from %var0% (%var1% / %var2%) : " 
+      user_perms_list: "List of all user permissions from %var0% (%var1% / %var2%) : " 
   ppinfo: 
     desc: "Shows info about PurePerms."
     messages:

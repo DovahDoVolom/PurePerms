@@ -7,6 +7,13 @@ cmds:
     messages:
       group_added_successfully: "그룹 %var0%이 추가되었습니다."
       group_already_exists: "%var0%이라는 이름을 가진 그룹이 이미 존재합니다."
+  fperms:
+    desc: "특정 플러그인이 가진 모든 퍼미션들을 보여줍니다."
+    usage: "사용법: /fperms <plugin>"
+    messages:
+      no_plugin_perms: "플러그인 %var0%은 어떠한 퍼미션도 가지고 있지 않습니다."
+      plugin_not_exist: "%var0%이라는 이름을 가진 플러그인이 존재하지 않습니다."
+      plugin_perms_list: "플러그인 %var0%의 모든 퍼미션 (현재 페이지 %var1% / 전체 페이지 %var2%) : "
   groups:
     desc: "모든 그룹들의 목록을 보여줍니다."
     messages:

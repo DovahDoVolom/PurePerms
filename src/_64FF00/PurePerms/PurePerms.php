@@ -3,6 +3,7 @@
 namespace _64FF00\PurePerms;
 
 use _64FF00\PurePerms\commands\AddGroup;
+use _64FF00\PurePerms\commands\FPerms;
 use _64FF00\PurePerms\commands\Groups;
 use _64FF00\PurePerms\commands\ListGPerms;
 use _64FF00\PurePerms\commands\ListUPerms;
@@ -82,6 +83,7 @@ class PurePerms extends PluginBase
 		$commandMap = $this->getServer()->getCommandMap();
 		
 		$commandMap->register("addgroup", new AddGroup($this, "addgroup", $this->getMessage("cmds.addgroup.desc")));
+		$commandMap->register("fperms", new FPerms($this, "fperms", $this->getMessage("cmds.fperms.desc")));
 		$commandMap->register("groups", new Groups($this, "groups", $this->getMessage("cmds.groups.desc")));
 		$commandMap->register("listgperms", new ListGPerms($this, "listgperms", $this->getMessage("cmds.listgperms.desc")));
 		$commandMap->register("listuperms", new ListUPerms($this, "listuperms", $this->getMessage("cmds.listuperms.desc")));
@@ -217,12 +219,7 @@ class PurePerms extends PluginBase
 	{
 		$group = new PPGroup($this, $groupName);
 			
-		if(empty($group->getData()))
-		{
-			// $this->getLogger()->warning("Group $groupName is null.");
-			
-			return null;
-		}
+		if(empty($group->getData())) throw new \RuntimeException("Group $groupName has invalid or corrupted data");
 		
 		return $group;
 	}

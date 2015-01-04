@@ -3,7 +3,6 @@
 namespace _64FF00\PurePerms\commands;
 
 use _64FF00\PurePerms\PurePerms;
-use _64FF00\PurePerms\ppdata\PPGroup;
 
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
@@ -12,7 +11,7 @@ use pocketmine\command\PluginIdentifiableCommand;
 
 use pocketmine\utils\TextFormat;
 
-class ListGPerms extends Command implements PluginIdentifiableCommand
+class FPerms extends Command implements PluginIdentifiableCommand
 {
 	public function __construct(PurePerms $plugin, $name, $description)
 	{
@@ -20,7 +19,7 @@ class ListGPerms extends Command implements PluginIdentifiableCommand
 		
 		parent::__construct($name, $description);
 		
-		$this->setPermission("pperms.command.listgperms");
+		$this->setPermission("pperms.command.fperms");
 	}
 	
 	public function execute(CommandSender $sender, $label, array $args)
@@ -30,29 +29,27 @@ class ListGPerms extends Command implements PluginIdentifiableCommand
 			return false;
 		}
 		
-		if(count($args) < 1 || count($args) > 3)
+		if(!isset($args[0]) || count($args) > 1)
 		{
-			$sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.listgperms.usage"));
+			$sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.fperms.usage"));
 			
 			return true;
 		}
 		
-		$group = $this->plugin->getGroup($args[0]);
+		$plugin = $this->plugin->getServer()->getPluginManager()->getPlugin($args[0]);
 		
-		if($group == null) 
+		if($plugin == null)
 		{
-			$sender->sendMessage(TextFormat::RED . "[PurePerms] " . $this->plugin->getMessage("cmds.listgperms.messages.group_not_exist", $args[0]));
+			$sender->sendMessage(TextFormat::RED . "[PurePerms] " . $this->plugin->getMessage("cmds.fperms.messages.plugin_not_exist", $args[0]));
 			
 			return true;
 		}
 		
-		$levelName = isset($args[2]) ?  $this->plugin->getServer()->getLevelByName($args[2])->getName() : null;
-		
-		$permissions = $group->getPermissions($levelName);
+		$permissions = $plugin->getDescription()->getPermissions();
 		
 		if(empty($permissions))
 		{
-			$sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.listgperms.messages.no_group_perms", $group->getName()));
+			$sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.fperms.messages.no_plugin_perms", $plugin->getName()));
 			
 			return true;
 		}
@@ -76,11 +73,11 @@ class ListGPerms extends Command implements PluginIdentifiableCommand
 			$pageNumber = $args[1];
 		}
 		
-		$sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.listgperms.messages.group_perms_list", $group->getName(), $pageNumber, $maxPageNumber));
+		$sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.fperms.messages.plugin_perms_list", $plugin->getName(), $pageNumber, $maxPageNumber));
 		
 		foreach($chunkedPermissions[$pageNumber - 1] as $permission)
 		{
-			$sender->sendMessage(TextFormat::BLUE . "[PurePerms] - " . $permission);
+			$sender->sendMessage(TextFormat::BLUE . "[PurePerms] - " . $permission->getName());
 		}
 		
 		return true;

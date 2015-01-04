@@ -14,6 +14,8 @@ permissions:
         children:
           pperms.command.addgroup:
             description: "Allows you to add a new group to the groups list."
+          pperms.command.fperms:
+            description: "Allows you to find permissions for a specific plugin."
           pperms.command.groups:
             description: "Allows you to see a list of all groups."
           pperms.command.listgperms:
