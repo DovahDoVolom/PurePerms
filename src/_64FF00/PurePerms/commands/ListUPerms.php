@@ -38,7 +38,21 @@ class ListUPerms extends Command implements PluginIdentifiableCommand
 		
 		$player = $this->plugin->getPlayer($args[0]);
 		
-		$levelName = isset($args[2]) ?  $this->plugin->getServer()->getLevelByName($args[2])->getName() : null;
+		$levelName = null;
+		
+		if(isset($args[2]))
+		{
+			$level = $this->plugin->getServer()->getLevelByName($args[2]);
+			
+			if($level == null)
+			{
+				$sender->sendMessage(TextFormat::RED . "[PurePerms] " . $this->plugin->getMessage("cmds.setgperm.messages.level_not_exist", $args[2]));
+				
+				return true;
+			}
+			
+			$levelName = $level->getName();
+		}
 		
 		$permissions = $this->plugin->getUser($player)->getUserPermissions($levelName);
 		

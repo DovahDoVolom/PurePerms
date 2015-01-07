@@ -253,6 +253,11 @@ class PurePerms extends PluginBase
 		return $this->config;
 	}
 	
+	public function getPPVersion()
+	{
+		return $this->getDescription()->getVersion();
+	}
+	
 	public function getProvider()
 	{
 		return $this->provider;
@@ -261,6 +266,15 @@ class PurePerms extends PluginBase
 	public function getUser(IPlayer $player)
 	{
 		return new PPUser($this, $player);
+	}
+	
+	public function isValidPerm($permission)
+	{
+		$isNegative = substr($permission, 0, 1) === "-";
+					
+		if($isNegative) $permission = substr($permission, 1);
+		
+		return $this->getServer()->getPluginManager()->getPermission($permission) instanceof Permission;
 	}
 	
 	public function reload()

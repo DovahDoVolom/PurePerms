@@ -46,7 +46,21 @@ class UnsetGPerm extends Command implements PluginIdentifiableCommand
 		
 		$permission = $args[1];
 		
-		$levelName = isset($args[2]) ?  $this->plugin->getServer()->getLevelByName($args[2])->getName() : null;
+		$levelName = null;
+		
+		if(isset($args[2]))
+		{
+			$level = $this->plugin->getServer()->getLevelByName($args[2]);
+			
+			if($level == null)
+			{
+				$sender->sendMessage(TextFormat::RED . "[PurePerms] " . $this->plugin->getMessage("cmds.unsetgperm.messages.level_not_exist", $args[2]));
+				
+				return true;
+			}
+			
+			$levelName = $level->getName();
+		}
 		
 		$group->unsetGroupPermission($permission, $levelName);
 		

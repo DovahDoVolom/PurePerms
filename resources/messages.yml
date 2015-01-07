@@ -1,4 +1,5 @@
 ---
+messages-version: "1.1.0-INDEV"
 cmds:
   addgroup:
     desc: "Adds a new group to the groups list."
@@ -22,12 +23,14 @@ cmds:
     usage: "Usage: /listgperms <group> <page> [world]"
     messages:
       group_not_exist: "Group %var0% does NOT exist."
-      no_group_perms: "Group %var0% doesn't have any group permissions."
       group_perms_list: "List of all group permissions from %var0% (%var1% / %var2%) : "
+      level_not_exist: "World %var0% does NOT exist."
+      no_group_perms: "Group %var0% doesn't have any group permissions."
   listuperms: 
     desc: "Shows a list of all permissions from a user."
     usage: "Usage: /listuperms <player> <page> [world]"
     messages:
+      level_not_exist: "World %var0% does NOT exist."
       no_user_perms: "Player %var0% doesn't have any user permissions."
       user_perms_list: "List of all user permissions from %var0% (%var1% / %var2%) : " 
   ppinfo: 
@@ -51,16 +54,21 @@ cmds:
     messages:
       gperm_added_successfully: "Added permission %var0% to the group successfully."
       group_not_exist: "Group %var0% does NOT exist."
+      level_not_exist: "World %var0% does NOT exist."
+      perm_not_exist: "Permission Node %var0% does NOT exist."
   setgroup: 
     desc: "Sets group for the user."
     usage: "Usage: /setgroup <player> <group> [world]"
     messages: 
       group_not_exist: "Group %var0% does NOT exist."
+      level_not_exist: "World %var0% does NOT exist."
       setgroup_successfully: "Added %var0% to the group successfully."
   setuperm: 
     desc: "Adds a permission to the user."
     usage: "Usage: /setuperm <player> <permission> [world]"
     messages:
+      level_not_exist: "World %var0% does NOT exist."
+      perm_not_exist: "Permission Node %var0% does NOT exist."
       uperm_added_successfully: "Added permission %var0% to %var1% successfully."
   unsetgperm: 
     desc: "Removes a permission from the group."
@@ -68,10 +76,12 @@ cmds:
     messages:
       gperm_removed_successfully: "Removed permission %var0% from the group successfully."
       group_not_exist: "Group %var0% does NOT exist."
+      level_not_exist: "World %var0% does NOT exist."
   unsetuperm: 
     desc: "Removes a permission from the user."
     usage: "Usage: /unsetuperm <player> <permission> [world]"
     messages: 
+      level_not_exist: "World %var0% does NOT exist."
       uperm_removed_successfully: "Removed permission %var0% from %var1% successfully."
   usrinfo: 
     desc: "Shows info about a user."

@@ -36,12 +36,24 @@ class PPMessages
 		return null;
 	}
 	
+	public function getVersion()
+	{
+		return $this->messages->get("messages-version");
+	}
+	
 	public function loadMessages()
 	{
 		$this->plugin->saveResource("messages.yml");
 		
 		$this->messages = new Config($this->plugin->getDataFolder() . "messages.yml", Config::YAML, array(
 		));
+		
+		if($this->getVersion() < $this->plugin->getPPVersion())
+		{
+			$this->plugin->saveResource("messages.yml", true);
+			
+			$this->reloadMessages();
+		}
 	}
 	
 	public function reloadMessages()
