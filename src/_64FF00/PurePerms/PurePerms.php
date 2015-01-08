@@ -104,6 +104,7 @@ class PurePerms extends PluginBase
 		
 		switch(strtolower($providerName))
 		{
+			/*
 			case "sqlite3":
 			
 				$this->provider = new SQLite3Provider($this);
@@ -111,6 +112,7 @@ class PurePerms extends PluginBase
 				$this->getLogger()->info("Set data provider to SQLite3.");
 				
 				break;
+			*/
 				
 			case "yaml":
 			
