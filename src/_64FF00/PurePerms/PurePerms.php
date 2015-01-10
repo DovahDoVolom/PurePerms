@@ -25,6 +25,8 @@ use pocketmine\IPlayer;
 
 use pocketmine\OfflinePlayer;
 
+use pocketmine\permission\Permission;
+
 use pocketmine\Player;
 
 use pocketmine\plugin\PluginBase;
