@@ -29,7 +29,7 @@ class FPerms extends Command implements PluginIdentifiableCommand
 			return false;
 		}
 		
-		if(!isset($args[0]) || count($args) > 1)
+		if(!isset($args[0]) || count($args) > 2)
 		{
 			$sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.fperms.usage"));
 			

@@ -46,13 +46,6 @@ class SetGPerm extends Command implements PluginIdentifiableCommand
 		
 		$permission = $args[1];
 		
-		if(!$this->plugin->isValidPerm($permission))
-		{
-			$sender->sendMessage(TextFormat::RED . "[PurePerms] " . $this->plugin->getMessage("cmds.setgperm.messages.perm_not_exist", $args[1]));
-			
-			return true;
-		}
-		
 		$levelName = null;
 		
 		if(isset($args[2]))
