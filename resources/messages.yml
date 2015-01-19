@@ -55,7 +55,6 @@ cmds:
       gperm_added_successfully: "Added permission %var0% to the group successfully."
       group_not_exist: "Group %var0% does NOT exist."
       level_not_exist: "World %var0% does NOT exist."
-      perm_not_exist: "Permission Node %var0% does NOT exist."
   setgroup: 
     desc: "Sets group for the user."
     usage: "Usage: /setgroup <player> <group> [world]"
@@ -68,7 +67,6 @@ cmds:
     usage: "Usage: /setuperm <player> <permission> [world]"
     messages:
       level_not_exist: "World %var0% does NOT exist."
-      perm_not_exist: "Permission Node %var0% does NOT exist."
       uperm_added_successfully: "Added permission %var0% to %var1% successfully."
   unsetgperm: 
     desc: "Removes a permission from the group."

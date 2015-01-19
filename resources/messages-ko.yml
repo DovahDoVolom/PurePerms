@@ -55,7 +55,6 @@ cmds:
       gperm_added_successfully: "퍼미션 %var0%을 그룹에 추가하였습니다."
       group_not_exist: "%var0%이라는 이름을 가진 그룹이 존재하지 않습니다."
       level_not_exist: "%var0%이라는 이름을 가진 월드가 존재하지 않습니다."
-      perm_not_exist: "%var0%이라는 이름을 가진 퍼미션이 존재하지 않습니다."
   setgroup: 
     desc: "플레이어의 그룹을 설정합니다."
     usage: "사용법: /setgroup <그룹을 설정할 플레이어> <그룹 이름> [월드 이름]"
@@ -68,7 +67,6 @@ cmds:
     usage: "사용법: /setuperm <퍼미션을 추가할 플레이어> <퍼미션> [월드 이름]"
     messages:
       level_not_exist: "%var0%이라는 이름을 가진 월드가 존재하지 않습니다."
-      perm_not_exist: "%var0%이라는 이름을 가진 퍼미션이 존재하지 않습니다."
       uperm_added_successfully: "퍼미션 %var0%을 그룹 %var1%에 추가하였습니다."
   unsetgperm: 
     desc: "그룹의 퍼미션을 제거합니다."

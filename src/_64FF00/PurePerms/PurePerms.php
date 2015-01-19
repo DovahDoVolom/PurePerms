@@ -272,15 +272,6 @@ class PurePerms extends PluginBase
 		return new PPUser($this, $player);
 	}
 	
-	public function isValidPerm($permission)
-	{
-		$isNegative = substr($permission, 0, 1) === "-";
-					
-		if($isNegative) $permission = substr($permission, 1);
-		
-		return $this->getServer()->getPluginManager()->getPermission($permission) instanceof Permission;
-	}
-	
 	public function reload()
 	{
 		$this->config->reloadConfig();
