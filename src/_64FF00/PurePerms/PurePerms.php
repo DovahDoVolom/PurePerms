@@ -134,16 +134,14 @@ class PurePerms extends PluginBase
 		}
 	}
 	
-	/*	
-	
-	       #    ######  ###    ### 
+	/*
+		   #    ######  ###    ### 
           # #   #     #  #     ### 
          #   #  #     #  #     ### 
         #     # ######   #      #  
         ####### #        #         
         #     # #        #     ### 
         #     # #       ###    ###
-	  
 	*/
 	
 	public function addGroup($groupName)
