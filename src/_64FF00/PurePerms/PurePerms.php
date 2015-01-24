@@ -136,15 +136,18 @@ class PurePerms extends PluginBase
 	}
 	
 	/*
-  		   #    ######  ###    ### 
-        	  # #   #     #  #     ### 
-         	 #   #  #     #  #     ### 
-        	#     # ######   #      #  
-        	####### #        #         
-	 	#     # #        #     ### 
-	 	#     # #       ###    ###
-	*/
 	
+			#    ######  ### ### 
+		   # #   #     #  #  ### 
+		  #   #  #     #  #  ### 
+		 #     # ######   #   #  
+		 ####### #        #      
+		 #     # #        #  ### 
+		 #     # #       ### ### 
+	 
+	 */
+                         
+                     
 	public function addGroup($groupName)
 	{
 		$groupsData = $this->provider->getGroupsData(true);
