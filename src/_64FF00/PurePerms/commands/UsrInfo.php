@@ -39,7 +39,21 @@ class UsrInfo extends Command implements PluginIdentifiableCommand
 		
 		$user = $this->plugin->getUser($player);
 		
-		$levelName = isset($args[1]) ?  $this->plugin->getServer()->getLevelByName($args[1])->getName() : null; 
+		$levelName = null;
+		
+		if(isset($args[1]))
+		{
+			$level = $this->plugin->getServer()->getLevelByName($args[1]);
+			
+			if($level == null)
+			{
+				$sender->sendMessage(TextFormat::RED . "[PurePerms] " . $this->plugin->getMessage("cmds.usrinfo.messages.level_not_exist", $args[1]));
+				
+				return true;
+			}
+			
+			$levelName = $level->getName();
+		}
 		
 		$status = $player instanceof Player ? TextFormat::GREEN . $this->plugin->getMessage("cmds.usrinfo.messages.status_online") : TextFormat::RED . $this->plugin->getMessage("cmds.usrinfo.messages.status_offline");
 		

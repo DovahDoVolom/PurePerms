@@ -85,6 +85,7 @@ cmds:
     desc: "Shows info about a user."
     usage: "Usage: /usrinfo <player> [world]"
     messages:
+      level_not_exist: "World %var0% does NOT exist."
       status_online: "ONLINE!"
       status_offline: "OFFLINE..."
       usrinfo_header: "<--- User Information for %var0% --->"

@@ -50,6 +50,13 @@ class PPGroup implements PPDataInterface
 	{
 		$permissions = $levelName != null ? $this->getWorldData($levelName)["permissions"] : $this->getNode("permissions");
 		
+		if(!is_array($permissions))
+		{
+			$this->getLogger()->critical("Invalid 'permissions' node given to " .  __NAMESPACE__ . "\PPGroup->getPermissions()");
+			
+			return [];
+		}
+		
 		foreach($this->getInheritedGroups() as $inheritedGroup)
 		{
 			$inheritedGroupPermissions = $inheritedGroup->getPermissions($levelName);

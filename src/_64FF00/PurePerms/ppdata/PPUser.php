@@ -59,9 +59,10 @@ class PPUser implements PPDataInterface
 	
 	public function getPermissions($levelName = null)
 	{
-		$permissions = array_merge($this->getGroupPermissions($levelName), $this->getUserPermissions($levelName));
+		$groupPerms = $this->getGroupPermissions($levelName);	
+		$userPerms = $this->getUserPermissions($levelName);
 		
-		return $permissions;
+		return array_merge($groupPerms, $userPerms);
 	}
 	
 	public function getPlayer()
@@ -72,6 +73,13 @@ class PPUser implements PPDataInterface
 	public function getUserPermissions($levelName = null)
 	{
 		$permissions = $levelName != null ? $this->getWorldData($levelName)["permissions"] : $this->getNode("permissions");
+		
+		if(!is_array($permissions))
+		{
+			$this->getLogger()->critical("Invalid 'permissions' node given to " .  __NAMESPACE__ . "\PPUser->getPermissions()");
+			
+			return [];
+		}
 		
 		return $permissions;
 	}
