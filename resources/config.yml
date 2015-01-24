@@ -10,8 +10,4 @@ enable-multiworld-perms: false
 # Broadcasts this message when a player's group has been changed
 # - STRING
 msg-on-group-change: Your group has been changed into a / an %group%!
-
-# Gives all permissions to ops instead of giving their original group and user permissions
-# - true / false
-override-op-permissions: false
 ...

@@ -19,6 +19,7 @@ use _64FF00\PurePerms\commands\UsrInfo;
 use _64FF00\PurePerms\ppdata\PPGroup;
 use _64FF00\PurePerms\ppdata\PPUser;
 use _64FF00\PurePerms\providers\DefaultProvider;
+use _64FF00\PurePerms\providers\ProviderInterface;
 use _64FF00\PurePerms\providers\SQLite3Provider;
 
 use pocketmine\IPlayer;
@@ -69,7 +70,7 @@ class PurePerms extends PluginBase
 	
 	public function onDisable()
 	{
-		$this->provider->close();
+		if($this->provider instanceof ProviderInterface) $this->provider->close();
 	}
 	
 	private function cleanUpGroups()
@@ -221,7 +222,12 @@ class PurePerms extends PluginBase
 	{
 		$group = new PPGroup($this, $groupName);
 			
-		if(empty($group->getData())) throw new \RuntimeException("Group $groupName has invalid or corrupted data");
+		if(empty($group->getData())) 
+		{
+			$this->getLogger()->warning("Group $groupName has invalid or corrupted data.");
+			
+			return null;
+		}
 		
 		return $group;
 	}
@@ -355,29 +361,26 @@ class PurePerms extends PluginBase
 	{
 		if($player instanceof Player)
 		{
-			if(!$player->isOp() and !$this->config->getValue("override-op-permissions"))
-			{				
-				$attachment = $this->getAttachment($player);
+			$attachment = $this->getAttachment($player);
 				
-				$originalPermissions = $this->getUser($player)->getPermissions($levelName);
-				
-				$permissions = [];
-				
-				foreach($originalPermissions as $permission)
-				{
-					$isNegative = substr($permission, 0, 1) === "-";
+			$permissions = [];
+
+			foreach($this->getUser($player)->getPermissions($levelName) as $permission)
+			{
+				$isNegative = substr($permission, 0, 1) === "-";
 					
-					if($isNegative) $permission = substr($permission, 1);
+				if($isNegative) $permission = substr($permission, 1);
 					
-					$value = !$isNegative;
+				$value = !$isNegative;
 					
-					$permissions[$permission] = $value;
-				}
-				
-				$attachment->clearPermissions();
-				
-				$attachment->setPermissions($permissions);
+				$permissions[$permission] = $value;
 			}
+			
+			ksort($permissions);
+			
+			$attachment->clearPermissions();
+			
+			$attachment->setPermissions($permissions);
 		}
 	}
 }
