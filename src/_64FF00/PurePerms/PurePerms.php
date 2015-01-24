@@ -348,6 +348,8 @@ class PurePerms extends PluginBase
 	{
 		foreach($this->getServer()->getOnlinePlayers() as $player)
 		{
+			$this->updatePermissions($player, null);
+			
 			foreach($this->getServer()->getLevels() as $level)
 			{
 				$levelName = $level->getName();
