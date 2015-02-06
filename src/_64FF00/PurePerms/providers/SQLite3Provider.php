@@ -103,8 +103,9 @@ class SQLite3Provider implements ProviderInterface
 		return $this->groupsData;
 	}
 	
-	public function getUserData(PPUser $user, $isArray = false)
+	public function getUserData(PPUser $user)
 	{
+		
 	}
 	
 	public function setGroupData(PPGroup $group, array $tempGroupData)

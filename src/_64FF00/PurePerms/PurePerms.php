@@ -70,7 +70,7 @@ class PurePerms extends PluginBase
 	
 	public function onDisable()
 	{
-		if($this->provider instanceof ProviderInterface) $this->provider->close();
+		$this->provider->close();
 	}
 	
 	private function cleanUpGroups()
@@ -79,6 +79,20 @@ class PurePerms extends PluginBase
 		{
 			$group->sortPermissions();
 		}
+	}
+	
+	private function dumpPermissions(Player $player)
+	{
+		foreach($player->getEffectivePermissions() as $attachmentInfo)
+		{
+			$permission = $attachmentInfo->getPermission();
+			
+			$value = $attachmentInfo->getValue();
+			
+			$this->getLogger()->info('PurePerms->dumpPermissions(Player $player (' . $player->getName() . ")) >>> $permission : " . ($value ? "true" : "false"));
+		}
+		
+		$this->getLogger()->info("--------------------------------");
 	}
 	
 	private function registerCommands()
@@ -110,7 +124,7 @@ class PurePerms extends PluginBase
 			/*
 			case "sqlite3":
 			
-				$this->provider = new SQLite3Provider($this);
+				$provider = new SQLite3Provider($this);
 				
 				$this->getLogger()->info("Set data provider to SQLite3.");
 				
@@ -119,7 +133,7 @@ class PurePerms extends PluginBase
 				
 			case "yaml":
 			
-				$this->provider = new DefaultProvider($this);
+				$provider = new DefaultProvider($this);
 				
 				$this->getLogger()->info("Set data provider to YAML.");
 				
@@ -129,9 +143,14 @@ class PurePerms extends PluginBase
 				
 				$this->getLogger()->warning("Provider $providerName does NOT exist. Setting the data provider to default.");
 				
-				$this->provider = new DefaultProvider($this);
+				$provider = new DefaultProvider($this);
 				
 				break;				
+		}
+		
+		if(!isset($this->provider) and !($this->provider instanceof ProviderInterface))
+		{
+			$this->provider = $provider;
 		}
 	}
 	
@@ -208,6 +227,24 @@ class PurePerms extends PluginBase
 				}
 			}
 		}
+	}
+	
+	public function getEffectivePermissions(Player $player)
+	{
+		$permissions = [];
+		
+		foreach($player->getEffectivePermissions() as $attachmentInfo)
+		{
+			$permission = $attachmentInfo->getPermission();
+			
+			$value = $attachmentInfo->getValue();
+			
+			$permissions[$permission] = $value;
+		}
+		
+		ksort($permissions);
+		
+		return $permissions;
 	}
 	
 	public function getGroup($groupName)
@@ -356,6 +393,8 @@ class PurePerms extends PluginBase
 		if($player instanceof Player)
 		{
 			$attachment = $this->getAttachment($player);
+			
+			$attachment->clearPermissions();
 				
 			$permissions = [];
 
@@ -371,8 +410,6 @@ class PurePerms extends PluginBase
 			}
 			
 			ksort($permissions);
-			
-			$attachment->clearPermissions();
 			
 			$attachment->setPermissions($permissions);
 		}
