@@ -42,9 +42,9 @@ cmds:
     desc: "Reloads all PurePerms configurations."
     messages: 
       successfully_reloaded: "All plugin configurations have been successfully reloaded."
-  removegroup: 
+  rmgroup: 
     desc: "Removes a group from the groups list."
-    usage: "Usage: /removegroup <group>"
+    usage: "Usage: /rmgroup <group>"
     messages:
       group_removed_successfully: "Removed %var0% from the group list successfully."
       group_not_exist: "Group %var0% does NOT exist."

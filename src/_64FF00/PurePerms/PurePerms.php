@@ -9,7 +9,7 @@ use _64FF00\PurePerms\commands\ListGPerms;
 use _64FF00\PurePerms\commands\ListUPerms;
 use _64FF00\PurePerms\commands\PPInfo;
 use _64FF00\PurePerms\commands\PPReload;
-use _64FF00\PurePerms\commands\RemoveGroup;
+use _64FF00\PurePerms\commands\RmGroup;
 use _64FF00\PurePerms\commands\SetGPerm;
 use _64FF00\PurePerms\commands\SetGroup;
 use _64FF00\PurePerms\commands\SetUPerm;
@@ -106,7 +106,7 @@ class PurePerms extends PluginBase
 		$commandMap->register("listuperms", new ListUPerms($this, "listuperms", $this->getMessage("cmds.listuperms.desc")));
 		$commandMap->register("ppinfo", new PPInfo($this, "ppinfo", $this->getMessage("cmds.ppinfo.desc")));
 		$commandMap->register("ppreload", new PPReload($this, "ppreload", $this->getMessage("cmds.ppreload.desc")));
-		$commandMap->register("removegroup", new RemoveGroup($this, "removegroup", $this->messages->getMessage("cmds.removegroup.desc")));
+		$commandMap->register("rmgroup", new RmGroup($this, "rmgroup", $this->messages->getMessage("cmds.rmgroup.desc")));
 		$commandMap->register("setgperm", new SetGPerm($this, "setgperm", $this->getMessage("cmds.setgperm.desc")));
 		$commandMap->register("setgroup", new SetGroup($this, "setgroup", $this->getMessage("cmds.setgroup.desc")));
 		$commandMap->register("setuperm", new SetUPerm($this, "setuperm", $this->getMessage("cmds.setuperm.desc")));
@@ -253,7 +253,7 @@ class PurePerms extends PluginBase
 			
 		if(empty($group->getData())) 
 		{
-			$this->getLogger()->warning("Group $groupName has invalid or corrupted data.");
+			// $this->getLogger()->warning("Group $groupName has invalid or corrupted data.");
 			
 			return null;
 		}

@@ -10,7 +10,7 @@ use pocketmine\command\PluginIdentifiableCommand;
 
 use pocketmine\utils\TextFormat;
 
-class RemoveGroup extends Command implements PluginIdentifiableCommand
+class RmGroup extends Command implements PluginIdentifiableCommand
 {
 	public function __construct(PurePerms $plugin, $name, $description)
 	{
@@ -30,18 +30,18 @@ class RemoveGroup extends Command implements PluginIdentifiableCommand
 		
 		if(!isset($args[0]) || count($args) > 1)
 		{
-			$sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.removegroup.usage"));
+			$sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.rmgroup.usage"));
 			
 			return true;
 		}
 		
 		if($this->plugin->removeGroup($args[0]))
 		{
-			$sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.removegroup.messages.group_removed_successfully", $args[0]));
+			$sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.rmgroup.messages.group_removed_successfully", $args[0]));
 		}
 		else
 		{
-			$sender->sendMessage(TextFormat::RED . "[PurePerms] " . $this->plugin->getMessage("cmds.removegroup.messages.group_not_exist", $args[0]));
+			$sender->sendMessage(TextFormat::RED . "[PurePerms] " . $this->plugin->getMessage("cmds.rmgroup.messages.group_not_exist", $args[0]));
 		}
 		
 		return true;

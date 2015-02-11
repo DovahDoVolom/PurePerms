@@ -24,12 +24,18 @@ class PPUser implements PPDataInterface
 	{
 		$groupName = $levelName != null ? $this->getWorldData($levelName)["group"] : $this->getNode("group");
 		
-		if(isset($groupName))
+		if(!isset($groupName)) return null;
+		
+		$group = $this->plugin->getGroup($groupName);
+		
+		if($group == null)
 		{
-			return $this->plugin->getGroup($groupName);
+			$group = $this->plugin->getDefaultGroup();
+			
+			$this->setGroup($group, $levelName);
 		}
 		
-		return null;
+		return $group;
 	}
 	
 	public function getGroupPermissions($levelName = null)

@@ -42,9 +42,9 @@ cmds:
     desc: "모든 PurePerms 설정 파일들을 다시 로드합니다."
     messages: 
       successfully_reloaded: "모든 설정 파일들이 다시 로드되었습니다."
-  removegroup: 
+  rmgroup: 
     desc: "그룹을 제거합니다."
-    usage: "사용법: /removegroup <제거할 그룹 이름>"
+    usage: "사용법: /rmgroup <제거할 그룹 이름>"
     messages:
       group_removed_successfully: "그룹 %var0%이 제거되었습니다."
       group_not_exist: "%var0%이라는 이름을 가진 그룹이 존재하지 않습니다."
