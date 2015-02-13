@@ -25,7 +25,7 @@ class PPGroup implements PPDataInterface
 		{
 			$inheritedGroup = $this->plugin->getGroup($inheritedGroupName);
 			
-			array_push($inheritedGroups, $inheritedGroup);
+			if($inheritedGroup != null) array_push($inheritedGroups, $inheritedGroup);
 		}
 		
 		return $inheritedGroups;
