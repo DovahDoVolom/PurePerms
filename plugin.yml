@@ -4,7 +4,7 @@ version: "1.0.7"
 api: [1.9.0]
 load: STARTUP
 author: 64FF00
-website: https://github.com/64FF00/PurePerms
+website: https://github.com/PurePlugins/PurePerms
 permissions:
   pperms:
     description: "#64FF00"
