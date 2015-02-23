@@ -12,31 +12,31 @@ use pocketmine\utils\TextFormat;
 
 class PPReload extends Command implements PluginIdentifiableCommand
 {
-	public function __construct(PurePerms $plugin, $name, $description)
-	{
-		$this->plugin = $plugin;
-		
-		parent::__construct($name, $description);
-		
-		$this->setPermission("pperms.command.ppreload");
-	}
-	
-	public function execute(CommandSender $sender, $label, array $args)
-	{
-		if(!$this->testPermission($sender))
-		{
-			return false;
-		}
-		
-		$this->plugin->reload();
-		
-		$sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.ppreload.messages.successfully_reloaded"));
-		
-		return true;
-	}
-	
-	public function getPlugin()
-	{
-		return $this->plugin;
-	}
+    public function __construct(PurePerms $plugin, $name, $description)
+    {
+        $this->plugin = $plugin;
+        
+        parent::__construct($name, $description);
+        
+        $this->setPermission("pperms.command.ppreload");
+    }
+    
+    public function execute(CommandSender $sender, $label, array $args)
+    {
+        if(!$this->testPermission($sender))
+        {
+            return false;
+        }
+        
+        $this->plugin->reload();
+        
+        $sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.ppreload.messages.successfully_reloaded"));
+        
+        return true;
+    }
+    
+    public function getPlugin()
+    {
+        return $this->plugin;
+    }
 }

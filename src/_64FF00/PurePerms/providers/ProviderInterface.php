@@ -7,19 +7,19 @@ use _64FF00\PurePerms\ppdata\PPUser;
 
 interface ProviderInterface
 {
-	public function init();
-	
-	public function getGroupData(PPGroup $group);
-	
-	public function getGroupsData();
-	
-	public function getUserData(PPUser $user);
-	
-	public function setGroupData(PPGroup $group, array $tempGroupData);
-	
-	public function setGroupsData(array $tempGroupsData);
+    public function init();
+    
+    public function getGroupData(PPGroup $group);
+    
+    public function getGroupsData();
+    
+    public function getUserData(PPUser $user);
+    
+    public function setGroupData(PPGroup $group, array $tempGroupData);
+    
+    public function setGroupsData(array $tempGroupsData);
 
-	public function setUserData(PPUser $user, array $tempUserData);
-	
-	public function close();
+    public function setUserData(PPUser $user, array $tempUserData);
+    
+    public function close();
 }
