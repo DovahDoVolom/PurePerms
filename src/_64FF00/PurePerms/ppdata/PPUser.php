@@ -82,7 +82,7 @@ class PPUser implements PPDataInterface
         
         if(!is_array($permissions))
         {
-            $this->getLogger()->critical("Invalid 'permissions' node given to " .  __NAMESPACE__ . "\PPUser->getPermissions()");
+            $this->plugin->getLogger()->critical("Invalid 'permissions' node given to " .  __NAMESPACE__ . "\PPUser->getPermissions()");
             
             return [];
         }
