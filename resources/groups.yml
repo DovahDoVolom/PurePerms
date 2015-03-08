@@ -3,12 +3,12 @@ Guest:
   isDefault: true
   inheritance: []
   permissions:
-  - pocketmine.command.list
   - -pocketmine.command.me
+  - pocketmine.command.list
   - pperms.command.ppinfo
   worlds: []
 Admin:
-  inheritance: 
+  inheritance:
   - Guest
   permissions:
   - pocketmine.broadcast
@@ -19,11 +19,16 @@ Admin:
   - pocketmine.command.time
   worlds: []
 Owner:
-  inheritance: 
+  inheritance:
   - Guest
   - Admin
   permissions:
   - pocketmine.command
   - pperms.command
+  worlds: []
+OP:
+  inheritance: []
+  permissions:
+  - '*'
   worlds: []
 ...

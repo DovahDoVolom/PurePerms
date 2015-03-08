@@ -408,13 +408,23 @@ class PurePerms extends PluginBase
 
             foreach($this->getUser($player)->getPermissions($levelName) as $permission)
             {
-                $isNegative = substr($permission, 0, 1) === "-";
-                    
-                if($isNegative) $permission = substr($permission, 1);
-                    
-                $value = !$isNegative;
-                    
-                $permissions[$permission] = $value;
+                if($permission === "*")
+                {                 
+                    foreach($this->getServer()->getPluginManager()->getPermissions() as $temp_permission)
+                    {
+                        $permissions[$temp_permission->getName()] = true;
+                    }
+                }
+                else
+                {
+                    $isNegative = substr($permission, 0, 1) === "-";
+                        
+                    if($isNegative) $permission = substr($permission, 1);
+                        
+                    $value = !$isNegative;
+                        
+                    $permissions[$permission] = $value;
+                }
             }
             
             ksort($permissions);

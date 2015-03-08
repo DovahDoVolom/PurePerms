@@ -74,7 +74,7 @@ class SetGroup extends Command implements PluginIdentifiableCommand
         {
             $message = $this->plugin->getPPConfig()->getValue("msg-on-group-change");
             
-            $message = str_replace("%group%", strtolower($group->getName()), $message);
+            $message = str_replace("{group}", strtolower($group->getName()), $message);
             
             $player->sendMessage(TextFormat::BLUE . "[PurePerms] " . $message);
         }
