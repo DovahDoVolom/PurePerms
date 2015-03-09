@@ -70,7 +70,10 @@ class PurePerms extends PluginBase
     
     public function onDisable()
     {
-        $this->provider->close();
+        if($this->provider)
+        {
+              $this->provider->close();
+        }
     }
     
     private function cleanUpGroups()
