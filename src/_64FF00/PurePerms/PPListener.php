@@ -22,11 +22,8 @@ class PPListener implements Listener
         $isMultiWorldPermsEnabled = $this->plugin->getPPConfig()->getValue("enable-multiworld-perms");
         
         $levelName = $isMultiWorldPermsEnabled ? $event->getTarget()->getName() : null;
-        
-        if($player instanceof Player)
-        {
-            $this->plugin->updatePermissions($player, $levelName);
-        }
+               
+        $this->plugin->updatePermissions($player, $levelName);
     }
     
     public function onPlayerJoin(PlayerJoinEvent $event)

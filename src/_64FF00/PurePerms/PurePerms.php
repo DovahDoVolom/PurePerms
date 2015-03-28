@@ -70,10 +70,7 @@ class PurePerms extends PluginBase
     
     public function onDisable()
     {
-        if($this->provider)
-        {
-              $this->provider->close();
-        }
+        if($this->provider) $this->provider->close();
     }
     
     private function cleanUpGroups()
@@ -82,20 +79,6 @@ class PurePerms extends PluginBase
         {
             $group->sortPermissions();
         }
-    }
-    
-    private function dumpPermissions(Player $player)
-    {
-        foreach($player->getEffectivePermissions() as $attachmentInfo)
-        {
-            $permission = $attachmentInfo->getPermission();
-            
-            $value = $attachmentInfo->getValue();
-            
-            $this->getLogger()->info('PurePerms->dumpPermissions(Player $player (' . $player->getName() . ")) >>> $permission : " . ($value ? "true" : "false"));
-        }
-        
-        $this->getLogger()->info("--------------------------------");
     }
     
     private function registerCommands()
@@ -188,6 +171,20 @@ class PurePerms extends PluginBase
         $this->provider->setGroupsData($groupsData);
         
         return true;
+    }
+    
+    public function dumpPermissions(Player $player)
+    {
+        foreach($player->getEffectivePermissions() as $attachmentInfo)
+        {
+            $permission = $attachmentInfo->getPermission();
+            
+            $value = $attachmentInfo->getValue();
+            
+            $this->getLogger()->info("[" . $player->getName() . "] -> $permission : " . ($value ? "true" : "false"));
+        }
+        
+        $this->getLogger()->info("...");
     }
     
     public function getAttachment(Player $player)
