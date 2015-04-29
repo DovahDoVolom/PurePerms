@@ -10,6 +10,19 @@ use pocketmine\event\player\PlayerQuitEvent;
 
 class PPListener implements Listener
 {
+    /* PurePerms by 64FF00 (xktiverz@gmail.com, @64ff00 for Twitter) */
+
+    /*
+          # #    #####  #       ####### #######   ###     ###   
+          # #   #     # #    #  #       #        #   #   #   #  
+        ####### #       #    #  #       #       #     # #     # 
+          # #   ######  #    #  #####   #####   #     # #     # 
+        ####### #     # ####### #       #       #     # #     # 
+          # #   #     #      #  #       #        #   #   #   #  
+          # #    #####       #  #       #         ###     ###                                        
+                                                                                       
+    */
+    
     public function __construct(PurePerms $plugin)
     {
         $this->plugin = $plugin;

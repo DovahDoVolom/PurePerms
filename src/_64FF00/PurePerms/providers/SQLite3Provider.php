@@ -10,6 +10,19 @@ use pocketmine\IPlayer;
 
 class SQLite3Provider implements ProviderInterface
 {
+    /* PurePerms by 64FF00 (xktiverz@gmail.com, @64ff00 for Twitter) */
+
+    /*
+          # #    #####  #       ####### #######   ###     ###   
+          # #   #     # #    #  #       #        #   #   #   #  
+        ####### #       #    #  #       #       #     # #     # 
+          # #   ######  #    #  #####   #####   #     # #     # 
+        ####### #     # ####### #       #       #     # #     # 
+          # #   #     #      #  #       #        #   #   #   #  
+          # #    #####       #  #       #         ###     ###                                        
+                                                                                       
+    */
+    
     private $groups, $groupsData = [], $players;
     
     public function __construct(PurePerms $plugin)

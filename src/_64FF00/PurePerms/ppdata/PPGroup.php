@@ -6,6 +6,19 @@ use _64FF00\PurePerms\PurePerms;
 
 class PPGroup implements PPDataInterface
 {
+    /* PurePerms by 64FF00 (xktiverz@gmail.com, @64ff00 for Twitter) */
+
+    /*
+          # #    #####  #       ####### #######   ###     ###   
+          # #   #     # #    #  #       #        #   #   #   #  
+        ####### #       #    #  #       #       #     # #     # 
+          # #   ######  #    #  #####   #####   #     # #     # 
+        ####### #     # ####### #       #       #     # #     # 
+          # #   #     #      #  #       #        #   #   #   #  
+          # #    #####       #  #       #         ###     ###                                        
+                                                                                       
+    */
+    
     public function __construct(PurePerms $plugin, $name)
     {
         $this->plugin = $plugin;

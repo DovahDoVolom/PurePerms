@@ -12,6 +12,19 @@ use pocketmine\utils\Config;
 
 class DefaultProvider implements ProviderInterface
 {
+    /* PurePerms by 64FF00 (xktiverz@gmail.com, @64ff00 for Twitter) */
+
+    /*
+          # #    #####  #       ####### #######   ###     ###   
+          # #   #     # #    #  #       #        #   #   #   #  
+        ####### #       #    #  #       #       #     # #     # 
+          # #   ######  #    #  #####   #####   #     # #     # 
+        ####### #     # ####### #       #       #     # #     # 
+          # #   #     #      #  #       #        #   #   #   #  
+          # #    #####       #  #       #         ###     ###                                        
+                                                                                       
+    */
+    
     private $groups;
     
     public function __construct(PurePerms $plugin)

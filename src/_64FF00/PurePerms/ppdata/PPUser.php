@@ -9,6 +9,19 @@ use pocketmine\IPlayer;
 
 class PPUser implements PPDataInterface
 {   
+    /* PurePerms by 64FF00 (xktiverz@gmail.com, @64ff00 for Twitter) */
+
+    /*
+          # #    #####  #       ####### #######   ###     ###   
+          # #   #     # #    #  #       #        #   #   #   #  
+        ####### #       #    #  #       #       #     # #     # 
+          # #   ######  #    #  #####   #####   #     # #     # 
+        ####### #     # ####### #       #       #     # #     # 
+          # #   #     #      #  #       #        #   #   #   #  
+          # #    #####       #  #       #         ###     ###                                        
+                                                                                       
+    */
+    
     public function __construct(PurePerms $plugin, IPlayer $player)
     {
         $this->player = $player;

@@ -32,6 +32,8 @@ use pocketmine\Player;
 
 use pocketmine\plugin\PluginBase;
 
+/* PurePerms by 64FF00 (xktiverz@gmail.com, @64ff00 for Twitter) */
+
 /*
       # #    #####  #       ####### #######   ###     ###   
       # #   #     # #    #  #       #        #   #   #   #  
