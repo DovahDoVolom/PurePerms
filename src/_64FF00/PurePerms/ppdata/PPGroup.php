@@ -52,7 +52,7 @@ class PPGroup implements PPDataInterface
         
         if(!is_array($permissions))
         {
-            $this->getLogger()->critical("Invalid 'permissions' node given to " .  __NAMESPACE__ . "\PPGroup->getPermissions()");
+            $this->plugin->getLogger()->critical("Invalid 'permissions' node given to " .  __NAMESPACE__ . "\PPGroup->getPermissions()");
             
             return [];
         }
