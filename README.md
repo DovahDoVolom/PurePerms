@@ -1,5 +1,5 @@
 # PurePerms
 
-![PurePerms](https://github.com/PurePlugins/PurePerms/blob/master/PurePerms.png)
+![PurePerms](https://raw.githubusercontent.com/PurePlugins/PurePerms/master/PurePerms.png)
 
 ...
