@@ -34,6 +34,13 @@ class PPGroup implements PPDataInterface
     {
         $inheritedGroups = [];
         
+        if(!is_array($this->getNode("inheritance")))
+        {
+            $this->plugin->getLogger()->critical("Invalid 'inheritance' node given to " .  __NAMESPACE__ . "\PPGroup->getInheritedGroups()");
+            
+            return [];
+        }
+        
         foreach($this->getNode("inheritance") as $inheritedGroupName)
         {
             $inheritedGroup = $this->plugin->getGroup($inheritedGroupName);
@@ -51,10 +58,7 @@ class PPGroup implements PPDataInterface
     
     public function getNode($node)
     {
-        if(!isset($this->getData()[$node]))
-        {
-            return null;
-        }
+        if(!isset($this->getData()[$node])) return null;
         
         return $this->getData()[$node];
     }

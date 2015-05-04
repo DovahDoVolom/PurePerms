@@ -136,7 +136,7 @@ class PurePerms extends PluginBase
                 break;              
         }
         
-        if(!isset($this->provider) and !($this->provider instanceof ProviderInterface))
+        if(!isset($this->provider) || !($this->provider instanceof ProviderInterface))
         {
             $this->provider = $provider;
         }
@@ -156,10 +156,7 @@ class PurePerms extends PluginBase
     {
         $groupsData = $this->provider->getGroupsData(true);
         
-        if(isset($groupsData[$groupName]))
-        {
-            return false;
-        }
+        if(isset($groupsData[$groupName])) return false;
         
         $groupsData[$groupName] = array(
             "inheritance" => array(
@@ -191,10 +188,7 @@ class PurePerms extends PluginBase
     
     public function getAttachment(Player $player)
     {
-        if(!isset($this->attachments[$player->getName()]))
-        {
-            $this->attachments[$player->getName()] = $player->addAttachment($this);
-        }
+        if(!isset($this->attachments[$player->getName()])) $this->attachments[$player->getName()] = $player->addAttachment($this);
         
         return $this->attachments[$player->getName()];
     }
@@ -216,7 +210,7 @@ class PurePerms extends PluginBase
         {
             if(count($defaultGroups) > 1)
             {
-                $this->getLogger()->warning("More than one default groups were declared in the groups file.");
+                $this->getLogger()->warning("More than one default group was declared in the groups file.");
             }
             elseif(count($defaultGroups) <= 0)
             {
@@ -225,7 +219,7 @@ class PurePerms extends PluginBase
                 $defaultGroups = $this->getGroups();
             }
             
-            $this->getLogger()->warning("Setting the default group automatically...");  
+            $this->getLogger()->info("Setting the default group automatically.");  
             
             foreach($defaultGroups as $defaultGroup)
             {
@@ -263,7 +257,7 @@ class PurePerms extends PluginBase
             
         if(empty($group->getData())) 
         {
-            // $this->getLogger()->warning("Group $groupName has invalid or corrupted data.");
+            $this->getLogger()->warning("Group $groupName has invalid or corrupted data");
             
             return null;
         }
@@ -341,20 +335,14 @@ class PurePerms extends PluginBase
     
     public function removeAttachments()
     {
-        foreach($this->attachments as $attachment)
-        {
-            unset($this->attachments[$attachment]);
-        }
+        $this->attachments = [];
     }
     
     public function removeGroup($groupName)
     {
         $groupsData = $this->provider->getGroupsData(true);
         
-        if(!isset($groupsData[$groupName]))
-        {
-            return false;
-        }
+        if(!isset($groupsData[$groupName])) return false;
         
         unset($groupsData[$groupName]);
         
