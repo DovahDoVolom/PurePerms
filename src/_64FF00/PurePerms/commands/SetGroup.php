@@ -28,7 +28,12 @@ class SetGroup extends Command implements PluginIdentifiableCommand
           # #    #####       #  #       #         ###     ###                                        
                                                                                        
     */
-    
+
+    /**
+     * @param PurePerms $plugin
+     * @param $name
+     * @param $description
+     */
     public function __construct(PurePerms $plugin, $name, $description)
     {
         $this->plugin = $plugin;
@@ -37,7 +42,13 @@ class SetGroup extends Command implements PluginIdentifiableCommand
         
         $this->setPermission("pperms.command.setgroup");
     }
-    
+
+    /**
+     * @param CommandSender $sender
+     * @param $label
+     * @param array $args
+     * @return bool
+     */
     public function execute(CommandSender $sender, $label, array $args)
     {
         if(!$this->testPermission($sender))
@@ -85,7 +96,7 @@ class SetGroup extends Command implements PluginIdentifiableCommand
         
         if($player instanceof Player)
         {
-            $message = $this->plugin->getPPConfig()->getValue("msg-on-group-change");
+            $message = $this->plugin->getConfigValue("msg-on-group-change");
             
             $message = str_replace("{group}", strtolower($group->getName()), $message);
             

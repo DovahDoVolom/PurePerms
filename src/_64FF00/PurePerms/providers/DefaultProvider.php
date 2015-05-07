@@ -26,7 +26,10 @@ class DefaultProvider implements ProviderInterface
     */
     
     private $groups;
-    
+
+    /**
+     * @param PurePerms $plugin
+     */
     public function __construct(PurePerms $plugin)
     {
         $this->plugin = $plugin;
@@ -43,7 +46,11 @@ class DefaultProvider implements ProviderInterface
         $this->groups = new Config($this->plugin->getDataFolder() . "groups.yml", Config::YAML, array(
         ));
     }
-    
+
+    /**
+     * @param PPGroup $group
+     * @return mixed
+     */
     public function getGroupData(PPGroup $group)
     {
         $groupName = $group->getName();
@@ -53,17 +60,27 @@ class DefaultProvider implements ProviderInterface
             return $this->getGroupsData()[$groupName];
         }
     }
-    
+
+    /**
+     * @return mixed
+     */
     public function getGroupsConfig()
     {
         return $this->groups;
     }
-    
+
+    /**
+     * @return mixed
+     */
     public function getGroupsData()
     {
         return $this->groups->getAll();
     }
-    
+
+    /**
+     * @param PPUser $user
+     * @return Config
+     */
     public function getUserConfig(PPUser $user)
     {
         $userName = $user->getPlayer()->getName();
@@ -85,14 +102,22 @@ class DefaultProvider implements ProviderInterface
             ));
         }
     }
-    
+
+    /**
+     * @param PPUser $user
+     * @return mixed
+     */
     public function getUserData(PPUser $user)
     {
         $userConfig = $this->getUserConfig($user);
         
         return $userConfig->getAll();
     }
-    
+
+    /**
+     * @param PPGroup $group
+     * @param array $tempGroupData
+     */
     public function setGroupData(PPGroup $group, array $tempGroupData)
     {
         $groupName = $group->getName();
@@ -101,7 +126,10 @@ class DefaultProvider implements ProviderInterface
         
         $this->groups->save();
     }
-    
+
+    /**
+     * @param array $tempGroupsData
+     */
     public function setGroupsData(array $tempGroupsData)
     {
         $this->groups->setAll($tempGroupsData);
@@ -109,6 +137,10 @@ class DefaultProvider implements ProviderInterface
         $this->groups->save();
     }
 
+    /**
+     * @param PPUser $user
+     * @param array $tempUserData
+     */
     public function setUserData(PPUser $user, array $tempUserData)
     {
         $userData = $this->getUserConfig($user);

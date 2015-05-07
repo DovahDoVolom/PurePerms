@@ -49,12 +49,23 @@ class PurePerms extends PluginBase
 {
     private $attachments = [];
     
-    private $config, $provider;
+    private $provider;
     
     public function onLoad()
     {
-        $this->config = new PPConfig($this);
         $this->messages = new PPMessages($this);
+        
+        $this->saveDefaultConfig();
+        
+        if($this->getConfigValue("enable-multiworld-perms") == false)
+        {
+            $this->getLogger()->notice("Multiworld support is currently disabled.");
+            $this->getLogger()->notice("Don't forget to set enable-multiworld-perms option in config.yml to true if you want to use per-world permissions!");
+        }
+        else
+        {
+            $this->getLogger()->notice("Multiworld support enabled.");
+        }
     }
     
     public function onEnable()
@@ -105,11 +116,10 @@ class PurePerms extends PluginBase
     
     private function setProvider()
     {
-        $providerName = $this->config->getValue("data-provider");
+        $providerName = $this->getConfigValue("data-provider");
         
         switch(strtolower($providerName))
         {
-            /*
             case "sqlite3":
             
                 $provider = new SQLite3Provider($this);
@@ -117,7 +127,6 @@ class PurePerms extends PluginBase
                 $this->getLogger()->info("Set data provider to SQLite3.");
                 
                 break;
-            */
                 
             case "yaml":
             
@@ -151,7 +160,11 @@ class PurePerms extends PluginBase
          #     # #        #  ### 
          #     # #       ### ###
     */
-                     
+
+    /**
+     * @param $groupName
+     * @return bool
+     */
     public function addGroup($groupName)
     {
         $groupsData = $this->provider->getGroupsData(true);
@@ -171,28 +184,38 @@ class PurePerms extends PluginBase
         
         return true;
     }
-    
+
+    /**
+     * @param Player $player
+     */
     public function dumpPermissions(Player $player)
     {
         foreach($player->getEffectivePermissions() as $attachmentInfo)
         {
             $permission = $attachmentInfo->getPermission();
             
-            $value = $attachmentInfo->getValue();
+            $value = $attachmentInfo->getConfigValue();
             
             $this->getLogger()->info("[" . $player->getName() . "] -> $permission : " . ($value ? "true" : "false"));
         }
         
         $this->getLogger()->info("...");
     }
-    
+
+    /**
+     * @param Player $player
+     * @return mixed
+     */
     public function getAttachment(Player $player)
     {
-        if(!isset($this->attachments[$player->getName()])) $this->attachments[$player->getName()] = $player->addAttachment($this);
+        if(!isset($this->attachments[$player->getUniqueId()])) $this->attachments[$player->getUniqueId()] = $player->addAttachment($this);
         
-        return $this->attachments[$player->getName()];
+        return $this->attachments[$player->getUniqueId()];
     }
-    
+
+    /**
+     * @return mixed
+     */
     public function getDefaultGroup()
     {       
         $defaultGroups = [];
@@ -232,7 +255,11 @@ class PurePerms extends PluginBase
             }
         }
     }
-    
+
+    /**
+     * @param Player $player
+     * @return array
+     */
     public function getEffectivePermissions(Player $player)
     {
         $permissions = [];
@@ -241,7 +268,7 @@ class PurePerms extends PluginBase
         {
             $permission = $attachmentInfo->getPermission();
             
-            $value = $attachmentInfo->getValue();
+            $value = $attachmentInfo->getConfigValue();
             
             $permissions[$permission] = $value;
         }
@@ -250,7 +277,11 @@ class PurePerms extends PluginBase
         
         return $permissions;
     }
-    
+
+    /**
+     * @param $groupName
+     * @return PPGroup|null
+     */
     public function getGroup($groupName)
     {
         $group = new PPGroup($this, $groupName);
@@ -264,7 +295,10 @@ class PurePerms extends PluginBase
         
         return $group;
     }
-    
+
+    /**
+     * @return array
+     */
     public function getGroups()
     {
         $result = [];
@@ -276,42 +310,75 @@ class PurePerms extends PluginBase
         
         return $result;
     }
-    
+
+    /**
+     * @param $node
+     * @param ...$vars
+     * @return mixed
+     */
     public function getMessage($node, ...$vars)
     {
         return $this->messages->getMessage($node, ...$vars);
     }
-    
+
+    /**
+     * @param $name
+     * @return Player
+     */
     public function getPlayer($name)
     {
         $player = $this->getServer()->getPlayer($name);
         
         return $player instanceof Player ? $player : $this->getServer()->getOfflinePlayer($name);
     }
-    
-    public function getPPConfig()
-    {
-        return $this->config;
-    }
-    
+
+    /**
+     * @return mixed
+     */
     public function getPPVersion()
     {
         return $this->getDescription()->getVersion();
     }
-    
+
+    /**
+     * @return mixed
+     */
     public function getProvider()
     {
         return $this->provider;
     }
-    
+
+    /**
+     * @param IPlayer $player
+     * @return PPUser
+     */
     public function getUser(IPlayer $player)
     {
         return new PPUser($this, $player);
     }
-    
+
+    /**
+     * @param $key
+     * @return null
+     */
+    public function getConfigValue($key)
+    {
+        $value = $this->getConfig()->getNested($key);
+        
+        if($value === null)
+        {
+            $this->getLogger()->warning("Key $key not found in config.yml.");
+            
+            return null;
+        }
+        
+        return $value;
+    }
+
     public function reload()
     {
-        $this->config->reloadConfig();
+        $this->reloadConfig();
+        $this->saveDefaultConfig();
         
         $this->messages->reloadMessages();
         
@@ -323,21 +390,28 @@ class PurePerms extends PluginBase
         
         $this->updateAllPlayers();
     }
-    
+
+    /**
+     * @param Player $player
+     */
     public function removeAttachment(Player $player)
     {
         $attachment = $this->getAttachment($player);
         
         $player->removeAttachment($attachment);
         
-        unset($this->attachments[$player->getName()]);
+        unset($this->attachments[$player->getUniqueId()]);
     }
     
     public function removeAttachments()
     {
         $this->attachments = [];
     }
-    
+
+    /**
+     * @param $groupName
+     * @return bool
+     */
     public function removeGroup($groupName)
     {
         $groupsData = $this->provider->getGroupsData(true);
@@ -350,7 +424,10 @@ class PurePerms extends PluginBase
         
         return true;
     }
-    
+
+    /**
+     * @param PPGroup $group
+     */
     public function setDefaultGroup(PPGroup $group)
     {
         foreach($this->getGroups() as $currentGroup)
@@ -365,7 +442,12 @@ class PurePerms extends PluginBase
         
         $group->setDefault();
     }
-    
+
+    /**
+     * @param IPlayer $player
+     * @param PPGroup $group
+     * @param null $levelName
+     */
     public function setGroup(IPlayer $player, PPGroup $group, $levelName = null)
     {
         $this->getUser($player)->setGroup($group, $levelName);
@@ -385,7 +467,11 @@ class PurePerms extends PluginBase
             }
         }
     }
-    
+
+    /**
+     * @param IPlayer $player
+     * @param null $levelName
+     */
     public function updatePermissions(IPlayer $player, $levelName = null)
     {
         if($player instanceof Player)

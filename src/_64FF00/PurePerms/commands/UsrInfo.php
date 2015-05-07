@@ -24,7 +24,12 @@ class UsrInfo extends Command implements PluginIdentifiableCommand
           # #    #####       #  #       #         ###     ###                                        
                                                                                        
     */
-    
+
+    /**
+     * @param PurePerms $plugin
+     * @param $name
+     * @param $description
+     */
     public function __construct(PurePerms $plugin, $name, $description)
     {
         $this->plugin = $plugin;
@@ -33,7 +38,13 @@ class UsrInfo extends Command implements PluginIdentifiableCommand
         
         $this->setPermission("pperms.command.usrinfo");
     }
-    
+
+    /**
+     * @param CommandSender $sender
+     * @param $label
+     * @param array $args
+     * @return bool
+     */
     public function execute(CommandSender $sender, $label, array $args)
     {
         if(!$this->testPermission($sender))

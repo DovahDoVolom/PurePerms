@@ -24,7 +24,10 @@ class SQLite3Provider implements ProviderInterface
     */
     
     private $groups, $groupsData = [], $players;
-    
+
+    /**
+     * @param PurePerms $plugin
+     */
     public function __construct(PurePerms $plugin)
     {
         $this->plugin = $plugin;
@@ -40,7 +43,11 @@ class SQLite3Provider implements ProviderInterface
         
         $this->db->exec($db_query);
     }
-    
+
+    /**
+     * @param PPGroup $group
+     * @return mixed
+     */
     public function getGroupData(PPGroup $group)
     {
         $groupName = $group->getName();
@@ -50,7 +57,10 @@ class SQLite3Provider implements ProviderInterface
             return $this->getGroupsData()[$groupName];
         }
     }
-    
+
+    /**
+     * @return array
+     */
     public function getGroupsData()
     {
         if(empty($this->groupsData))
@@ -120,7 +130,11 @@ class SQLite3Provider implements ProviderInterface
     {
         
     }
-    
+
+    /**
+     * @param PPGroup $group
+     * @param array $tempGroupData
+     */
     public function setGroupData(PPGroup $group, array $tempGroupData)
     {
         $groupName = $group->getName();
@@ -192,7 +206,10 @@ class SQLite3Provider implements ProviderInterface
             $result->finalize();
         }
     }
-    
+
+    /**
+     * @param array $tempGroupsData
+     */
     public function setGroupsData(array $tempGroupsData)
     {
         foreach(array_keys($tempGroupsData) as $groupName)

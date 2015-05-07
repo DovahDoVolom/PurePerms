@@ -22,34 +22,46 @@ class PPListener implements Listener
           # #    #####       #  #       #         ###     ###                                        
                                                                                        
     */
-    
+
+    /**
+     * @param PurePerms $plugin
+     */
     public function __construct(PurePerms $plugin)
     {
         $this->plugin = $plugin;
     }
-    
+
+    /**
+     * @param EntityLevelChangeEvent $event
+     */
     public function onLevelChange(EntityLevelChangeEvent $event)
     {
         $player = $event->getEntity();
         
-        $isMultiWorldPermsEnabled = $this->plugin->getPPConfig()->getValue("enable-multiworld-perms");
+        $isMultiWorldPermsEnabled = $this->plugin->getConfigValue("enable-multiworld-perms");
         
         $levelName = $isMultiWorldPermsEnabled ? $event->getTarget()->getName() : null;
                
         $this->plugin->updatePermissions($player, $levelName);
     }
-    
+
+    /**
+     * @param PlayerJoinEvent $event
+     */
     public function onPlayerJoin(PlayerJoinEvent $event)
     {
         $player = $event->getPlayer();
         
-        $isMultiWorldPermsEnabled = $this->plugin->getPPConfig()->getValue("enable-multiworld-perms");
+        $isMultiWorldPermsEnabled = $this->plugin->getConfigValue("enable-multiworld-perms");
         
         $levelName = $isMultiWorldPermsEnabled ? $player->getLevel()->getName() : null;
         
         $this->plugin->updatePermissions($player, $levelName);
     }
 
+    /**
+     * @param PlayerKickEvent $event
+     */
     public function onPlayerKick(PlayerKickEvent $event)
     {
         $player = $event->getPlayer();
@@ -57,6 +69,9 @@ class PPListener implements Listener
         $this->plugin->removeAttachment($player);
     }
 
+    /**
+     * @param PlayerQuitEvent $event
+     */
     public function onPlayerQuit(PlayerQuitEvent $event)
     {
         $player = $event->getPlayer();

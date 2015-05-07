@@ -21,7 +21,11 @@ class PPUser implements PPDataInterface
           # #    #####       #  #       #         ###     ###                                        
                                                                                        
     */
-    
+
+    /**
+     * @param PurePerms $plugin
+     * @param IPlayer $player
+     */
     public function __construct(PurePerms $plugin, IPlayer $player)
     {
         $this->player = $player;
@@ -32,7 +36,11 @@ class PPUser implements PPDataInterface
     {
         return $this->plugin->getProvider()->getUserData($this, true);
     }
-    
+
+    /**
+     * @param null $levelName
+     * @return PPGroup|mixed|null
+     */
     public function getGroup($levelName = null)
     {
         $groupName = $levelName != null ? $this->getWorldData($levelName)["group"] : $this->getNode("group");
@@ -50,7 +58,11 @@ class PPUser implements PPDataInterface
         
         return $group;
     }
-    
+
+    /**
+     * @param null $levelName
+     * @return array|mixed|null
+     */
     public function getGroupPermissions($levelName = null)
     {
         $group = $this->getGroup($levelName);
@@ -60,12 +72,19 @@ class PPUser implements PPDataInterface
             return $group->getPermissions($levelName);
         }
     }
-    
+
+    /**
+     * @return mixed
+     */
     public function getName()
     {
         return $this->player->getName();
     }
-    
+
+    /**
+     * @param $node
+     * @return null
+     */
     public function getNode($node)
     {
         if(!isset($this->getData()[$node]))
@@ -75,7 +94,11 @@ class PPUser implements PPDataInterface
         
         return $this->getData()[$node];
     }
-    
+
+    /**
+     * @param null $levelName
+     * @return array
+     */
     public function getPermissions($levelName = null)
     {
         $groupPerms = $this->getGroupPermissions($levelName);   
@@ -83,12 +106,19 @@ class PPUser implements PPDataInterface
         
         return array_merge($groupPerms, $userPerms);
     }
-    
+
+    /**
+     * @return IPlayer
+     */
     public function getPlayer()
     {
         return $this->player;
     }
-    
+
+    /**
+     * @param null $levelName
+     * @return array|null
+     */
     public function getUserPermissions($levelName = null)
     {
         $permissions = $levelName != null ? $this->getWorldData($levelName)["permissions"] : $this->getNode("permissions");
@@ -102,7 +132,11 @@ class PPUser implements PPDataInterface
         
         return $permissions;
     }
-    
+
+    /**
+     * @param $levelName
+     * @return null
+     */
     public function getWorldData($levelName)
     {
         if($levelName == null) return null;
@@ -122,7 +156,10 @@ class PPUser implements PPDataInterface
             
         return $this->getData()["worlds"][$levelName];
     }
-    
+
+    /**
+     * @param $node
+     */
     public function removeNode($node)
     {
         $tempUserData = $this->getData();
@@ -134,12 +171,19 @@ class PPUser implements PPDataInterface
             $this->setData($tempUserData);
         }
     }
-    
+
+    /**
+     * @param array $data
+     */
     public function setData(array $data)
     {
         $this->plugin->getProvider()->setUserData($this, $data);
     }
-    
+
+    /**
+     * @param PPGroup $group
+     * @param $levelName
+     */
     public function setGroup(PPGroup $group, $levelName)
     {
         if($levelName == null)
@@ -157,7 +201,11 @@ class PPUser implements PPDataInterface
         
         $this->plugin->updatePermissions($this->player, $levelName);
     }
-    
+
+    /**
+     * @param $node
+     * @param $value
+     */
     public function setNode($node, $value)
     {
         $tempUserData = $this->getData();
@@ -166,7 +214,11 @@ class PPUser implements PPDataInterface
             
         $this->setData($tempUserData);
     }
-    
+
+    /**
+     * @param $permission
+     * @param null $levelName
+     */
     public function setUserPermission($permission, $levelName = null)
     {
         if($levelName == null)
@@ -188,7 +240,11 @@ class PPUser implements PPDataInterface
         
         $this->plugin->updatePermissions($this->player, $levelName);
     }
-    
+
+    /**
+     * @param $levelName
+     * @param array $worldData
+     */
     public function setWorldData($levelName, array $worldData)
     {
         if(isset($this->getData()["worlds"][$levelName]))
@@ -200,7 +256,12 @@ class PPUser implements PPDataInterface
             $this->setData($tempUserData);
         }
     }
-    
+
+    /**
+     * @param $permission
+     * @param null $levelName
+     * @return bool
+     */
     public function unsetUserPermission($permission, $levelName = null)
     {
         if($levelName == null)

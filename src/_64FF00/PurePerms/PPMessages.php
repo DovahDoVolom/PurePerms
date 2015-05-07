@@ -20,14 +20,22 @@ class PPMessages
     */
 
     private $messages;
-    
+
+    /**
+     * @param PurePerms $plugin
+     */
     public function __construct(PurePerms $plugin)
     {
         $this->plugin = $plugin;
         
         $this->loadMessages();
     }
-    
+
+    /**
+     * @param $node
+     * @param ...$vars
+     * @return mixed|null
+     */
     public function getMessage($node, ...$vars)
     {
         $msg = $this->messages->getNested($node);
@@ -48,7 +56,10 @@ class PPMessages
         
         return null;
     }
-    
+
+    /**
+     * @return mixed
+     */
     public function getVersion()
     {
         return $this->messages->get("messages-version");

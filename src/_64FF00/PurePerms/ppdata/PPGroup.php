@@ -18,18 +18,28 @@ class PPGroup implements PPDataInterface
           # #    #####       #  #       #         ###     ###                                        
                                                                                        
     */
-    
+
+    /**
+     * @param PurePerms $plugin
+     * @param $name
+     */
     public function __construct(PurePerms $plugin, $name)
     {
         $this->plugin = $plugin;
         $this->name = $name;
     }
-    
+
+    /**
+     * @return mixed
+     */
     public function getData()
     {
         return $this->plugin->getProvider()->getGroupData($this);
     }
-    
+
+    /**
+     * @return array
+     */
     public function getInheritedGroups()
     {
         $inheritedGroups = [];
@@ -50,19 +60,30 @@ class PPGroup implements PPDataInterface
         
         return $inheritedGroups;
     }
-    
+
+    /**
+     * @return mixed
+     */
     public function getName()
     {
         return $this->name;
     }
-    
+
+    /**
+     * @param $node
+     * @return null|mixed
+     */
     public function getNode($node)
     {
         if(!isset($this->getData()[$node])) return null;
         
         return $this->getData()[$node];
     }
-    
+
+    /**
+     * @param null $levelName
+     * @return array|mixed
+     */
     public function getPermissions($levelName = null)
     {
         $permissions = $levelName != null ? $this->getWorldData($levelName)["permissions"] : $this->getNode("permissions");
@@ -85,12 +106,19 @@ class PPGroup implements PPDataInterface
         
         return $permissions;
     }
-    
+
+    /**
+     * @param null $levelName
+     */
     public function getUsers($levelName = null)
     {
         
     }
-    
+
+    /**
+     * @param $levelName
+     * @return null
+     */
     public function getWorldData($levelName)
     {
         if($levelName == null) return null;
@@ -109,12 +137,18 @@ class PPGroup implements PPDataInterface
             
         return $this->getData()["worlds"][$levelName];
     }
-    
+
+    /**
+     * @return bool
+     */
     public function isDefault()
     {
         return ($this->getNode("isDefault") == true);
     }
-    
+
+    /**
+     * @param $node
+     */
     public function removeNode($node)
     {
         $tempGroupData = $this->getData();
@@ -126,7 +160,10 @@ class PPGroup implements PPDataInterface
             $this->setData($tempGroupData);
         }
     }
-    
+
+    /**
+     * @param array $data
+     */
     public function setData(array $data)
     {
         $this->plugin->getProvider()->setGroupData($this, $data);
@@ -136,7 +173,11 @@ class PPGroup implements PPDataInterface
     {
         $this->setNode("isDefault", true);
     }
-    
+
+    /**
+     * @param $permission
+     * @param null $levelName
+     */
     public function setGroupPermission($permission, $levelName = null)
     {
         if($levelName == null)
@@ -156,7 +197,11 @@ class PPGroup implements PPDataInterface
             $this->setWorldData($levelName, $worldData);
         }
     }
-    
+
+    /**
+     * @param $node
+     * @param $value
+     */
     public function setNode($node, $value)
     {
         $tempGroupData = $this->getData();
@@ -165,7 +210,11 @@ class PPGroup implements PPDataInterface
             
         $this->setData($tempGroupData);
     }
-    
+
+    /**
+     * @param $levelName
+     * @param array $worldData
+     */
     public function setWorldData($levelName, array $worldData)
     {
         if(isset($this->getData()["worlds"][$levelName]))
@@ -177,7 +226,7 @@ class PPGroup implements PPDataInterface
             $this->setData($tempGroupData);
         }
     }
-    
+
     public function sortPermissions()
     {
         $tempGroupData = $this->getData();
@@ -189,7 +238,7 @@ class PPGroup implements PPDataInterface
             sort($tempGroupData["permissions"]);
         }
         
-        $isMultiWorldPermsEnabled = $this->plugin->getPPConfig()->getValue("enable-multiworld-perms");
+        $isMultiWorldPermsEnabled = $this->plugin->getConfigValue("enable-multiworld-perms");
         
         if($isMultiWorldPermsEnabled)
         {               
@@ -211,7 +260,12 @@ class PPGroup implements PPDataInterface
         
         $this->setData($tempGroupData);
     }
-    
+
+    /**
+     * @param $permission
+     * @param null $levelName
+     * @return bool
+     */
     public function unsetGroupPermission($permission, $levelName = null)
     {
         if($levelName == null)
