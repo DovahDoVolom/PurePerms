@@ -2,7 +2,7 @@
 
 namespace _64FF00\PurePerms;
 
-use _64FF00\PurePerms\event\PPGroupChangeEvent;
+use _64FF00\PurePerms\event\PPGroupChangedEvent;
 
 use pocketmine\event\Listener;
 use pocketmine\event\entity\EntityLevelChangeEvent;
@@ -34,9 +34,9 @@ class PPListener implements Listener
     }
 
     /**
-     * @param PPGroupChangeEvent $event
+     * @param PPGroupChangedEvent $event
      */
-    public function onGroupChange(PPGroupChangeEvent $event)
+    public function onGroupChanged(PPGroupChangedEvent $event)
     {
         $player = $event->getPlayer();
         $levelName = $event->getLevelName();

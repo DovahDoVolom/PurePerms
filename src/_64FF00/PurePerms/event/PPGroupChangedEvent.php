@@ -10,7 +10,7 @@ use pocketmine\event\plugin\PluginEvent;
 
 use pocketmine\IPlayer;
 
-class PPGroupChangeEvent extends PluginEvent implements Cancellable
+class PPGroupChangedEvent extends PluginEvent
 {
     /* PurePerms by 64FF00 (xktiverz@gmail.com, @64ff00 for Twitter) */
 
