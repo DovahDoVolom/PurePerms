@@ -2,6 +2,7 @@
 
 namespace _64FF00\PurePerms\ppdata;
 
+use _64FF00\PurePerms\event\PPGroupChangeEvent;
 use _64FF00\PurePerms\PurePerms;
 use _64FF00\PurePerms\ppdata\PPGroup;
 
@@ -186,20 +187,25 @@ class PPUser implements PPDataInterface
      */
     public function setGroup(PPGroup $group, $levelName)
     {
-        if($levelName == null)
+        $event = new PPGroupChangeEvent($this->plugin, $this->player, $group, $levelName);
+
+        $this->plugin->getServer()->getPluginManager()->callEvent($event);
+
+        if(!$event->isCancelled())
         {
-            $this->setNode("group", $group->getName());
+            if ($levelName == null)
+            {
+                $this->setNode("group", $group->getName());
+            }
+            else
+            {
+                $worldData = $this->getWorldData($levelName);
+
+                $worldData["group"] = $group->getName();
+
+                $this->setWorldData($levelName, $worldData);
+            }
         }
-        else
-        {
-            $worldData = $this->getWorldData($levelName);
-            
-            $worldData["group"] = $group->getName();
-            
-            $this->setWorldData($levelName, $worldData);
-        }
-        
-        $this->plugin->updatePermissions($this->player, $levelName);
     }
 
     /**

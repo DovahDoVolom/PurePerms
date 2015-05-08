@@ -18,9 +18,9 @@ use _64FF00\PurePerms\commands\UnsetUPerm;
 use _64FF00\PurePerms\commands\UsrInfo;
 use _64FF00\PurePerms\ppdata\PPGroup;
 use _64FF00\PurePerms\ppdata\PPUser;
-use _64FF00\PurePerms\providers\DefaultProvider;
-use _64FF00\PurePerms\providers\ProviderInterface;
-use _64FF00\PurePerms\providers\SQLite3Provider;
+use _64FF00\PurePerms\provider\DefaultProvider;
+use _64FF00\PurePerms\provider\ProviderInterface;
+use _64FF00\PurePerms\provider\SQLite3Provider;
 
 use pocketmine\IPlayer;
 
@@ -32,21 +32,21 @@ use pocketmine\Player;
 
 use pocketmine\plugin\PluginBase;
 
-/* PurePerms by 64FF00 (xktiverz@gmail.com, @64ff00 for Twitter) */
-
-/*
-      # #    #####  #       ####### #######   ###     ###   
-      # #   #     # #    #  #       #        #   #   #   #  
-    ####### #       #    #  #       #       #     # #     # 
-      # #   ######  #    #  #####   #####   #     # #     # 
-    ####### #     # ####### #       #       #     # #     # 
-      # #   #     #      #  #       #        #   #   #   #  
-      # #    #####       #  #       #         ###     ###                                        
-                                                                                   
-*/
-
 class PurePerms extends PluginBase
 {
+    /* PurePerms by 64FF00 (xktiverz@gmail.com, @64ff00 for Twitter) */
+
+    /*
+          # #    #####  #       ####### #######   ###     ###
+          # #   #     # #    #  #       #        #   #   #   #
+        ####### #       #    #  #       #       #     # #     #
+          # #   ######  #    #  #####   #####   #     # #     #
+        ####### #     # ####### #       #       #     # #     #
+          # #   #     #      #  #       #        #   #   #   #
+          # #    #####       #  #       #         ###     ###
+
+    */
+
     private $attachments = [];
     
     private $provider;
@@ -194,7 +194,7 @@ class PurePerms extends PluginBase
         {
             $permission = $attachmentInfo->getPermission();
             
-            $value = $attachmentInfo->getConfigValue();
+            $value = $attachmentInfo->getValue();
             
             $this->getLogger()->info("[" . $player->getName() . "] -> $permission : " . ($value ? "true" : "false"));
         }

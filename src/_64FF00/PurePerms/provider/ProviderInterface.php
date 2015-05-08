@@ -1,6 +1,6 @@
 <?php
 
-namespace _64FF00\PurePerms\providers;
+namespace _64FF00\PurePerms\provider;
 
 use _64FF00\PurePerms\ppdata\PPGroup;
 use _64FF00\PurePerms\ppdata\PPUser;

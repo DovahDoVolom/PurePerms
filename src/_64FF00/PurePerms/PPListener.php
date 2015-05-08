@@ -2,6 +2,8 @@
 
 namespace _64FF00\PurePerms;
 
+use _64FF00\PurePerms\event\PPGroupChangeEvent;
+
 use pocketmine\event\Listener;
 use pocketmine\event\entity\EntityLevelChangeEvent;
 use pocketmine\event\player\PlayerJoinEvent;
@@ -29,6 +31,17 @@ class PPListener implements Listener
     public function __construct(PurePerms $plugin)
     {
         $this->plugin = $plugin;
+    }
+
+    /**
+     * @param PPGroupChangeEvent $event
+     */
+    public function onGroupChange(PPGroupChangeEvent $event)
+    {
+        $player = $event->getPlayer();
+        $levelName = $event->getLevelName();
+
+        $this->plugin->updatePermissions($player, $levelName);
     }
 
     /**
