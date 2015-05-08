@@ -6,6 +6,8 @@ Guest:
   isDefault: true
   inheritance: []
   permissions:
+  - -essentials.kit
+  - -essentials.kit.other
   - -pocketmine.command.me
   - pocketmine.command.list
   - pperms.command.ppinfo
@@ -13,7 +15,8 @@ Guest:
 Admin:
   inheritance:
   - Guest
-  permissions:
+  permissions:  
+  - essentials.gamemode
   - pocketmine.broadcast
   - pocketmine.command.gamemode
   - pocketmine.command.give
@@ -26,6 +29,7 @@ Owner:
   - Guest
   - Admin
   permissions:
+  - essentials
   - pocketmine.command
   - pperms.command
   worlds: []

@@ -456,12 +456,15 @@ class PurePerms extends PluginBase
         foreach($this->getServer()->getOnlinePlayers() as $player)
         {
             $this->updatePermissions($player, null);
-            
-            foreach($this->getServer()->getLevels() as $level)
+
+            if($this->getConfigValue("enable-multiworld-perms") == true)
             {
-                $levelName = $level->getName();
-                
-                $this->updatePermissions($player, $levelName);
+                foreach ($this->getServer()->getLevels() as $level)
+                {
+                    $levelName = $level->getName();
+
+                    $this->updatePermissions($player, $levelName);
+                }
             }
         }
     }
