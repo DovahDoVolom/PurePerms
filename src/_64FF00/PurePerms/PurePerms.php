@@ -24,7 +24,6 @@ use _64FF00\PurePerms\provider\SQLite3Provider;
 
 use pocketmine\IPlayer;
 
-use pocketmine\permission\Permission;
 use pocketmine\permission\PermissionAttachment;
 
 use pocketmine\Player;
