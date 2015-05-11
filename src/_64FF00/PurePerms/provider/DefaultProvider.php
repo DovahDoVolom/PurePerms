@@ -25,7 +25,7 @@ class DefaultProvider implements ProviderInterface
                                                                                        
     */
     
-    private $groups;
+    private $groups = [];
 
     /**
      * @param PurePerms $plugin
@@ -55,10 +55,12 @@ class DefaultProvider implements ProviderInterface
     {
         $groupName = $group->getName();
         
-        if(isset($this->getGroupsData()[$groupName]) and is_array($this->getGroupsData(true)[$groupName]))
+        if(!isset($this->getGroupsData()[$groupName]) || !is_array($this->getGroupsData()[$groupName]))
         {
-            return $this->getGroupsData()[$groupName];
+            return [];
         }
+
+        return $this->getGroupsData()[$groupName];
     }
 
     /**

@@ -170,6 +170,7 @@ class PurePerms extends PluginBase
         if(isset($groupsData[$groupName])) return false;
         
         $groupsData[$groupName] = array(
+            "isDefault" => false,
             "inheritance" => array(
             ), 
             "permissions" => array(
@@ -217,7 +218,7 @@ class PurePerms extends PluginBase
     public function getDefaultGroup()
     {       
         $defaultGroups = [];
-        
+
         foreach($this->getGroups() as $defaultGroup)
         {
             if($defaultGroup->isDefault()) array_push($defaultGroups, $defaultGroup);

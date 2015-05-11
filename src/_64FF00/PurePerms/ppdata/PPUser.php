@@ -35,7 +35,7 @@ class PPUser implements PPDataInterface
     
     public function getData()
     {
-        return $this->plugin->getProvider()->getUserData($this, true);
+        return $this->plugin->getProvider()->getUserData($this);
     }
 
     /**
@@ -45,7 +45,7 @@ class PPUser implements PPDataInterface
     public function getGroup($levelName = null)
     {
         $groupName = $levelName != null ? $this->getWorldData($levelName)["group"] : $this->getNode("group");
-        
+
         if(!isset($groupName)) return null;
         
         $group = $this->plugin->getGroup($groupName);
