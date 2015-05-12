@@ -21,7 +21,7 @@ class SQLite3Provider implements ProviderInterface
                                                                                        
     */
     
-    private $groupsData = [];
+    private $groupsData;
 
     /**
      * @param PurePerms $plugin
@@ -52,12 +52,62 @@ class SQLite3Provider implements ProviderInterface
     {
         $groupName = $group->getName();
 
-        if(!isset($this->getGroupsData()[$groupName]) || !is_array($this->getGroupsData()[$groupName]))
-        {
+        if(!isset($this->getGroupsData()[$groupName]) || !is_array($this->getGroupsData()[$groupName])){
             return [];
         }
 
         return $this->getGroupsData()[$groupName];
+    }
+
+    public function getGroupsData()
+    {
+        return $this->groupsData;
+    }
+
+    /**
+     * @param PPUser $user
+     * @return array
+     */
+    public function getUserData(PPUser $user)
+    {
+        $userName = $user->getName();
+        $defaultGroup = $this->plugin->getDefaultGroup()->getName();
+
+        $stmt01 = $this->db->prepare("
+            INSERT OR IGNORE INTO players (userName, userGroup, permissions)
+            VALUES (:userName, :userGroup, :permissions);
+        ");
+
+        $stmt01->bindValue(":userName", $userName, SQLITE3_TEXT);
+        $stmt01->bindValue(":userGroup", $defaultGroup, SQLITE3_TEXT);
+        $stmt01->bindValue(":permissions", "", SQLITE3_TEXT);
+
+        $result01 = $stmt01->execute();
+
+        $result01->finalize();
+
+        $result02 = $this->db->query("
+            SELECT userName, userGroup, permissions
+            FROM players;
+        ");
+
+        $userData = [];
+
+        if($result02 instanceof \SQLite3Result)
+        {
+            while($currentRow = $result02->fetchArray(SQLITE3_ASSOC))
+            {
+                $userData["userName"] = $currentRow["userName"];
+                $userData["userGroup"] = $currentRow["userGroup"];
+                $userData["permissions"] = explode(",", $currentRow["permissions"]);
+            }
+        }
+
+        $result02->finalize();
+
+        // TODO: Multiworld Support
+
+        return $userData;
     }
 
     public function loadGroupsData()
@@ -66,6 +116,8 @@ class SQLite3Provider implements ProviderInterface
             SELECT groupName, isDefault, inheritance, permissions
             FROM groups;
         ");
+
+        $this->groupsData = [];
 
         if($result01 instanceof \SQLite3Result)
         {
@@ -84,55 +136,20 @@ class SQLite3Provider implements ProviderInterface
         // TODO: Multiworld Support
     }
 
-    public function getGroupsData()
-    {
-        return $this->groupsData;
-    }
-
     /**
-     * @param PPUser $user
-     * @return array
+     * @param $groupName
      */
-    public function getUserData(PPUser $user)
+    public function removeGroupData($groupName)
     {
-        $userName = $user->getName();
-        $defaultGroup = $this->plugin->getDefaultGroup()->getName();
-
-        $this->db->exec("
-            INSERT OR IGNORE INTO players (
-                userName,
-                userGroup,
-                permissions
-            )
-            VALUES (
-                $userName,
-                $defaultGroup,
-                ''
-            );
+        $stmt = $this->db->prepare("
+            DELETE FROM groups WHERE groupName = :groupName;
         ");
 
-        $result01 = $this->db->query("
-            SELECT userName, userGroup, permissions
-            FROM players;
-        ");
+        $stmt->bindValue(":groupName", $groupName, SQLITE3_TEXT);
 
-        $userData = [];
+        $result = $stmt->execute();
 
-        if($result01 instanceof \SQLite3Result)
-        {
-            while($currentRow = $result01->fetchArray(SQLITE3_ASSOC))
-            {
-                $userData["userName"] = $currentRow["userName"];
-                $userData["userGroup"] = $currentRow["userGroup"];
-                $userData["permissions"] = explode(",", $currentRow["permissions"]);
-            }
-        }
-
-        $result01->finalize();
-
-        // TODO: Multiworld Support
-
-        return $userData;
+        $result->finalize();
     }
 
     /**
@@ -143,28 +160,9 @@ class SQLite3Provider implements ProviderInterface
     {
         $groupName = $group->getName();
 
-        // INSERT OR IGNORE INTO groups ...
+        $this->updateGroupData($groupName, $tempGroupData);
 
-        if(isset($tempGroupData["isDefault"])) $isDefault = $tempGroupData["isDefault"];
-        if(isset($tempGroupData["inheritance"])) $inheritance = implode(",", $tempGroupData["inheritance"]);
-        if(isset($tempGroupData["permissions"])) $permissions = implode(",", $tempGroupData["permissions"]);
-
-        $stmt01 = $this->db->prepare("
-            UPDATE groups
-            SET isDefault = :isDefault, inheritance = :inheritance, permissions = :permissions
-            WHERE groupName = :groupName;
-        ");
-
-        $stmt01->bindValue(":groupName", $groupName, SQLITE3_TEXT);
-        $stmt01->bindValue(":isDefault", $isDefault, SQLITE3_INTEGER);
-        $stmt01->bindValue(":inheritance", $inheritance, SQLITE3_TEXT);
-        $stmt01->bindValue(":permissions", $permissions, SQLITE3_TEXT);
-
-        $result01 = $stmt01->execute();
-
-        $result01->finalize();
-
-        // TODO: Multiworld Support
+        $this->loadGroupsData();
     }
 
     /**
@@ -172,31 +170,18 @@ class SQLite3Provider implements ProviderInterface
      */
     public function setGroupsData(array $tempGroupsData)
     {
-        foreach($tempGroupsData as $groupName => $groupData)
+        $tempGroupData01 = array_diff_key($this->groupsData, $tempGroupsData);
+
+        $tempGroupName01 = key($tempGroupData01);
+
+        if($tempGroupData01 != []) $this->removeGroupData($tempGroupName01);
+
+        foreach($tempGroupsData as $tempGroupName02 => $tempGroupData02)
         {
-            // INSERT OR IGNORE INTO groups ...
-
-            $stmt01 = $this->db->prepare("
-                UPDATE groups
-                SET isDefault = :isDefault, inheritance = :inheritance, permissions = :permissions
-                WHERE groupName = :groupName;
-            ");
-
-            $isDefault = $groupData["isDefault"];
-            $inheritance = implode(",", $groupData["inheritance"]);
-            $permissions = implode(",", $groupData["permissions"]);
-
-            $stmt01->bindValue(":groupName", $groupName, SQLITE3_TEXT);
-            $stmt01->bindValue(":isDefault", $isDefault, SQLITE3_INTEGER);
-            $stmt01->bindValue(":inheritance", $inheritance, SQLITE3_TEXT);
-            $stmt01->bindValue(":permissions", $permissions, SQLITE3_TEXT);
-
-            $result01 = $stmt01->execute();
-
-            $result01->finalize();
-
-            // TODO: Multiworld Support
+            $this->updateGroupData($tempGroupName02, $tempGroupData02);
         }
+
+        $this->loadGroupsData();
     }
 
     /**
@@ -222,6 +207,47 @@ class SQLite3Provider implements ProviderInterface
         $result01 = $stmt01->execute();
 
         $result01->finalize();
+
+        // TODO: Multiworld Support
+    }
+
+    /**
+     * @param $groupName
+     * @param $tempGroupData
+     */
+    public function updateGroupData($groupName, $tempGroupData)
+    {
+        $stmt01 = $this->db->prepare("
+            INSERT OR IGNORE INTO groups (groupName, isDefault, inheritance, permissions)
+            VALUES (:groupName, 0, :inheritance, :permissions);
+        ");
+
+        $stmt01->bindValue(":groupName", $groupName, SQLITE3_TEXT);
+        $stmt01->bindValue(":inheritance", "", SQLITE3_TEXT);
+        $stmt01->bindValue(":permissions", "", SQLITE3_TEXT);
+
+        $result01 = $stmt01->execute();
+
+        $result01->finalize();
+
+        if(isset($tempGroupData["isDefault"])) $isDefault = $tempGroupData["isDefault"];
+        if(isset($tempGroupData["inheritance"])) $inheritance = implode(",", $tempGroupData["inheritance"]);
+        if(isset($tempGroupData["permissions"])) $permissions = implode(",", $tempGroupData["permissions"]);
+
+        $stmt02 = $this->db->prepare("
+            UPDATE groups
+            SET isDefault = :isDefault, inheritance = :inheritance, permissions = :permissions
+            WHERE groupName = :groupName;
+        ");
+
+        $stmt02->bindValue(":groupName", $groupName, SQLITE3_TEXT);
+        $stmt02->bindValue(":isDefault", $isDefault, SQLITE3_INTEGER);
+        $stmt02->bindValue(":inheritance", $inheritance, SQLITE3_TEXT);
+        $stmt02->bindValue(":permissions", $permissions, SQLITE3_TEXT);
+
+        $result02 = $stmt02->execute();
+
+        $result02->finalize();
 
         // TODO: Multiworld Support
     }
