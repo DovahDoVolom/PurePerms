@@ -52,13 +52,14 @@ class SQLite3Provider implements ProviderInterface
     {
         $groupName = $group->getName();
 
-        if(!isset($this->getGroupsData()[$groupName]) || !is_array($this->getGroupsData()[$groupName])){
-            return [];
-        }
+        if(!isset($this->getGroupsData()[$groupName]) || !is_array($this->getGroupsData()[$groupName])) return [];
 
         return $this->getGroupsData()[$groupName];
     }
 
+    /**
+     * @return array
+     */
     public function getGroupsData()
     {
         return $this->groupsData;
@@ -150,6 +151,8 @@ class SQLite3Provider implements ProviderInterface
         $result = $stmt->execute();
 
         $result->finalize();
+
+        // TODO: Multiworld Support
     }
 
     /**
