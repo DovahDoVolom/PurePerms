@@ -2,7 +2,7 @@
 # PurePerms by 64FF00 (xktiverz@gmail.com, @64ff00 for Twitter)
 
 ---
-messages-version: "1.1.0"
+messages-version: "1.1.0.01"
 cmds:
   addgroup:
     desc: "Adds a new group to the groups list."
@@ -91,8 +91,20 @@ cmds:
       level_not_exist: "World %var0% does NOT exist."
       status_online: "ONLINE!"
       status_offline: "OFFLINE..."
-      usrinfo_header: "<--- User Information for %var0% --->"
+      usrinfo_header: "-- User Information for %var0% --"
       usrinfo_username: "USERNAME: %var0%"
       usrinfo_status: "STATUS: %var0%"
       usrinfo_group: "GROUP: %var0%"
+logger_messages:
+  getConfigValue_01: "Key %var0% not found in config.yml."
+  getDefaultGroup_01: "More than one default group was declared in the groups file."
+  getDefaultGroup_02: "No default group was found in the groups file."
+  getDefaultGroup_03: "Setting the default group automatically."
+  getGroup_01: "Group %var0% has invalid or corrupted data"
+  onEnable_01: "Multiworld support is currently disabled."
+  onEnable_02: "Don't forget to set enable-multiworld-perms option in config.yml to true if you want to use per-world permissions!"
+  onEnable_03: "Multiworld support enabled."
+  setProvider_SQLite3: "Set data provider to SQLite3."
+  setProvider_YAML: "Set data provider to YAML."
+  setProvider_Invalid: "Provider %var0% does NOT exist. Setting the data provider to default."
 ...

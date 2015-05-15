@@ -57,12 +57,12 @@ class PurePerms extends PluginBase
         
         if($this->getConfigValue("enable-multiworld-perms") == false)
         {
-            $this->getLogger()->notice("Multiworld support is currently disabled.");
-            $this->getLogger()->notice("Don't forget to set enable-multiworld-perms option in config.yml to true if you want to use per-world permissions!");
+            $this->getLogger()->notice($this->getMessage("logger_messages.onEnable_01"));
+            $this->getLogger()->notice($this->getMessage("logger_messages.onEnable_02"));
         }
         else
         {
-            $this->getLogger()->notice("Multiworld support enabled.");
+            $this->getLogger()->notice($this->getMessage("logger_messages.onEnable_03"));
         }
     }
     
@@ -122,7 +122,7 @@ class PurePerms extends PluginBase
             
                 $provider = new SQLite3Provider($this);
                 
-                $this->getLogger()->info("Set data provider to SQLite3.");
+                $this->getLogger()->info($this->getMessage("logger_messages.setProvider_SQLite3"));
                 
                 break;
                 
@@ -130,13 +130,13 @@ class PurePerms extends PluginBase
             
                 $provider = new DefaultProvider($this);
                 
-                $this->getLogger()->info("Set data provider to YAML.");
+                $this->getLogger()->info($this->getMessage("logger_messages.setProvider_YAML"));
                 
                 break;
                 
             default:
                 
-                $this->getLogger()->warning("Provider $providerName does NOT exist. Setting the data provider to default.");
+                $this->getLogger()->warning($this->getMessage("logger_messages.setProvider_Invalid"));
                 
                 $provider = new DefaultProvider($this);
                 
@@ -232,16 +232,16 @@ class PurePerms extends PluginBase
         {
             if(count($defaultGroups) > 1)
             {
-                $this->getLogger()->warning("More than one default group was declared in the groups file.");
+                $this->getLogger()->warning($this->getMessage("logger_messages.getDefaultGroup_01"));
             }
             elseif(count($defaultGroups) <= 0)
             {
-                $this->getLogger()->warning("No default group was found in the groups file.");
+                $this->getLogger()->warning($this->getMessage("logger_messages.getDefaultGroup_02"));
                 
                 $defaultGroups = $this->getGroups();
             }
             
-            $this->getLogger()->info("Setting the default group automatically.");  
+            $this->getLogger()->info($this->getMessage("logger_messages.getDefaultGroup_03"));
             
             foreach($defaultGroups as $defaultGroup)
             {
@@ -287,7 +287,7 @@ class PurePerms extends PluginBase
             
         if(empty($group->getData())) 
         {
-            $this->getLogger()->warning("Group $groupName has invalid or corrupted data");
+            $this->getLogger()->warning($this->getMessage("logger_messages.getGroup_01", $groupName));
             
             return null;
         }
@@ -366,7 +366,7 @@ class PurePerms extends PluginBase
         
         if($value === null)
         {
-            $this->getLogger()->warning("Key $key not found in config.yml.");
+            $this->getLogger()->warning($this->getMessage("logger_messages.getConfigValue_01", $key));
             
             return null;
         }

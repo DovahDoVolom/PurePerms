@@ -10,7 +10,7 @@ author: 64FF00
 website: https://github.com/PurePlugins/PurePerms
 permissions:
   pperms:
-    description: "#64FF00"
+    description: "PurePerms by 64FF00 (#64FF00)"
     children:
       pperms.command:
         description: "Allows you to use all PurePerms commands."

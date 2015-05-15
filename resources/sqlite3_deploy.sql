@@ -1,3 +1,5 @@
+/* PurePerms by 64FF00 (xktiverz@gmail.com, @64ff00 for Twitter) */
+
 CREATE TABLE IF NOT EXISTS groups (
   groupName TEXT PRIMARY KEY NOT NULL,
   isDefault INTEGER NOT NULL DEFAULT 0,

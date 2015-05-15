@@ -94,4 +94,16 @@ cmds:
       usrinfo_username: "플레이어 이름: %var0%"
       usrinfo_status: "접속 상태: %var0%"
       usrinfo_group: "그룹: %var0%"
+logger_messages:
+  getConfigValue_01: "config.yml에서 %var0%의 값을 찾을 수 없습니다."
+  getDefaultGroup_01: "하나 이상의 기본 그룹이 설정되어있습니다."
+  getDefaultGroup_02: "기본 그룹을 groups.yml에서 찾을 수 없습니다."
+  getDefaultGroup_03: "기본 그룹을 자동으로 설정하는 중입니다..."
+  getGroup_01: "그룹 %var0%가 잘못되었거나 손상된 데이터를 포함하고 있습니다."
+  onEnable_01: "다중 월드 지원 기능은 현재 비활성화되어 있습니다."
+  onEnable_02: "다중 월드 지원 기능을 사용하시려면 반드시 config.yml에서 enable-multiworld-perms 옵션을 true로 설정해주세요."
+  onEnable_03: "다중 월드 지원 기능이 활성화되었습니다."
+  setProvider_SQLite3: "SQLite3 형식으로 데이터가 저장됩니다."
+  setProvider_YAML: "YAML 방식으로 데이터가 저장됩니다."
+  setProvider_Invalid: "올바르지 않은 데이터 저장 방식입니다. 자동으로 YAML 방식으로 데이터가 저장됩니다."
 ...
