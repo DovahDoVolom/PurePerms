@@ -213,6 +213,24 @@ class PurePerms extends PluginBase
     }
 
     /**
+     * @param $key
+     * @return null
+     */
+    public function getConfigValue($key)
+    {
+        $value = $this->getConfig()->getNested($key);
+
+        if($value === null)
+        {
+            $this->getLogger()->warning($this->getMessage("logger_messages.getConfigValue_01", $key));
+
+            return null;
+        }
+
+        return $value;
+    }
+
+    /**
      * @return mixed
      */
     public function getDefaultGroup()
@@ -354,24 +372,6 @@ class PurePerms extends PluginBase
     public function getUser(IPlayer $player)
     {
         return new PPUser($this, $player);
-    }
-
-    /**
-     * @param $key
-     * @return null
-     */
-    public function getConfigValue($key)
-    {
-        $value = $this->getConfig()->getNested($key);
-        
-        if($value === null)
-        {
-            $this->getLogger()->warning($this->getMessage("logger_messages.getConfigValue_01", $key));
-            
-            return null;
-        }
-        
-        return $value;
     }
 
     public function reload()
