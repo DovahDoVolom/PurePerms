@@ -57,12 +57,12 @@ class PurePerms extends PluginBase
         
         if($this->getConfigValue("enable-multiworld-perms") == false)
         {
-            $this->getLogger()->notice($this->messages->getMessage("logger_messages.onEnable_01"));
-            $this->getLogger()->notice($this->messages->getMessage("logger_messages.onEnable_02"));
+            $this->getLogger()->notice($this->getMessage("logger_messages.onEnable_01"));
+            $this->getLogger()->notice($this->getMessage("logger_messages.onEnable_02"));
         }
         else
         {
-            $this->getLogger()->notice($this->messages->getMessage("logger_messages.onEnable_03"));
+            $this->getLogger()->notice($this->getMessage("logger_messages.onEnable_03"));
         }
     }
     
@@ -96,20 +96,20 @@ class PurePerms extends PluginBase
     {
         $commandMap = $this->getServer()->getCommandMap();
         
-        $commandMap->register("addgroup", new AddGroup($this, "addgroup", $this->messages->getMessage("cmds.addgroup.desc")));
-        $commandMap->register("fperms", new FPerms($this, "fperms", $this->messages->getMessage("cmds.fperms.desc")));
-        $commandMap->register("groups", new Groups($this, "groups", $this->messages->getMessage("cmds.groups.desc")));
-        $commandMap->register("listgperms", new ListGPerms($this, "listgperms", $this->messages->getMessage("cmds.listgperms.desc")));
-        $commandMap->register("listuperms", new ListUPerms($this, "listuperms", $this->messages->getMessage("cmds.listuperms.desc")));
-        $commandMap->register("ppinfo", new PPInfo($this, "ppinfo", $this->messages->getMessage("cmds.ppinfo.desc")));
-        $commandMap->register("ppreload", new PPReload($this, "ppreload", $this->messages->getMessage("cmds.ppreload.desc")));
+        $commandMap->register("addgroup", new AddGroup($this, "addgroup", $this->getMessage("cmds.addgroup.desc")));
+        $commandMap->register("fperms", new FPerms($this, "fperms", $this->getMessage("cmds.fperms.desc")));
+        $commandMap->register("groups", new Groups($this, "groups", $this->getMessage("cmds.groups.desc")));
+        $commandMap->register("listgperms", new ListGPerms($this, "listgperms", $this->getMessage("cmds.listgperms.desc")));
+        $commandMap->register("listuperms", new ListUPerms($this, "listuperms", $this->getMessage("cmds.listuperms.desc")));
+        $commandMap->register("ppinfo", new PPInfo($this, "ppinfo", $this->getMessage("cmds.ppinfo.desc")));
+        $commandMap->register("ppreload", new PPReload($this, "ppreload", $this->getMessage("cmds.ppreload.desc")));
         $commandMap->register("rmgroup", new RmGroup($this, "rmgroup", $this->messages->getMessage("cmds.rmgroup.desc")));
-        $commandMap->register("setgperm", new SetGPerm($this, "setgperm", $this->messages->getMessage("cmds.setgperm.desc")));
-        $commandMap->register("setgroup", new SetGroup($this, "setgroup", $this->messages->getMessage("cmds.setgroup.desc")));
-        $commandMap->register("setuperm", new SetUPerm($this, "setuperm", $this->messages->getMessage("cmds.setuperm.desc")));
-        $commandMap->register("unsetgperm", new UnsetGPerm($this, "unsetgperm", $this->messages->getMessage("cmds.unsetgperm.desc")));
-        $commandMap->register("unsetuperm", new UnsetUPerm($this, "unsetuperm", $this->messages->getMessage("cmds.unsetuperm.desc")));
-        $commandMap->register("usrinfo", new UsrInfo($this, "usrinfo", $this->messages->getMessage("cmds.usrinfo.desc")));
+        $commandMap->register("setgperm", new SetGPerm($this, "setgperm", $this->getMessage("cmds.setgperm.desc")));
+        $commandMap->register("setgroup", new SetGroup($this, "setgroup", $this->getMessage("cmds.setgroup.desc")));
+        $commandMap->register("setuperm", new SetUPerm($this, "setuperm", $this->getMessage("cmds.setuperm.desc")));
+        $commandMap->register("unsetgperm", new UnsetGPerm($this, "unsetgperm", $this->getMessage("cmds.unsetgperm.desc")));
+        $commandMap->register("unsetuperm", new UnsetUPerm($this, "unsetuperm", $this->getMessage("cmds.unsetuperm.desc")));
+        $commandMap->register("usrinfo", new UsrInfo($this, "usrinfo", $this->getMessage("cmds.usrinfo.desc")));
     }
     
     private function setProvider()
@@ -122,7 +122,7 @@ class PurePerms extends PluginBase
             
                 $provider = new SQLite3Provider($this);
                 
-                $this->getLogger()->info($this->messages->getMessage("logger_messages.setProvider_SQLite3"));
+                $this->getLogger()->info($this->getMessage("logger_messages.setProvider_SQLite3"));
                 
                 break;
                 
@@ -130,13 +130,13 @@ class PurePerms extends PluginBase
             
                 $provider = new DefaultProvider($this);
                 
-                $this->getLogger()->info($this->messages->getMessage("logger_messages.setProvider_YAML"));
+                $this->getLogger()->info($this->getMessage("logger_messages.setProvider_YAML"));
                 
                 break;
                 
             default:
                 
-                $this->getLogger()->warning($this->messages->getMessage("logger_messages.setProvider_Invalid"));
+                $this->getLogger()->warning($this->getMessage("logger_messages.setProvider_Invalid"));
                 
                 $provider = new DefaultProvider($this);
                 
@@ -213,24 +213,6 @@ class PurePerms extends PluginBase
     }
 
     /**
-     * @param $key
-     * @return null
-     */
-    public function getConfigValue($key)
-    {
-        $value = $this->getConfig()->getNested($key);
-
-        if($value === null)
-        {
-            $this->getLogger()->warning($this->messages->getMessage("logger_messages.getConfigValue_01", $key));
-
-            return null;
-        }
-
-        return $value;
-    }
-
-    /**
      * @return mixed
      */
     public function getDefaultGroup()
@@ -250,16 +232,16 @@ class PurePerms extends PluginBase
         {
             if(count($defaultGroups) > 1)
             {
-                $this->getLogger()->warning($this->messages->getMessage("logger_messages.getDefaultGroup_01"));
+                $this->getLogger()->warning($this->getMessage("logger_messages.getDefaultGroup_01"));
             }
             elseif(count($defaultGroups) <= 0)
             {
-                $this->getLogger()->warning($this->messages->getMessage("logger_messages.getDefaultGroup_02"));
+                $this->getLogger()->warning($this->getMessage("logger_messages.getDefaultGroup_02"));
                 
                 $defaultGroups = $this->getGroups();
             }
             
-            $this->getLogger()->info($this->messages->getMessage("logger_messages.getDefaultGroup_03"));
+            $this->getLogger()->info($this->getMessage("logger_messages.getDefaultGroup_03"));
             
             foreach($defaultGroups as $defaultGroup)
             {
@@ -305,7 +287,7 @@ class PurePerms extends PluginBase
             
         if(empty($group->getData())) 
         {
-            $this->getLogger()->warning($this->messages->getMessage("logger_messages.getGroup_01", $groupName));
+            $this->getLogger()->warning($this->getMessage("logger_messages.getGroup_01", $groupName));
             
             return null;
         }
@@ -326,6 +308,16 @@ class PurePerms extends PluginBase
         }
         
         return $result;
+    }
+
+    /**
+     * @param $node
+     * @param ...$vars
+     * @return mixed
+     */
+    public function getMessage($node, ...$vars)
+    {
+        return $this->messages->getMessage($node, ...$vars);
     }
 
     /**
@@ -362,6 +354,24 @@ class PurePerms extends PluginBase
     public function getUser(IPlayer $player)
     {
         return new PPUser($this, $player);
+    }
+
+    /**
+     * @param $key
+     * @return null
+     */
+    public function getConfigValue($key)
+    {
+        $value = $this->getConfig()->getNested($key);
+        
+        if($value === null)
+        {
+            $this->getLogger()->warning($this->getMessage("logger_messages.getConfigValue_01", $key));
+            
+            return null;
+        }
+        
+        return $value;
     }
 
     public function reload()
