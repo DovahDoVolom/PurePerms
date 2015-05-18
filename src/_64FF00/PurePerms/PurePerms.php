@@ -207,9 +207,9 @@ class PurePerms extends PluginBase
      */
     public function getAttachment(Player $player)
     {
-        if(!isset($this->attachments[$player->getUniqueId()])) $this->attachments[$player->getUniqueId()] = $player->addAttachment($this);
+        if(!isset($this->attachments[$player->getId()])) $this->attachments[$player->getId()] = $player->addAttachment($this);
         
-        return $this->attachments[$player->getUniqueId()];
+        return $this->attachments[$player->getId()];
     }
 
     /**
