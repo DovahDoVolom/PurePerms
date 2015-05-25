@@ -4,7 +4,7 @@
 name: PurePerms
 main: _64FF00\PurePerms\PurePerms
 version: "1.1.1"
-api: [1.11.0]
+api: [1.12.0]
 load: STARTUP
 author: 64FF00
 website: https://github.com/PurePlugins/PurePerms
