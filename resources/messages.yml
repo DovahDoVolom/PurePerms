@@ -2,7 +2,7 @@
 # PurePerms by 64FF00 (xktiverz@gmail.com, @64ff00 for Twitter)
 
 ---
-messages-version: "1.1.0.01"
+messages-version: "1.1.1"
 cmds:
   addgroup:
     desc: "Adds a new group to the groups list."
