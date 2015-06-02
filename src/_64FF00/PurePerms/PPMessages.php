@@ -62,7 +62,9 @@ class PPMessages
      */
     public function getVersion()
     {
-        return $this->messages->get("messages-version");
+        $version = $this->messages->get("messages-version");
+
+        return $version;
     }
     
     public function loadMessages()
@@ -72,9 +74,11 @@ class PPMessages
         $this->messages = new Config($this->plugin->getDataFolder() . "messages.yml", Config::YAML, array(
         ));
         
-        if($this->getVersion() < $this->plugin->getPPVersion())
+        if(version_compare($this->getVersion(), $this->plugin->getPPVersion()) == -1)
         {
             $this->plugin->saveResource("messages.yml", true);
+            
+            $this->plugin->getLogger()->info("Updating default message resource to the latest one.");
             
             $this->reloadMessages();
         }

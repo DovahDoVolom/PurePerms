@@ -354,7 +354,9 @@ class PurePerms extends PluginBase
      */
     public function getPPVersion()
     {
-        return $this->getDescription()->getVersion();
+        $version = $this->getDescription()->getVersion();
+
+        return $version;
     }
 
     /**
