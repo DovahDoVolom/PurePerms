@@ -37,7 +37,7 @@ cmds:
       no_user_perms: "플레이어 %var0%는 어떠한 퍼미션도 가지고 있지 않습니다."
       user_perms_list: "플레이어 %var0%의 모든 퍼미션 (현재 페이지 %var1% / 모든 페이지 %var2%) : " 
   ppinfo: 
-    desc: "PurePerms 플러그인의 정보를 보여줍니다."
+    desc: "PurePerms 플러그인 정보를 보여줍니다. #64FF00"
     messages:
       ppinfo_console: "현재 PurePerms v%var0% 버전을 사용하고 계십니다! (제작자: %var1%)"
       ppinfo_player: "이 서버는 PurePerms v%var0% 버전을 사용하고 있습니다. (제작자: %var1%)"
