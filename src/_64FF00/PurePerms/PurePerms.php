@@ -169,15 +169,15 @@ class PurePerms extends PluginBase
         
         if(isset($groupsData[$groupName])) return false;
         
-        $groupsData[$groupName] = array(
+        $groupsData[$groupName] = [
             "isDefault" => false,
-            "inheritance" => array(
-            ), 
-            "permissions" => array(
-            ),
-            "worlds" => array(
-            )
-        );
+            "inheritance" => [
+            ],
+            "permissions" => [
+            ],
+            "worlds" => [
+            ]
+        ];
             
         $this->provider->setGroupsData($groupsData);
         
@@ -228,6 +228,29 @@ class PurePerms extends PluginBase
         }
 
         return $value;
+    }
+
+    /**
+     * @param $permission
+     * @return array
+     */
+    public function getChildNodes($tempNode)
+    {
+        $result = [];
+
+        $permission = $this->getServer()->getPluginManager()->getPermission($tempNode);
+
+        $childNodes = $permission->getChildren();
+
+        if($childNodes != [])
+        {
+            foreach($childNodes as $childNode => $value)
+            {
+                $result[] = $childNode;
+            }
+        }
+
+        return $result;
     }
 
     /**

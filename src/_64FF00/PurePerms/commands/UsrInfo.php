@@ -8,6 +8,8 @@ use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\command\PluginIdentifiableCommand;
 
+use pocketmine\Player;
+
 use pocketmine\utils\TextFormat;
 
 class UsrInfo extends Command implements PluginIdentifiableCommand
