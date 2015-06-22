@@ -542,7 +542,7 @@ class PurePerms extends PluginBase
                     $permissions[$permission] = $value;
                 }
             }
-            
+
             ksort($permissions);
             
             $attachment->setPermissions($permissions);
