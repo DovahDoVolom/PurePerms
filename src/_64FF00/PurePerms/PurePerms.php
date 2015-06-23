@@ -81,7 +81,7 @@ class PurePerms extends PluginBase
     
     public function onDisable()
     {
-        if($this->provider instanceof ProviderInterface) $this->provider->close();
+        if($this->isValidProvider()) $this->provider->close();
     }
     
     private function cleanUpGroups()
@@ -111,8 +111,11 @@ class PurePerms extends PluginBase
         $commandMap->register("unsetuperm", new UnsetUPerm($this, "unsetuperm", $this->getMessage("cmds.unsetuperm.desc")));
         $commandMap->register("usrinfo", new UsrInfo($this, "usrinfo", $this->getMessage("cmds.usrinfo.desc")));
     }
-    
-    private function setProvider()
+
+    /**
+     * @param bool $onEnable
+     */
+    private function setProvider($onEnable = true)
     {
         $providerName = $this->getConfigValue("data-provider");
         
@@ -122,31 +125,28 @@ class PurePerms extends PluginBase
             
                 $provider = new SQLite3Provider($this);
                 
-                $this->getLogger()->info($this->getMessage("logger_messages.setProvider_SQLite3"));
+                if($onEnable == true) $this->getLogger()->info($this->getMessage("logger_messages.setProvider_SQLite3"));
                 
                 break;
                 
             case "yaml":
             
                 $provider = new DefaultProvider($this);
-                
-                $this->getLogger()->info($this->getMessage("logger_messages.setProvider_YAML"));
+
+                if($onEnable == true) $this->getLogger()->info($this->getMessage("logger_messages.setProvider_YAML"));
                 
                 break;
                 
             default:
-                
-                $this->getLogger()->warning($this->getMessage("logger_messages.setProvider_Invalid"));
-                
+
                 $provider = new DefaultProvider($this);
+
+                if($onEnable == true) $this->getLogger()->warning($this->getMessage("logger_messages.setProvider_NotFound"));
                 
                 break;              
         }
-        
-        if(!isset($this->provider) || !($this->provider instanceof ProviderInterface))
-        {
-            $this->provider = $provider;
-        }
+
+        if(!$this->isValidProvider()) $this->provider = $provider;
     }
     
     /*
@@ -383,10 +383,12 @@ class PurePerms extends PluginBase
     }
 
     /**
-     * @return mixed
+     * @return ProviderInterface
      */
     public function getProvider()
     {
+        if(!$this->isValidProvider()) $this->setProvider(false);
+
         return $this->provider;
     }
 
@@ -399,6 +401,16 @@ class PurePerms extends PluginBase
         return new PPUser($this, $player);
     }
 
+    /**
+     * @return bool
+     */
+    public function isValidProvider()
+    {
+        if(!isset($this->provider) || $this->provider == null || !($this->provider instanceof ProviderInterface)) return false;
+
+        return true;
+    }
+
     public function reload()
     {
         $this->reloadConfig();
@@ -407,7 +419,9 @@ class PurePerms extends PluginBase
         $this->messages->reloadMessages();
         
         $this->registerCommands();
-        
+
+        if(!$this->isValidProvider()) $this->setProvider(false);
+
         $this->provider->init();
         
         $this->cleanUpGroups();

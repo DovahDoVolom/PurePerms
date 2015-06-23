@@ -78,8 +78,6 @@ class PPMessages
         {
             $this->plugin->saveResource("messages.yml", true);
             
-            $this->plugin->getLogger()->info("Updating default message resource to the latest one.");
-            
             $this->reloadMessages();
         }
     }
