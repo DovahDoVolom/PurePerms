@@ -32,7 +32,10 @@ class PPUser implements PPDataInterface
         $this->player = $player;
         $this->plugin = $plugin;
     }
-    
+
+    /**
+     * @return array
+     */
     public function getData()
     {
         return $this->plugin->getProvider()->getUserData($this);
@@ -40,7 +43,7 @@ class PPUser implements PPDataInterface
 
     /**
      * @param null $levelName
-     * @return PPGroup|mixed|null
+     * @return PPGroup|null
      */
     public function getGroup($levelName = null)
     {
@@ -62,16 +65,13 @@ class PPUser implements PPDataInterface
 
     /**
      * @param null $levelName
-     * @return array|mixed|null
+     * @return array
      */
     public function getGroupPermissions($levelName = null)
     {
         $group = $this->getGroup($levelName);
         
-        if($group instanceof PPGroup)
-        {
-            return $group->getPermissions($levelName);
-        }
+        if($group instanceof PPGroup) return $group->getPermissions($levelName);
     }
 
     /**
@@ -146,11 +146,11 @@ class PPUser implements PPDataInterface
         {
             $tempUserData = $this->getData();
             
-            $tempUserData["worlds"][$levelName] = array(
+            $tempUserData["worlds"][$levelName] = [
                 "group" => $this->plugin->getDefaultGroup()->getName(),
-                "permissions" => array(
-                )
-            );
+                "permissions" => [
+                ]
+            ];
                 
             $this->setData($tempUserData);
         }
