@@ -107,5 +107,4 @@ logger_messages:
   setProvider_SQLite3: "Set data provider to SQLite3."
   setProvider_YAML: "Set data provider to YAML."
   setProvider_NotFound: "Provider %var0% does NOT exist. Setting the data provider to default."
-  setProvider_Critical: "Corrupted provider variable detected. Setting the data provider to default."
 ...
