@@ -78,7 +78,7 @@ class PurePerms extends PluginBase
         
         $this->getServer()->getPluginManager()->registerEvents(new PPListener($this), $this);
     }
-    
+
     public function onDisable()
     {
         if($this->isValidProvider()) $this->provider->close();
@@ -147,6 +147,8 @@ class PurePerms extends PluginBase
         }
 
         if(!$this->isValidProvider()) $this->provider = $provider;
+
+        $this->cleanUpGroups();
     }
     
     /*
@@ -417,14 +419,12 @@ class PurePerms extends PluginBase
         $this->saveDefaultConfig();
         
         $this->messages->reloadMessages();
-        
-        $this->registerCommands();
 
         if(!$this->isValidProvider()) $this->setProvider(false);
 
         $this->provider->init();
-        
-        $this->cleanUpGroups();
+
+        $this->removeAttachments();
         
         $this->updateAllPlayers();
     }

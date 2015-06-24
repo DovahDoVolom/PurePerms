@@ -9,6 +9,7 @@ Guest:
   - -essentials.kit
   - -essentials.kit.other
   - -pocketmine.command.me
+  - pchat.colored
   - pocketmine.command.list
   - pperms.command.ppinfo
   worlds: []
