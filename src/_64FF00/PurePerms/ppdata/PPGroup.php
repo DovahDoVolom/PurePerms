@@ -232,10 +232,8 @@ class PPGroup implements PPDataInterface
         $tempGroupData = $this->getData();
             
         if(isset($tempGroupData["permissions"]))
-        {       
-            array_unique($tempGroupData["permissions"]);    
-            
-            sort($tempGroupData["permissions"]);
+        {
+            $tempGroupData["permissions"] = array_keys(array_flip($tempGroupData["permissions"]));
         }
         
         $isMultiWorldPermsEnabled = $this->plugin->getConfigValue("enable-multiworld-perms");
@@ -249,10 +247,8 @@ class PPGroup implements PPDataInterface
                     $levelName = $level->getName();
                         
                     if(isset($tempGroupData["worlds"][$levelName]))
-                    {       
-                        array_unique($tempGroupData["worlds"][$levelName]["permissions"]);
-                        
-                        sort($tempGroupData["worlds"][$levelName]["permissions"]);
+                    {
+                        $tempGroupData["worlds"][$levelName]["permissions"] = array_keys(array_flip($tempGroupData["worlds"][$levelName]["permissions"]));
                     }
                 }
             }

@@ -47,6 +47,8 @@ class PurePerms extends PluginBase
 
     private $attachments = [];
     
+    private $groups = [];
+    
     private $provider;
     
     public function onLoad()
@@ -72,8 +74,6 @@ class PurePerms extends PluginBase
         
         $this->setProvider();
         
-        $this->cleanUpGroups();
-        
         $this->updateAllPlayers();
         
         $this->getServer()->getPluginManager()->registerEvents(new PPListener($this), $this);
@@ -82,14 +82,6 @@ class PurePerms extends PluginBase
     public function onDisable()
     {
         if($this->isValidProvider()) $this->provider->close();
-    }
-    
-    private function cleanUpGroups()
-    {
-        foreach($this->getGroups() as $group)
-        {
-            $group->sortPermissions();
-        }
     }
     
     private function registerCommands()
@@ -147,8 +139,8 @@ class PurePerms extends PluginBase
         }
 
         if(!$this->isValidProvider()) $this->provider = $provider;
-
-        $this->cleanUpGroups();
+        
+        $this->loadGroups();
     }
     
     /*
@@ -326,11 +318,18 @@ class PurePerms extends PluginBase
      */
     public function getGroup($groupName)
     {
-        $group = new PPGroup($this, $groupName);
-            
-        if(empty($group->getData())) 
+        if(!isset($this->groups[$groupName]))
         {
             $this->getLogger()->warning($this->getMessage("logger_messages.getGroup_01", $groupName));
+
+            return null;
+        }
+
+        $group = $this->groups[$groupName];
+            
+        if(empty($group->getData()))
+        {
+            $this->getLogger()->warning($this->getMessage("logger_messages.getGroup_02", $groupName));
             
             return null;
         }
@@ -343,14 +342,7 @@ class PurePerms extends PluginBase
      */
     public function getGroups()
     {
-        $result = [];
-        
-        foreach(array_keys($this->provider->getGroupsData(true)) as $groupName)
-        {
-            array_push($result, new PPGroup($this, $groupName));
-        }
-        
-        return $result;
+        return $this->groups;
     }
 
     /**
@@ -411,6 +403,19 @@ class PurePerms extends PluginBase
         if(!isset($this->provider) || $this->provider == null || !($this->provider instanceof ProviderInterface)) return false;
 
         return true;
+    }
+    
+    public function loadGroups()
+    {
+        if($this->isValidProvider())
+        {
+            foreach(array_keys($this->provider->getGroupsData(true)) as $groupName)
+            {
+                $this->groups[$groupName] = new PPGroup($this, $groupName);
+            }
+            
+            $this->sortGroupPermissions();
+        }
     }
 
     public function reload()
@@ -491,6 +496,14 @@ class PurePerms extends PluginBase
         $this->getUser($player)->setGroup($group, $levelName);
     }
     
+    public function sortGroupPermissions()
+    {
+        foreach($this->getGroups() as $group)
+        {
+            $group->sortPermissions();
+        }
+    }
+    
     public function updateAllPlayers()
     {
         foreach($this->getServer()->getOnlinePlayers() as $player)
@@ -558,7 +571,7 @@ class PurePerms extends PluginBase
             }
 
             ksort($permissions);
-            
+
             $attachment->setPermissions($permissions);
         }
     }
