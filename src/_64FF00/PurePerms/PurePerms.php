@@ -570,8 +570,6 @@ class PurePerms extends PluginBase
                 }
             }
 
-            ksort($permissions);
-
             $attachment->setPermissions($permissions);
         }
     }
