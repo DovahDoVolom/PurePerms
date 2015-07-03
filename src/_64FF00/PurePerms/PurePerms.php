@@ -181,16 +181,12 @@ class PurePerms extends PluginBase
      */
     public function dumpPermissions(Player $player)
     {
-        foreach($player->getEffectivePermissions() as $attachmentInfo)
+        $this->getLogger()->notice("--- List of all permissions from " . $player->getName() . " ---");
+
+        foreach($this->getEffectivePermissions() as $permission => $value)
         {
-            $permission = $attachmentInfo->getPermission();
-            
-            $value = $attachmentInfo->getValue();
-            
-            $this->getLogger()->info("[" . $player->getName() . "] -> $permission : " . ($value ? "true" : "false"));
+            $this->getLogger()->notice("- " . $permission . " : " . ($value ? "true" : "false"));
         }
-        
-        $this->getLogger()->info("...");
     }
 
     /**
