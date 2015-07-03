@@ -45,9 +45,7 @@ class PurePerms extends PluginBase
 
     */
 
-    private $attachments = [];
-    
-    private $groups = [];
+    private $attachments = [], $groups = [];
     
     private $provider;
     
@@ -356,6 +354,19 @@ class PurePerms extends PluginBase
     }
 
     /**
+     * @param IPlayer $player
+     * @param $levelName
+     * @return array
+     */
+    public function getPermissions(IPlayer $player, $levelName)
+    {
+        $user = $this->getUser($player);
+        $group = $user->getGroup($levelName);
+
+        return array_merge($group->getGroupPermissions($levelName), $user->getUserPermissions($levelName));
+    }
+
+    /**
      * @param $name
      * @return Player
      */
@@ -523,54 +534,40 @@ class PurePerms extends PluginBase
     }
 
     /**
-     * @param PermissionAttachment $attachment
-     */
-    public function unsetAll(PermissionAttachment $attachment)
-    {
-        foreach($this->getServer()->getPluginManager()->getPermissions() as $permission)
-        {
-            $attachment->unsetPermission($permission);
-        }
-    }
-
-    /**
      * @param IPlayer $player
      * @param null $levelName
      */
     public function updatePermissions(IPlayer $player, $levelName = null)
     {
-        if($player instanceof Player)
-        {
-            $attachment = $this->getAttachment($player);
+        if(!$player instanceof Player) return;
+
+        $attachment = $this->getAttachment($player);
             
-            $attachment->clearPermissions();
-
-            $this->unsetAll($attachment);
+        $attachment->clearPermissions();
                 
-            $permissions = [];
+        $permissions = [];
 
-            foreach($this->getUser($player)->getPermissions($levelName) as $permission)
+        foreach($this->getPermissions($player, $levelName) as $permission)
+        {
+            if($permission == "*")
             {
-                if($permission == "*")
-                {                 
-                    foreach($this->getServer()->getPluginManager()->getPermissions() as $tmp)
-                    {
-                        $permissions[$tmp->getName()] = true;
-                    }
-                }
-                else
+                foreach($this->getServer()->getPluginManager()->getPermissions() as $tmp)
                 {
-                    $isNegative = substr($permission, 0, 1) === "-";
-                        
-                    if($isNegative) $permission = substr($permission, 1);
-                        
-                    $value = !$isNegative;
-                        
-                    $permissions[$permission] = $value;
+                    $permissions[$tmp->getName()] = true;
                 }
             }
+            else
+            {
+                $isNegative = substr($permission, 0, 1) === "-";
 
-            $attachment->setPermissions($permissions);
+                if($isNegative) $permission = substr($permission, 1);
+
+                $value = !$isNegative;
+
+                $permissions[$permission] = $value;
+            }
         }
+
+        $attachment->setPermissions($permissions);
     }
 }

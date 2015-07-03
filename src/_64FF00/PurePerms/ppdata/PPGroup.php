@@ -46,7 +46,7 @@ class PPGroup implements PPDataInterface
         
         if(!is_array($this->getNode("inheritance")))
         {
-            $this->plugin->getLogger()->critical("Invalid 'inheritance' node given to " .  __NAMESPACE__ . "\PPGroup->getInheritedGroups()");
+            $this->plugin->getLogger()->critical("Invalid 'inheritance' node given to " .  __METHOD__);
             
             return [];
         }
@@ -84,7 +84,7 @@ class PPGroup implements PPDataInterface
      * @param null $levelName
      * @return array|mixed
      */
-    public function getPermissions($levelName = null)
+    public function getGroupPermissions($levelName = null)
     {
         $permissions = $levelName != null ? $this->getWorldData($levelName)["permissions"] : $this->getNode("permissions");
         
@@ -234,7 +234,7 @@ class PPGroup implements PPDataInterface
         if(isset($tempGroupData["permissions"]))
         {
             $tempGroupData["permissions"] = array_keys(array_flip($tempGroupData["permissions"]));
-            
+
             sort($tempGroupData["permissions"]);
         }
         

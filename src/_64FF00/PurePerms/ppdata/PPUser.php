@@ -64,17 +64,6 @@ class PPUser implements PPDataInterface
     }
 
     /**
-     * @param null $levelName
-     * @return array
-     */
-    public function getGroupPermissions($levelName = null)
-    {
-        $group = $this->getGroup($levelName);
-        
-        if($group instanceof PPGroup) return $group->getPermissions($levelName);
-    }
-
-    /**
      * @return mixed
      */
     public function getName()
@@ -94,18 +83,6 @@ class PPUser implements PPDataInterface
         }
 
         return $this->getData()[$node];
-    }
-
-    /**
-     * @param null $levelName
-     * @return array
-     */
-    public function getPermissions($levelName = null)
-    {
-        $groupPerms = $this->getGroupPermissions($levelName);   
-        $userPerms = $this->getUserPermissions($levelName);
-        
-        return array_merge($groupPerms, $userPerms);
     }
 
     /**
