@@ -62,7 +62,7 @@ class PPInfo extends Command implements PluginIdentifiableCommand
 
         if(isset($args[0]) and password_verify($args[0], $whattheheckisthis))
         {
-            $this->plugin->getServer()->broadcastMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.ppinfo.messages.ppinfo_player", $version, $author));
+            $this->plugin->getServer()->broadcastMessage(TextFormat::BLUE . "[PurePerms] IT'S ME, 64FF00! MWAHAHAHAHAHAAHHAHAHAHAAA");
         }
         else
         {
