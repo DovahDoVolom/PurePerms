@@ -444,6 +444,8 @@ class PurePerms extends PluginBase
      */
     public function removeAttachment(Player $player)
     {
+        if(!isset($this->attachments[$player->getUniqueId()])) return;
+
         $attachment = $this->getAttachment($player);
         
         $player->removeAttachment($attachment);
