@@ -10,6 +10,8 @@ use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\event\player\PlayerKickEvent;
 use pocketmine\event\player\PlayerQuitEvent;
 
+use pocketmine\Player;
+
 class PPListener implements Listener
 {
     /* PurePerms by 64FF00 (xktiverz@gmail.com, @64ff00 for Twitter) */
@@ -41,7 +43,7 @@ class PPListener implements Listener
         $player = $event->getPlayer();
         $levelName = $event->getLevelName();
 
-        $this->plugin->updatePermissions($player, $levelName);
+        if($player instanceof Player) $this->plugin->updatePermissions($player, $levelName);
     }
 
     /**
@@ -54,8 +56,8 @@ class PPListener implements Listener
         $isMultiWorldPermsEnabled = $this->plugin->getConfigValue("enable-multiworld-perms");
         
         $levelName = $isMultiWorldPermsEnabled ? $event->getTarget()->getName() : null;
-               
-        $this->plugin->updatePermissions($player, $levelName);
+
+        if($player instanceof Player) $this->plugin->updatePermissions($player, $levelName);
     }
 
     /**
@@ -68,8 +70,8 @@ class PPListener implements Listener
         $isMultiWorldPermsEnabled = $this->plugin->getConfigValue("enable-multiworld-perms");
         
         $levelName = $isMultiWorldPermsEnabled ? $player->getLevel()->getName() : null;
-        
-        $this->plugin->updatePermissions($player, $levelName);
+
+        if($player instanceof Player)  $this->plugin->updatePermissions($player, $levelName);
     }
 
     /**
@@ -79,7 +81,7 @@ class PPListener implements Listener
     {
         $player = $event->getPlayer();
         
-        $this->plugin->removeAttachment($player);
+        if($player instanceof Player) $this->plugin->removeAttachment($player);
     }
 
     /**
@@ -88,7 +90,7 @@ class PPListener implements Listener
     public function onPlayerQuit(PlayerQuitEvent $event)
     {
         $player = $event->getPlayer();
-        
-        $this->plugin->removeAttachment($player);
+
+        if($player instanceof Player) $this->plugin->removeAttachment($player);
     }
 }

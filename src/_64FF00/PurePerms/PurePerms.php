@@ -193,9 +193,11 @@ class PurePerms extends PluginBase
      */
     public function getAttachment(Player $player)
     {
-        if(!isset($this->attachments[$player->getUniqueId()])) $this->attachments[$player->getUniqueId()] = $player->addAttachment($this);
-        
-        return $this->attachments[$player->getUniqueId()];
+        $uuid = $player->getUniqueId();
+
+        if(!isset($this->attachments[$uuid])) $this->attachments[$uuid] = $player->addAttachment($this);
+
+        return $this->attachments[$uuid];
     }
 
     /**
@@ -433,8 +435,6 @@ class PurePerms extends PluginBase
         if(!$this->isValidProvider()) $this->setProvider(false);
 
         $this->provider->init();
-
-        $this->removeAttachments();
         
         $this->updateAllPlayers();
     }
@@ -444,18 +444,14 @@ class PurePerms extends PluginBase
      */
     public function removeAttachment(Player $player)
     {
-        if(!isset($this->attachments[$player->getUniqueId()])) return;
+        $uuid = $player->getUniqueId();
 
-        $attachment = $this->getAttachment($player);
-        
-        $player->removeAttachment($attachment);
-        
-        unset($this->attachments[$player->getUniqueId()]);
-    }
-    
-    public function removeAttachments()
-    {
-        $this->attachments = [];
+        if(isset($this->attachments[$uuid]))
+        {
+            $player->removeAttachment($this->getAttachment($player));
+
+            unset($this->attachments[$player->getUniqueId()]);
+        }
     }
 
     /**
