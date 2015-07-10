@@ -37,17 +37,19 @@ class PPListener implements Listener
 
     /**
      * @param PPGroupChangedEvent $event
+     * @priority LOWEST
      */
     public function onGroupChanged(PPGroupChangedEvent $event)
     {
         $player = $event->getPlayer();
         $levelName = $event->getLevelName();
 
-        if($player instanceof Player) $this->plugin->updatePermissions($player, $levelName);
+        $this->plugin->updatePermissions($player, $levelName);
     }
 
     /**
      * @param EntityLevelChangeEvent $event
+     * @priority LOWEST
      */
     public function onLevelChange(EntityLevelChangeEvent $event)
     {
@@ -62,6 +64,7 @@ class PPListener implements Listener
 
     /**
      * @param PlayerJoinEvent $event
+     * @priority LOWEST
      */
     public function onPlayerJoin(PlayerJoinEvent $event)
     {
@@ -71,26 +74,28 @@ class PPListener implements Listener
         
         $levelName = $isMultiWorldPermsEnabled ? $player->getLevel()->getName() : null;
 
-        if($player instanceof Player)  $this->plugin->updatePermissions($player, $levelName);
+        $this->plugin->updatePermissions($player, $levelName);
     }
 
     /**
      * @param PlayerKickEvent $event
+     * @priority HIGHEST
      */
     public function onPlayerKick(PlayerKickEvent $event)
     {
         $player = $event->getPlayer();
         
-        if($player instanceof Player) $this->plugin->removeAttachment($player);
+        $this->plugin->removeAttachment($player);
     }
 
     /**
      * @param PlayerQuitEvent $event
+     * @priority HIGHEST
      */
     public function onPlayerQuit(PlayerQuitEvent $event)
     {
         $player = $event->getPlayer();
 
-        if($player instanceof Player) $this->plugin->removeAttachment($player);
+        $this->plugin->removeAttachment($player);
     }
 }
