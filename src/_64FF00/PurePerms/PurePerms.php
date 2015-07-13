@@ -24,6 +24,8 @@ use _64FF00\PurePerms\provider\SQLite3Provider;
 
 use pocketmine\IPlayer;
 
+use pocketmine\permission\PermissionAttachment;
+
 use pocketmine\Player;
 
 use pocketmine\plugin\PluginBase;
@@ -155,7 +157,7 @@ class PurePerms extends PluginBase
      */
     public function addGroup($groupName)
     {
-        $groupsData = $this->provider->getGroupsData(true);
+        $groupsData = $this->getProvider()->getGroupsData(true);
         
         if(isset($groupsData[$groupName])) return false;
         
@@ -169,7 +171,7 @@ class PurePerms extends PluginBase
             ]
         ];
             
-        $this->provider->setGroupsData($groupsData);
+        $this->getProvider()->setGroupsData($groupsData);
         
         return true;
     }
@@ -416,7 +418,7 @@ class PurePerms extends PluginBase
     {
         if($this->isValidProvider())
         {
-            foreach(array_keys($this->provider->getGroupsData(true)) as $groupName)
+            foreach(array_keys($this->getProvider()->getGroupsData(true)) as $groupName)
             {
                 $this->groups[$groupName] = new PPGroup($this, $groupName);
             }
@@ -446,9 +448,9 @@ class PurePerms extends PluginBase
     {
         $uuid = $player->getUniqueId();
 
-        if(isset($this->attachments[$uuid]))
+        if(isset($this->attachments[$uuid]) and $this->attachments[$uuid] instanceof PermissionAttachment)
         {
-            $player->removeAttachment($this->getAttachment($player));
+            $player->removeAttachment($this->attachments[$uuid]);
 
             unset($this->attachments[$player->getUniqueId()]);
         }
@@ -460,13 +462,13 @@ class PurePerms extends PluginBase
      */
     public function removeGroup($groupName)
     {
-        $groupsData = $this->provider->getGroupsData(true);
+        $groupsData = $this->getProvider()->getGroupsData(true);
         
         if(!isset($groupsData[$groupName])) return false;
         
         unset($groupsData[$groupName]);
         
-        $this->provider->setGroupsData($groupsData);
+        $this->getProvider()->setGroupsData($groupsData);
         
         return true;
     }
