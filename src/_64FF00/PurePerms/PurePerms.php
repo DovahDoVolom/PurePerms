@@ -533,35 +533,36 @@ class PurePerms extends PluginBase
      */
     public function updatePermissions(IPlayer $player, $levelName = null)
     {
-        if(!$player instanceof Player) return;
-
-        $attachment = $this->getAttachment($player);
-            
-        $attachment->clearPermissions();
-                
-        $permissions = [];
-
-        foreach($this->getPermissions($player, $levelName) as $permission)
+        if($player instanceof Player)
         {
-            if($permission == "*")
+            $attachment = $this->getAttachment($player);
+
+            $attachment->clearPermissions();
+
+            $permissions = [];
+
+            foreach($this->getPermissions($player, $levelName) as $permission)
             {
-                foreach($this->getServer()->getPluginManager()->getPermissions() as $tmp)
+                if($permission == "*")
                 {
-                    $permissions[$tmp->getName()] = true;
+                    foreach($this->getServer()->getPluginManager()->getPermissions() as $tmp)
+                    {
+                        $permissions[$tmp->getName()] = true;
+                    }
+                }
+                else
+                {
+                    $isNegative = substr($permission, 0, 1) === "-";
+
+                    if($isNegative) $permission = substr($permission, 1);
+
+                    $value = !$isNegative;
+
+                    $permissions[$permission] = $value;
                 }
             }
-            else
-            {
-                $isNegative = substr($permission, 0, 1) === "-";
 
-                if($isNegative) $permission = substr($permission, 1);
-
-                $value = !$isNegative;
-
-                $permissions[$permission] = $value;
-            }
+            $attachment->setPermissions($permissions);
         }
-
-        $attachment->setPermissions($permissions);
     }
 }

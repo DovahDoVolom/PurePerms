@@ -233,7 +233,7 @@ class PPGroup implements PPDataInterface
             
         if(isset($tempGroupData["permissions"]))
         {
-            $tempGroupData["permissions"] = array_keys(array_flip($tempGroupData["permissions"]));
+            $tempGroupData["permissions"] = array_unique($tempGroupData["permissions"]);
 
             sort($tempGroupData["permissions"]);
         }
@@ -250,7 +250,7 @@ class PPGroup implements PPDataInterface
                         
                     if(isset($tempGroupData["worlds"][$levelName]))
                     {
-                        $tempGroupData["worlds"][$levelName]["permissions"] = array_keys(array_flip($tempGroupData["worlds"][$levelName]["permissions"]));
+                        $tempGroupData["worlds"][$levelName]["permissions"] = array_unique($tempGroupData["worlds"][$levelName]["permissions"]);
 
                         sort($tempGroupData["worlds"][$levelName]["permissions"]);
                     }
