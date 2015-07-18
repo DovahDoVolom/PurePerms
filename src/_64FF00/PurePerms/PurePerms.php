@@ -199,8 +199,6 @@ class PurePerms extends PluginBase
 
         if(!isset($this->attachments[$uuid])) $this->attachments[$uuid] = $player->addAttachment($this);
 
-        var_dump($this->attachments[$uuid]);
-
         return $this->attachments[$uuid];
     }
 

@@ -86,7 +86,7 @@ class ListGPerms extends Command implements PluginIdentifiableCommand
             $levelName = $level->getName();
         }
         
-        $permissions = $group->getPermissions($levelName);
+        $permissions = $group->getGroupPermissions($levelName);
         
         if(empty($permissions))
         {
