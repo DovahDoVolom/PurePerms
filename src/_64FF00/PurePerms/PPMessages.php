@@ -34,7 +34,7 @@ class PPMessages
         
         $this->loadMessages();
     }
-    
+
     public function registerLanguages()
     {
         $result = [];
@@ -82,7 +82,7 @@ class PPMessages
 
         return $version;
     }
-    
+
     public function loadMessages()
     {       
         $defaultLang = $this->plugin->getConfigValue("default-language");
@@ -104,8 +104,8 @@ class PPMessages
         
         $this->plugin->saveResource("messages-" . $this->language . ".yml");
         
-        $this->messages = new Config($this->plugin->getDataFolder() . "messages-" . $this->language . ".yml", Config::YAML, array(
-        ));
+        $this->messages = new Config($this->plugin->getDataFolder() . "messages-" . $this->language . ".yml", Config::YAML, [
+        ]);
         
         $this->plugin->getLogger()->info("Setting default language to '" . $defaultLang . "'");
         
@@ -113,8 +113,8 @@ class PPMessages
         {
             $this->plugin->saveResource("messages-" . $this->language . ".yml", true);
         
-            $this->messages = new Config($this->plugin->getDataFolder() . "messages-" . $this->language . ".yml", Config::YAML, array(
-            ));
+            $this->messages = new Config($this->plugin->getDataFolder() . "messages-" . $this->language . ".yml", Config::YAML, [
+            ]);
         }
     }
     

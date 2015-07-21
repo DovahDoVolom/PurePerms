@@ -196,6 +196,8 @@ class PPGroup implements PPDataInterface
             
             $this->setWorldData($levelName, $worldData);
         }
+
+        $this->plugin->updatePlayersInGroup($this);
     }
 
     /**
@@ -288,5 +290,7 @@ class PPGroup implements PPDataInterface
             
             $this->setWorldData($levelName, $worldData);
         }
+
+        $this->plugin->updatePlayersInGroup($this);
     }
 }

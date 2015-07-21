@@ -513,7 +513,7 @@ class PurePerms extends PluginBase
     {
         foreach($this->getServer()->getOnlinePlayers() as $player)
         {
-            $this->updatePermissions($player, null);
+            $this->updatePermissions($player);
 
             if($this->getConfigValue("enable-multiworld-perms") == true)
             {
@@ -522,6 +522,34 @@ class PurePerms extends PluginBase
                     $levelName = $level->getName();
 
                     $this->updatePermissions($player, $levelName);
+                }
+            }
+        }
+    }
+
+    /**
+     * @param PPGroup $group
+     * @experimental #64FF00
+     */
+    public function updatePlayersInGroup(PPGroup $group)
+    {
+        foreach($this->getServer()->getOnlinePlayers() as $player)
+        {
+            if($this->getUser($player)->getGroup() === $group)
+            {
+                $this->updatePermissions($player);
+            }
+
+            if($this->getConfigValue("enable-multiworld-perms") == true)
+            {
+                foreach($this->getServer()->getLevels() as $level)
+                {
+                    $levelName = $level->getName();
+
+                    if($this->getUser($player)->getGroup($levelName) === $group)
+                    {
+                        $this->updatePermissions($player, $levelName);
+                    }
                 }
             }
         }
