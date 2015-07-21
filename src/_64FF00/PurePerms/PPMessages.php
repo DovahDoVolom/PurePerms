@@ -19,7 +19,9 @@ class PPMessages
                                                                                        
     */
 
-    private $messages;
+    private $language, $messages;
+    
+    private $langList = [];
 
     /**
      * @param PurePerms $plugin
@@ -28,7 +30,21 @@ class PPMessages
     {
         $this->plugin = $plugin;
         
+        $this->registerLanguages();
+        
         $this->loadMessages();
+    }
+    
+    public function registerLanguages()
+    {
+        $result = [];
+        
+        foreach($this->plugin->getResources() as $resource)
+        {
+            if(mb_strpos($resource, "messages-") !== false) $result[] = substr($resource, -6, -4);
+        }
+        
+        $this->langList = $result;
     }
 
     /**
@@ -68,22 +84,42 @@ class PPMessages
     }
     
     public function loadMessages()
-    {
-        $this->plugin->saveResource("messages.yml");
+    {       
+        $defaultLang = $this->plugin->getConfigValue("default-language");
         
-        $this->messages = new Config($this->plugin->getDataFolder() . "messages.yml", Config::YAML, array(
+        foreach($this->langList as $langName)
+        {
+            if(strtolower($defaultLang) == $langName)
+            {
+                $this->language = $langName;
+            }
+        }
+        
+        if(!isset($this->language))
+        {
+            $this->plugin->getLogger()->warning("Language resource " . $defaultLang . " not found. Using default language resource by " . $this->plugin->getDescription()->getAuthors()[0]);
+            
+            $this->language = "en";
+        }
+        
+        $this->plugin->saveResource("messages-" . $this->language . ".yml");
+        
+        $this->messages = new Config($this->plugin->getDataFolder() . "messages-" . $this->language . ".yml", Config::YAML, array(
         ));
+        
+        $this->plugin->getLogger()->info("Setting default language to '" . $defaultLang . "'");
         
         if(version_compare($this->getVersion(), $this->plugin->getPPVersion()) == -1)
         {
-            $this->plugin->saveResource("messages.yml", true);
-            
-            $this->reloadMessages();
+            $this->plugin->saveResource("messages-" . $this->language . ".yml", true);
+        
+            $this->messages = new Config($this->plugin->getDataFolder() . "messages-" . $this->language . ".yml", Config::YAML, array(
+            ));
         }
     }
     
     public function reloadMessages()
     {
         $this->messages->reload();
-    }
+    }    
 }

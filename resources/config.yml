@@ -2,15 +2,23 @@
 # PurePerms by 64FF00 (xktiverz@gmail.com, @64ff00 for Twitter)
 
 ---
-# Sets the data provider for PurePerms :3 
+# Set default data provider for PurePerms
 # - yaml, sqlite3
 data-provider: yaml
+
+# Set the default language for PurePerms
+# - en, ko, ru
+# English message resource by @64FF00 and @Samueljh1 (GitHub)
+# Korean message resource by @64FF00 (GitHub)
+# 제 블로그 이외에 허락없이 마음대로 플러그인 배포하실 시에는 바로 한국어 파일 삭제 조치하고 공유 중단합니다
+# Russian message resource by @vvzar (GitHub)
+default-language: en
 
 # Setting this option will allow you to use per-world permissions
 # - true / false
 enable-multiworld-perms: false
 
-# Broadcasts this message when a player's group has been changed
+# Broadcast this message when a player's group has been changed
 # - STRING
 msg-on-group-change: Your group has been changed to a / an {group}!
 ...

@@ -51,9 +51,9 @@ class PurePerms extends PluginBase
     
     public function onLoad()
     {
-        $this->messages = new PPMessages($this);
-        
         $this->saveDefaultConfig();
+        
+        $this->messages = new PPMessages($this);
         
         if($this->getConfigValue("enable-multiworld-perms") == false)
         {
