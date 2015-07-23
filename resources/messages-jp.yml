@@ -1,0 +1,113 @@
+
+# PurePerms by 64FF00 (xktiverz@gmail.com, @64ff00 for Twitter)
+# Japanese Translation by onebone (jyc00410@gmail.com)
+
+---
+messages-version: "1.1.7"
+language: "jp"
+cmds:
+  addgroup:
+    desc: "新しいグループをリストに追加します。"
+    usage: "使用法: /addgroup <グループ>"
+    messages:
+      group_added_successfully: "%var0%をグループのリストに成功的に追加しました。"
+      group_already_exists: "グループ%var0%はもう存在しています。"
+  fperms:
+    desc: "特定プラグインのパーミションのリストを見せて取らせます。"
+    usage: "使用法: /fperms <プラグイン>"
+    messages:
+      no_plugin_perms: "プラグイン%var0%は何のパーミションも持っていません。"
+      plugin_not_exist: "プラグイン%var0%は存在しません。"
+      plugin_perms_list: "プラグイン%var0%のパーミション (%var1% / %var2%) : "
+  groups:
+    desc: "全てのグルプを見せて取らせます。"
+    messages:
+      all_registered_groups: "グルプのリスト：%var0%"
+  listgperms:
+    desc: "グルプのパーミションのリストを見せて取らせます。"
+    usage: "使用法: /listgperms <グルプ> <ページ> [ワールド]"
+    messages:
+      group_not_exist: "グルプ%var0%は存在しません。"
+      group_perms_list: "%var0%のグルプのパーミションを見せて取らせます　(%var1% / %var2%) : "
+      level_not_exist: "ワールド%var0%は存在しません。"
+      no_group_perms: "グルプ%var0%は何のパーミションも持っていません。"
+  listuperms:
+    desc: "プレーヤーのパーミションを見せてとらせます。"
+    usage: "使用法: /listuperms <プレーヤー> <ページ> [ワールド]"
+    messages:
+      level_not_exist: "ワールド%var0%は存在しません。"
+      no_user_perms: "プレーヤー%var0%は何のパーミションも持っていません。"
+      user_perms_list: "%var0%のパーミションを見せて取らせます (%var1% / %var2%) : "
+  ppinfo:
+    desc: "PurePermsの情報、例えば作成者、バージョン、など #64FF00"
+    messages:
+      ppinfo_console: "いまあなたはPurePerms v%var0% by %var1%を使っています。"
+      ppinfo_player: "このサーバーはPurePerms v%var0% by %var1%を使っています。"
+  ppreload:
+    desc: "全てのPurePerms設定をリロードします。"
+    messages:
+      successfully_reloaded: "全てのプラグインの設定がリロードされました。"
+  rmgroup:
+    desc: "グルプのリストからグルプを削除します。"
+    usage: "使用法: /rmgroup <グルプ>"
+    messages:
+      group_removed_successfully: "%var0%をグルプリストから削除しました。"
+      group_not_exist: "グルプ%var0%は存在しません。"
+  setgperm:
+    desc: "グルプにパーミションを追加します。"
+    usage: "使用法: /setgperm <グルプ> <パーミション> [ワールド]"
+    messages:
+      gperm_added_successfully: "パーミション%var0%をグルプに成功的に追加しました。"
+      group_not_exist: "グルプ%var0%は存在しません。"
+      level_not_exist: "ワールド%var0%は存在しません。"
+  setgroup:
+    desc: "プレーヤーのグルプを設定します。"
+    usage: "使用法: /setgroup <プレーヤー> <グルプ> [ワールド]"
+    messages:
+      group_not_exist: "グルプ%var0%は存在しません。"
+      level_not_exist: "ワールド%var0%は存在しません。"
+      setgroup_successfully: "%var0%をグルプに追加しました。"
+  setuperm:
+    desc: "プレーヤーのパーミションをプレーヤーに追加します。"
+    usage: "使用法: /setuperm <プレーヤー> <パーミション> [ワールド]"
+    messages:
+      level_not_exist: "ワールド%var0%は存在しません。"
+      uperm_added_successfully: "パーミション%var0%を%var1%に追加しました。"
+  unsetgperm:
+    desc: "グルプからパーミションを削除します。"
+    usage: "使用法: /unsetgperm <グルプ> <パーミション> [ワールド]"
+    messages:
+      gperm_removed_successfully: "パーミション%var0%をグルプから削除しました。"
+      group_not_exist: "グルプ%var0%は存在しません。"
+      level_not_exist: "ワールド%var0%は存在しません。"
+  unsetuperm:
+    desc: "プレーヤーからパーミションを削除します。"
+    usage: "使用法: /unsetuperm <プレーヤー> <パーミション> [ワールド]"
+    messages:
+      level_not_exist: "ワールド%var0%は存在しません。"
+      uperm_removed_successfully: "パーミション%var0%をグルプ%var1%から削除しました。"
+  usrinfo:
+    desc: "プレーヤーの情報を見せて取らせます。"
+    usage: "使用法: /usrinfo <プレーヤー> [ワールド]"
+    messages:
+      level_not_exist: "ワールド%var0%は存在しません。"
+      status_online: "オンライン!"
+      status_offline: "オフライン..."
+      usrinfo_header: "-- %var0%の情報 --"
+      usrinfo_username: "名前: %var0%"
+      usrinfo_status: "状態: %var0%"
+      usrinfo_group: "グルプ: %var0%"
+logger_messages:
+  getConfigValue_01: "キー%var0%はconfig.ymlから探せません。"
+  getDefaultGroup_01: "基本グルプが２つ以上に設定されています。"
+  getDefaultGroup_02: "基本グルプが設定されていません。"
+  getDefaultGroup_03: "基本グルプを自動的に設定します。"
+  getGroup_01: "グルプ%var0%は存在しません。"
+  getGroup_02: "グルプ%var0%は不正です。"
+  onEnable_01: "マルチワールドのサーポートが今設定されていません。"
+  onEnable_02: "per-worldパーミションを使用するには、config.ymlのenable-multiworld-permsionをtrueに設定することを忘れるな！"
+  onEnable_03: "マルチワールドのサーポートが今活性状態です。"
+  setProvider_SQLite3: "SQLite3にデーター提供方式が設定されました。"
+  setProvider_YAML: "YAMLにデーター提供方式が設定されました。"
+  setProvider_NotFound: "データー提供方式%var0%は存在しません。基本方式に設定しました。"
+...
