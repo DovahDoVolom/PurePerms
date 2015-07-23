@@ -88,7 +88,7 @@ cmds:
       uperm_removed_successfully: "Permesso %var0% rimosso a %var1% con successo."
   usrinfo: 
     desc: "Mostra informazioni riguardo un utente."
-    usage: "Usage: /usrinfo <giocatore> [mondo]"
+    usage: "Sintassi: /usrinfo <giocatore> [mondo]"
     messages:
       level_not_exist: "Il mondo %var0% non esiste."
       status_online: "ONLINE!"
