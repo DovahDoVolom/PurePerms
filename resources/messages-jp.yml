@@ -105,7 +105,7 @@ logger_messages:
   getGroup_01: "グルプ%var0%は存在しません。"
   getGroup_02: "グルプ%var0%は不正です。"
   onEnable_01: "マルチワールドのサーポートが今設定されていません。"
-  onEnable_02: "per-worldパーミションを使用するには、config.ymlのenable-multiworld-permsionをtrueに設定することを忘れるな！"
+  onEnable_02: "per-worldパーミションを使用するには、config.ymlのenable-multiworld-permissionをtrueに設定することを忘れるな！"
   onEnable_03: "マルチワールドのサーポートが今活性状態です。"
   setProvider_SQLite3: "SQLite3にデーター提供方式が設定されました。"
   setProvider_YAML: "YAMLにデーター提供方式が設定されました。"
