@@ -12,7 +12,7 @@ data-provider: yaml
 # Korean message resource by @64FF00 (GitHub)
 # 제 블로그 이외에 허락없이 마음대로 플러그인 배포하실 시에는 바로 한국어 파일 삭제 조치하고 공유 중단합니다
 # Japanese message resource by @onebone (GitHub) (<3)
-# Russian message resource by @vvzar and @Pub4Game(GitHub)
+# Russian message resource by @vvzar and @Pub4Game (GitHub)
 # Italian message resource by @AryToNeX (GitHub)
 default-language: en
 
