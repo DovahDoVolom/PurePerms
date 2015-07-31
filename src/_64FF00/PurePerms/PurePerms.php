@@ -298,7 +298,7 @@ class PurePerms extends PluginBase
         {
             $permission = $attachmentInfo->getPermission();
             
-            $value = $attachmentInfo->getConfigValue();
+            $value = $attachmentInfo->getValue();
             
             $permissions[$permission] = $value;
         }
