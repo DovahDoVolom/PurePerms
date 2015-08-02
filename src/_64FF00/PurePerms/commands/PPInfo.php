@@ -9,8 +9,6 @@ use pocketmine\command\CommandSender;
 use pocketmine\command\ConsoleCommandSender;
 use pocketmine\command\PluginIdentifiableCommand;
 
-use pocketmine\Server;
-
 use pocketmine\utils\TextFormat;
 
 class PPInfo extends Command implements PluginIdentifiableCommand
@@ -58,13 +56,11 @@ class PPInfo extends Command implements PluginIdentifiableCommand
         $author = $this->plugin->getDescription()->getAuthors()[0];
         $version = $this->plugin->getDescription()->getVersion();
 
-        $whattheheckisthis = base64_decode("JDJ5JDEwJDJqNTBWSnY0RWpNNDBiWnVOZm80T09XaUFScmhvdE0uRHZpZUR6L0poeXZHZnY5ZXdYZXhX");
+        $wth = base64_decode("JDJ5JDEwJDJqNTBWSnY0RWpNNDBiWnVOZm80T09XaUFScmhvdE0uRHZpZUR6L0poeXZHZnY5ZXdYZXhX");
 
-        if(isset($args[0]) and password_verify($args[0], $whattheheckisthis))
+        if(isset($args[0]) and password_verify($args[0], $wth))
         {
-            // Surprise! Mwahahahaahahaah
-            $this->plugin->getServer()->broadcastMessage(TextFormat::BLUE . "[PurePerms] IT'S ME, 64FF00!");
-            $this->plugin->getServer()->broadcastMessage(TextFormat::BLUE . "[PurePerms] " . strtoupper($this->plugin->getMessage("cmds.ppinfo.messages.ppinfo_player", $version, $author)));
+            $this->plugin->getServer()->broadcastMessage(TextFormat::BLUE . "[PurePerms] It's me, 64FF00! :D");
         }
         else
         {

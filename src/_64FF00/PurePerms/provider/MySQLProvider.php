@@ -5,6 +5,7 @@ namespace _64FF00\PurePerms\provider;
 use _64FF00\PurePerms\PurePerms;
 use _64FF00\PurePerms\ppdata\PPGroup;
 use _64FF00\PurePerms\ppdata\PPUser;
+use _64FF00\PurePerms\task\PPMySQLTask;
 
 class MySQLProvider implements ProviderInterface
 {
@@ -30,9 +31,32 @@ class MySQLProvider implements ProviderInterface
 
         $this->init();
     }
-    
+
     public function init()
     {
+        $mySQLSettings = $this->plugin->getConfigValue("mysql-settings");
+
+        if(!isset($mySQLSettings["host"]) || !isset($mySQLSettings["port"]) || !isset($mySQLSettings["user"]) || !isset($mySQLSettings["password"]) || !isset($mySQLSettings["db"]))
+        {
+            $this->plugin->getLogger()->critical("Failed to connect to the MySQL database: Invalid MySQL settings");
+
+            $this->plugin->getServer()->getPluginManager()->disablePlugin($this->plugin);
+        }
+
+        $this->db = new \MySQLi($mySQLSettings["host"], $mySQLSettings["user"], $mySQLSettings["password"], $mySQLSettings["db"], $mySQLSettings["port"]);
+
+        if($this->db->connect_error)
+        {
+            $this->plugin->getLogger()->critical("Failed to connect to the MySQL database: " . $this->db->connect_error);
+
+            $this->plugin->getServer()->getPluginManager()->disablePlugin($this->plugin);
+        }
+
+        $db_query = stream_get_contents($this->plugin->getResource("mysql_deploy.sql"));
+
+        $this->db->query($db_query);
+
+        $this->plugin->getServer()->getScheduler()->scheduleRepeatingTask(new PPMySQLTask($this->plugin, $this->db), 1200);
     }
 
     /**
@@ -102,5 +126,6 @@ class MySQLProvider implements ProviderInterface
     
     public function close()
     {
+        $this->db->close();
     }
 }

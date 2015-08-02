@@ -19,8 +19,10 @@ use _64FF00\PurePerms\commands\UsrInfo;
 use _64FF00\PurePerms\ppdata\PPGroup;
 use _64FF00\PurePerms\ppdata\PPUser;
 use _64FF00\PurePerms\provider\DefaultProvider;
+use _64FF00\PurePerms\provider\MySQLProvider;
 use _64FF00\PurePerms\provider\ProviderInterface;
 use _64FF00\PurePerms\provider\SQLite3Provider;
+use _64FF00\PurePerms\task\PPAvalancheTask;
 
 use pocketmine\IPlayer;
 
@@ -75,6 +77,8 @@ class PurePerms extends PluginBase
         $this->updateAllPlayers();
         
         $this->getServer()->getPluginManager()->registerEvents(new PPListener($this), $this);
+
+        $this->getServer()->getScheduler()->scheduleDelayedTask(new PPAvalancheTask($this), 100);
     }
 
     public function onDisable()
@@ -111,6 +115,16 @@ class PurePerms extends PluginBase
         
         switch(strtolower($providerName))
         {
+            /*
+            case "mysql":
+
+                $provider = new MySQLProvider($this);
+
+                if($onEnable == true) $this->getLogger()->info($this->getMessage("logger_messages.setProvider_MySQL"));
+
+                break;
+            */
+
             case "sqlite3":
             
                 $provider = new SQLite3Provider($this);
