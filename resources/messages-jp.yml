@@ -1,8 +1,7 @@
-
 # PurePerms by 64FF00 (xktiverz@gmail.com, @64ff00 for Twitter)
 
 # Japanese Translation by onebone (jyc00410@gmail.com)
-
+# 2015/08/03 translated into fluent Japanese by haniokasai (htek@haniokasai.com @haniokasai for Twitter)
 ---
 messages-version: "1.1.7"
 language: "jp"
@@ -11,34 +10,34 @@ cmds:
     desc: "新しいグループをリストに追加します。"
     usage: "使用法: /addgroup <グループ>"
     messages:
-      group_added_successfully: "%var0%をグループのリストに成功的に追加しました。"
-      group_already_exists: "グループ%var0%はもう存在しています。"
+      group_added_successfully: "%var0%をグループリストに追加しました。"
+      group_already_exists: "グループ%var0%はすでに存在しています。"
   fperms:
-    desc: "特定プラグインのパーミションのリストを見せて取らせます。"
+    desc: "特定のプラグインの権限リストを表示します。"
     usage: "使用法: /fperms <プラグイン>"
     messages:
-      no_plugin_perms: "プラグイン%var0%は何のパーミションも持っていません。"
+      no_plugin_perms: "プラグイン%var0%は何の権限も持っていません。"
       plugin_not_exist: "プラグイン%var0%は存在しません。"
-      plugin_perms_list: "プラグイン%var0%のパーミション (%var1% / %var2%) : "
+      plugin_perms_list: "プラグイン%var0%の権限 (%var1% / %var2%) : "
   groups:
-    desc: "全てのグルプを見せて取らせます。"
+    desc: "グループリストを表示します。"
     messages:
-      all_registered_groups: "グルプのリスト：%var0%"
+      all_registered_groups: "グループリスト：%var0%"
   listgperms:
-    desc: "グルプのパーミションのリストを見せて取らせます。"
-    usage: "使用法: /listgperms <グルプ> <ページ> [ワールド]"
+    desc: "グループの権限のリストを表示します。"
+    usage: "使用法: /listgperms <グループ> <ページ> [ワールド]"
     messages:
-      group_not_exist: "グルプ%var0%は存在しません。"
-      group_perms_list: "%var0%のグルプのパーミションを見せて取らせます　(%var1% / %var2%) : "
+      group_not_exist: "グループ%var0%は存在しません。"
+      group_perms_list: "%var0%のグループの権限一覧を表示します　(%var1% / %var2%) : "
       level_not_exist: "ワールド%var0%は存在しません。"
-      no_group_perms: "グルプ%var0%は何のパーミションも持っていません。"
+      no_group_perms: "グループ%var0%は何の権限も持っていません。"
   listuperms:
-    desc: "プレーヤーのパーミションを見せてとらせます。"
+    desc: "プレーヤーの権限を表示します。"
     usage: "使用法: /listuperms <プレーヤー> <ページ> [ワールド]"
     messages:
       level_not_exist: "ワールド%var0%は存在しません。"
-      no_user_perms: "プレーヤー%var0%は何のパーミションも持っていません。"
-      user_perms_list: "%var0%のパーミションを見せて取らせます (%var1% / %var2%) : "
+      no_user_perms: "プレーヤー%var0%は何の権限も持っていません。"
+      user_perms_list: "%var0%の権限を表示します (%var1% / %var2%) : "
   ppinfo:
     desc: "PurePermsの情報、例えば作成者、バージョン、など #64FF00"
     messages:
@@ -49,46 +48,46 @@ cmds:
     messages:
       successfully_reloaded: "全てのプラグインの設定がリロードされました。"
   rmgroup:
-    desc: "グルプのリストからグルプを削除します。"
-    usage: "使用法: /rmgroup <グルプ>"
+    desc: "グループを削除します。"
+    usage: "使用法: /rmgroup <グループ>"
     messages:
-      group_removed_successfully: "%var0%をグルプリストから削除しました。"
-      group_not_exist: "グルプ%var0%は存在しません。"
+      group_removed_successfully: "グループ%var0%を削除しました。"
+      group_not_exist: "グループ%var0%は存在しません。"
   setgperm:
-    desc: "グルプにパーミションを追加します。"
-    usage: "使用法: /setgperm <グルプ> <パーミション> [ワールド]"
+    desc: "グループに権限を追加します。"
+    usage: "使用法: /setgperm <グループ> <権限> [ワールド]"
     messages:
-      gperm_added_successfully: "パーミション%var0%をグルプに成功的に追加しました。"
-      group_not_exist: "グルプ%var0%は存在しません。"
+      gperm_added_successfully: "権限%var0%をグループに追加しました。"
+      group_not_exist: "グループ%var0%は存在しません。"
       level_not_exist: "ワールド%var0%は存在しません。"
   setgroup:
-    desc: "プレーヤーのグルプを設定します。"
-    usage: "使用法: /setgroup <プレーヤー> <グルプ> [ワールド]"
+    desc: "プレーヤーのグループを設定します。"
+    usage: "使用法: /setgroup <プレーヤー> <グループ> [ワールド]"
     messages:
-      group_not_exist: "グルプ%var0%は存在しません。"
+      group_not_exist: "グループ%var0%は存在しません。"
       level_not_exist: "ワールド%var0%は存在しません。"
-      setgroup_successfully: "%var0%をグルプに追加しました。"
+      setgroup_successfully: "%var0%をグループに追加しました。"
   setuperm:
-    desc: "プレーヤーのパーミションをプレーヤーに追加します。"
-    usage: "使用法: /setuperm <プレーヤー> <パーミション> [ワールド]"
+    desc: "権限をプレーヤーに追加します。"
+    usage: "使用法: /setuperm <プレーヤー> <権限> [ワールド]"
     messages:
       level_not_exist: "ワールド%var0%は存在しません。"
-      uperm_added_successfully: "パーミション%var0%を%var1%に追加しました。"
+      uperm_added_successfully: "権限%var0%を%var1%に追加しました。"
   unsetgperm:
-    desc: "グルプからパーミションを削除します。"
-    usage: "使用法: /unsetgperm <グルプ> <パーミション> [ワールド]"
+    desc: "グループから権限を削除します。"
+    usage: "使用法: /unsetgperm <グループ> <権限> [ワールド]"
     messages:
-      gperm_removed_successfully: "パーミション%var0%をグルプから削除しました。"
-      group_not_exist: "グルプ%var0%は存在しません。"
+      gperm_removed_successfully: "権限%var0%をグループから削除しました。"
+      group_not_exist: "グループ%var0%は存在しません。"
       level_not_exist: "ワールド%var0%は存在しません。"
   unsetuperm:
-    desc: "プレーヤーからパーミションを削除します。"
-    usage: "使用法: /unsetuperm <プレーヤー> <パーミション> [ワールド]"
+    desc: "プレーヤーから権限を削除します。"
+    usage: "使用法: /unsetuperm <プレーヤー> <権限> [ワールド]"
     messages:
       level_not_exist: "ワールド%var0%は存在しません。"
-      uperm_removed_successfully: "パーミション%var0%をグルプ%var1%から削除しました。"
+      uperm_removed_successfully: "権限%var0%をグループ%var1%から削除しました。"
   usrinfo:
-    desc: "プレーヤーの情報を見せて取らせます。"
+    desc: "プレーヤーの情報を表示します。"
     usage: "使用法: /usrinfo <プレーヤー> [ワールド]"
     messages:
       level_not_exist: "ワールド%var0%は存在しません。"
@@ -97,18 +96,17 @@ cmds:
       usrinfo_header: "-- %var0%の情報 --"
       usrinfo_username: "名前: %var0%"
       usrinfo_status: "状態: %var0%"
-      usrinfo_group: "グルプ: %var0%"
+      usrinfo_group: "グループ: %var0%"
 logger_messages:
-  getConfigValue_01: "キー%var0%はconfig.ymlから探せません。"
-  getDefaultGroup_01: "基本グルプが２つ以上に設定されています。"
-  getDefaultGroup_02: "基本グルプが設定されていません。"
-  getDefaultGroup_03: "基本グルプを自動的に設定します。"
-  getGroup_01: "グルプ%var0%は存在しません。"
-  getGroup_02: "グルプ%var0%は不正です。"
-  onEnable_01: "マルチワールドのサーポートが今設定されていません。"
-  onEnable_02: "per-worldパーミションを使用するには、config.ymlのenable-multiworld-permissionをtrueに設定することを忘れるな！"
-  onEnable_03: "マルチワールドのサーポートが今活性状態です。"
-  setProvider_SQLite3: "SQLite3にデーター提供方式が設定されました。"
-  setProvider_YAML: "YAMLにデーター提供方式が設定されました。"
-  setProvider_NotFound: "データー提供方式%var0%は存在しません。基本方式に設定しました。"
-...
+  getConfigValue_01: "キー%var0%はconfig.ymlにありませんでした。"
+  getDefaultGroup_01: "基本グループが２つ以上に設定されています。"
+  getDefaultGroup_02: "基本グループが設定されていません。"
+  getDefaultGroup_03: "基本グループを自動的に設定します。"
+  getGroup_01: "グループ%var0%は存在しません。"
+  getGroup_02: "グループ%var0%は不正です。"
+  onEnable_01: "マルチワールド対応が現在無効です。"
+  onEnable_02: "per-world（ワールドごとの)権限を使用するには、config.ymlのenable-multiworld-permissionをtrueに設定することを忘れるないでください！"
+  onEnable_03: "マルチワールド対応が有効です。"
+  setProvider_SQLite3: "SQLite3にデーター管理方式が設定されました。"
+  setProvider_YAML: "YAMLにデーター管理方式が設定されました。"
+  setProvider_NotFound: "データー管理方式%var0%は存在しません。デフォルトの方式に設定しました。"
