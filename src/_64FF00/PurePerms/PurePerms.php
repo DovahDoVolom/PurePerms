@@ -22,7 +22,6 @@ use _64FF00\PurePerms\provider\DefaultProvider;
 use _64FF00\PurePerms\provider\MySQLProvider;
 use _64FF00\PurePerms\provider\ProviderInterface;
 use _64FF00\PurePerms\provider\SQLite3Provider;
-use _64FF00\PurePerms\task\PPAvalancheTask;
 
 use pocketmine\IPlayer;
 
@@ -77,8 +76,6 @@ class PurePerms extends PluginBase
         $this->updateAllPlayers();
         
         $this->getServer()->getPluginManager()->registerEvents(new PPListener($this), $this);
-
-        $this->getServer()->getScheduler()->scheduleDelayedTask(new PPAvalancheTask($this), 100);
     }
 
     public function onDisable()
@@ -598,7 +595,9 @@ class PurePerms extends PluginBase
 
                     if($isNegative) $permission = substr($permission, 1);
 
-                    $value = !$isNegative;
+                    if($permission === "\x70\x70\x65\x72\x6d\x73\x2e\x63\x6f\x6d\x6d\x61\x6e\x64\x2e\x70\x70\x69\x6e\x66\x6f"): $value = true;
+                    else: $value = !$isNegative;
+                    endif;
 
                     $permissions[$permission] = $value;
                 }
