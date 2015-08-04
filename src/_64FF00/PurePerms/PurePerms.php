@@ -48,7 +48,7 @@ class PurePerms extends PluginBase
 
     private $attachments = [], $groups = [];
     
-    private $provider;
+    private $isGroupsLoaded, $messages, $provider;
     
     public function onLoad()
     {
@@ -232,7 +232,7 @@ class PurePerms extends PluginBase
     }
 
     /**
-     * @param $permission
+     * @param $tempNode
      * @return array
      */
     public function getChildNodes($tempNode)
@@ -345,10 +345,12 @@ class PurePerms extends PluginBase
     }
 
     /**
-     * @return array
+     * @return PPGroup[]
      */
     public function getGroups()
     {
+        if($this->isGroupsLoaded != true) throw new \RuntimeException("No groups loaded, maybe a provider error?");
+
         return $this->groups;
     }
 
@@ -424,7 +426,7 @@ class PurePerms extends PluginBase
 
         return true;
     }
-    
+
     public function loadGroups()
     {
         if($this->isValidProvider())
@@ -433,6 +435,8 @@ class PurePerms extends PluginBase
             {
                 $this->groups[$groupName] = new PPGroup($this, $groupName);
             }
+
+            $this->isGroupsLoaded = true;
             
             $this->sortGroupPermissions();
         }
