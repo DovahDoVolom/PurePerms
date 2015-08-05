@@ -6,8 +6,6 @@ use _64FF00\PurePerms\PurePerms;
 use _64FF00\PurePerms\ppdata\PPGroup;
 use _64FF00\PurePerms\ppdata\PPUser;
 
-use pocketmine\IPlayer;
-
 use pocketmine\utils\Config;
 
 class DefaultProvider implements ProviderInterface
@@ -25,7 +23,7 @@ class DefaultProvider implements ProviderInterface
                                                                                        
     */
     
-    private $groups = [];
+    private $dataFolder, $groups;
 
     /**
      * @param PurePerms $plugin
@@ -39,7 +37,9 @@ class DefaultProvider implements ProviderInterface
     
     public function init()
     {
-        @mkdir($this->plugin->getDataFolder() . "players/", 0777, true);
+        $this->dataFolder = $this->plugin->getDataFolder() . "players/";
+
+        if(!file_exists($this->dataFolder)) @mkdir($this->dataFolder, 0777, true);
         
         $this->plugin->saveResource("groups.yml");
         
@@ -87,9 +87,9 @@ class DefaultProvider implements ProviderInterface
     {
         $userName = $user->getPlayer()->getName();
         
-        if(!(file_exists($this->plugin->getDataFolder() . "players/" . strtolower($userName) . ".yml")))
+        if(!(file_exists($this->dataFolder . strtolower($userName) . ".yml")))
         {
-            return new Config($this->plugin->getDataFolder() . "players/" . strtolower($userName) . ".yml", Config::YAML, array(
+            return new Config($this->dataFolder . strtolower($userName) . ".yml", Config::YAML, array(
                 "userName" => $userName,
                 "group" => $this->plugin->getDefaultGroup()->getName(),
                 "permissions" => array(
@@ -100,7 +100,7 @@ class DefaultProvider implements ProviderInterface
         }
         else
         {
-            return new Config($this->plugin->getDataFolder() . "players/" . strtolower($userName) . ".yml", Config::YAML, array(
+            return new Config($this->dataFolder . strtolower($userName) . ".yml", Config::YAML, array(
             ));
         }
     }
