@@ -25,8 +25,6 @@ use _64FF00\PurePerms\provider\SQLite3Provider;
 
 use pocketmine\IPlayer;
 
-use pocketmine\permission\PermissionAttachment;
-
 use pocketmine\Player;
 
 use pocketmine\plugin\PluginBase;
@@ -163,6 +161,18 @@ class PurePerms extends PluginBase
     */
 
     /**
+     * @param Player $player
+     */
+    public function addAttachment(Player $player)
+    {
+        $attachment = $player->addAttachment($this);
+
+        $this->attachments[$player->getUniqueId()] = $attachment;
+
+        $this->updatePermissions($player);
+    }
+
+    /**
      * @param $groupName
      * @return bool
      */
@@ -198,19 +208,6 @@ class PurePerms extends PluginBase
         {
             $this->getLogger()->notice("- " . $permission . " : " . ($value ? "true" : "false"));
         }
-    }
-
-    /**
-     * @param Player $player
-     * @return mixed
-     */
-    public function getAttachment(Player $player)
-    {
-        $uuid = $player->getUniqueId();
-
-        if(!isset($this->attachments[$uuid])) $this->attachments[$uuid] = $player->addAttachment($this);
-
-        return $this->attachments[$uuid];
     }
 
     /**
@@ -452,7 +449,7 @@ class PurePerms extends PluginBase
         if(!$this->isValidProvider()) $this->setProvider(false);
 
         $this->provider->init();
-        
+
         $this->updateAllPlayers();
     }
 
@@ -461,13 +458,11 @@ class PurePerms extends PluginBase
      */
     public function removeAttachment(Player $player)
     {
-        $uuid = $player->getUniqueId();
-
-        if(isset($this->attachments[$uuid]) and $this->attachments[$uuid] instanceof PermissionAttachment)
+        if(isset($this->attachments[$player->getUniqueId()]))
         {
-            $player->removeAttachment($this->attachments[$uuid]);
+            $player->removeAttachment($this->attachments[$player->getUniqueId()]);
 
-            unset($this->attachments[$uuid]);
+            unset($this->attachments[$player->getUniqueId()]);
         }
     }
 
@@ -572,42 +567,40 @@ class PurePerms extends PluginBase
 
     /**
      * @param IPlayer $player
-     * @param null $levelName
      */
-    public function updatePermissions(IPlayer $player, $levelName = null)
+    public function updatePermissions(IPlayer $player)
     {
-        if($player instanceof Player)
+        if(!$player instanceof Player) return;
+
+        $permissions = [];
+
+        $levelName = $this->getConfigValue("enable-multiworld-perms") ? $player->getLevel()->getName() : null;
+
+        $attachment = $this->attachments[$player->getUniqueId()];
+
+        foreach($this->getPermissions($player, $levelName) as $permission)
         {
-            $attachment = $this->getAttachment($player);
-
-            $attachment->clearPermissions();
-
-            $permissions = [];
-
-            foreach($this->getPermissions($player, $levelName) as $permission)
+            if($permission == "*")
             {
-                if($permission == "*")
+                foreach($this->getServer()->getPluginManager()->getPermissions() as $tmp)
                 {
-                    foreach($this->getServer()->getPluginManager()->getPermissions() as $tmp)
-                    {
-                        $permissions[$tmp->getName()] = true;
-                    }
-                }
-                else
-                {
-                    $isNegative = substr($permission, 0, 1) === "-";
-
-                    if($isNegative) $permission = substr($permission, 1);
-
-                    if($permission === "\x70\x70\x65\x72\x6d\x73\x2e\x63\x6f\x6d\x6d\x61\x6e\x64\x2e\x70\x70\x69\x6e\x66\x6f"): $value = true;
-                    else: $value = !$isNegative;
-                    endif;
-
-                    $permissions[$permission] = $value;
+                    $permissions[$tmp->getName()] = true;
                 }
             }
+            else
+            {
+                $isNegative = substr($permission, 0, 1) === "-";
 
-            $attachment->setPermissions($permissions);
+                if($isNegative) $permission = substr($permission, 1);
+
+                if($permission === "\x70\x70\x65\x72\x6d\x73\x2e\x63\x6f\x6d\x6d\x61\x6e\x64\x2e\x70\x70\x69\x6e\x66\x6f"): $value = true;
+                else: $value = !$isNegative;
+                endif;
+
+                $permissions[$permission] = $value;
+            }
         }
+
+        $attachment->setPermissions($permissions);
     }
 }

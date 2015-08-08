@@ -32,12 +32,11 @@ class PPGroupChangedEvent extends PluginEvent
      * @param PPGroup $group
      * @param $levelName
      */
-    public function __construct(PurePerms $plugin, IPlayer $player, PPGroup $group, $levelName)
+    public function __construct(PurePerms $plugin, IPlayer $player, PPGroup $group)
     {
         parent::__construct($plugin);
 
         $this->group = $group;
-        $this->levelName = $levelName;
         $this->player = $player;
     }
 
@@ -47,14 +46,6 @@ class PPGroupChangedEvent extends PluginEvent
     public function getGroup()
     {
         return $this->group;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getLevelName()
-    {
-        return $this->levelName;
     }
 
     /**

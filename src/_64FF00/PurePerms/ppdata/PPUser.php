@@ -8,8 +8,6 @@ use _64FF00\PurePerms\ppdata\PPGroup;
 
 use pocketmine\IPlayer;
 
-use pocketmine\Player;
-
 class PPUser implements PPDataInterface
 {   
     /* PurePerms by 64FF00 (xktiverz@gmail.com, @64ff00 for Twitter) */
@@ -179,7 +177,7 @@ class PPUser implements PPDataInterface
             $this->setWorldData($levelName, $worldData);
         }
 
-        $event = new PPGroupChangedEvent($this->plugin, $this->player, $group, $levelName);
+        $event = new PPGroupChangedEvent($this->plugin, $this->player, $group);
 
         $this->plugin->getServer()->getPluginManager()->callEvent($event);
     }
@@ -242,7 +240,6 @@ class PPUser implements PPDataInterface
     /**
      * @param $permission
      * @param null $levelName
-     * @return bool
      */
     public function unsetUserPermission($permission, $levelName = null)
     {
@@ -250,7 +247,7 @@ class PPUser implements PPDataInterface
         {
             $tempUserData = $this->getData();
             
-            if(!in_array($permission, $tempUserData["permissions"])) return false;
+            if(!in_array($permission, $tempUserData["permissions"])) return;
 
             $tempUserData["permissions"] = array_diff($tempUserData["permissions"], [$permission]);
             
@@ -260,7 +257,7 @@ class PPUser implements PPDataInterface
         {
             $worldData = $this->getWorldData($levelName);
             
-            if(!in_array($permission, $worldData["permissions"])) return false;
+            if(!in_array($permission, $worldData["permissions"])) return;
             
             $worldData["permissions"] = array_diff($worldData["permissions"], [$permission]);
             

@@ -22,6 +22,8 @@ class MySQLProvider implements ProviderInterface
                                                                                        
     */
 
+    private $db;
+
     /**
      * @param PurePerms $plugin
      */
