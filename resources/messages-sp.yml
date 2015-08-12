@@ -1,114 +1,115 @@
 
 # PurePerms by 64FF00 (xktiverz@gmail.com, @64ff00 for Twitter)
 
-# Spanish language resource by @JoahDave (Github)
+# Original Spanish message resource by @JoahDave (Github)
+# Fixed "ALMOST EVERYTHING" by @iksaku (Github) (Follow me on Twitter: @iksaku2) [Hype! ( ^ω^ )]
 
 ---
 messages-version: "1.2.0"
 language: "sp"
 cmds:
   addgroup:
-    desc: "Añade un nuevo grupo a la lista de grupos."
+    desc: "Añade un nuevo grupo a la lista."
     usage: "Uso: /addgroup <grupo>"
     messages:
-      group_added_successfully: "Añadido%var0% a la lista de grupos con éxito."
-      group_already_exists: "Grupo%var0% ya existe."
+      group_added_successfully: "%var0% ha sido añadido a la lista de grupos."
+      group_already_exists: "El grupo %var0% ya existe."
   fperms:
-    desc: "Muestra una lista de todos los permisos para un plugin específico."
-    usage: "Uso: /fperms <Plugin>"
+    desc: "Muestra una lista con todos los permisos de un plugin."
+    usage: "Uso: /fperms <plugin>"
     messages:
-      no_plugin_perms: "Plugin%var0% no tiene ningún permiso."
-      plugin_not_exist: "Plugin%var0% no existe."
-      plugin_perms_list: "Lista de todos los permisos de plugin de%var0% (%var1% / %var2%):"
+      no_plugin_perms: "El plugin %var0% no contiene ningún permiso."
+      plugin_not_exist: "El plugin %var0% NO existe."
+      plugin_perms_list: "Lista de permisos del plugin %var0% (%var1% / %var2%) : "
   groups:
-    desc: "Muestra una lista de todos los grupos."
+    desc: "Muestra la lista de todos los grupos disponibles."
     messages:
-      all_registered_groups: "Todos los grupos registrados:%var0%"
+      all_registered_groups: "Grupos registrados: %var0%"
   listgperms:
-    desc: "Muestra una lista de todos los permisos de un grupo."
+    desc: "Muestra una lista con todos los permisos de un grupo."
     usage: "Uso: /listgperms <grupo> <página> [mundo]"
     messages:
-      group_not_exist: "Grupo%var0% no existe."
-      group_perms_list: "Lista de todos los permisos de grupo de%var0% (%var1% / %var2%):"
-      level_not_exist: "World%var0% no existe."
-      no_group_perms: "Grupo%var0% no cuenta con los permisos de grupo."
+      group_not_exist: "El grupo %var0% NO existe."
+      group_perms_list: "Lista de permisos del grupo provenientes de %var0% (%var1% / %var2%) : "
+      level_not_exist: "El mundo %var0% NO existe."
+      no_group_perms: "El grupo %var0% no contiene ningun permiso."
   listuperms:
-    desc: "Muestra una lista de todos los permisos de un usuario."
-    usage: "Uso: /listuperms <jugador> <página> [mundo]"
+    desc: "Muestra todos los permisos de un usuario."
+    usage: "Uso: /listuperms <usuario> <página> [mundo]"
     messages:
-      level_not_exist: "World%var0% no existe."
-      no_user_perms: "Jugador%var0% no tiene ningún permisos de usuario."
-      user_perms_list: "Lista de todos los permisos de usuario de%var0% (%var1% /%var2%):"
+      level_not_exist: "El mundo %var0% NO existe."
+      no_user_perms: "El usuario %var0% no tiene ningun permiso."
+      user_perms_list: "Lista de todos los permisos de usuario de %var0% (%var1% / %var2%) : "
   ppinfo:
-    desc: "Obtener información actualizada PurePerms incluido el autor, la versión y etc #64FF00"
+    desc: "Obtén información de PurePerms, incluyendo autor, versión, etc... #64FF00 #iksaku"
     messages:
-      ppinfo_console: "Usted está utilizando actualmente PurePerms v%var0% en%var1%."
-      ppinfo_player: "Este servidor está usando PurePerms v%var0% en%var1%."
+      ppinfo_console: "Actualmente estas utilizando PurePerms v%var0% por %var1%."
+      ppinfo_player: "Este servidor esta utlizando PurePerms v%var0% por %var1%."
   ppreload:
-    desc: "Vuelve a cargar todas las configuraciones PurePerms."
+    desc: "Recarga las configuraciones de PurePerms."
     messages:
-      successfully_reloaded: "Todas las configuraciones de plugins han sido recargado con éxito."
+      successfully_reloaded: "Todas las configuraciones del plugin han sido recargadas."
   rmgroup:
-    desc: "Elimina un grupo de la lista de grupos."
+    desc: "Elimina un grupo de la lista."
     usage: "Uso: /rmgroup <grupo>"
     messages:
-      group_removed_successfully: "Eliminado%var0% a partir de la lista de grupos con éxito."
-      group_not_exist: "Grupo%var0% no existe."
+      group_removed_successfully: "%var0% ha sido eliminado de la lista de grupos."
+      group_not_exist: "El grupo %var0% NO existe."
   setgperm:
-    desc: "Añade un permiso para el grupo."
+    desc: "Concede un permiso al grupo."
     usage: "Uso: /setgperm <grupo> <permiso> [mundo]"
     messages:
-      gperm_added_successfully: "Añadido permiso%var0% para el grupo con éxito."
-      group_not_exist: "Grupo%var0% no existe."
-      level_not_exist: "World%var0% no existe."
+      gperm_added_successfully: "Se ha añadido el permiso %var0% al grupo."
+      group_not_exist: "El grupo %var0% NO existe."
+      level_not_exist: "El mundo %var0% NO existe."
   setgroup:
-    desc: "Establece grupo para el usuario."
-    usage: "Uso: /setgroup <jugador> <grupo> [mundo]"
+    desc: "Coloca al usuario en un grupo."
+    usage: "Uso: /setgroup <usuario> <grupo> [mundo]"
     messages:
-      group_not_exist: "Grupo%var0% no existe."
-      level_not_exist: "World%var0% no existe."
-      setgroup_successfully: "Añadido%var0% para el grupo con éxito."
+      group_not_exist: "El grupo %var0% NO existe."
+      level_not_exist: "El mundo %var0% NO existe."
+      setgroup_successfully: "%var0% ha sido añadido al grupo."
   setuperm:
-    desc: "Añade un permiso para el usuario."
-    usage: "Uso: /setuperm <jugador> <permiso> [mundo]"
+    desc: "Concede un permiso al usuario."
+    usage: "Uso: /setuperm <usuario> <permiso> [mundo]"
     messages:
-      level_not_exist: "World%var0% no existe."
-      uperm_added_successfully: "Añadido permiso%var0% a%var1% con éxito."
+      level_not_exist: "El mundo %var0% NO existe."
+      uperm_added_successfully: "Se le ha consedido el permiso %var0% a %var1%."
   unsetgperm:
-    desc: "Quita un permiso del grupo."
+    desc: "Revoca un permiso del grupo."
     usage: "Uso: /unsetgperm <grupo> <permiso> [mundo]"
     messages:
-      gperm_removed_successfully: "Eliminado el permiso%var0% del grupo con éxito."
-      group_not_exist: "Grupo %var0% no existe."
-      level_not_exist: "World %var0% no existe."
+      gperm_removed_successfully: "Se ha removido el permission %var0% del grupo."
+      group_not_exist: "El grupo %var0% NO existe."
+      level_not_exist: "El mundo %var0% NO existe."
   unsetuperm:
-    desc: "Quita un permiso del usuario."
-    usage: "Uso: /unsetuperm <jugador> <permiso> [mundo]"
+    desc: "Revoca un permiso del usuario."
+    usage: "Uso: /unsetuperm <usuario> <permiso> [mundo]"
     messages:
-      level_not_exist: "World %var0% no existe."
-      uperm_removed_successfully: "Eliminado el permiso %var0% de %var1% con éxito."
+      level_not_exist: "El mundo %var0% NO existe."
+      uperm_removed_successfully: "Se ha revocado el permiso %var0% de %var1%."
   usrinfo:
-    desc: "Muestra información sobre un usuario."
-    usage: "Uso: /usrinfo <jugador> [mundo]"
+    desc: "Muestra información sobre el usuario."
+    usage: "Uso: /usrinfo <usuario> [mundo]"
     messages:
-      level_not_exist: "World %var0% no existe."
-      status_online: "EN LÍNEA!"
-      status_offline: "NO ESTA EN LÍNEA..."
-      usrinfo_header: "- Información del usuario para %var0% -"
+      level_not_exist: "El mundo %var0% NO existe."
+      status_online: "¡En línea!"
+      status_offline: "Desconectado..."
+      usrinfo_header: "-- Información del usuario %var0% --"
       usrinfo_username: "NOMBRE DE USUARIO: %var0%"
       usrinfo_status: "ESTADO: %var0%"
       usrinfo_group: "GRUPO: %var0%"
 logger_messages:
-  getConfigValue_01: "Llave%var0% no se encuentra en config.yml."
-  getDefaultGroup_01: "Más de un grupo predeterminado fue declarada en el fichero grupos."
-  getDefaultGroup_02: "Ningún grupo por defecto se encuentra en el archivo de grupos."
-  getDefaultGroup_03: "Ajuste del grupo predeterminado de forma automática."
-  getGroup_01: "Grupo %var0% no encontrado"
-  getGroup_02: "Grupo %var0% tiene datos no válidos o dañados"
-  onEnable_01: "El apoyo Multiworld está desactivado."
-  onEnable_02: "No olvides establecer enable-Multiworld-permanentes opción en config.yml a true si desea utilizar los permisos por el mundo!"
-  onEnable_03: "El apoyo Multiworld habilitado."
-  setProvider_SQLite3: "proveedor de datos Conjunto de SQLite3."
-  setProvider_YAML: "Establecer proveedor de datos para YAML."
-  setProvider_NotFound: "Proveedor%var0% NO existe Configuración del proveedor de datos por defecto.."
+  getConfigValue_01: "La llave %var0% no ha sido encontrada en config.yml."
+  getDefaultGroup_01: "Se ha declarado más de un grupo como 'predeterminado' en el archivo de grupos."
+  getDefaultGroup_02: "No se ha encontrado ningún grupo 'predeterminado' en el archivo de grupos."
+  getDefaultGroup_03: "Estableciendo automáticamente el grupo 'predeterminado'."
+  getGroup_01: "No se ha encontrado el grupo %var0%"
+  getGroup_02: "El grupo %var0% contiene información inválida o corrupta"
+  onEnable_01: "El soporte multi-nivel se encuentra actualmente deshabilitado."
+  onEnable_02: "¡No olvides habilitar el soporte multi-nivel (enable-multiworld-perms: true en config.yml) si quieres establecer permisos-por-mundo!"
+  onEnable_03: "El soporte multi-nivel ha sido activado."
+  setProvider_SQLite3: "Utilizando SQLite3 como proveedor."
+  setProvider_YAML: "Utilizando YAML como proveedor."
+  setProvider_NotFound: "El proveedor %var0% NO existe. Utilizando el proveedor predeterminado."
 ...

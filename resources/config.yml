@@ -15,7 +15,7 @@ data-provider: yaml
 # Russian message resource by @vvzar and @Pub4Game (GitHub)
 # Italian message resource by @AryToNeX (GitHub)
 # Spanish message resource by @JoahDave (Github)
-# Hindi message resource by @JoahDave (Github)
+# Hindi message resource by @iksaku (<3) and @JoahDave (Github)
 default-language: en
 
 # Setting this option will allow you to use per-world permissions
