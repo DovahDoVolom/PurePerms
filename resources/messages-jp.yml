@@ -105,7 +105,7 @@ logger_messages:
   getGroup_01: "グループ%var0%は存在しません。"
   getGroup_02: "グループ%var0%は不正です。"
   onEnable_01: "マルチワールド対応が現在無効です。"
-  onEnable_02: "per-world（ワールドごとの)権限を使用するには、config.ymlのenable-multiworld-permissionをtrueに設定することを忘れないでください！"
+  onEnable_02: "per-world（ワールドごとの)権限を使用するには、config.ymlのenable-multiworld-permissionをtrueに設定することを忘れるないでください！"
   onEnable_03: "マルチワールド対応が有効です。"
   setProvider_SQLite3: "SQLite3にデーター管理方式が設定されました。"
   setProvider_YAML: "YAMLにデーター管理方式が設定されました。"

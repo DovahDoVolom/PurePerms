@@ -110,7 +110,6 @@ class PurePerms extends PluginBase
         
         switch(strtolower($providerName))
         {
-            /*
             case "mysql":
 
                 $provider = new MySQLProvider($this);
@@ -118,7 +117,6 @@ class PurePerms extends PluginBase
                 if($onEnable == true) $this->getLogger()->info($this->getMessage("logger_messages.setProvider_MySQL"));
 
                 break;
-            */
 
             case "sqlite3":
             

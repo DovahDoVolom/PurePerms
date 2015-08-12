@@ -1,10 +1,10 @@
 /* PurePerms by 64FF00 (xktiverz@gmail.com, @64ff00 for Twitter) */
 
 CREATE TABLE IF NOT EXISTS groups (
-  groupName TEXT PRIMARY KEY NOT NULL,
+  groupName CHAR(255) PRIMARY KEY NOT NULL,
   isDefault INTEGER NOT NULL DEFAULT 0,
-  inheritance TEXT NOT NULL,
-  permissions TEXT NOT NULL
+  inheritance CHAR(255) NOT NULL,
+  permissions VARCHAR(65535) NOT NULL
 );
 
 INSERT OR IGNORE INTO groups (groupName, isDefault, inheritance, permissions) VALUES ("Guest", 1, "", "-essentials.kit,-essentials.kit.other,-pocketmine.command.me,pocketmine.command.list,pperms.command.ppinfo");
@@ -13,20 +13,20 @@ INSERT OR IGNORE INTO groups (groupName, isDefault, inheritance, permissions) VA
 INSERT OR IGNORE INTO groups (groupName, isDefault, inheritance, permissions) VALUES ("OP", 0, "", "*");
 
 CREATE TABLE IF NOT EXISTS groups_mw (
-  groupName TEXT PRIMARY KEY NOT NULL,
-  worldName TEXT NOT NULL,
-  permissions TEXT NOT NULL
+  groupName CHAR(255) PRIMARY KEY NOT NULL,
+  worldName CHAR(255) NOT NULL,
+  permissions VARCHAR(65535) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS players (
-  userName TEXT PRIMARY KEY NOT NULL,
-  userGroup TEXT NOT NULL,
-  permissions TEXT NOT NULL
+  userName VARCHAR(16) PRIMARY KEY NOT NULL,
+  userGroup CHAR(255) NOT NULL,
+  permissions VARCHAR(65535) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS players_mw (
-  userName TEXT PRIMARY KEY NOT NULL,
-  worldName TEXT NOT NULL,
-  userGroup TEXT NOT NULL,
-  permissions TEXT NOT NULL
+  userName VARCHAR(16) PRIMARY KEY NOT NULL,
+  worldName CHAR(255) NOT NULL,
+  userGroup CHAR(255) NOT NULL,
+  permissions VARCHAR(65535) NOT NULL
 );

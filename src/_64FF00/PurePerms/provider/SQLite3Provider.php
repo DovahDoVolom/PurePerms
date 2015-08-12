@@ -21,7 +21,7 @@ class SQLite3Provider implements ProviderInterface
                                                                                        
     */
     
-    private $groupsData;
+    private $db, $groupsData;
 
     /**
      * @param PurePerms $plugin
@@ -278,7 +278,7 @@ class SQLite3Provider implements ProviderInterface
     {
         $stmt01 = $this->db->prepare("
             INSERT OR REPLACE INTO groups (groupName, isDefault, inheritance, permissions)
-            VALUES (:groupName, 0, :inheritance, :permissions);
+            VALUES (:groupName, :isDefault, :inheritance, :permissions);
         ");
 
         if(isset($tempGroupData["isDefault"])) $isDefault = $tempGroupData["isDefault"];
@@ -305,7 +305,7 @@ class SQLite3Provider implements ProviderInterface
 
                 $stmt02->bindValue(":groupName", $groupName, SQLITE3_TEXT);
                 $stmt02->bindValue(":worldName", $worldName, SQLITE3_TEXT);
-                $stmt02->bindValue(":permissions", $permissions, SQLITE3_TEXT);
+                $stmt02->bindValue(":permissions", $worldPerms, SQLITE3_TEXT);
 
                 $result02 = $stmt02->execute();
 
