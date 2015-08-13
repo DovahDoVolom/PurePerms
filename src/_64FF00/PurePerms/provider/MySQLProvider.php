@@ -22,7 +22,7 @@ class MySQLProvider implements ProviderInterface
                                                                                        
     */
 
-    private $db;
+    private $db, $groupsData;
 
     /**
      * @param PurePerms $plugin
@@ -57,6 +57,11 @@ class MySQLProvider implements ProviderInterface
         $db_query = stream_get_contents($this->plugin->getResource("mysql_deploy.sql"));
 
         $this->db->query($db_query);
+
+        // TODO
+        var_dump($this->db);
+
+        $this->loadGroupsData();
 
         $this->plugin->getServer()->getScheduler()->scheduleRepeatingTask(new PPMySQLTask($this->plugin, $this->db), 1200);
     }
@@ -150,9 +155,11 @@ class MySQLProvider implements ProviderInterface
                 $this->groupsData[$groupName]["inheritance"] = explode(",", $currentRow["inheritance"]);
                 $this->groupsData[$groupName]["permissions"] = explode(",", $currentRow["permissions"]);
             }
-        }
 
-        $result01->free();
+            var_dump($result01);
+
+            $result01->free();
+        }
 
         $result02 = $this->db->query("
             SELECT groupName, worldName, permissions
@@ -170,9 +177,9 @@ class MySQLProvider implements ProviderInterface
                     $this->groupsData[$groupName]["worlds"][$worldName] = explode(",", $worldPerms);
                 }
             }
-        }
 
-        $result02->free();
+            $result02->free();
+        }
     }
 
     /**
@@ -184,13 +191,13 @@ class MySQLProvider implements ProviderInterface
             DELETE FROM groups WHERE groupName = $groupName;
         ");
 
-        $result01->free();
+        if($result01 instanceof \mysqli_result) $result01->free();
 
         $result02 = $this->db->query("
             DELETE OR IGNORE FROM groups_mw WHERE groupName = $groupName;
         ");
 
-        $result02->free();
+        if($result02 instanceof \mysqli_result) $result02->free();
     }
 
     /**
@@ -242,7 +249,7 @@ class MySQLProvider implements ProviderInterface
             VALUES ($userName, $userGroup, $permissions);
         ");
 
-        $result01->free();
+        if($result01 instanceof \mysqli_result) $result01->free();
 
         if(isset($tempUserData["worlds"]))
         {
@@ -253,7 +260,7 @@ class MySQLProvider implements ProviderInterface
                     VALUES ($userName, $worldName, $userGroup, $worldPerms);
                 ");
 
-                $result02->free();
+                if($result02 instanceof \mysqli_result) $result02->free();
             }
         }
     }
@@ -273,7 +280,7 @@ class MySQLProvider implements ProviderInterface
             VALUES ($groupName, $isDefault, $inheritance, $permissions);
         ");
 
-        $result01->free();
+        if($result01 instanceof \mysqli_result) $result01->free();
 
         if(isset($tempGroupData["worlds"]))
         {
@@ -284,7 +291,7 @@ class MySQLProvider implements ProviderInterface
                     VALUES ($groupName, $worldName, $worldPerms);
                 ");
 
-                $result02->free();
+                if($result02 instanceof \mysqli_result) $result02->free();
             }
         }
     }

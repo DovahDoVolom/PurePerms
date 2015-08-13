@@ -2,6 +2,8 @@
 
 namespace _64FF00\PurePerms\task;
 
+use _64FF00\PurePerms\PurePerms;
+
 use pocketmine\scheduler\PluginTask;
 
 class PPMySQLTask extends PluginTask
@@ -19,16 +21,17 @@ class PPMySQLTask extends PluginTask
 
     */
 
-	private $database;
+	private $db;
 
     /**
      * @param PurePerms $plugin
-     * @param \MySQLi $db
+     * @param \mysqli $db
      */
-	public function __construct(PurePerms $plugin, \MySQLi $db)
+	public function __construct(PurePerms $plugin, \mysqli $db)
     {
 		parent::__construct($plugin);
-        
+
+        $this->plugin = $plugin;
 		$this->db = $db;
 	}
 

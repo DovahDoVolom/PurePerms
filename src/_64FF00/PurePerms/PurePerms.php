@@ -426,7 +426,7 @@ class PurePerms extends PluginBase
     {
         if($this->isValidProvider())
         {
-            foreach(array_keys($this->getProvider()->getGroupsData(true)) as $groupName)
+            foreach(array_keys($this->getProvider()->getGroupsData()) as $groupName)
             {
                 $this->groups[$groupName] = new PPGroup($this, $groupName);
             }
