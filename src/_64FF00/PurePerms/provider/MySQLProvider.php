@@ -110,9 +110,9 @@ class MySQLProvider implements ProviderInterface
                 $userData["userGroup"] = $currentRow["userGroup"];
                 $userData["permissions"] = explode(",", $currentRow["permissions"]);
             }
-        }
 
-        $result01->free();
+            $result01->free();
+        }
 
         $result02 = $this->db->query("
             SELECT worldName, userGroup, permissions
@@ -129,9 +129,9 @@ class MySQLProvider implements ProviderInterface
 
                 $userData["worlds"][$worldName]["permissions"] = $worldPerms;
             }
-        }
 
-        $result02->free();
+            $result02->free();
+        }
 
         return $userData;
     }
@@ -155,8 +155,6 @@ class MySQLProvider implements ProviderInterface
                 $this->groupsData[$groupName]["inheritance"] = explode(",", $currentRow["inheritance"]);
                 $this->groupsData[$groupName]["permissions"] = explode(",", $currentRow["permissions"]);
             }
-
-            var_dump($result01);
 
             $result01->free();
         }
