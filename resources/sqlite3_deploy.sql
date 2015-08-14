@@ -12,7 +12,7 @@ INSERT OR IGNORE INTO groups (groupName, isDefault, inheritance, permissions) VA
 INSERT OR IGNORE INTO groups (groupName, isDefault, inheritance, permissions) VALUES ('Owner', 0, 'Guest,Admin', 'essentials,pocketmine.command,pperms.command');
 INSERT OR IGNORE INTO groups (groupName, isDefault, inheritance, permissions) VALUES ('OP', 0, '', '*');
 
-CREATE TABLE IF NOT EXISTS groupsMW(
+CREATE TABLE IF NOT EXISTS groups_mw(
   groupName TEXT PRIMARY KEY NOT NULL,
   worldName TEXT NOT NULL,
   permissions TEXT NOT NULL
@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS players(
   permissions TEXT NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS playersMW(
+CREATE TABLE IF NOT EXISTS players_mw(
   userName TEXT PRIMARY KEY NOT NULL,
   worldName TEXT NOT NULL,
   userGroup TEXT NOT NULL,
