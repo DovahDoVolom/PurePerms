@@ -77,10 +77,7 @@ class PPUser implements PPDataInterface
      */
     public function getNode($node)
     {
-        if(!isset($this->getData()[$node]))
-        {
-            return null;
-        }
+        if(!isset($this->getData()[$node])) return null;
 
         return $this->getData()[$node];
     }
@@ -189,9 +186,9 @@ class PPUser implements PPDataInterface
     public function setNode($node, $value)
     {
         $tempUserData = $this->getData();
-                    
+
         $tempUserData[$node] = $value;
-            
+
         $this->setData($tempUserData);
     }
 

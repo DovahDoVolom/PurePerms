@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS `groups`(
   PRIMARY KEY(`groupName`)
 );
 
-INSERT IGNORE INTO `groups` VALUES ('Guest', 1, '', '-essentials.kit,-essentials.kit.other,-pocketmine.command.me,pocketmine.command.list,pperms.command.ppinfo');
+INSERT IGNORE INTO `groups` VALUES ('Guest', 1, '', '-essentials.kit,-essentials.kit.other,-pocketmine.command.me,pchat.colored,pocketmine.command.list,pperms.command.ppinfo');
 INSERT IGNORE INTO `groups` VALUES ('Admin', 0, 'Guest', 'essentials.gamemode,pocketmine.broadcast,pocketmine.command.gamemode,pocketmine.command.give,pocketmine.command.kick,pocketmine.command.teleport,pocketmine.command.time');
 INSERT IGNORE INTO `groups` VALUES ('Owner', 0, 'Guest,Admin', 'essentials,pocketmine.command,pperms.command');
 INSERT IGNORE INTO `groups` VALUES ('OP', 0, '', '*');

@@ -511,9 +511,9 @@ class PurePerms extends PluginBase
     
     public function sortGroupPermissions()
     {
-        foreach($this->getGroups() as $group)
+        foreach($this->getGroups() as $groupName => $ppGroup)
         {
-            $group->sortPermissions();
+            $ppGroup->sortPermissions();
         }
     }
     
