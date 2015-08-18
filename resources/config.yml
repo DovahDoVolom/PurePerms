@@ -7,24 +7,19 @@
 data-provider: yaml
 
 # Set the default language for PurePerms
-# - en, ko, jp, ru, it, sp, hi
+# - en, ko, jp, ru, it, sp
 # English message resource by @64FF00 and @Samueljh1 (GitHub)
 # Korean message resource by @64FF00 (GitHub)
 # 제 블로그 이외에 허락없이 마음대로 플러그인 배포하실 시에는 바로 한국어 파일 삭제 조치하고 공유 중단합니다
 # Japanese message resource by @onebone (<3) and @haniokasai (GitHub)
 # Russian message resource by @vvzar and @Pub4Game (GitHub)
 # Italian message resource by @AryToNeX (GitHub)
-# Spanish message resource by @JoahDave (Github)
-# Hindi message resource by @iksaku (<3) and @JoahDave (Github)
+# Spanish message resource by @iksaku (<3) and @JoahDave (Github)
 default-language: en
 
 # Setting this option will allow you to use per-world permissions
 # - true / false
 enable-multiworld-perms: false
-
-# Broadcast this message when a player's group has been changed
-# - STRING
-msg-on-group-change: Your group has been changed to a / an {group}!
 
 # MySQL Settings (Only configure this if you are going to use MySQL data provider)
 mysql-settings:

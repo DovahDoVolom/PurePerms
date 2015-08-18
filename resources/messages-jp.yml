@@ -3,7 +3,7 @@
 # Original Japanese Translation by onebone (jyc00410@gmail.com)
 # Translated into fluent Japanese by haniokasai (08/03/2015) (htek@haniokasai.com, @haniokasai for Twitter)
 ---
-messages-version: "1.1.7"
+messages-version: "1.2.0"
 language: "jp"
 cmds:
   addgroup:
@@ -67,6 +67,7 @@ cmds:
       group_not_exist: "グループ%var0%は存在しません。"
       level_not_exist: "ワールド%var0%は存在しません。"
       setgroup_successfully: "%var0%をグループに追加しました。"
+      on_player_group_change: "Your group has been changed to a / an %var0%!"
   setuperm:
     desc: "権限をプレーヤーに追加します。"
     usage: "使用法: /setuperm <プレーヤー> <権限> [ワールド]"

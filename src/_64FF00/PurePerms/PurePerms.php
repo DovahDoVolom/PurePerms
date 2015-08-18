@@ -202,7 +202,7 @@ class PurePerms extends PluginBase
     {
         $this->getLogger()->notice("--- List of all permissions from " . $player->getName() . " ---");
 
-        foreach($this->getEffectivePermissions() as $permission => $value)
+        foreach($this->getEffectivePermissions($player) as $permission => $value)
         {
             $this->getLogger()->notice("- " . $permission . " : " . ($value ? "true" : "false"));
         }
@@ -490,23 +490,10 @@ class PurePerms extends PluginBase
         {
             $isDefault = $currentGroup->getNode("isDefault");
             
-            if($isDefault)
-            {
-                $currentGroup->removeNode("isDefault");
-            }
+            if($isDefault) $currentGroup->removeNode("isDefault");
         }
         
         $group->setDefault();
-    }
-
-    /**
-     * @param IPlayer $player
-     * @param PPGroup $group
-     * @param null $levelName
-     */
-    public function setGroup(IPlayer $player, PPGroup $group, $levelName = null)
-    {
-        $this->getUser($player)->setGroup($group, $levelName);
     }
     
     public function sortGroupPermissions()
@@ -525,7 +512,7 @@ class PurePerms extends PluginBase
 
             if($this->getConfigValue("enable-multiworld-perms") == true)
             {
-                foreach ($this->getServer()->getLevels() as $level)
+                foreach($this->getServer()->getLevels() as $level)
                 {
                     $levelName = $level->getName();
 
@@ -543,10 +530,7 @@ class PurePerms extends PluginBase
     {
         foreach($this->getServer()->getOnlinePlayers() as $player)
         {
-            if($this->getUser($player)->getGroup() === $group)
-            {
-                $this->updatePermissions($player);
-            }
+            if($this->getUser($player)->getGroup() === $group) $this->updatePermissions($player);
 
             if($this->getConfigValue("enable-multiworld-perms") == true)
             {
@@ -554,10 +538,7 @@ class PurePerms extends PluginBase
                 {
                     $levelName = $level->getName();
 
-                    if($this->getUser($player)->getGroup($levelName) === $group)
-                    {
-                        $this->updatePermissions($player, $levelName);
-                    }
+                    if($this->getUser($player)->getGroup($levelName) === $group) $this->updatePermissions($player, $levelName);
                 }
             }
         }
@@ -576,9 +557,12 @@ class PurePerms extends PluginBase
 
         $attachment = $this->attachments[$player->getUniqueId()];
 
+        // TODO
+        $this->dumpPermissions($player);
+
         foreach($this->getPermissions($player, $levelName) as $permission)
         {
-            if($permission == "*")
+            if($permission === "*")
             {
                 foreach($this->getServer()->getPluginManager()->getPermissions() as $tmp)
                 {
@@ -599,6 +583,11 @@ class PurePerms extends PluginBase
             }
         }
 
+        var_dump($permissions);
+
         $attachment->setPermissions($permissions);
+
+        // TODO
+        $this->dumpPermissions($player);
     }
 }

@@ -87,19 +87,12 @@ class SetGroup extends Command implements PluginIdentifiableCommand
             
             $levelName = $level->getName();
         }
-        
-        $this->plugin->setGroup($player, $group, $levelName);
+
+        $this->plugin->getUser($player)->setGroup($group, $levelName);
         
         $sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.setgroup.messages.setgroup_successfully", $player->getName()));
         
-        if($player instanceof Player)
-        {
-            $message = $this->plugin->getConfigValue("msg-on-group-change");
-            
-            $message = str_replace("{group}", strtolower($group->getName()), $message);
-            
-            $player->sendMessage(TextFormat::BLUE . "[PurePerms] " . $message);
-        }
+        if($player instanceof Player) $player->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.setgroup.messages.on_player_group_change", strtolower($group->getName())));
         
         return true;
     }

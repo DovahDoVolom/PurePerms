@@ -4,7 +4,7 @@
 # Russian language resource by @vvzar and @Pub4Game 
 
 ---
-messages-version: "1.1.7"
+messages-version: "1.2.0"
 language: "ru"
 cmds:
   addgroup:
@@ -68,6 +68,7 @@ cmds:
       group_not_exist: "Группа %var0% не существует."
       level_not_exist: "Мир %var0% не существует."
       setgroup_successfully: "Игрок %var0% успешно добавлен в группу."
+      on_player_group_change: "Your group has been changed to a / an %var0%!"
   setuperm: 
     desc: "Добавляет разрешение пользователю."
     usage: "Пример: /setuperm <игрок> <разрешение> [мир]"

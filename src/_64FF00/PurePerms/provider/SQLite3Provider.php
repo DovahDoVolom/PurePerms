@@ -72,9 +72,11 @@ class SQLite3Provider implements ProviderInterface
     public function getUserData(PPUser $user)
     {
         $userName = $user->getName();
-        $userData = [];
-
-        $this->setUserData($user, []);
+        $userData = [
+            "userName" => $userName,
+            "group" => $this->plugin->getDefaultGroup()->getName(),
+            "permissions" => []
+        ];
 
         $stmt01 = $this->db->prepare("
             SELECT userGroup, permissions
@@ -90,7 +92,6 @@ class SQLite3Provider implements ProviderInterface
         {
             while($currentRow = $result01->fetchArray(SQLITE3_ASSOC))
             {
-                $userData["userName"] = $userName;
                 $userData["group"] = $currentRow["userGroup"];
                 $userData["permissions"] = $currentRow["permissions"] !== "" ? explode(",", $currentRow["permissions"]) : [];
             }
@@ -234,8 +235,6 @@ class SQLite3Provider implements ProviderInterface
      */
     public function setUserData(PPUser $user, array $tempUserData)
     {
-        // TODO: #var_dump(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS));
-
         $userName = $user->getName();
         $userGroup = $this->plugin->getDefaultGroup()->getName();
         $permissions = "";

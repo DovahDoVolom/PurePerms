@@ -66,6 +66,7 @@ cmds:
       group_not_exist: "Group %var0% does NOT exist."
       level_not_exist: "World %var0% does NOT exist."
       setgroup_successfully: "Added %var0% to the group successfully."
+      on_player_group_change: "Your group has been changed to a / an %var0%!"
   setuperm: 
     desc: "Adds a permission to the user."
     usage: "Usage: /setuperm <player> <permission> [world]"
