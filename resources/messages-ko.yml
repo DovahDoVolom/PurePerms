@@ -13,6 +13,12 @@ cmds:
     messages:
       group_added_successfully: "그룹 %var0%이 추가되었습니다."
       group_already_exists: "%var0%이라는 이름을 가진 그룹이 이미 존재합니다."
+  defgroup:
+    desc: "Allows you to set default group. #64FF00"
+    usage: "Usage: /defgroup <group>"
+    messages:
+      defgroup_successfully: "Default group has been successfully set to %var0%."
+      group_not_exist: "Group %var0% does NOT exist."    
   fperms:
     desc: "특정 플러그인이 가진 모든 퍼미션들을 보여줍니다. #64FF00"
     usage: "사용법: /fperms <plugin>"

@@ -17,6 +17,8 @@ permissions:
         children:
           pperms.command.addgroup:
             description: "Allows you to add a new group to the groups list."
+          pperms.command.defgroup:
+            description: "Allows you to set the default group manually."
           pperms.command.fperms:
             description: "Allows you to find permissions for a specific plugin."
           pperms.command.groups:

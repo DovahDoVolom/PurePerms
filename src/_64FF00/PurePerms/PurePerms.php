@@ -3,6 +3,7 @@
 namespace _64FF00\PurePerms;
 
 use _64FF00\PurePerms\commands\AddGroup;
+use _64FF00\PurePerms\commands\DefGroup;
 use _64FF00\PurePerms\commands\FPerms;
 use _64FF00\PurePerms\commands\Groups;
 use _64FF00\PurePerms\commands\ListGPerms;
@@ -86,6 +87,7 @@ class PurePerms extends PluginBase
         $commandMap = $this->getServer()->getCommandMap();
         
         $commandMap->register("addgroup", new AddGroup($this, "addgroup", $this->getMessage("cmds.addgroup.desc")));
+        $commandMap->register("defgroup", new DefGroup($this, "defgroup", $this->getMessage("cmds.defgroup.desc")));
         $commandMap->register("fperms", new FPerms($this, "fperms", $this->getMessage("cmds.fperms.desc")));
         $commandMap->register("groups", new Groups($this, "groups", $this->getMessage("cmds.groups.desc")));
         $commandMap->register("listgperms", new ListGPerms($this, "listgperms", $this->getMessage("cmds.listgperms.desc")));
@@ -206,6 +208,17 @@ class PurePerms extends PluginBase
         {
             $this->getLogger()->notice("- " . $permission . " : " . ($value ? "true" : "false"));
         }
+    }
+
+    /**
+     * @param Player $player
+     * @return null
+     */
+    public function getAttachment(Player $player)
+    {
+        if(isset($this->attachments[$player->getUniqueId()])) return $this->attachments[$player->getUniqueId()];
+
+        return null;
     }
 
     /**
@@ -555,10 +568,7 @@ class PurePerms extends PluginBase
 
         $levelName = $this->getConfigValue("enable-multiworld-perms") ? $player->getLevel()->getName() : null;
 
-        $attachment = $this->attachments[$player->getUniqueId()];
-
-        // TODO
-        $this->dumpPermissions($player);
+        $attachment = $this->getAttachment($player);
 
         foreach($this->getPermissions($player, $levelName) as $permission)
         {
@@ -583,11 +593,6 @@ class PurePerms extends PluginBase
             }
         }
 
-        var_dump($permissions);
-
         $attachment->setPermissions($permissions);
-
-        // TODO
-        $this->dumpPermissions($player);
     }
 }

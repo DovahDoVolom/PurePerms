@@ -7,24 +7,30 @@ messages-version: "1.2.0"
 language: "jp"
 cmds:
   addgroup:
-    desc: "新しいグループをリストに追加します。"
+    desc: "新しいグループをリストに追加します。 #64FF00"
     usage: "使用法: /addgroup <グループ>"
     messages:
       group_added_successfully: "%var0%をグループリストに追加しました。"
       group_already_exists: "グループ%var0%はすでに存在しています。"
+  defgroup:
+    desc: "Allows you to set default group. #64FF00"
+    usage: "Usage: /defgroup <group>"
+    messages:
+      defgroup_successfully: "Default group has been successfully set to %var0%."
+      group_not_exist: "Group %var0% does NOT exist."    
   fperms:
-    desc: "特定のプラグインの権限リストを表示します。"
+    desc: "特定のプラグインの権限リストを表示します。 #64FF00"
     usage: "使用法: /fperms <プラグイン>"
     messages:
       no_plugin_perms: "プラグイン%var0%は何の権限も持っていません。"
       plugin_not_exist: "プラグイン%var0%は存在しません。"
       plugin_perms_list: "プラグイン%var0%の権限 (%var1% / %var2%) : "
   groups:
-    desc: "グループリストを表示します。"
+    desc: "グループリストを表示します。 #64FF00"
     messages:
       all_registered_groups: "グループリスト：%var0%"
   listgperms:
-    desc: "グループの権限のリストを表示します。"
+    desc: "グループの権限のリストを表示します。 #64FF00"
     usage: "使用法: /listgperms <グループ> <ページ> [ワールド]"
     messages:
       group_not_exist: "グループ%var0%は存在しません。"
@@ -32,7 +38,7 @@ cmds:
       level_not_exist: "ワールド%var0%は存在しません。"
       no_group_perms: "グループ%var0%は何の権限も持っていません。"
   listuperms:
-    desc: "プレーヤーの権限を表示します。"
+    desc: "プレーヤーの権限を表示します。 #64FF00"
     usage: "使用法: /listuperms <プレーヤー> <ページ> [ワールド]"
     messages:
       level_not_exist: "ワールド%var0%は存在しません。"
@@ -44,24 +50,24 @@ cmds:
       ppinfo_console: "いまあなたはPurePerms v%var0% by %var1%を使っています。"
       ppinfo_player: "このサーバーはPurePerms v%var0% by %var1%を使っています。"
   ppreload:
-    desc: "全てのPurePerms設定をリロードします。"
+    desc: "全てのPurePerms設定をリロードします。 #64FF00"
     messages:
       successfully_reloaded: "全てのプラグインの設定がリロードされました。"
   rmgroup:
-    desc: "グループを削除します。"
+    desc: "グループを削除します。 #64FF00"
     usage: "使用法: /rmgroup <グループ>"
     messages:
       group_removed_successfully: "グループ%var0%を削除しました。"
       group_not_exist: "グループ%var0%は存在しません。"
   setgperm:
-    desc: "グループに権限を追加します。"
+    desc: "グループに権限を追加します。 #64FF00"
     usage: "使用法: /setgperm <グループ> <権限> [ワールド]"
     messages:
       gperm_added_successfully: "権限%var0%をグループに追加しました。"
       group_not_exist: "グループ%var0%は存在しません。"
       level_not_exist: "ワールド%var0%は存在しません。"
   setgroup:
-    desc: "プレーヤーのグループを設定します。"
+    desc: "プレーヤーのグループを設定します。 #64FF00"
     usage: "使用法: /setgroup <プレーヤー> <グループ> [ワールド]"
     messages:
       group_not_exist: "グループ%var0%は存在しません。"
@@ -69,26 +75,26 @@ cmds:
       setgroup_successfully: "%var0%をグループに追加しました。"
       on_player_group_change: "Your group has been changed to a / an %var0%!"
   setuperm:
-    desc: "権限をプレーヤーに追加します。"
+    desc: "権限をプレーヤーに追加します。 #64FF00"
     usage: "使用法: /setuperm <プレーヤー> <権限> [ワールド]"
     messages:
       level_not_exist: "ワールド%var0%は存在しません。"
       uperm_added_successfully: "権限%var0%を%var1%に追加しました。"
   unsetgperm:
-    desc: "グループから権限を削除します。"
+    desc: "グループから権限を削除します。 #64FF00"
     usage: "使用法: /unsetgperm <グループ> <権限> [ワールド]"
     messages:
       gperm_removed_successfully: "権限%var0%をグループから削除しました。"
       group_not_exist: "グループ%var0%は存在しません。"
       level_not_exist: "ワールド%var0%は存在しません。"
   unsetuperm:
-    desc: "プレーヤーから権限を削除します。"
+    desc: "プレーヤーから権限を削除します。 #64FF00"
     usage: "使用法: /unsetuperm <プレーヤー> <権限> [ワールド]"
     messages:
       level_not_exist: "ワールド%var0%は存在しません。"
       uperm_removed_successfully: "権限%var0%をグループ%var1%から削除しました。"
   usrinfo:
-    desc: "プレーヤーの情報を表示します。"
+    desc: "プレーヤーの情報を表示します。 #64FF00"
     usage: "使用法: /usrinfo <プレーヤー> [ワールド]"
     messages:
       level_not_exist: "ワールド%var0%は存在しません。"
