@@ -14,11 +14,11 @@ cmds:
       group_added_successfully: "Группа %var0% успешно создана."
       group_already_exists: "Ошибка! Группа %var0% уже существует."
   defgroup:
-    desc: "Allows you to set default group. #64FF00"
-    usage: "Usage: /defgroup <group>"
+    desc: "Изменяет группу по умолчанию. #64FF00"
+    usage: "Пример: /defgroup <группа>"
     messages:
-      defgroup_successfully: "Default group has been successfully set to %var0%."
-      group_not_exist: "Group %var0% does NOT exist."    
+      defgroup_successfully: "Группа по умолчанию успешно изменена на %var0%."
+      group_not_exist: "Группа %var0% не существует."    
   fperms:
     desc: "Показывает список всех разрешений для указанного плагина. #64FF00"
     usage: "Пример: /fperms <плагин>"
