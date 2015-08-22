@@ -18,7 +18,11 @@ cmds:
     usage: "Пример: /defgroup <группа>"
     messages:
       defgroup_successfully: "Группа по умолчанию успешно изменена на %var0%."
-      group_not_exist: "Группа %var0% не существует."    
+      group_not_exist: "Группа %var0% не существует."     
+  grpinfo:
+    desc: "Shows info about a group. #64FF00"
+    usage: "Usage: /grpinfo <group> [world]"
+    messages: []
   fperms:
     desc: "Показывает список всех разрешений для указанного плагина. #64FF00"
     usage: "Пример: /fperms <плагин>"
@@ -74,7 +78,7 @@ cmds:
       group_not_exist: "Группа %var0% не существует."
       level_not_exist: "Мир %var0% не существует."
       setgroup_successfully: "Игрок %var0% успешно добавлен в группу."
-      on_player_group_change: "Ваша группа изменена на %var0%!"
+      on_player_group_change: "Your group has been changed to a / an %var0%!"
   setuperm: 
     desc: "Добавляет разрешение пользователю. #64FF00"
     usage: "Пример: /setuperm <игрок> <разрешение> [мир]"
@@ -104,7 +108,10 @@ cmds:
       usrinfo_header: "<--- Информация об игроке %var0% --->"
       usrinfo_username: "ИГРОК: %var0%"
       usrinfo_status: "СТАТУС: %var0%"
+      usrinfo_ip: "IP: %var0%"
+      usrinfo_uuid: "UNIQUE ID: %var0%"
       usrinfo_group: "ГРУППА: %var0%"
+      unknown: "UNKNOWN"
 logger_messages:
   getConfigValue_01: "Ключ %var0% не найден в файле config.yml."
   getDefaultGroup_01: "Было указано более одной группы, назначаемой по-умолчанию в файле groups.yml."

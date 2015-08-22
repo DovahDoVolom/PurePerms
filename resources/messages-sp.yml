@@ -20,6 +20,10 @@ cmds:
     messages:
       defgroup_successfully: "Default group has been successfully set to %var0%."
       group_not_exist: "Group %var0% does NOT exist."    
+  grpinfo:
+    desc: "Shows info about a group. #64FF00"
+    usage: "Usage: /grpinfo <group> [world]"
+    messages: []    
   fperms:
     desc: "Muestra una lista con todos los permisos de un plugin. #64FF00"
     usage: "Uso: /fperms <plugin>"
@@ -105,7 +109,10 @@ cmds:
       usrinfo_header: "-- Información del usuario %var0% --"
       usrinfo_username: "NOMBRE DE USUARIO: %var0%"
       usrinfo_status: "ESTADO: %var0%"
+      usrinfo_ip: "IP: %var0%"
+      usrinfo_uuid: "UNIQUE ID: %var0%"
       usrinfo_group: "GRUPO: %var0%"
+      unknown: "UNKNOWN"
 logger_messages:
   getConfigValue_01: "La llave %var0% no ha sido encontrada en config.yml."
   getDefaultGroup_01: "Se ha declarado más de un grupo como 'predeterminado' en el archivo de grupos."
