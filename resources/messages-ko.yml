@@ -19,10 +19,6 @@ cmds:
     messages:
       defgroup_successfully: "기본 그룹이 %var0%로 설정되었습니다."
       group_not_exist: "%var0%이라는 이름을 가진 그룹이 존재하지 않습니다."
-  grpinfo:
-    desc: "그룹 정보를 보여줍니다. #64FF00"
-    usage: "사용법: /grpinfo <그룹 이름> [월드 이름]"
-    messages: []      
   fperms:
     desc: "특정 플러그인이 가진 모든 퍼미션 목록을 보여줍니다. #64FF00"
     usage: "사용법: /fperms <플러그인 이름>"

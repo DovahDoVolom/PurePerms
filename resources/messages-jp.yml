@@ -17,11 +17,7 @@ cmds:
     usage: "Usage: /defgroup <group>"
     messages:
       defgroup_successfully: "Default group has been successfully set to %var0%."
-      group_not_exist: "Group %var0% does NOT exist."    
-  grpinfo:
-    desc: "Shows info about a group. #64FF00"
-    usage: "Usage: /grpinfo <group> [world]"
-    messages: []    
+      group_not_exist: "グループ%var0%は存在しません。"    
   fperms:
     desc: "特定のプラグインの権限リストを表示します。 #64FF00"
     usage: "使用法: /fperms <プラグイン>"

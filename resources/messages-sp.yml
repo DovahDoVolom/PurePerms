@@ -19,11 +19,7 @@ cmds:
     usage: "Usage: /defgroup <group>"
     messages:
       defgroup_successfully: "Default group has been successfully set to %var0%."
-      group_not_exist: "Group %var0% does NOT exist."    
-  grpinfo:
-    desc: "Shows info about a group. #64FF00"
-    usage: "Usage: /grpinfo <group> [world]"
-    messages: []    
+      group_not_exist: "El grupo %var0% NO existe."       
   fperms:
     desc: "Muestra una lista con todos los permisos de un plugin. #64FF00"
     usage: "Uso: /fperms <plugin>"

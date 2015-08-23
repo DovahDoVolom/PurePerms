@@ -19,10 +19,6 @@ cmds:
     messages:
       defgroup_successfully: "Группа по умолчанию успешно изменена на %var0%."
       group_not_exist: "Группа %var0% не существует."     
-  grpinfo:
-    desc: "Shows info about a group. #64FF00"
-    usage: "Usage: /grpinfo <group> [world]"
-    messages: []
   fperms:
     desc: "Показывает список всех разрешений для указанного плагина. #64FF00"
     usage: "Пример: /fperms <плагин>"

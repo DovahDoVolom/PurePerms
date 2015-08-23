@@ -6,7 +6,6 @@ use _64FF00\PurePerms\commands\AddGroup;
 use _64FF00\PurePerms\commands\DefGroup;
 use _64FF00\PurePerms\commands\FPerms;
 use _64FF00\PurePerms\commands\Groups;
-use _64FF00\PurePerms\commands\GroupInfo;
 use _64FF00\PurePerms\commands\ListGPerms;
 use _64FF00\PurePerms\commands\ListUPerms;
 use _64FF00\PurePerms\commands\PPInfo;
@@ -91,7 +90,6 @@ class PurePerms extends PluginBase
         $commandMap->register("defgroup", new DefGroup($this, "defgroup", $this->getMessage("cmds.defgroup.desc")));
         $commandMap->register("fperms", new FPerms($this, "fperms", $this->getMessage("cmds.fperms.desc")));
         $commandMap->register("groups", new Groups($this, "groups", $this->getMessage("cmds.groups.desc")));
-        // $commandMap->register("grpinfo", new GroupInfo($this, "grpinfo", $this->getMessage("cmds.grpinfo.desc")));
         $commandMap->register("listgperms", new ListGPerms($this, "listgperms", $this->getMessage("cmds.listgperms.desc")));
         $commandMap->register("listuperms", new ListUPerms($this, "listuperms", $this->getMessage("cmds.listuperms.desc")));
         $commandMap->register("ppinfo", new PPInfo($this, "ppinfo", $this->getMessage("cmds.ppinfo.desc")));
@@ -305,6 +303,9 @@ class PurePerms extends PluginBase
                 }
             }
         }
+
+        // #ermagerd
+        return null;
     }
 
     /**
