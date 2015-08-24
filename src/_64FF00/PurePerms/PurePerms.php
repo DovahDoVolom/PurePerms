@@ -112,6 +112,7 @@ class PurePerms extends PluginBase
         
         switch(strtolower($providerName))
         {
+            /*
             case "mysql":
 
                 $provider = new MySQLProvider($this);
@@ -119,6 +120,7 @@ class PurePerms extends PluginBase
                 if($onEnable == true) $this->getLogger()->info($this->getMessage("logger_messages.setProvider_MySQL"));
 
                 break;
+             */
 
             case "sqlite3":
             
@@ -167,7 +169,11 @@ class PurePerms extends PluginBase
     {
         $attachment = $player->addAttachment($this);
 
-        $this->attachments[$player->getUniqueId()] = $attachment;
+        $uniqueId = $player->getUniqueId();
+
+        if(!is_string($uniqueId)) $this->getLogger()->critical('PurePerms->addAttachment(): Invalid $uniqueId data type (' . gettype($uniqueId) . ')');
+
+        $this->attachments[$uniqueId] = $attachment;
 
         $this->updatePermissions($player);
     }
@@ -216,7 +222,11 @@ class PurePerms extends PluginBase
      */
     public function getAttachment(Player $player)
     {
-        if(isset($this->attachments[$player->getUniqueId()])) return $this->attachments[$player->getUniqueId()];
+        $uniqueId = $player->getUniqueId();
+
+        if(!is_string($uniqueId)) $this->getLogger()->critical('PurePerms->addAttachment(): Invalid $uniqueId data type (' . gettype($uniqueId) . ')');
+
+        if(isset($this->attachments[$uniqueId])) return $this->attachments[$uniqueId];
 
         return null;
     }
@@ -472,11 +482,15 @@ class PurePerms extends PluginBase
      */
     public function removeAttachment(Player $player)
     {
-        if(isset($this->attachments[$player->getUniqueId()]))
-        {
-            $player->removeAttachment($this->attachments[$player->getUniqueId()]);
+        $uniqueId = $player->getUniqueId();
 
-            unset($this->attachments[$player->getUniqueId()]);
+        if(!is_string($uniqueId)) $this->getLogger()->critical('PurePerms->addAttachment(): Invalid $uniqueId data type (' . gettype($uniqueId) . ')');
+
+        if(isset($this->attachments[$uniqueId]))
+        {
+            $player->removeAttachment($this->attachments[$uniqueId]);
+
+            unset($this->attachments[$uniqueId]);
         }
     }
 
