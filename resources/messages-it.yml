@@ -4,7 +4,7 @@
 # Translated in Italian by AnThOnEx (Twitter: @AryToNeX)
 
 ---
-messages-version: "1.1.7"
+messages-version: "1.2.0"
 language: "it"
 cmds:
   addgroup:
@@ -14,10 +14,10 @@ cmds:
       group_added_successfully: "Il gruppo %var0% è stato aggiunto con successo."
       group_already_exists: "Il gruppo %var0% esiste già."
   defgroup:
-    desc: "Allows you to set default group. #64FF00" 
-    usage: "Usage: /defgroup <group>"
+    desc: "Permette di impostare un gruppo predefinito. #64FF00" 
+    usage: "Sintassi: /defgroup <group>"
     messages:
-      defgroup_successfully: "Default group has been successfully set to %var0%."
+      defgroup_successfully: "Gruppo predefinito impostato in %var0% con successo."
       group_not_exist: "Il gruppo %var0% non esiste."      
   fperms:
     desc: "Mostra una lista dei permessi di un plugin. #64FF00"
@@ -74,7 +74,7 @@ cmds:
       group_not_exist: "Il gruppo %var0% non esiste."
       level_not_exist: "Il mondo %var0% non esiste."
       setgroup_successfully: "%var0% aggiunto al gruppo con successo."
-      on_player_group_change: "Your group has been changed to a / an %var0%!"
+      on_player_group_change: "Il tuo gruppo è stato cambiato in %var0%!"
   setuperm: 
     desc: "Aggiunge un permesso ad un utente. #64FF00"
     usage: "Sintassi: /setuperm <giocatore> <permesso> [mondo]"
@@ -105,9 +105,9 @@ cmds:
       usrinfo_username: "NOME UTENTE: %var0%"
       usrinfo_status: "STATO: %var0%"
       usrinfo_ip: "IP: %var0%"
-      usrinfo_uuid: "UNIQUE ID: %var0%"
+      usrinfo_uuid: "ID UNIVOCO: %var0%"
       usrinfo_group: "GRUPPO: %var0%"
-      unknown: "UNKNOWN"
+      unknown: "SCONOSCIUTO"
 logger_messages:
   getConfigValue_01: "Chiave %var0% non trovata in config.yml."
   getDefaultGroup_01: "Nel file dei gruppi sono stati dichiarati più gruppi predefiniti."
