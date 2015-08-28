@@ -367,6 +367,22 @@ class PurePerms extends PluginBase
     }
 
     /**
+     * @param PPGroup $group
+     * @return array
+     */
+    public function getOnlinePlayersInGroup(PPGroup $group)
+    {
+        $users = [];
+
+        foreach($this->getServer()->getOnlinePlayers() as $player)
+        {
+            if($this->getUser($player)->getGroup() === $group) $users[] = $player;
+        }
+
+        return $users;
+    }
+
+    /**
      * @param IPlayer $player
      * @param $levelName
      * @return array
@@ -540,9 +556,9 @@ class PurePerms extends PluginBase
      */
     public function updatePlayersInGroup(PPGroup $group)
     {
-        foreach($this->getServer()->getOnlinePlayers() as $player)
+        foreach($this->getOnlinePlayersInGroup($group) as $player)
         {
-            if($this->getUser($player)->getGroup() === $group) $this->updatePermissions($player);
+            $this->updatePermissions($player);
 
             if($this->getConfigValue("enable-multiworld-perms") == true)
             {
@@ -550,7 +566,7 @@ class PurePerms extends PluginBase
                 {
                     $levelName = $level->getName();
 
-                    if($this->getUser($player)->getGroup($levelName) === $group) $this->updatePermissions($player, $levelName);
+                    $this->updatePermissions($player, $levelName);
                 }
             }
         }
@@ -594,7 +610,7 @@ class PurePerms extends PluginBase
             $attachment = $this->getAttachment($player);
 
             $attachment->clearPermissions();
-            
+
             $attachment->setPermissions($permissions);
         }
     }
