@@ -118,8 +118,10 @@ logger_messages:
   onEnable_01: "Podpora MultiSveta je v soucasne dobe zakazana."
   onEnable_02: "Nezapomente nastavit moznost enable-multiworld-perms v config.yml na true jestli chcete pouzit MultiSvet opravneni!"
   onEnable_03: "Podpora Multisveta povolena."
+  registerPlayer: "Registering player %var0%..."
   setProvider_MySQL: "Nastavte poskytovatele dat do MySQL."
   setProvider_SQLite3: "Nastavte poskytovatele dat na vychozi SQLite3."
   setProvider_YAML: "Nastavte poskytovatele dat na YAML."
   setProvider_NotFound: "Poskytovatel %var0% neexistuje. Nastavuji zprostredkovatele dat na vychozi nastaveni."
+  unregisterPlayer: "Unregistering player %var0%..."
 ...

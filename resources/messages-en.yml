@@ -116,8 +116,10 @@ logger_messages:
   onEnable_01: "Multiworld support is currently disabled."
   onEnable_02: "Don't forget to set enable-multiworld-perms option in config.yml to true if you want to use per-world permissions!"
   onEnable_03: "Multiworld support enabled."
+  registerPlayer: "Registering player %var0%..."
   setProvider_MySQL: "Set data provider to MySQL."
   setProvider_SQLite3: "Set data provider to SQLite3."
   setProvider_YAML: "Set data provider to YAML."
   setProvider_NotFound: "Provider %var0% does NOT exist. Setting the data provider to default."
+  unregisterPlayer: "Unregistering player %var0%..."
 ...

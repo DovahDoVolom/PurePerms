@@ -118,7 +118,9 @@ logger_messages:
   onEnable_01: "Il supporto multimondo è disabilitato."
   onEnable_02: "Non dimenticare di impostare nel config.yml l'opzione enable-multiworld-perms in true se vuoi usare i permessi specifici per ogni mondo!"
   onEnable_03: "Il supporto multimondo è abilitato."
+  registerPlayer: "Registering player %var0%..."
   setProvider_SQLite3: "Il fornitore dati impostato è SQLite3."
   setProvider_YAML: "Il fornitore dati impostato è YAML."
   setProvider_NotFound: "Il fornitore %var0% non esiste. Impostando il fornitore dati predefinito."
+  unregisterPlayer: "Unregistering player %var0%..."
 ...

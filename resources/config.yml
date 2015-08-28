@@ -7,7 +7,7 @@
 data-provider: yaml
 
 # Set the default language for PurePerms
-# - en, ko, jp, ru, it, sp, cz
+# - en, ko, jp, ru, it, sp, cz, sk
 # English message resource by @64FF00 and @Samueljh1 (GitHub)
 # Korean message resource by @64FF00 (GitHub)
 # 제 블로그 이외에 허락없이 마음대로 플러그인 배포하실 시에는 바로 한국어 파일 삭제 조치하고 공유 중단합니다
@@ -16,7 +16,7 @@ data-provider: yaml
 # Italian message resource by @AryToNeX (GitHub)
 # Spanish message resource by @iksaku (<3) and @JoahDave (Github)
 # Czech message resource by @Michael2010117 (GitHub)
-
+# Slovak message resource by @Michael2010117 (GitHub)
 default-language: en
 
 # Setting this option will allow you to use per-world permissions

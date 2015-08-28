@@ -63,7 +63,9 @@ class PPListener implements Listener
      */
     public function onPlayerJoin(PlayerJoinEvent $event)
     {
-        $this->plugin->addAttachment($event->getPlayer());
+        $player = $event->getPlayer();
+
+        $this->plugin->registerPlayer($player);
     }
 
     /**
@@ -72,7 +74,9 @@ class PPListener implements Listener
      */
     public function onPlayerKick(PlayerKickEvent $event)
     {
-        $this->plugin->removeAttachment($event->getPlayer());
+        $player = $event->getPlayer();
+
+        $this->plugin->unregisterPlayer($player);
     }
 
     /**
@@ -81,6 +85,8 @@ class PPListener implements Listener
      */
     public function onPlayerQuit(PlayerQuitEvent $event)
     {
-        $this->plugin->removeAttachment($event->getPlayer());
+        $player = $event->getPlayer();
+
+        $this->plugin->unregisterPlayer($player);
     }
 }

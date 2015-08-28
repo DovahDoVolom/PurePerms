@@ -119,7 +119,9 @@ logger_messages:
   onEnable_01: "El soporte multi-nivel se encuentra actualmente deshabilitado."
   onEnable_02: "¡No olvides habilitar el soporte multi-nivel (enable-multiworld-perms: true en config.yml) si quieres establecer permisos-por-mundo!"
   onEnable_03: "El soporte multi-nivel ha sido activado."
+  registerPlayer: "Registering player %var0%..."
   setProvider_SQLite3: "Utilizando SQLite3 como proveedor."
   setProvider_YAML: "Utilizando YAML como proveedor."
   setProvider_NotFound: "El proveedor %var0% NO existe. Utilizando el proveedor predeterminado."
+  unregisterPlayer: "Unregistering player %var0%..."
 ...

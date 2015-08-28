@@ -117,6 +117,8 @@ logger_messages:
   onEnable_01: "マルチワールド対応が現在無効です。"
   onEnable_02: "per-world（ワールドごとの)権限を使用するには、config.ymlのenable-multiworld-permissionをtrueに設定することを忘れるないでください！"
   onEnable_03: "マルチワールド対応が有効です。"
+  registerPlayer: "Registering player %var0%..."
   setProvider_SQLite3: "SQLite3にデーター管理方式が設定されました。"
   setProvider_YAML: "YAMLにデーター管理方式が設定されました。"
   setProvider_NotFound: "データー管理方式%var0%は存在しません。デフォルトの方式に設定しました。"
+  unregisterPlayer: "Unregistering player %var0%..."

@@ -117,8 +117,10 @@ logger_messages:
   onEnable_01: "다중 월드 지원 기능은 현재 비활성화되어 있습니다."
   onEnable_02: "다중 월드 지원 기능을 사용하시려면 반드시 config.yml에서 enable-multiworld-perms 옵션을 true로 설정해주세요."
   onEnable_03: "다중 월드 지원 기능이 활성화되었습니다."
+  registerPlayer: "플레이어 %var0% 등록 중..."
   setProvider_MySQL: "MySQL 형식으로 데이터가 저장됩니다."
   setProvider_SQLite3: "SQLite3 형식으로 데이터가 저장됩니다."
   setProvider_YAML: "YAML 방식으로 데이터가 저장됩니다."
   setProvider_Invalid: "올바르지 않은 데이터 저장 방식입니다. 자동으로 YAML 방식으로 데이터가 저장됩니다."
+  unregisterPlayer: "플레이어 %var0% 등록 해제 중..."
 ...

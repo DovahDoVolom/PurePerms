@@ -163,22 +163,6 @@ class PurePerms extends PluginBase
     */
 
     /**
-     * @param Player $player
-     */
-    public function addAttachment(Player $player)
-    {
-        $attachment = $player->addAttachment($this);
-
-        $uniqueId = $player->getUniqueId();
-
-        if(!is_string($uniqueId)) $this->getLogger()->critical('PurePerms->addAttachment(): Invalid $uniqueId data type (' . gettype($uniqueId) . ')');
-
-        $this->attachments[$uniqueId] = $attachment;
-
-        $this->updatePermissions($player);
-    }
-
-    /**
      * @param $groupName
      * @return bool
      */
@@ -216,19 +200,13 @@ class PurePerms extends PluginBase
         }
     }
 
-    /**
-     * @param Player $player
-     * @return null
-     */
     public function getAttachment(Player $player)
     {
         $uniqueId = $player->getUniqueId();
 
-        if(!is_string($uniqueId)) $this->getLogger()->critical('PurePerms->addAttachment(): Invalid $uniqueId data type (' . gettype($uniqueId) . ')');
+        if(!isset($this->attachments[$uniqueId])) throw new \RuntimeException("Tried to calculate permissions on " .  $player->getName() . " using null attachment");
 
-        if(isset($this->attachments[$uniqueId])) return $this->attachments[$uniqueId];
-
-        return null;
+        return $this->attachments[$uniqueId];
     }
 
     /**
@@ -463,6 +441,24 @@ class PurePerms extends PluginBase
         }
     }
 
+    /**
+     * @param Player $player
+     */
+    public function registerPlayer(Player $player)
+    {
+        $this->getLogger()->info($this->getMessage("logger_messages.registerPlayer", $player->getName()));
+
+        $uniqueId = $player->getUniqueId();
+
+        if(isset($this->attachments[$uniqueId])) $this->unregisterPlayer($player);
+
+        $attachment = $player->addAttachment($this);
+
+        $this->attachments[$uniqueId] = $attachment;
+
+        $this->updatePermissions($player);
+    }
+
     public function reload()
     {
         $this->reloadConfig();
@@ -475,23 +471,6 @@ class PurePerms extends PluginBase
         $this->provider->init();
 
         $this->updateAllPlayers();
-    }
-
-    /**
-     * @param Player $player
-     */
-    public function removeAttachment(Player $player)
-    {
-        $uniqueId = $player->getUniqueId();
-
-        if(!is_string($uniqueId)) $this->getLogger()->critical('PurePerms->addAttachment(): Invalid $uniqueId data type (' . gettype($uniqueId) . ')');
-
-        if(isset($this->attachments[$uniqueId]))
-        {
-            $player->removeAttachment($this->attachments[$uniqueId]);
-
-            unset($this->attachments[$uniqueId]);
-        }
     }
 
     /**
@@ -611,5 +590,19 @@ class PurePerms extends PluginBase
         }
 
         $attachment->setPermissions($permissions);
+    }
+
+    /**
+     * @param Player $player
+     */
+    public function unregisterPlayer(Player $player)
+    {
+        $this->getLogger()->info($this->getMessage("logger_messages.unregisterPlayer", $player->getName()));
+
+        $uniqueId = $player->getUniqueId();
+
+        if(isset($this->attachments[$uniqueId])) $player->removeAttachment($this->attachments[$uniqueId]);
+
+        unset($this->attachments[$uniqueId]);
     }
 }
