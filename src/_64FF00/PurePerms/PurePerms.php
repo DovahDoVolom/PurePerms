@@ -465,7 +465,7 @@ class PurePerms extends PluginBase
      */
     public function registerPlayer(Player $player)
     {
-        $this->getLogger()->info($this->getMessage("logger_messages.registerPlayer", $player->getName()));
+        $this->getLogger()->debug($this->getMessage("logger_messages.registerPlayer", $player->getName()));
 
         $uniqueId = $player->getUniqueId();
 
@@ -620,7 +620,7 @@ class PurePerms extends PluginBase
      */
     public function unregisterPlayer(Player $player)
     {
-        $this->getLogger()->info($this->getMessage("logger_messages.unregisterPlayer", $player->getName()));
+        $this->getLogger()->debug($this->getMessage("logger_messages.unregisterPlayer", $player->getName()));
 
         $uniqueId = $player->getUniqueId();
 
