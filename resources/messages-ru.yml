@@ -107,7 +107,7 @@ cmds:
       usrinfo_ip: "IP: %var0%"
       usrinfo_uuid: "UNIQUE ID: %var0%"
       usrinfo_group: "ГРУППА: %var0%"
-      unknown: "UNKNOWN"
+      unknown: "Неизвестно"
 logger_messages:
   getConfigValue_01: "Ключ %var0% не найден в файле config.yml."
   getDefaultGroup_01: "Было указано более одной группы, назначаемой по-умолчанию в файле groups.yml."
@@ -118,9 +118,9 @@ logger_messages:
   onEnable_01: "Поддержка мульти миров в настоящее время отключена."
   onEnable_02: "Не забудьте установить для параметра enable-multiworld-perms в файле config.yml значение true, если хотите иметь разные разрешения в различных мирах!"
   onEnable_03: "Поддержка мульти миров включена."
-  registerPlayer: "Registering player %var0%..."
+  registerPlayer: "Регистрация игрока %var0%..."
   setProvider_SQLite3: "Тип хранилища данных  - SQLite3."
   setProvider_YAML: "Тип хранилища данных - YAML."
   setProvider_NotFound: "Провайдер данных %var0% не существует. Устанавливается стандартный тип хранилища данных."
-  unregisterPlayer: "Unregistering player %var0%..."
+  unregisterPlayer: "Отмена регистрации игрока %var0%..."
 ...
