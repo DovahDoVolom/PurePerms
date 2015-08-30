@@ -23,7 +23,7 @@ class DefaultProvider implements ProviderInterface
                                                                                        
     */
     
-    private $dataFolder, $groups;
+    private $userDataFolder, $groups;
 
     /**
      * @param PurePerms $plugin
@@ -37,9 +37,9 @@ class DefaultProvider implements ProviderInterface
     
     public function init()
     {
-        $this->dataFolder = $this->plugin->getDataFolder() . "players/";
+        $this->userDataFolder = $this->plugin->getDataFolder() . "players/";
 
-        if(!file_exists($this->dataFolder)) @mkdir($this->dataFolder, 0777, true);
+        if(!file_exists($this->userDataFolder)) @mkdir($this->userDataFolder, 0777, true);
         
         $this->plugin->saveResource("groups.yml");
         
@@ -87,9 +87,9 @@ class DefaultProvider implements ProviderInterface
     {
         $userName = $user->getPlayer()->getName();
         
-        if(!(file_exists($this->dataFolder . strtolower($userName) . ".yml")))
+        if(!(file_exists($this->userDataFolder . strtolower($userName) . ".yml")))
         {
-            return new Config($this->dataFolder . strtolower($userName) . ".yml", Config::YAML, array(
+            return new Config($this->userDataFolder . strtolower($userName) . ".yml", Config::YAML, array(
                 "userName" => $userName,
                 "group" => $this->plugin->getDefaultGroup()->getName(),
                 "permissions" => array(
@@ -100,7 +100,7 @@ class DefaultProvider implements ProviderInterface
         }
         else
         {
-            return new Config($this->dataFolder . strtolower($userName) . ".yml", Config::YAML, array(
+            return new Config($this->userDataFolder . strtolower($userName) . ".yml", Config::YAML, array(
             ));
         }
     }

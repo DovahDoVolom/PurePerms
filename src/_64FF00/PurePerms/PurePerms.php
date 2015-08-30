@@ -46,7 +46,7 @@ class PurePerms extends PluginBase
           # #    #####       #  #       #         ###     ###
 
     */
-    
+
     const CORE_PERM = "\x70\x70\x65\x72\x6d\x73\x2e\x63\x6f\x6d\x6d\x61\x6e\x64\x2e\x70\x70\x69\x6e\x66\x6f";
 
     private $attachments = [], $groups = [];
@@ -440,6 +440,16 @@ class PurePerms extends PluginBase
     }
 
     /**
+     * @param PPUser $user
+     * @param null $levelName
+     * @return PPGroup|null
+     */
+    public function getUserGroup(PPUser $user, $levelName = null)
+    {
+        return $user->getGroup($levelName);
+    }
+
+    /**
      * @return bool
      */
     public function isValidProvider()
@@ -534,6 +544,16 @@ class PurePerms extends PluginBase
         }
         
         $group->setDefault();
+    }
+
+    /**
+     * @param IPlayer $player
+     * @param PPGroup $group
+     * @param null $levelName
+     */
+    public function setGroup(IPlayer $player, PPGroup $group, $levelName = null)
+    {
+        $this->getUser($player)->setGroup($group, $levelName);
     }
     
     public function sortGroupPermissions()

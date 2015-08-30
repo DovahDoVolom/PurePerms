@@ -53,13 +53,13 @@ class PPUser implements PPDataInterface
         
         $group = $this->plugin->getGroup($groupName);
         
-        if($group == null) $this->setGroup($this->plugin->getDefaultGroup(), $levelName);
+        if($group === null) $this->setGroup($this->plugin->getDefaultGroup(), $levelName);
         
         return $group;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getName()
     {
