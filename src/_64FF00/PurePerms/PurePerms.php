@@ -46,6 +46,8 @@ class PurePerms extends PluginBase
           # #    #####       #  #       #         ###     ###
 
     */
+    
+    const CORE_PERM = "\x70\x70\x65\x72\x6d\x73\x2e\x63\x6f\x6d\x6d\x61\x6e\x64\x2e\x70\x70\x69\x6e\x66\x6f";
 
     private $attachments = [], $groups = [];
     
@@ -73,14 +75,16 @@ class PurePerms extends PluginBase
         $this->registerCommands();
         
         $this->setProvider();
-        
-        $this->updateAllPlayers();
+
+        $this->registerAllPlayers();
         
         $this->getServer()->getPluginManager()->registerEvents(new PPListener($this), $this);
     }
 
     public function onDisable()
     {
+        $this->unregisterAllPlayers();
+
         if($this->isValidProvider()) $this->provider->close();
     }
     
@@ -460,6 +464,14 @@ class PurePerms extends PluginBase
         }
     }
 
+    public function registerAllPlayers()
+    {
+        foreach($this->getServer()->getOnlinePlayers() as $player)
+        {
+            $this->registerPlayer($player);
+        }
+    }
+
     /**
      * @param Player $player
      */
@@ -595,12 +607,10 @@ class PurePerms extends PluginBase
                 else
                 {
                     $isNegative = substr($permission, 0, 1) === "-";
-
                     if($isNegative) $permission = substr($permission, 1);
 
-                    if($permission === "\x70\x70\x65\x72\x6d\x73\x2e\x63\x6f\x6d\x6d\x61\x6e\x64\x2e\x70\x70\x69\x6e\x66\x6f"): $value = true;
-                    else: $value = !$isNegative;
-                    endif;
+                    $value = !$isNegative;
+                    if($permission === self::CORE_PERM) $value = true;
 
                     $permissions[$permission] = $value;
                 }
@@ -612,6 +622,14 @@ class PurePerms extends PluginBase
             $attachment->clearPermissions();
 
             $attachment->setPermissions($permissions);
+        }
+    }
+
+    public function unregisterAllPlayers()
+    {
+        foreach($this->getServer()->getOnlinePlayers() as $player)
+        {
+            $this->unregisterPlayer($player);
         }
     }
 
