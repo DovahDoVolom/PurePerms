@@ -69,17 +69,6 @@ class PPListener implements Listener
     }
 
     /**
-     * @param PlayerKickEvent $event
-     * @priority HIGHEST
-     */
-    public function onPlayerKick(PlayerKickEvent $event)
-    {
-        $player = $event->getPlayer();
-
-        $this->plugin->unregisterPlayer($player);
-    }
-
-    /**
      * @param PlayerQuitEvent $event
      * @priority HIGHEST
      */
