@@ -208,7 +208,7 @@ class PurePerms extends PluginBase
 
     public function getAttachment(Player $player)
     {
-        $uniqueId = $player->getUniqueId();
+        $uniqueId = $player->getUniqueId()->toString();
 
         if(!isset($this->attachments[$uniqueId])) throw new \RuntimeException("Tried to calculate permissions on " .  $player->getName() . " using null attachment");
 
@@ -489,8 +489,9 @@ class PurePerms extends PluginBase
     {
         $this->getLogger()->debug($this->getMessage("logger_messages.registerPlayer", $player->getName()));
 
-        $uniqueId = $player->getUniqueId();
+        $uniqueId = $player->getUniqueId()->toString();
 
+        // TODO: Fix 'Illegal offset type in isset or empty' error
         if(isset($this->attachments[$uniqueId])) $this->unregisterPlayer($player);
 
         $attachment = $player->addAttachment($this);
@@ -660,7 +661,7 @@ class PurePerms extends PluginBase
     {
         $this->getLogger()->debug($this->getMessage("logger_messages.unregisterPlayer", $player->getName()));
 
-        $uniqueId = $player->getUniqueId();
+        $uniqueId = $player->getUniqueId()->toString();
 
         if(isset($this->attachments[$uniqueId])) $player->removeAttachment($this->attachments[$uniqueId]);
 

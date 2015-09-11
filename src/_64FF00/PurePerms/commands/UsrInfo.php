@@ -90,12 +90,12 @@ class UsrInfo extends Command implements PluginIdentifiableCommand
         $ip = $player instanceof Player ? TextFormat::GREEN . $player->getAddress() : TextFormat::RED . $this->plugin->getMessage("cmds.usrinfo.messages.unknown");
         $sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.usrinfo.messages.usrinfo_ip", $ip));
 
-        $uuid = $player instanceof Player ? TextFormat::GREEN . $player->getUniqueId() : TextFormat::RED . $this->plugin->getMessage("cmds.usrinfo.messages.unknown");
+        $uuid = $player instanceof Player ? TextFormat::GREEN . $player->getUniqueId()->toString() : TextFormat::RED . $this->plugin->getMessage("cmds.usrinfo.messages.unknown");
         $sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.usrinfo.messages.usrinfo_uuid", $uuid));
         
         $userGroup = $user->getGroup($levelName);
         
-        $sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.usrinfo.messages.usrinfo_group", $userGroup->getName()));
+        $sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.usrinfo.messages.usrinfo_group", TextFormat::GREEN . $userGroup->getName()));
         
         return true;
     }
