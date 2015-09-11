@@ -38,8 +38,6 @@ class DefaultProvider implements ProviderInterface
     public function init()
     {
         $this->userDataFolder = $this->plugin->getDataFolder() . "players/";
-
-        if(!file_exists($this->userDataFolder)) @mkdir($this->userDataFolder, 0777, true);
         
         $this->plugin->saveResource("groups.yml");
         
@@ -86,6 +84,8 @@ class DefaultProvider implements ProviderInterface
     public function getUserConfig(PPUser $user)
     {
         $userName = $user->getPlayer()->getName();
+
+        if(!file_exists($this->userDataFolder)) @mkdir($this->userDataFolder, 0777, true);
         
         if(!(file_exists($this->userDataFolder . strtolower($userName) . ".yml")))
         {
