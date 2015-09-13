@@ -487,7 +487,7 @@ class PurePerms extends PluginBase
     {
         $this->getLogger()->debug($this->getMessage("logger_messages.registerPlayer", $player->getName()));
 
-        $uniqueId = $player->getUniqueId();
+        $uniqueId = $player->getUniqueId()->toString();
 
         if(isset($this->attachments[$uniqueId])) $this->unregisterPlayer($player);
 
@@ -658,7 +658,7 @@ class PurePerms extends PluginBase
     {
         $this->getLogger()->debug($this->getMessage("logger_messages.unregisterPlayer", $player->getName()));
 
-        $uniqueId = $player->getUniqueId();
+        $uniqueId = $player->getUniqueId()->toString();
 
         if(isset($this->attachments[$uniqueId])) $player->removeAttachment($this->attachments[$uniqueId]);
 
