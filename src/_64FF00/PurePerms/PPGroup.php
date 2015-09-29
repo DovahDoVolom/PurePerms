@@ -1,8 +1,6 @@
 <?php
 
-namespace _64FF00\PurePerms\ppdata;
-
-use _64FF00\PurePerms\PurePerms;
+namespace _64FF00\PurePerms;
 
 class PPGroup implements PPDataInterface
 {
@@ -18,6 +16,8 @@ class PPGroup implements PPDataInterface
           # #    #####       #  #       #         ###     ###                                        
                                                                                        
     */
+
+    private $name, $plugin;
 
     /**
      * @param PurePerms $plugin
@@ -94,12 +94,13 @@ class PPGroup implements PPDataInterface
             
             return [];
         }
-        
+
+        /** @var PPGroup $inheritedGroup */
         foreach($this->getInheritedGroups() as $inheritedGroup)
         {
             $inheritedGroupPermissions = $inheritedGroup->getGroupPermissions($levelName);
             
-            if($inheritedGroupPermissions == null) $inheritedGroupPermissions = [];
+            if($inheritedGroupPermissions === null) $inheritedGroupPermissions = [];
             
             $permissions = array_merge($permissions, $inheritedGroupPermissions);
         }
@@ -112,7 +113,7 @@ class PPGroup implements PPDataInterface
      */
     public function getUsers($levelName = null)
     {
-        
+        // TODO
     }
 
     /**
@@ -127,10 +128,10 @@ class PPGroup implements PPDataInterface
         {
             $tempGroupData = $this->getData();
             
-            $tempGroupData["worlds"][$levelName] = array(
-                "permissions" => array(
-                )
-            );
+            $tempGroupData["worlds"][$levelName] = [
+                "permissions" => [
+                ]
+            ];
                 
             $this->setData($tempGroupData);
         }

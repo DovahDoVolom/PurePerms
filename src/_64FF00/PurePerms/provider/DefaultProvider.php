@@ -3,27 +3,28 @@
 namespace _64FF00\PurePerms\provider;
 
 use _64FF00\PurePerms\PurePerms;
-use _64FF00\PurePerms\ppdata\PPGroup;
-use _64FF00\PurePerms\ppdata\PPUser;
+use _64FF00\PurePerms\PPGroup;
+
+use pocketmine\IPlayer;
 
 use pocketmine\utils\Config;
 
 class DefaultProvider implements ProviderInterface
 {
-    /* PurePerms by 64FF00 (xktiverz@gmail.com, @64ff00 for Twitter) */
-
     /*
-          # #    #####  #       ####### #######   ###     ###   
-          # #   #     # #    #  #       #        #   #   #   #  
-        ####### #       #    #  #       #       #     # #     # 
-          # #   ######  #    #  #####   #####   #     # #     # 
-        ####### #     # ####### #       #       #     # #     # 
-          # #   #     #      #  #       #        #   #   #   #  
-          # #    #####       #  #       #         ###     ###                                        
-                                                                                       
+        PurePerms by 64FF00 (Twitter: @64FF00)
+
+          888  888    .d8888b.      d8888  8888888888 8888888888 .d8888b.   .d8888b.
+          888  888   d88P  Y88b    d8P888  888        888       d88P  Y88b d88P  Y88b
+        888888888888 888          d8P 888  888        888       888    888 888    888
+          888  888   888d888b.   d8P  888  8888888    8888888   888    888 888    888
+          888  888   888P "Y88b d88   888  888        888       888    888 888    888
+        888888888888 888    888 8888888888 888        888       888    888 888    888
+          888  888   Y88b  d88P       888  888        888       Y88b  d88P Y88b  d88P
+          888  888    "Y8888P"        888  888        888        "Y8888P"   "Y8888P"
     */
     
-    private $userDataFolder, $groups;
+    private $groups;
 
     /**
      * @param PurePerms $plugin
@@ -31,18 +32,11 @@ class DefaultProvider implements ProviderInterface
     public function __construct(PurePerms $plugin)
     {
         $this->plugin = $plugin;
-        
-        $this->init();
-    }
-    
-    public function init()
-    {
-        $this->userDataFolder = $this->plugin->getDataFolder() . "players/";
-        
+
         $this->plugin->saveResource("groups.yml");
-        
-        $this->groups = new Config($this->plugin->getDataFolder() . "groups.yml", Config::YAML, array(
-        ));
+
+        $this->groups = new Config($this->plugin->getDataFolder() . "groups.yml", Config::YAML, [
+        ]);
     }
 
     /**
@@ -53,10 +47,7 @@ class DefaultProvider implements ProviderInterface
     {
         $groupName = $group->getName();
         
-        if(!isset($this->getGroupsData()[$groupName]) || !is_array($this->getGroupsData()[$groupName]))
-        {
-            return [];
-        }
+        if(!isset($this->getGroupsData()[$groupName]) || !is_array($this->getGroupsData()[$groupName])) return [];
 
         return $this->getGroupsData()[$groupName];
     }
@@ -78,42 +69,20 @@ class DefaultProvider implements ProviderInterface
     }
 
     /**
-     * @param PPUser $user
-     * @return Config
+     * @param IPlayer $player
+     * @return array|Config
      */
-    public function getUserConfig(PPUser $user)
+    public function getPlayerData(IPlayer $player)
     {
-        $userName = $user->getPlayer()->getName();
+        $userName = $player->getName();
+        $defaultGroupName = $this->plugin->getDefaultGroup()->getName();
 
-        if(!file_exists($this->userDataFolder)) @mkdir($this->userDataFolder, 0777, true);
-        
-        if(!(file_exists($this->userDataFolder . strtolower($userName) . ".yml")))
+        // TODO
+        if(!(file_exists($this->plugin->getDataFolder() . "players/" . strtolower($userName) . ".yml")))
         {
-            return new Config($this->userDataFolder . strtolower($userName) . ".yml", Config::YAML, array(
-                "userName" => $userName,
-                "group" => $this->plugin->getDefaultGroup()->getName(),
-                "permissions" => array(
-                ),
-                "worlds" => array(
-                )
-            ));
         }
-        else
-        {
-            return new Config($this->userDataFolder . strtolower($userName) . ".yml", Config::YAML, array(
-            ));
-        }
-    }
 
-    /**
-     * @param PPUser $user
-     * @return mixed
-     */
-    public function getUserData(PPUser $user)
-    {
-        $userConfig = $this->getUserConfig($user);
-        
-        return $userConfig->getAll();
+        // TODO
     }
 
     /**
@@ -123,9 +92,9 @@ class DefaultProvider implements ProviderInterface
     public function setGroupData(PPGroup $group, array $tempGroupData)
     {
         $groupName = $group->getName();
-        
+
         $this->groups->set($groupName, $tempGroupData);
-        
+
         $this->groups->save();
     }
 
@@ -135,21 +104,16 @@ class DefaultProvider implements ProviderInterface
     public function setGroupsData(array $tempGroupsData)
     {
         $this->groups->setAll($tempGroupsData);
-        
+
         $this->groups->save();
     }
 
     /**
-     * @param PPUser $user
+     * @param IPlayer $player
      * @param array $tempUserData
      */
-    public function setUserData(PPUser $user, array $tempUserData)
+    public function setPlayerData(IPlayer $player, array $tempUserData)
     {
-        $userData = $this->getUserConfig($user);
-        
-        $userData->setAll($tempUserData);
-            
-        $userData->save();
     }
     
     public function close()

@@ -93,7 +93,7 @@ cmds:
     usage: "Пример: /unsetuperm <игрок> <разрешение> [мир]"
     messages: 
       level_not_exist: "Мир %var0% не существует."
-      uperm_removed_successfully: "Разрешение  %var0% успешно отобрано у игрока %var1%."
+      uperm_removed_successfully: "Разрешение %var0% успешно отобрано у игрока %var1%."
   usrinfo: 
     desc: "Показывает информацию об игроке. #64FF00"
     usage: "Пример: /usrinfo <игрок> [мир]"

@@ -3,22 +3,23 @@
 namespace _64FF00\PurePerms\provider;
 
 use _64FF00\PurePerms\PurePerms;
-use _64FF00\PurePerms\ppdata\PPGroup;
-use _64FF00\PurePerms\ppdata\PPUser;
+use _64FF00\PurePerms\PPGroup;
+
+use pocketmine\IPlayer;
 
 class SQLite3Provider implements ProviderInterface
 {
-    /* PurePerms by 64FF00 (xktiverz@gmail.com, @64ff00 for Twitter) */
-
     /*
-          # #    #####  #       ####### #######   ###     ###   
-          # #   #     # #    #  #       #        #   #   #   #  
-        ####### #       #    #  #       #       #     # #     # 
-          # #   ######  #    #  #####   #####   #     # #     # 
-        ####### #     # ####### #       #       #     # #     # 
-          # #   #     #      #  #       #        #   #   #   #  
-          # #    #####       #  #       #         ###     ###                                        
-                                                                                       
+        PurePerms by 64FF00 (Twitter: @64FF00)
+
+          888  888    .d8888b.      d8888  8888888888 8888888888 .d8888b.   .d8888b.
+          888  888   d88P  Y88b    d8P888  888        888       d88P  Y88b d88P  Y88b
+        888888888888 888          d8P 888  888        888       888    888 888    888
+          888  888   888d888b.   d8P  888  8888888    8888888   888    888 888    888
+          888  888   888P "Y88b d88   888  888        888       888    888 888    888
+        888888888888 888    888 8888888888 888        888       888    888 888    888
+          888  888   Y88b  d88P       888  888        888       Y88b  d88P Y88b  d88P
+          888  888    "Y8888P"        888  888        888        "Y8888P"   "Y8888P"
     */
     
     private $db, $groupsData;
@@ -29,16 +30,11 @@ class SQLite3Provider implements ProviderInterface
     public function __construct(PurePerms $plugin)
     {
         $this->plugin = $plugin;
-        
-        $this->init();
-    }
-    
-    public function init()
-    {
+
         $this->db = new \SQLite3($this->plugin->getDataFolder() . "PurePerms.db");
-            
+
         $db_query = stream_get_contents($this->plugin->getResource("sqlite3_deploy.sql"));
-        
+
         $this->db->exec($db_query);
 
         $this->loadGroupsData();
@@ -66,12 +62,13 @@ class SQLite3Provider implements ProviderInterface
     }
 
     /**
-     * @param PPUser $user
+     * @param IPlayer $player
      * @return array
      */
-    public function getUserData(PPUser $user)
+    public function getPlayerData(IPlayer $player)
     {
-        $userName = $user->getName();
+        $userName = $player->getName();
+
         $userData = [
             "userName" => $userName,
             "group" => $this->plugin->getDefaultGroup()->getName(),
@@ -230,12 +227,12 @@ class SQLite3Provider implements ProviderInterface
     }
 
     /**
-     * @param PPUser $user
+     * @param IPlayer $player
      * @param array $tempUserData
      */
-    public function setUserData(PPUser $user, array $tempUserData)
+    public function setPlayerData(IPlayer $player, array $tempUserData)
     {
-        $userName = $user->getName();
+        $userName = $player->getName();
         $userGroup = $this->plugin->getDefaultGroup()->getName();
         $permissions = "";
 
