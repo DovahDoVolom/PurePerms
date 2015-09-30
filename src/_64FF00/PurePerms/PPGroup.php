@@ -2,7 +2,7 @@
 
 namespace _64FF00\PurePerms;
 
-class PPGroup implements PPDataInterface
+class PPGroup
 {
     /* PurePerms by 64FF00 (xktiverz@gmail.com, @64ff00 for Twitter) */
 

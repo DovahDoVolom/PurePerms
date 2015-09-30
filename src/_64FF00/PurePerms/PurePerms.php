@@ -2,9 +2,27 @@
 
 namespace _64FF00\PurePerms;
 
+use _64FF00\PurePerms\cmd\AddGroup;
+use _64FF00\PurePerms\cmd\DefGroup;
+use _64FF00\PurePerms\cmd\FPerms;
+use _64FF00\PurePerms\cmd\Groups;
+use _64FF00\PurePerms\cmd\ListGPerms;
+use _64FF00\PurePerms\cmd\ListUPerms;
+use _64FF00\PurePerms\cmd\PPInfo;
+use _64FF00\PurePerms\cmd\PPReload;
+use _64FF00\PurePerms\cmd\RmGroup;
+use _64FF00\PurePerms\cmd\SetGPerm;
+use _64FF00\PurePerms\cmd\SetGroup;
+use _64FF00\PurePerms\cmd\SetUPerm;
+use _64FF00\PurePerms\cmd\UnsetGPerm;
+use _64FF00\PurePerms\cmd\UnsetUPerm;
+use _64FF00\PurePerms\cmd\UsrInfo;
+use _64FF00\PurePerms\data\UserDataManager;
 use _64FF00\PurePerms\provider\DefaultProvider;
 use _64FF00\PurePerms\provider\ProviderInterface;
 use _64FF00\PurePerms\provider\SQLite3Provider;
+
+use pocketmine\IPlayer;
 
 use pocketmine\permission\PermissionAttachment;
 
@@ -37,14 +55,18 @@ class PurePerms extends PluginBase
     /** @var ProviderInterface $provider */
     private $provider;
 
+    /** @var UserDataManager $userDataMgr */
+    private $userDataMgr;
+
     private $attachments = [], $groups = [];
 
     public function onLoad()
     {
         $this->saveDefaultConfig();
 
-        /** @var PPMessages messages */
         $this->messages = new PPMessages($this);
+
+        $this->userDataMgr = new UserDataManager($this);
 
         if($this->getConfigValue("enable-multiworld-perms") === false)
         {
@@ -59,16 +81,42 @@ class PurePerms extends PluginBase
     
     public function onEnable()
     {
+        $this->registerCommands();
+
         $this->setProvider();
 
-        $this->registerAll();
+        $this->registerPlayers();
+
+        $this->getServer()->getPluginManager()->registerEvents(new PPListener($this), $this);
     }
 
     public function onDisable()
     {
-        $this->unregisterAll();
+        $this->unregisterPlayers();
 
-        if($this->isValidProvider()) $this->provider->close();
+        if($this->isValidProvider())
+            $this->provider->close();
+    }
+
+    private function registerCommands()
+    {
+        $commandMap = $this->getServer()->getCommandMap();
+
+        $commandMap->register("addgroup", new AddGroup($this, "addgroup", $this->getMessage("cmds.addgroup.desc")));
+        $commandMap->register("defgroup", new DefGroup($this, "defgroup", $this->getMessage("cmds.defgroup.desc")));
+        $commandMap->register("fperms", new FPerms($this, "fperms", $this->getMessage("cmds.fperms.desc")));
+        $commandMap->register("groups", new Groups($this, "groups", $this->getMessage("cmds.groups.desc")));
+        $commandMap->register("listgperms", new ListGPerms($this, "listgperms", $this->getMessage("cmds.listgperms.desc")));
+        $commandMap->register("listuperms", new ListUPerms($this, "listuperms", $this->getMessage("cmds.listuperms.desc")));
+        $commandMap->register("ppinfo", new PPInfo($this, "ppinfo", $this->getMessage("cmds.ppinfo.desc")));
+        $commandMap->register("ppreload", new PPReload($this, "ppreload", $this->getMessage("cmds.ppreload.desc")));
+        $commandMap->register("rmgroup", new RmGroup($this, "rmgroup", $this->getMessage("cmds.rmgroup.desc")));
+        $commandMap->register("setgperm", new SetGPerm($this, "setgperm", $this->getMessage("cmds.setgperm.desc")));
+        $commandMap->register("setgroup", new SetGroup($this, "setgroup", $this->getMessage("cmds.setgroup.desc")));
+        $commandMap->register("setuperm", new SetUPerm($this, "setuperm", $this->getMessage("cmds.setuperm.desc")));
+        $commandMap->register("unsetgperm", new UnsetGPerm($this, "unsetgperm", $this->getMessage("cmds.unsetgperm.desc")));
+        $commandMap->register("unsetuperm", new UnsetUPerm($this, "unsetuperm", $this->getMessage("cmds.unsetuperm.desc")));
+        $commandMap->register("usrinfo", new UsrInfo($this, "usrinfo", $this->getMessage("cmds.usrinfo.desc")));
     }
 
     /**
@@ -84,7 +132,8 @@ class PurePerms extends PluginBase
 
                 $provider = new SQLite3Provider($this);
 
-                if($onEnable === true) $this->getLogger()->info($this->getMessage("logger_messages.setProvider_SQLite3"));
+                if($onEnable === true)
+                    $this->getLogger()->info($this->getMessage("logger_messages.setProvider_SQLite3"));
 
                 break;
 
@@ -92,7 +141,8 @@ class PurePerms extends PluginBase
 
                 $provider = new DefaultProvider($this);
 
-                if($onEnable === true) $this->getLogger()->info($this->getMessage("logger_messages.setProvider_YAML"));
+                if($onEnable === true)
+                    $this->getLogger()->info($this->getMessage("logger_messages.setProvider_YAML"));
 
                 break;
 
@@ -100,12 +150,14 @@ class PurePerms extends PluginBase
 
                 $provider = new DefaultProvider($this);
 
-                if($onEnable === true) $this->getLogger()->warning($this->getMessage("logger_messages.setProvider_NotFound"));
+                if($onEnable === true)
+                    $this->getLogger()->warning($this->getMessage("logger_messages.setProvider_NotFound"));
 
                 break;
         }
 
-        if(!$this->isValidProvider()) $this->provider = $provider;
+        if(!$this->isValidProvider())
+            $this->provider = $provider;
 
         $this->loadGroups();
     }
@@ -122,6 +174,32 @@ class PurePerms extends PluginBase
     */
 
     /**
+     * @param $groupName
+     * @return bool
+     */
+    public function addGroup($groupName)
+    {
+        $groupsData = $this->getProvider()->getGroupsData(true);
+
+        if(isset($groupsData[$groupName]))
+            return false;
+
+        $groupsData[$groupName] = [
+            "isDefault" => false,
+            "inheritance" => [
+            ],
+            "permissions" => [
+            ],
+            "worlds" => [
+            ]
+        ];
+
+        $this->getProvider()->setGroupsData($groupsData);
+
+        return true;
+    }
+
+    /**
      * @param Player $player
      * @return null|\pocketmine\permission\PermissionAttachment
      */
@@ -129,7 +207,8 @@ class PurePerms extends PluginBase
     {
         $uniqueId = $this->getValidUUID($player);
 
-        if(!isset($this->attachments[$uniqueId])) throw new \RuntimeException("Tried to calculate permissions on " .  $player->getName() . " using null attachment");
+        if(!isset($this->attachments[$uniqueId]))
+            throw new \RuntimeException("Tried to calculate permissions on " .  $player->getName() . " using null attachment");
 
         return $this->attachments[$uniqueId];
     }
@@ -161,7 +240,8 @@ class PurePerms extends PluginBase
 
         foreach($this->getGroups() as $defaultGroup)
         {
-            if($defaultGroup->isDefault()) array_push($defaultGroups, $defaultGroup);
+            if($defaultGroup->isDefault())
+                $defaultGroups[] = $defaultGroup;
         }
 
         if(count($defaultGroups) == 1)
@@ -228,7 +308,8 @@ class PurePerms extends PluginBase
      */
     public function getGroups()
     {
-        if($this->isGroupsLoaded != true) throw new \RuntimeException("No groups loaded, maybe a provider error?");
+        if($this->isGroupsLoaded != true)
+            throw new \RuntimeException("No groups loaded, maybe a provider error?");
 
         return $this->groups;
     }
@@ -253,7 +334,13 @@ class PurePerms extends PluginBase
 
         foreach($this->getServer()->getOnlinePlayers() as $player)
         {
-            if($this->getUser($player)->getGroup() === $group) $users[] = $player;
+            foreach($this->getServer()->getLevels() as $level)
+            {
+                $levelName = $level->getName();
+
+                if($this->userDataMgr->getGroup($player, $levelName) === $group)
+                    $users[] = $player;
+            }
         }
 
         return $users;
@@ -266,13 +353,24 @@ class PurePerms extends PluginBase
      */
     public function getPermissions(IPlayer $player, $levelName)
     {
-        $user = $this->getUser($player);
-        $group = $user->getGroup($levelName);
+        // TODO: ...
+        $group = $this->userDataMgr->getGroup($player, $levelName);
 
         $groupPerms = $group->getGroupPermissions($levelName);
-        $userPerms = $user->getUserPermissions($levelName);
+        $userPerms = $this->userDataMgr->getUserPermissions($player, $levelName);
 
         return array_merge($groupPerms, $userPerms);
+    }
+
+    /**
+     * @param $userName
+     * @return Player
+     */
+    public function getPlayer($userName)
+    {
+        $player = $this->getServer()->getPlayer($userName);
+
+        return $player instanceof Player ? $player : $this->getServer()->getOfflinePlayer($userName);
     }
 
     /**
@@ -288,18 +386,18 @@ class PurePerms extends PluginBase
      */
     public function getProvider()
     {
-        if(!$this->isValidProvider()) $this->setProvider(false);
+        if(!$this->isValidProvider())
+            $this->setProvider(false);
 
         return $this->provider;
     }
 
     /**
-     * @param IPlayer $player
-     * @return PPUser
+     * @return UserDataManager
      */
-    public function getUser(IPlayer $player)
+    public function getUserDataMgr()
     {
-        return new PPUser($this, $player);
+        return $this->userDataMgr;
     }
 
     /**
@@ -325,7 +423,8 @@ class PurePerms extends PluginBase
      */
     public function isValidProvider()
     {
-        if(!isset($this->provider) || $this->provider == null || !($this->provider instanceof ProviderInterface)) return false;
+        if(!isset($this->provider) || $this->provider == null || !($this->provider instanceof ProviderInterface))
+            return false;
 
         return true;
     }
@@ -344,14 +443,6 @@ class PurePerms extends PluginBase
         $this->sortGroupPermissions();
     }
 
-    public function registerAll()
-    {
-        foreach($this->getServer()->getOnlinePlayers() as $player)
-        {
-            $this->registerPlayer($player);
-        }
-    }
-
     /**
      * @param Player $player
      */
@@ -368,6 +459,14 @@ class PurePerms extends PluginBase
         $this->updatePermissions($player);
     }
 
+    public function registerPlayers()
+    {
+        foreach($this->getServer()->getOnlinePlayers() as $player)
+        {
+            $this->registerPlayer($player);
+        }
+    }
+
     public function reload()
     {
         $this->reloadConfig();
@@ -375,7 +474,8 @@ class PurePerms extends PluginBase
 
         $this->messages->reloadMessages();
 
-        if(!$this->isValidProvider()) $this->setProvider(false);
+        if(!$this->isValidProvider())
+            $this->setProvider(false);
     }
 
     /**
@@ -386,7 +486,8 @@ class PurePerms extends PluginBase
     {
         $groupsData = $this->getProvider()->getGroupsData(true);
 
-        if(!isset($groupsData[$groupName])) return false;
+        if(!isset($groupsData[$groupName]))
+            return false;
 
         unset($groupsData[$groupName]);
 
@@ -404,7 +505,8 @@ class PurePerms extends PluginBase
         {
             $isDefault = $currentGroup->getNode("isDefault");
 
-            if($isDefault) $currentGroup->removeNode("isDefault");
+            if($isDefault)
+                $currentGroup->removeNode("isDefault");
         }
 
         $group->setDefault();
@@ -417,7 +519,7 @@ class PurePerms extends PluginBase
      */
     public function setGroup(IPlayer $player, PPGroup $group, $levelName = null)
     {
-        $this->getUser($player)->setGroup($group, $levelName);
+        $this->userDataMgr->setGroup($player, $group, $levelName);
     }
 
     public function sortGroupPermissions()
@@ -451,10 +553,12 @@ class PurePerms extends PluginBase
                 else
                 {
                     $isNegative = substr($permission, 0, 1) === "-";
-                    if($isNegative) $permission = substr($permission, 1);
+                    if($isNegative)
+                        $permission = substr($permission, 1);
 
                     $value = !$isNegative;
-                    if($permission === self::CORE_PERM) $value = true;
+                    if($permission === self::CORE_PERM)
+                        $value = true;
 
                     $permissions[$permission] = $value;
                 }
@@ -469,14 +573,6 @@ class PurePerms extends PluginBase
         }
     }
 
-    public function unregisterAll()
-    {
-        foreach($this->getServer()->getOnlinePlayers() as $player)
-        {
-            $this->unregisterPlayer($player);
-        }
-    }
-
     /**
      * @param Player $player
      */
@@ -486,8 +582,17 @@ class PurePerms extends PluginBase
 
         $uniqueId = $this->getValidUUID($player);
 
-        if(isset($this->attachments[$uniqueId])) $player->removeAttachment($this->attachments[$uniqueId]);
+        if(isset($this->attachments[$uniqueId]))
+            $player->removeAttachment($this->attachments[$uniqueId]);
 
         unset($this->attachments[$uniqueId]);
+    }
+
+    public function unregisterPlayers()
+    {
+        foreach($this->getServer()->getOnlinePlayers() as $player)
+        {
+            $this->unregisterPlayer($player);
+        }
     }
 }

@@ -4,6 +4,7 @@ namespace _64FF00\PurePerms\data;
 
 use _64FF00\PurePerms\PPGroup;
 use _64FF00\PurePerms\PurePerms;
+use _64FF00\PurePerms\event\PPGroupChangedEvent;
 
 use pocketmine\IPlayer;
 
@@ -41,6 +42,20 @@ class UserDataManager
 
     /**
      * @param IPlayer $player
+     * @param null $levelName
+     * @return PPGroup|null
+     */
+    public function getGroup(IPlayer $player, $levelName = null)
+    {
+        $groupName = $levelName != null ? $this->getWorldData($player, $levelName)["group"] : $this->getNode($player, "group");
+
+        $group = $this->plugin->getGroup($groupName);
+
+        return $group;
+    }
+
+    /**
+     * @param IPlayer $player
      * @param $node
      * @return null|mixed
      */
@@ -51,6 +66,24 @@ class UserDataManager
         if(!isset($userData[$node])) return null;
 
         return $userData[$node];
+    }
+
+    /**
+     * @param null $levelName
+     * @return array
+     */
+    public function getUserPermissions(IPlayer $player, $levelName = null)
+    {
+        $permissions = $levelName != null ? $this->getWorldData($player, $levelName)["permissions"] : $this->getNode($player, "permissions");
+
+        if(!is_array($permissions))
+        {
+            $this->plugin->getLogger()->critical("Invalid 'permissions' node given to " . __METHOD__);
+
+            return [];
+        }
+
+        return $permissions;
     }
 
     /**
@@ -108,7 +141,7 @@ class UserDataManager
     {
         if($levelName === null)
         {
-            $this->setNode("group", $group->getName());
+            $this->setNode($player, "group", $group->getName());
         }
         else
         {
