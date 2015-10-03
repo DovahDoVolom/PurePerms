@@ -199,7 +199,7 @@ class PurePerms extends PluginBase
     {
         $groupsData = $this->getProvider()->getGroupsData(true);
 
-        if(!preg_match("/^[0-9a-zA-Z\xA1-\xFE]$/", $groupName))
+        if(!preg_match('/^[0-9a-zA-Z\xA1-\xFE]$/', $groupName))
             return self::INVALID_NAME;
 
         if(isset($groupsData[$groupName]))
