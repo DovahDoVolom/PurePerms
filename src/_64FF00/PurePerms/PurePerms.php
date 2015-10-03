@@ -54,6 +54,8 @@ class PurePerms extends PluginBase
 
     private $isGroupsLoaded = false;
 
+    private $isUUIDSupported = false;
+
     /** @var PPMessages $messages */
     private $messages;
 
@@ -90,6 +92,8 @@ class PurePerms extends PluginBase
 
         $this->setProvider();
 
+        $this->checkForUUIDSupport();
+
         $this->registerPlayers();
 
         $this->getServer()->getPluginManager()->registerEvents(new PPListener($this), $this);
@@ -101,6 +105,15 @@ class PurePerms extends PluginBase
 
         if($this->isValidProvider())
             $this->provider->close();
+    }
+
+    private function checkForUUIDSupport()
+    {
+        $declaredClasses = \get_declared_classes();
+
+        if(isset($declaredClasses['pocketmine\utils\UUID'])) $this->isUUIDSupported = true;
+
+        $this->isUUIDSupported = false;
     }
 
     private function registerCommands()
@@ -414,7 +427,7 @@ class PurePerms extends PluginBase
      */
     public function getValidUUID(Player $player)
     {
-        if(class_exists('\pocketmine\utils\UUID'))
+        if($this->isUUIDSupported)
         {
             $uniqueId = $player->getUniqueId()->toString();
         }
@@ -492,7 +505,7 @@ class PurePerms extends PluginBase
      */
     public function removeGroup($groupName)
     {
-        if(!preg_match("/^[0-9a-zA-Z\xA1-\xFE]$/", $groupName))
+        if(!preg_match('/^[0-9a-zA-Z\xA1-\xFE]$/', $groupName))
             return self::INVALID_NAME;
 
         $groupsData = $this->getProvider()->getGroupsData(true);
