@@ -199,6 +199,8 @@ class PPGroup
         }
 
         $this->plugin->updatePlayersInGroup($this);
+
+        return true;
     }
 
     /**
@@ -290,5 +292,7 @@ class PPGroup
         }
 
         $this->plugin->updatePlayersInGroup($this);
+
+        return true;
     }
 }

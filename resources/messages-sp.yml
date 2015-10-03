@@ -122,7 +122,7 @@ logger_messages:
   onEnable_02: "¡No olvides habilitar el soporte multi-nivel (enable-multiworld-perms: true en config.yml) si quieres establecer permisos-por-mundo!"
   onEnable_03: "El soporte multi-nivel ha sido activado."
   registerPlayer: "Registering player %var0%..."
-  setProvider_MySQL: "Set data provider to MySQL."
+  setProvider_MySQL: "Nastavte poskytovatela dat na MySQL."
   setProvider_SQLite3: "Utilizando SQLite3 como proveedor."
   setProvider_YAML: "Utilizando YAML como proveedor."
   setProvider_NotFound: "El proveedor %var0% NO existe. Utilizando el proveedor predeterminado."
