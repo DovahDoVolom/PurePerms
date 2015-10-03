@@ -11,6 +11,7 @@ cmds:
     messages:
       group_added_successfully: "Added %var0% to the group list successfully."
       group_already_exists: "Group %var0% already exists."
+      invalid_group_name: "Invalid Group Name."
   defgroup:
     desc: "Allows you to set default group. #64FF00"
     usage: "Usage: /defgroup <group>"
@@ -58,6 +59,7 @@ cmds:
     messages:
       group_removed_successfully: "Removed %var0% from the group list successfully."
       group_not_exist: "Group %var0% does NOT exist."
+      invalid_group_name: "Invalid Group Name."
   setgperm: 
     desc: "Adds a permission to the group. #64FF00"
     usage: "Usage: /setgperm <group> <permission> [world]"

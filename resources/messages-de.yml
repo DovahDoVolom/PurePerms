@@ -13,6 +13,7 @@ cmds:
     messages:
       group_added_successfully: "Gruppe %var0% wurde erfolgreich zu der Liste hinzugefügt."
       group_already_exists: "Gruppe %var0% existiert bereits."
+      invalid_group_name: "Invalid Group Name."
   defgroup:
     desc: "Setzt die Standardgruppe. #64FF00"
     usage: "Benutzung: /defgroup <Gruppe>"
@@ -60,6 +61,7 @@ cmds:
     messages:
       group_removed_successfully: "%var0% wurde erfolgreich von der Gruppenliste entfernt."
       group_not_exist: "Gruppe %var0% existiert NICHT."
+      invalid_group_name: "Invalid Group Name."
   setgperm: 
     desc: "Fügt eine Berechtigung zu einer Gruppe hinzu. #64FF00"
     usage: "Benutzung: /setgperm <Gruppe> <Berechtigung> [Welt]"

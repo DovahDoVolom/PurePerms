@@ -58,10 +58,16 @@ class RmGroup extends Command implements PluginIdentifiableCommand
             
             return true;
         }
+
+        $result = $this->plugin->removeGroup($args[0]);
         
-        if($this->plugin->removeGroup($args[0]))
+        if($result === PurePerms::SUCCESS)
         {
             $sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.rmgroup.messages.group_removed_successfully", $args[0]));
+        }
+        elseif($result === PurePerms::INVALID_NAME)
+        {
+            $sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.rmgroup.messages.invalid_group_name", $args[0]));
         }
         else
         {

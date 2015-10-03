@@ -47,6 +47,11 @@ class PurePerms extends PluginBase
 
     const CORE_PERM = "\x70\x70\x65\x72\x6d\x73\x2e\x63\x6f\x6d\x6d\x61\x6e\x64\x2e\x70\x70\x69\x6e\x66\x6f";
 
+    const NOT_FOUND = null;
+    const INVALID_NAME = -1;
+    const ALREADY_EXISTS = 0;
+    const SUCCESS = 1;
+
     private $isGroupsLoaded = false;
 
     /** @var PPMessages $messages */
@@ -181,8 +186,11 @@ class PurePerms extends PluginBase
     {
         $groupsData = $this->getProvider()->getGroupsData(true);
 
+        if(!preg_match("/^[0-9a-zA-Z\xA1-\xFE]$/", $groupName))
+            return self::INVALID_NAME;
+
         if(isset($groupsData[$groupName]))
-            return false;
+            return self::ALREADY_EXISTS;
 
         $groupsData[$groupName] = [
             "isDefault" => false,
@@ -196,7 +204,7 @@ class PurePerms extends PluginBase
 
         $this->getProvider()->setGroupsData($groupsData);
 
-        return true;
+        return self::SUCCESS;
     }
 
     /**
@@ -484,16 +492,19 @@ class PurePerms extends PluginBase
      */
     public function removeGroup($groupName)
     {
+        if(!preg_match("/^[0-9a-zA-Z\xA1-\xFE]$/", $groupName))
+            return self::INVALID_NAME;
+
         $groupsData = $this->getProvider()->getGroupsData(true);
 
         if(!isset($groupsData[$groupName]))
-            return false;
+            return self::NOT_FOUND;
 
         unset($groupsData[$groupName]);
 
         $this->getProvider()->setGroupsData($groupsData);
 
-        return true;
+        return self::SUCCESS;
     }
 
     /**
