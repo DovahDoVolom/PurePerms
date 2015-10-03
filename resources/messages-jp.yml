@@ -120,6 +120,7 @@ logger_messages:
   onEnable_02: "per-world（ワールドごとの)権限を使用するには、config.ymlのenable-multiworld-permissionをtrueに設定することを忘れないでください！"
   onEnable_03: "マルチワールド対応が有効です。"
   registerPlayer: "プレイヤーを%var0%に登録しています..."
+  setProvider_MySQL: "Set data provider to MySQL."
   setProvider_SQLite3: "SQLite3にデーター管理方式が設定されました。"
   setProvider_YAML: "YAMLにデーター管理方式が設定されました。"
   setProvider_NotFound: "データー管理方式%var0%は存在しません。デフォルトの方式に設定しました。"

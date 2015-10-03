@@ -13,7 +13,7 @@ cmds:
     messages:
       group_added_successfully: "Группа %var0% успешно создана."
       group_already_exists: "Ошибка! Группа %var0% уже существует."
-      invalid_group_name: "Invalid Group Name."
+      invalid_group_name: "Введите нормальное название группы."
   defgroup:
     desc: "Изменяет группу по умолчанию. #64FF00"
     usage: "Пример: /defgroup <группа>"
@@ -61,7 +61,7 @@ cmds:
     messages:
       group_removed_successfully: "Группа %var0% успешно удалена."
       group_not_exist: "Группа %var0% не существует."
-      invalid_group_name: "Invalid Group Name."
+      invalid_group_name: "Введите нормальное название группы."
   setgperm: 
     desc: "Добавляет разрешение группе. #64FF00"
     usage: "Пример: /setgperm <группа> <разрешение> [мир]"
