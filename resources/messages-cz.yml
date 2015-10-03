@@ -13,6 +13,7 @@ cmds:
     messages:
       group_added_successfully: "%var0% Skupina byla uspesne nahrana."
       group_already_exists: "Skupina %var0% uz existuje."
+      invalid_group_name: "Invalid Group Name."
   defgroup:
     desc: "Umoznuje nastavit vychozi skupiny. #64FF00"
     usage: "Pouzij: /defgroup <skupina>"
@@ -60,6 +61,7 @@ cmds:
     messages:
       group_removed_successfully: "Odstraneni %var0% skupiny ze seznamu skupin probehlo uspesne."
       group_not_exist: "Skupina %var0% neexistuje."
+      invalid_group_name: "Invalid Group Name."
   setgperm: 
     desc: "Prida opravneni skupiny. #64FF00"
     usage: "Pouziti: /setgperm <skupina> <opravneni> [Svet]"

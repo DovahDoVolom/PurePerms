@@ -1,6 +1,6 @@
 <?php
 
-namespace _64FF00\PurePerms\commands;
+namespace _64FF00\PurePerms\cmd;
 
 use _64FF00\PurePerms\PurePerms;
 
@@ -10,19 +10,19 @@ use pocketmine\command\PluginIdentifiableCommand;
 
 use pocketmine\utils\TextFormat;
 
-class UnsetUPerm extends Command implements PluginIdentifiableCommand
+class UnsetGPerm extends Command implements PluginIdentifiableCommand
 {
-    /* PurePerms by 64FF00 (xktiverz@gmail.com, @64ff00 for Twitter) */
-
     /*
-          # #    #####  #       ####### #######   ###     ###   
-          # #   #     # #    #  #       #        #   #   #   #  
-        ####### #       #    #  #       #       #     # #     # 
-          # #   ######  #    #  #####   #####   #     # #     # 
-        ####### #     # ####### #       #       #     # #     # 
-          # #   #     #      #  #       #        #   #   #   #  
-          # #    #####       #  #       #         ###     ###                                        
-                                                                                       
+        PurePerms by 64FF00 (Twitter: @64FF00)
+
+          888  888    .d8888b.      d8888  8888888888 8888888888 .d8888b.   .d8888b.
+          888  888   d88P  Y88b    d8P888  888        888       d88P  Y88b d88P  Y88b
+        888888888888 888          d8P 888  888        888       888    888 888    888
+          888  888   888d888b.   d8P  888  8888888    8888888   888    888 888    888
+          888  888   888P "Y88b d88   888  888        888       888    888 888    888
+        888888888888 888    888 8888888888 888        888       888    888 888    888
+          888  888   Y88b  d88P       888  888        888       Y88b  d88P Y88b  d88P
+          888  888    "Y8888P"        888  888        888        "Y8888P"   "Y8888P"
     */
 
     /**
@@ -36,7 +36,7 @@ class UnsetUPerm extends Command implements PluginIdentifiableCommand
         
         parent::__construct($name, $description);
         
-        $this->setPermission("pperms.command.unsetuperm");
+        $this->setPermission("pperms.command.unsetgperm");
     }
 
     /**
@@ -54,12 +54,19 @@ class UnsetUPerm extends Command implements PluginIdentifiableCommand
         
         if(count($args) < 2 || count($args) > 3)
         {
-            $sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.unsetuperm.usage"));
+            $sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.unsetgperm.usage"));
             
             return true;
         }
         
-        $player = $this->plugin->getPlayer($args[0]);
+        $group = $this->plugin->getGroup($args[0]);
+        
+        if($group == null) 
+        {
+            $sender->sendMessage(TextFormat::RED . "[PurePerms] " . $this->plugin->getMessage("cmds.unsetgperm.messages.group_not_exist", $args[0]));
+            
+            return true;
+        }
         
         $permission = $args[1];
         
@@ -79,9 +86,9 @@ class UnsetUPerm extends Command implements PluginIdentifiableCommand
             $levelName = $level->getName();
         }
         
-        $this->plugin->getUser($player)->unsetUserPermission($permission, $levelName);
+        $group->unsetGroupPermission($permission, $levelName);
         
-        $sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.unsetuperm.messages.uperm_removed_successfully", $permission, $player->getName()));
+        $sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.unsetgperm.messages.gperm_removed_successfully", $permission));
         
         return true;
     }

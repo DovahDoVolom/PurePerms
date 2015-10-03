@@ -1,6 +1,6 @@
 <?php
 
-namespace _64FF00\PurePerms\commands;
+namespace _64FF00\PurePerms\cmd;
 
 use _64FF00\PurePerms\PurePerms;
 
@@ -14,17 +14,17 @@ use pocketmine\utils\TextFormat;
 
 class UsrInfo extends Command implements PluginIdentifiableCommand
 {
-    /* PurePerms by 64FF00 (xktiverz@gmail.com, @64ff00 for Twitter) */
-
     /*
-          # #    #####  #       ####### #######   ###     ###   
-          # #   #     # #    #  #       #        #   #   #   #  
-        ####### #       #    #  #       #       #     # #     # 
-          # #   ######  #    #  #####   #####   #     # #     # 
-        ####### #     # ####### #       #       #     # #     # 
-          # #   #     #      #  #       #        #   #   #   #  
-          # #    #####       #  #       #         ###     ###                                        
-                                                                                       
+        PurePerms by 64FF00 (Twitter: @64FF00)
+
+          888  888    .d8888b.      d8888  8888888888 8888888888 .d8888b.   .d8888b.
+          888  888   d88P  Y88b    d8P888  888        888       d88P  Y88b d88P  Y88b
+        888888888888 888          d8P 888  888        888       888    888 888    888
+          888  888   888d888b.   d8P  888  8888888    8888888   888    888 888    888
+          888  888   888P "Y88b d88   888  888        888       888    888 888    888
+        888888888888 888    888 8888888888 888        888       888    888 888    888
+          888  888   Y88b  d88P       888  888        888       Y88b  d88P Y88b  d88P
+          888  888    "Y8888P"        888  888        888        "Y8888P"   "Y8888P"
     */
 
     /**
@@ -63,8 +63,6 @@ class UsrInfo extends Command implements PluginIdentifiableCommand
         
         $player = $this->plugin->getPlayer($args[0]);
         
-        $user = $this->plugin->getUser($player);
-        
         $levelName = null;
         
         if(isset($args[1]))
@@ -92,8 +90,8 @@ class UsrInfo extends Command implements PluginIdentifiableCommand
 
         $uuid = $player instanceof Player ? TextFormat::GREEN . $player->getUniqueId()->toString() : TextFormat::RED . $this->plugin->getMessage("cmds.usrinfo.messages.unknown");
         $sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.usrinfo.messages.usrinfo_uuid", $uuid));
-        
-        $userGroup = $user->getGroup($levelName);
+
+        $userGroup = $this->plugin->getUserDataMgr()->getGroup($player, $levelName);
         
         $sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.usrinfo.messages.usrinfo_group", TextFormat::GREEN . $userGroup->getName()));
         

@@ -12,6 +12,7 @@ cmds:
     messages:
       group_added_successfully: "%var0%をグループリストに追加しました。"
       group_already_exists: "グループ%var0%はすでに存在しています。"
+      invalid_group_name: "Invalid Group Name."
   defgroup:
     desc: "デフォルトのグループを決めることを許可します。 #64FF00"
     usage: "Usage: /defgroup <group>"
@@ -59,6 +60,7 @@ cmds:
     messages:
       group_removed_successfully: "グループ%var0%を削除しました。"
       group_not_exist: "グループ%var0%は存在しません。"
+      invalid_group_name: "Invalid Group Name."
   setgperm:
     desc: "グループに権限を追加します。 #64FF00"
     usage: "使用法: /setgperm <グループ> <権限> [ワールド]"

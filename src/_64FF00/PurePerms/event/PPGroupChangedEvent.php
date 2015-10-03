@@ -2,7 +2,7 @@
 
 namespace _64FF00\PurePerms\event;
 
-use _64FF00\PurePerms\ppdata\PPGroup;
+use _64FF00\PurePerms\PPGroup;
 use _64FF00\PurePerms\PurePerms;
 
 use pocketmine\event\plugin\PluginEvent;
