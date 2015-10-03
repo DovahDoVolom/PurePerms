@@ -109,11 +109,16 @@ class PurePerms extends PluginBase
 
     private function checkForUUIDSupport()
     {
+        $tempClasses = [];
         $declaredClasses = \get_declared_classes();
 
-        if(isset($declaredClasses['pocketmine\utils\UUID'])) $this->isUUIDSupported = true;
+        foreach(array_values($declaredClasses) as $class)
+        {
+            $tempClasses[$class] = true;
+        }
 
-        $this->isUUIDSupported = false;
+        if(isset($tempClasses['pocketmine\utils\UUID']))
+            $this->isUUIDSupported = true;
     }
 
     private function registerCommands()
