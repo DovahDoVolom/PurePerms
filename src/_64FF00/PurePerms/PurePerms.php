@@ -270,7 +270,7 @@ class PurePerms extends PluginBase
                 $defaultGroups[] = $defaultGroup;
         }
 
-        if(count($defaultGroups) == 1)
+        if(count($defaultGroups) === 1)
         {
             return $defaultGroups[0];
         }
@@ -291,7 +291,7 @@ class PurePerms extends PluginBase
 
             foreach($defaultGroups as $defaultGroup)
             {
-                if(count($defaultGroup->getInheritedGroups()) == 0)
+                if(count($defaultGroup->getInheritedGroups()) === 0)
                 {
                     $this->setDefaultGroup($defaultGroup);
 
@@ -311,7 +311,7 @@ class PurePerms extends PluginBase
     {
         if(!isset($this->groups[$groupName]))
         {
-            $this->getLogger()->warning($this->getMessage("logger_messages.getGroup_01", $groupName));
+            $this->getLogger()->debug($this->getMessage("logger_messages.getGroup_01", $groupName));
 
             return null;
         }
@@ -434,6 +434,8 @@ class PurePerms extends PluginBase
     {
         if($this->isUUIDSupported)
         {
+            if($player->getUniqueId() === null) return null;
+
             $uniqueId = $player->getUniqueId()->toString();
         }
         else
@@ -634,10 +636,14 @@ class PurePerms extends PluginBase
 
         $uniqueId = $this->getValidUUID($player);
 
-        if(isset($this->attachments[$uniqueId]))
-            $player->removeAttachment($this->attachments[$uniqueId]);
+        // Do not try to remove attachments with invalid unique ids
+        if($uniqueId !== null)
+        {
+            if(isset($this->attachments[$uniqueId]))
+                $player->removeAttachment($this->attachments[$uniqueId]);
 
-        unset($this->attachments[$uniqueId]);
+            unset($this->attachments[$uniqueId]);
+        }
     }
 
     public function unregisterPlayers()
