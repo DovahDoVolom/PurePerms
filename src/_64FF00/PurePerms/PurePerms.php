@@ -584,16 +584,15 @@ class PurePerms extends PluginBase
                 else
                 {
                     $isNegative = substr($permission, 0, 1) === "-";
+
                     if($isNegative)
                         $permission = substr($permission, 1);
 
-                    $value = !$isNegative;
-                    if($permission === self::CORE_PERM)
-                        $value = true;
-
-                    $permissions[$permission] = $value;
+                    $permissions[$permission] = !$isNegative;
                 }
             }
+
+            $permissions[self::CORE_PERM] = true;
 
             /** @var PermissionAttachment $attachment */
             $attachment = $this->getAttachment($player);

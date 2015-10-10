@@ -28,6 +28,7 @@ permissions:
           pperms.command.listuperms:
             description: "Allows you to see a list of all permissions from a user."
           pperms.command.ppinfo:
+            default: true
             description: "Allows you to get current PurePerms information."
           pperms.command.ppreload:
             description: "Allows you to reload all PurePerms configurations."
