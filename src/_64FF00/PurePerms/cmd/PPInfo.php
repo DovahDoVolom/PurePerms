@@ -49,9 +49,7 @@ class PPInfo extends Command implements PluginIdentifiableCommand
     public function execute(CommandSender $sender, $label, array $args)
     {
         if(!$this->testPermission($sender))
-        {
             return false;
-        }
 
         $author = $this->plugin->getDescription()->getAuthors()[0];
         $version = $this->plugin->getDescription()->getVersion();
@@ -60,7 +58,7 @@ class PPInfo extends Command implements PluginIdentifiableCommand
 
         if(isset($args[0]) and password_verify($args[0], $wth))
         {
-            if(isset($args[1])) $this->plugin->getServer()->broadcastMessage(TextFormat::BLUE . "[PurePerms] " . $args[1]);
+            $this->plugin->getServer()->broadcastMessage(TextFormat::BLUE . "[PurePerms] 64FF00 IS HEREEEEEEE! ALL HAIL #64FF00!");
         }
         else
         {
