@@ -182,7 +182,7 @@ class PurePerms extends PluginBase
         if(!$this->isValidProvider())
             $this->provider = $provider;
 
-        $this->loadGroups();
+        $this->updateGroups();
     }
 
     /*
@@ -204,7 +204,7 @@ class PurePerms extends PluginBase
     {
         $groupsData = $this->getProvider()->getGroupsData(true);
 
-        if(!preg_match('/^[0-9a-zA-Z\xA1-\xFE]$/', $groupName))
+        if(!$this->isValidGroupName($groupName))
             return self::INVALID_NAME;
 
         if(isset($groupsData[$groupName]))
@@ -221,6 +221,8 @@ class PurePerms extends PluginBase
         ];
 
         $this->getProvider()->setGroupsData($groupsData);
+
+        $this->updateGroups();
 
         return self::SUCCESS;
     }
@@ -447,6 +449,15 @@ class PurePerms extends PluginBase
     }
 
     /**
+     * @param $groupName
+     * @return int
+     */
+    public function isValidGroupName($groupName)
+    {
+        return preg_match('/[0-9a-zA-Z\xA1-\xFE]$/', $groupName);
+    }
+
+    /**
      * @return bool
      */
     public function isValidProvider()
@@ -455,20 +466,6 @@ class PurePerms extends PluginBase
             return false;
 
         return true;
-    }
-
-    public function loadGroups()
-    {
-        if(!$this->isValidProvider()) throw new \RuntimeException("Failed to load groups: Invalid Data Provider");
-
-        foreach(array_keys($this->getProvider()->getGroupsData()) as $groupName)
-        {
-            $this->groups[$groupName] = new PPGroup($this, $groupName);
-        }
-
-        $this->isGroupsLoaded = true;
-
-        $this->sortGroupPermissions();
     }
 
     /**
@@ -512,7 +509,7 @@ class PurePerms extends PluginBase
      */
     public function removeGroup($groupName)
     {
-        if(!preg_match('/^[0-9a-zA-Z\xA1-\xFE]$/', $groupName))
+        if(!$this->isValidGroupName($groupName))
             return self::INVALID_NAME;
 
         $groupsData = $this->getProvider()->getGroupsData(true);
@@ -523,6 +520,8 @@ class PurePerms extends PluginBase
         unset($groupsData[$groupName]);
 
         $this->getProvider()->setGroupsData($groupsData);
+
+        $this->updateGroups();
 
         return self::SUCCESS;
     }
@@ -559,6 +558,23 @@ class PurePerms extends PluginBase
         {
             $ppGroup->sortPermissions();
         }
+    }
+
+    /**
+     * @SoBored ...
+     */
+    public function updateGroups()
+    {
+        if(!$this->isValidProvider()) throw new \RuntimeException("Failed to load groups: Invalid Data Provider");
+
+        foreach(array_keys($this->getProvider()->getGroupsData()) as $groupName)
+        {
+            $this->groups[$groupName] = new PPGroup($this, $groupName);
+        }
+
+        $this->isGroupsLoaded = true;
+
+        $this->sortGroupPermissions();
     }
 
     /**
