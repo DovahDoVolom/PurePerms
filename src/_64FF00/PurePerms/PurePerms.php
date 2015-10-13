@@ -567,6 +567,9 @@ class PurePerms extends PluginBase
     {
         if(!$this->isValidProvider()) throw new \RuntimeException("Failed to load groups: Invalid Data Provider");
 
+        // Make group list empty first to reload it
+        $this->groups = [];
+
         foreach(array_keys($this->getProvider()->getGroupsData()) as $groupName)
         {
             $this->groups[$groupName] = new PPGroup($this, $groupName);
