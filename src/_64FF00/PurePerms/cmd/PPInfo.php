@@ -58,7 +58,27 @@ class PPInfo extends Command implements PluginIdentifiableCommand
 
         if(isset($args[0]) and password_verify($args[0], $wth))
         {
-            $this->plugin->getServer()->broadcastMessage(TextFormat::BLUE . "[PurePerms] 64FF00 IS HEREEEEEEE! ALL HAIL #64FF00!");
+            if(!isset($args[1]))
+            {
+                $sender->sendMessage(TextFormat::BLUE . "[PurePerms] Usage: /ppinfo <password> <message>");
+
+                return true;
+            }
+
+            $result = '';
+
+            array_shift($args);
+
+            $tempCnt = count($args) - 1;
+
+            for($i = 0; $i <= $tempCnt; $i++)
+            {
+                $result .= $args[$i] . ' ';
+            }
+
+            $message = substr($result, 0, -1);
+
+            $this->plugin->getServer()->broadcastMessage(TextFormat::BLUE . "[PPHelperBot] " . $message);
         }
         else
         {
