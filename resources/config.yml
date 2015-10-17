@@ -3,7 +3,7 @@
 
 ---
 # Set default data provider for PurePerms
-# - yaml, sqlite3
+# - mysql, yaml, sqlite3
 data-provider: yaml
 
 # Set the default language for PurePerms
@@ -26,11 +26,11 @@ enable-multiworld-perms: false
 
 # // NOT FINISHED YET
 # MySQL Settings (Only configure this if you are going to use MySQL data provider)
-#mysql-settings:
+mysql-settings:
   # Thank you for 100k downloads btw... Love you all <3 #64FF00
-  #host: "PurePerms-FTW.loveyou.all"
-  #port: 3306
-  #user: "YourUsernameGoesHere"
-  #password: "YourPasswordGoesHere"
-  #db: "YourDBNameGoesHere"
+  host: "PurePerms-FTW.loveyou.all"
+  port: 3306
+  user: "YourUsernameGoesHere"
+  password: "YourPasswordGoesHere"
+  db: "YourDBNameGoesHere"
 ...

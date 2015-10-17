@@ -4,6 +4,7 @@ namespace _64FF00\PurePerms\provider;
 
 use _64FF00\PurePerms\PurePerms;
 use _64FF00\PurePerms\PPGroup;
+use _64FF00\PurePerms\task\PPMySQLTask;
 
 use pocketmine\IPlayer;
 
@@ -49,7 +50,8 @@ class MySQLProvider implements ProviderInterface
 
         $db_query = stream_get_contents($this->plugin->getResource("mysql_deploy.sql"));
 
-        $this->db->query($db_query);
+        // Yas! Finally!
+        $this->db->multi_query($db_query);
 
         $this->loadGroupsData();
 
@@ -142,6 +144,7 @@ class MySQLProvider implements ProviderInterface
      */
     public function updateGroupData($groupName, $tempGroupData)
     {
+
     }
     
     public function close()
