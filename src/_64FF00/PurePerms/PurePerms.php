@@ -19,6 +19,7 @@ use _64FF00\PurePerms\cmd\UnsetUPerm;
 use _64FF00\PurePerms\cmd\UsrInfo;
 use _64FF00\PurePerms\data\UserDataManager;
 use _64FF00\PurePerms\provider\DefaultProvider;
+use _64FF00\PurePerms\provider\MySQLProvider;
 use _64FF00\PurePerms\provider\ProviderInterface;
 use _64FF00\PurePerms\provider\SQLite3Provider;
 
@@ -151,6 +152,15 @@ class PurePerms extends PluginBase
 
         switch(strtolower($providerName))
         {
+            case "mysql":
+
+                $provider = new MySQLProvider($this);
+
+                if($onEnable === true)
+                    $this->getLogger()->info($this->getMessage("logger_messages.setProvider_MySQL"));
+
+                break;
+
             case "sqlite3":
 
                 $provider = new SQLite3Provider($this);
