@@ -105,7 +105,7 @@ class UserDataManager
                 ]
             ];
 
-            $this->setData($tempUserData);
+            $this->setData($player, $tempUserData);
         }
 
         return $this->getData($player)["worlds"][$levelName];
