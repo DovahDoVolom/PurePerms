@@ -88,11 +88,39 @@ class SetGroup extends Command implements PluginIdentifiableCommand
             $levelName = $level->getName();
         }
 
+        //Start rank constraints
+        
+		$rankorder = $this->plugin->getConfig()->get("rank-order");
+		$rankoffset = $this->plugin->getConfig()->get("rank-offset");
+		$forbiddenranks = $this->plugin->getConfig()->get("forbidden-ranks");
+		$lockedranks = $this->plugin->getConfig()->get("locked-ranks");
+		
+		if (!isset($rankorder) or !isset($rankorder) or !isset($forbiddenranks) or !isset($lockedranks)){
+		//
+		}
+		else{
+		
+		$sendergroup = $this->plugin->getUserDataMgr()->getGroup($sender, $levelName);
+		$targetplayersgroup = $this->plugin->getUserDataMgr()->getGroup($player, $levelName);
+		
+		$targetoffset = array_search($group->getName(), $rankorder);
+		$senderoffset = array_search($sendergroup->getName(), $rankorder);
+		
+		if ($sender instanceof IPlayer and ($targetoffset > ($senderoffset + $rankoffset) or in_array($group->getName(), $forbiddenranks) or in_array($targetplayersgroup->getName(), $lockedranks)))
+			{
+		$sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . " You cannot set the player to this rank");
+		return true;
+			}
+		
+		}
+		
+		//END rank constraints
+		
         $this->plugin->getUserDataMgr()->setGroup($player, $group, $levelName);
         
         $sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.setgroup.messages.setgroup_successfully", $player->getName()));
         
-        if($player instanceof Player) $player->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.setgroup.messages.on_player_group_change", strtolower($group->getName())));
+        if($player instanceof IPlayer and $player->isOnline()) $player->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.setgroup.messages.on_player_group_change", strtolower($group->getName())));
         
         return true;
     }
