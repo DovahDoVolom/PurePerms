@@ -77,7 +77,7 @@ class SetUPerm extends Command implements PluginIdentifiableCommand
             $levelName = $level->getName();
         }
         
-        $this->plugin->getUserDataMgr()->setUserPermission($player, $permission, $levelName);
+        $this->plugin->getUserDataMgr()->setPermission($player, $permission, $levelName);
         
         $sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.setuperm.messages.uperm_added_successfully", $permission, $player->getName()));
         

@@ -77,7 +77,7 @@ class UnsetUPerm extends Command implements PluginIdentifiableCommand
             $levelName = $level->getName();
         }
         
-        $this->plugin->getUserDataMgr()->unsetUserPermission($player, $permission, $levelName);
+        $this->plugin->getUserDataMgr()->unsetPermission($player, $permission, $levelName);
         
         $sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.unsetuperm.messages.uperm_removed_successfully", $permission, $player->getName()));
         

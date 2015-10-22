@@ -48,11 +48,10 @@ class MySQLProvider implements ProviderInterface
             $this->plugin->getServer()->getPluginManager()->disablePlugin($this->plugin);
         }
 
-        $db_query = stream_get_contents($this->plugin->getResource("mysql_deploy.sql"));
-
-        // Yas! Finally!
-        $this->db->multi_query($db_query);
-
+        $resource = $this->plugin->getResource("mysql_deploy.sql");
+        $this->db->multi_query(stream_get_contents($resource));
+        fclose($resource);
+        
         $this->loadGroupsData();
 
         $this->plugin->getServer()->getScheduler()->scheduleRepeatingTask(new PPMySQLTask($this->plugin, $this->db), 1200);
@@ -89,6 +88,46 @@ class MySQLProvider implements ProviderInterface
 
     public function loadGroupsData()
     {
+        $this->groupsData = [];
+
+        $result01 = $this->db->query("
+            SELECT groupName, isDefault, inheritance, permissions
+            FROM groups;
+        ");
+
+        if($result01 instanceof \mysqli_result)
+        {
+            while($currentRow = $result01->fetch_array(MYSQLI_ASSOC))
+            {
+                $groupName = $currentRow["groupName"];
+
+                $this->groupsData[$groupName]["isDefault"] = $currentRow["isDefault"];
+                $this->groupsData[$groupName]["inheritance"] = $currentRow["inheritance"] !== "" ? explode(",", $currentRow["inheritance"]) : [];
+                $this->groupsData[$groupName]["permissions"] = explode(",", $currentRow["permissions"]);
+            }
+
+            $result01->free();
+        }
+
+        $result02 = $this->db->query("
+            SELECT groupName, worldName, permissions
+            FROM groups_mw;
+        ");
+
+        if($result02 instanceof \mysqli_result)
+        {
+            while($currentRow = $result01->fetch_array(MYSQLI_ASSOC))
+            {
+                $groupName = $currentRow["groupName"];
+
+                foreach($currentRow["worlds"] as $worldName => $worldPerms)
+                {
+                    $this->groupsData[$groupName]["worlds"][$worldName] = explode(",", $worldPerms);
+                }
+            }
+
+            $result02->free();
+        }
     }
 
     /**

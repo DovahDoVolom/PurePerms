@@ -92,9 +92,9 @@ class SQLite3Provider implements ProviderInterface
                 $userData["group"] = $currentRow["userGroup"];
                 $userData["permissions"] = $currentRow["permissions"] !== "" ? explode(",", $currentRow["permissions"]) : [];
             }
-        }
 
-        $result01->finalize();
+            $result01->finalize();
+        }
 
         $stmt02 = $this->db->prepare("
             SELECT worldName, userGroup, permissions
@@ -117,9 +117,9 @@ class SQLite3Provider implements ProviderInterface
                 $userData["worlds"][$worldName]["group"] = $worldGroup;
                 $userData["worlds"][$worldName]["permissions"] = $worldPerms;
             }
-        }
 
-        $result02->finalize();
+            $result02->finalize();
+        }
 
         return $userData;
     }
@@ -143,9 +143,9 @@ class SQLite3Provider implements ProviderInterface
                 $this->groupsData[$groupName]["inheritance"] = $currentRow["inheritance"] !== "" ? explode(",", $currentRow["inheritance"]) : [];
                 $this->groupsData[$groupName]["permissions"] = explode(",", $currentRow["permissions"]);
             }
-        }
 
-        $result01->finalize();
+            $result01->finalize();
+        }
 
         $result02 = $this->db->query("
             SELECT groupName, worldName, permissions
@@ -163,9 +163,9 @@ class SQLite3Provider implements ProviderInterface
                     $this->groupsData[$groupName]["worlds"][$worldName] = explode(",", $worldPerms);
                 }
             }
-        }
 
-        $result02->finalize();
+            $result02->finalize();
+        }
     }
 
     /**

@@ -176,7 +176,7 @@ class UserDataManager
      * @param $permission
      * @param null $levelName
      */
-    public function setUserPermission(IPlayer $player, $permission, $levelName = null)
+    public function setPermission(IPlayer $player, $permission, $levelName = null)
     {
         if($levelName === null)
         {
