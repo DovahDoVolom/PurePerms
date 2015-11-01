@@ -7,12 +7,13 @@
 data-provider: yaml
 
 # Set the default language for PurePerms
-# - en, ko, jp, ru, it, sp, cz, sk, de
+# - en, ko, jp, ru, ua, it, sp, cz, sk, de
 # English message resource by @64FF00 and @Samueljh1 (GitHub)
 # Korean message resource by @64FF00 (GitHub)
 # 제 블로그 이외에 허락없이 마음대로 플러그인 배포하실 시에는 바로 한국어 파일 삭제 조치하고 공유 중단합니다
 # Japanese message resource by @onebone (<3) and @haniokasai (GitHub)
 # Russian message resource by @vvzar and @Pub4Game (GitHub)
+# Ukrainian messages resource by @samalero (GitHub)
 # Italian message resource by @AryToNeX (GitHub)
 # Spanish message resource by @iksaku (<3) and @JoahDave (Github)
 # Czech message resource by @Michael2010117 (GitHub)
