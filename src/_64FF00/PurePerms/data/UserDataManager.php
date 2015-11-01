@@ -47,9 +47,22 @@ class UserDataManager
      */
     public function getGroup(IPlayer $player, $levelName = null)
     {
-        $groupName = $levelName != null ? $this->getWorldData($player, $levelName)["group"] : $this->getNode($player, "group");
+        $groupName = $levelName !== null ? $this->getWorldData($player, $levelName)["group"] : $this->getNode($player, "group");
 
         $group = $this->plugin->getGroup($groupName);
+
+        // TODO: ...
+        if($group === null)
+        {
+            $this->plugin->getLogger()->critical("Invalid group name found in " . $player->getName() . "'s player data (World: " . $levelName . ")");
+            $this->plugin->getLogger()->critical("Restoring the group data to default settings");
+
+            $defaultGroup = $this->plugin->getDefaultGroup();
+
+            $this->setGroup($player, $defaultGroup, $levelName);
+
+            return $defaultGroup;
+        }
 
         return $group;
     }

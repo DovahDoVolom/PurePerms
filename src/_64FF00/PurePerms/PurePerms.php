@@ -391,7 +391,7 @@ class PurePerms extends PluginBase
      */
     public function getPermissions(IPlayer $player, $levelName)
     {
-        // TODO: ...
+        // TODO: Fix this damn shit
         $group = $this->userDataMgr->getGroup($player, $levelName);
 
         $groupPerms = $group->getGroupPermissions($levelName);
