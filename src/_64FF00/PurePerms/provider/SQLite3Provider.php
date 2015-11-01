@@ -184,7 +184,7 @@ class SQLite3Provider implements ProviderInterface
         $result01->finalize();
 
         $stmt02 = $this->db->prepare("
-            DELETE OR IGNORE FROM groups_mw WHERE groupName = :groupName;
+            DELETE FROM groups_mw WHERE groupName = :groupName;
         ");
 
         $stmt02->bindValue(":groupName", $groupName, SQLITE3_TEXT);
