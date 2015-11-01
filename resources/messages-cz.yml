@@ -72,11 +72,13 @@ cmds:
   setgroup: 
     desc: "Nastavi skupinu pro uzivatele. #64FF00"
     usage: "Pouziti: /setgroup <hrac> <skupina> [Svet]"
-    messages: 
+    messages:
+      access_denied_01: "You don't have permission to set a player's group to %var0%."
+      access_denied_02: "You don't have permission to change group of a player with group %var0%."        
       group_not_exist: "Skupina %var0% neexistuje."
       level_not_exist: "Svet %var0% neexistuje."
-      setgroup_successfully: "Uspesne %var0% pridan do skupiny."
       on_player_group_change: "Tvoje skupina byla zmenena a / an %var0%!"
+      setgroup_successfully: "Uspesne %var0% pridan do skupiny." 
   setuperm: 
     desc: "Pridano opravneni uzivately. #64FF00"
     usage: "Pouziti: /setuperm <hrac> <opravneni> [Svet]"

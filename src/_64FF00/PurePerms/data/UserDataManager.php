@@ -63,7 +63,8 @@ class UserDataManager
     {
         $userData = $this->getData($player);
 
-        if(!isset($userData[$node])) return null;
+        if(!isset($userData[$node]))
+            return null;
 
         return $userData[$node];
     }

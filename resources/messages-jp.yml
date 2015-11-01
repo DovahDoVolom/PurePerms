@@ -72,10 +72,12 @@ cmds:
     desc: "プレーヤーのグループを設定します。 #64FF00"
     usage: "使用法: /setgroup <プレーヤー> <グループ> [ワールド]"
     messages:
+      access_denied_01: "You don't have permission to set a player's group to %var0%."
+      access_denied_02: "You don't have permission to change group of a player with group %var0%."    
       group_not_exist: "グループ%var0%は存在しません。"
       level_not_exist: "ワールド%var0%は存在しません。"
-      setgroup_successfully: "%var0%をグループに追加しました。"
       on_player_group_change: "あなたのグループは%var0%に変わりました!"
+      setgroup_successfully: "%var0%をグループに追加しました。"
   setuperm:
     desc: "権限をプレーヤーに追加します。 #64FF00"
     usage: "使用法: /setuperm <プレーヤー> <権限> [ワールド]"

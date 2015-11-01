@@ -72,11 +72,13 @@ cmds:
   setgroup: 
     desc: "Setzt eine Gruppe für einen Spieler. #64FF00"
     usage: "Benutzung: /setgroup <Spieler> <Gruppe> [Welt]"
-    messages: 
+    messages:
+      access_denied_01: "You don't have permission to set a player's group to %var0%."
+      access_denied_02: "You don't have permission to change group of a player with group %var0%."        
       group_not_exist: "Gruppe %var0% existiert NICHT."
       level_not_exist: "Welt %var0% existiert NICHT."
-      setgroup_successfully: "Spieler %var0% wurde erfolgreich zur Gruppe hinzugefügt."
       on_player_group_change: "Deine PurePerms-Gruppe wurde zu %var0% geändert!"
+      setgroup_successfully: "Spieler %var0% wurde erfolgreich zur Gruppe hinzugefügt."
   setuperm: 
     desc: "Fügt eine Berechtigung zu einem Spieler hinzu. #64FF00"
     usage: "Benutzung: /setuperm <Spieler> <Berechtigung> [Welt]"

@@ -1,3 +1,8 @@
+
+# PurePerms by 64FF00 (xktiverz@gmail.com, @64ff00 for Twitter)
+
+# Ukrainian messages resource by @samalero (GitHub)
+
 ---
 messages-version: "1.2.0"
 language: "ua"
@@ -68,10 +73,12 @@ cmds:
     desc: "Додає гравця в групу."
     usage: "Пример: /setgroup <гравець> <група> [світ]"
     messages: 
+      access_denied_01: "You don't have permission to set a player's group to %var0%."
+      access_denied_02: "You don't have permission to change group of a player with group %var0%."
       group_not_exist: "Група %var0% не існує."
       level_not_exist: "Світ %var0% не існує."
-      setgroup_successfully: "Гравець %var0% успішно доданий в групу."
       on_player_group_change: "Ваша група змінена на %var0%!"
+      setgroup_successfully: "Гравець %var0% успішно доданий в групу."
   setuperm: 
     desc: "Додає дозвіл користувачу."
     usage: "Приклад: /setuperm <гравець> <дозвіл> [світ]"

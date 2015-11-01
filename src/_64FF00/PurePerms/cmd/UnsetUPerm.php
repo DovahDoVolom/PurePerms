@@ -67,7 +67,7 @@ class UnsetUPerm extends Command implements PluginIdentifiableCommand
         {
             $level = $this->plugin->getServer()->getLevelByName($args[2]);
             
-            if($level == null)
+            if($level === null)
             {
                 $sender->sendMessage(TextFormat::RED . "[PurePerms] " . $this->plugin->getMessage("cmds.unsetgperm.messages.level_not_exist", $args[2]));
                 

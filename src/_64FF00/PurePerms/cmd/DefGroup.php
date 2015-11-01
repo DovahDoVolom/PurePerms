@@ -68,7 +68,7 @@ class DefGroup extends Command implements PluginIdentifiableCommand
 
         $this->plugin->setDefaultGroup($group);
 
-        $sender->sendMessage(TextFormat::RED . "[PurePerms] " . $this->plugin->getMessage("cmds.defgroup.messages.defgroup_successfully", $args[0]));
+        $sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.defgroup.messages.defgroup_successfully", $args[0]));
         
         return true;
     }

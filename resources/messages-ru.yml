@@ -73,10 +73,12 @@ cmds:
     desc: "Добавляет игрока в группу. #64FF00"
     usage: "Пример: /setgroup <игрок> <группа> [мир]"
     messages: 
+      access_denied_01: "You don't have permission to set a player's group to %var0%."
+      access_denied_02: "You don't have permission to change group of a player with group %var0%."    
       group_not_exist: "Группа %var0% не существует."
       level_not_exist: "Мир %var0% не существует."
-      setgroup_successfully: "Игрок %var0% успешно добавлен в группу."
       on_player_group_change: "Ваша группа изменена на %var0%!"
+      setgroup_successfully: "Игрок %var0% успешно добавлен в группу."
   setuperm: 
     desc: "Добавляет разрешение пользователю. #64FF00"
     usage: "Пример: /setuperm <игрок> <разрешение> [мир]"

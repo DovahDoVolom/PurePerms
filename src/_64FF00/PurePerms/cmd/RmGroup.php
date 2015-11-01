@@ -65,7 +65,7 @@ class RmGroup extends Command implements PluginIdentifiableCommand
         }
         elseif($result === PurePerms::INVALID_NAME)
         {
-            $sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.rmgroup.messages.invalid_group_name", $args[0]));
+            $sender->sendMessage(TextFormat::RED . "[PurePerms] " . $this->plugin->getMessage("cmds.rmgroup.messages.invalid_group_name", $args[0]));
         }
         else
         {

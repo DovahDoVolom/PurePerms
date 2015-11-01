@@ -25,17 +25,6 @@ default-language: en
 # - true / false
 enable-multiworld-perms: false
 
-#All 4 options below must be set for any of them to work
-#rank-order defines the hierarchy order, players can only rank to their own rank plus the rank-offset.
-#in this example Owner can only rank up to Admin
-#forbidden-ranks are ranks that can only be set on console
-#users with a locked-rank can only have their rank changed on console
-
-rank-order: ["Guest","Admin","Owner", "OP"]
-rank-offset: -1
-forbidden-ranks: ["OP"]
-locked-ranks: ["OP"]
-
 # // NOT FINISHED YET
 # MySQL Settings (Only configure this if you are going to use MySQL data provider)
 mysql-settings:
@@ -45,4 +34,10 @@ mysql-settings:
   user: "YourUsernameGoesHere"
   password: "YourPasswordGoesHere"
   db: "YourDBNameGoesHere"
+
+# Special thanks to @jazzwhistle for helping me with this new kewl feature! ALL HAIL JAZZWHISTLEEEEEEE!
+# Ranks that can only be set on console
+# Also, users with a superadmin-rank can only have their rank changed on console
+# - array
+superadmin-ranks: ["OP"]
 ...

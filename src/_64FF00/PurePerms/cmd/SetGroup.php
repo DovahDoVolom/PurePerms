@@ -6,6 +6,7 @@ use _64FF00\PurePerms\PurePerms;
 
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
+use pocketmine\command\ConsoleCommandSender;
 use pocketmine\command\PluginIdentifiableCommand;
 
 use pocketmine\Player;
@@ -65,7 +66,7 @@ class SetGroup extends Command implements PluginIdentifiableCommand
         
         $group = $this->plugin->getGroup($args[1]);
         
-        if($group == null) 
+        if($group === null)
         {
             $sender->sendMessage(TextFormat::RED . "[PurePerms] " . $this->plugin->getMessage("cmds.setgroup.messages.group_not_exist", $args[1]));
             
@@ -78,7 +79,7 @@ class SetGroup extends Command implements PluginIdentifiableCommand
         {
             $level = $this->plugin->getServer()->getLevelByName($args[2]);
             
-            if($level == null)
+            if($level === null)
             {
                 $sender->sendMessage(TextFormat::RED . "[PurePerms] " . $this->plugin->getMessage("cmds.setgroup.messages.level_not_exist", $args[2]));
                 
@@ -88,39 +89,38 @@ class SetGroup extends Command implements PluginIdentifiableCommand
             $levelName = $level->getName();
         }
 
-        //Start rank constraints
-        
-		$rankorder = $this->plugin->getConfig()->get("rank-order");
-		$rankoffset = $this->plugin->getConfig()->get("rank-offset");
-		$forbiddenranks = $this->plugin->getConfig()->get("forbidden-ranks");
-		$lockedranks = $this->plugin->getConfig()->get("locked-ranks");
-		
-		if (!isset($rankorder) or !isset($rankorder) or !isset($forbiddenranks) or !isset($lockedranks)){
-		//
-		}
-		else{
-		
-		$sendergroup = $this->plugin->getUserDataMgr()->getGroup($sender, $levelName);
-		$targetplayersgroup = $this->plugin->getUserDataMgr()->getGroup($player, $levelName);
-		
-		$targetoffset = array_search($group->getName(), $rankorder);
-		$senderoffset = array_search($sendergroup->getName(), $rankorder);
-		
-		if ($sender instanceof IPlayer and ($targetoffset > ($senderoffset + $rankoffset) or in_array($group->getName(), $forbiddenranks) or in_array($targetplayersgroup->getName(), $lockedranks)))
-			{
-		$sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . " You cannot set the player to this rank");
-		return true;
-			}
-		
-		}
-		
-		//END rank constraints
-		
+		$superAdminRanks = $this->plugin->getConfigValue("superadmin-ranks");
+
+        foreach(array_values($superAdminRanks) as $value)
+        {
+            $tmpSuperAdminRanks[$value] = 1;
+        }
+
+        if(!($sender instanceof ConsoleCommandSender))
+        {
+            if(isset($tmpSuperAdminRanks[$group->getName()]))
+            {
+                $sender->sendMessage(TextFormat::RED . "[PurePerms] " . $this->plugin->getMessage("cmds.setgroup.messages.access_denied_01", $group->getName()));
+
+                return true;
+            }
+
+            $userGroup = $this->plugin->getUserDataMgr()->getGroup($player, $levelName);
+
+            if(isset($tmpSuperAdminRanks[$userGroup->getName()]))
+            {
+                $sender->sendMessage(TextFormat::RED . "[PurePerms] " . $this->plugin->getMessage("cmds.setgroup.messages.access_denied_02", $userGroup->getName()));
+
+                return true;
+            }
+        }
+
         $this->plugin->getUserDataMgr()->setGroup($player, $group, $levelName);
         
         $sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.setgroup.messages.setgroup_successfully", $player->getName()));
         
-        if($player instanceof IPlayer and $player->isOnline()) $player->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.setgroup.messages.on_player_group_change", strtolower($group->getName())));
+        if($player instanceof Player)
+            $player->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.setgroup.messages.on_player_group_change", strtolower($group->getName())));
         
         return true;
     }

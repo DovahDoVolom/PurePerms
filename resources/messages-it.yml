@@ -72,11 +72,13 @@ cmds:
   setgroup: 
     desc: "Imposta un gruppo per un utente. #64FF00"
     usage: "Sintassi: /setgroup <giocatore> <gruppo> [mondo]"
-    messages: 
+    messages:
+      access_denied_01: "You don't have permission to set a player's group to %var0%."
+      access_denied_02: "You don't have permission to change group of a player with group %var0%."        
       group_not_exist: "Il gruppo %var0% non esiste."
       level_not_exist: "Il mondo %var0% non esiste."
-      setgroup_successfully: "%var0% aggiunto al gruppo con successo."
       on_player_group_change: "Il tuo gruppo è stato cambiato in %var0%!"
+      setgroup_successfully: "%var0% aggiunto al gruppo con successo."
   setuperm: 
     desc: "Aggiunge un permesso ad un utente. #64FF00"
     usage: "Sintassi: /setuperm <giocatore> <permesso> [mondo]"
