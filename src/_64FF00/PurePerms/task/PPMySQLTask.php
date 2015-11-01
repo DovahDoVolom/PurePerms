@@ -46,7 +46,7 @@ class PPMySQLTask extends PluginTask
         }
         else
         {
-            $this->plugin->getLogger()->debug("Warning: " . $this->db->error);
+            $this->plugin->getLogger()->debug("[MySQL] Warning: " . $this->db->error);
         }
     }
 }
