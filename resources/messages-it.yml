@@ -4,35 +4,35 @@
 # Translated in Italian by AnThOnEx (Twitter: @AryToNeX)
 
 ---
-messages-version: "1.2.0"
+messages-version: "1.2.3"
 language: "it"
 cmds:
   addgroup:
-    desc: "Aggiunge un nuovo gruppo alla lista. #64FF00"
+    desc: "Aggiunge un nuovo gruppo alla lista."
     usage: "Sintassi: /addgroup <gruppo>"
     messages:
       group_added_successfully: "Il gruppo %var0% è stato aggiunto con successo."
       group_already_exists: "Il gruppo %var0% esiste già."
       invalid_group_name: "Invalid Group Name."
   defgroup:
-    desc: "Permette di impostare un gruppo predefinito. #64FF00" 
+    desc: "Permette di impostare un gruppo predefinito." 
     usage: "Sintassi: /defgroup <group>"
     messages:
       defgroup_successfully: "Gruppo predefinito impostato in %var0% con successo."
       group_not_exist: "Il gruppo %var0% non esiste."      
   fperms:
-    desc: "Mostra una lista dei permessi di un plugin. #64FF00"
+    desc: "Mostra una lista dei permessi di un plugin."
     usage: "Sintassi: /fperms <plugin>"
     messages:
       no_plugin_perms: "Il plugin %var0% non ha permessi."
       plugin_not_exist: "Il plugin %var0% non esiste."
       plugin_perms_list: "Lista dei permessi del plugin %var0% (%var1% / %var2%) : "
   groups:
-    desc: "Mostra una lista dei gruppi. #64FF00"
+    desc: "Mostra una lista dei gruppi."
     messages:
       all_registered_groups: "Tutti i gruppi registrati: %var0%"
   listgperms: 
-    desc: "Mostra una lista di tutti i permessi di un gruppo. #64FF00"
+    desc: "Mostra una lista di tutti i permessi di un gruppo."
     usage: "Sintassi: /listgperms <gruppo> <pagina> [mondo]"
     messages:
       group_not_exist: "Il gruppo %var0% non esiste."
@@ -40,37 +40,37 @@ cmds:
       level_not_exist: "Il mondo %var0% non esiste."
       no_group_perms: "Il gruppo %var0% non ha permessi."
   listuperms: 
-    desc: "Mostra una lista dei permessi di un utente. #64FF00"
+    desc: "Mostra una lista dei permessi di un utente."
     usage: "Sintassi: /listuperms <giocatore> <pagina> [mondo]"
     messages:
       level_not_exist: "Il mondo %var0% non esiste."
       no_user_perms: "Il giocatore %var0% non ha permessi."
       user_perms_list: "Lista dei permessi del giocatore %var0% (%var1% / %var2%) : " 
   ppinfo: 
-    desc: "Mostra informazioni riguardo PurePerms, il suo autore, ecc. #64FF00"
+    desc: "Mostra informazioni riguardo PurePerms, il suo autore, ecc."
     messages:
       ppinfo_console: "Stai usando PurePerms v%var0% sviluppato da %var1%."
       ppinfo_player: "Questo server usa PurePerms v%var0% sviluppato da %var1%."
   ppreload: 
-    desc: "Ricarica le configurazioni di PurePerms. #64FF00"
+    desc: "Ricarica le configurazioni di PurePerms."
     messages: 
       successfully_reloaded: "Configurazioni ricaricate con successo."
   rmgroup: 
-    desc: "Rimuove un gruppo. #64FF00"
+    desc: "Rimuove un gruppo."
     usage: "Sintassi: /rmgroup <gruppo>"
     messages:
       group_removed_successfully: "Il gruppo %var0% è stato rimosso con successo."
       group_not_exist: "Il gruppo %var0% non esiste."
       invalid_group_name: "Invalid Group Name."
   setgperm: 
-    desc: "Aggiunge un permesso a un gruppo. #64FF00"
+    desc: "Aggiunge un permesso a un gruppo."
     usage: "Sintassi: /setgperm <gruppo> <permesso> [mondo]"
     messages:
       gperm_added_successfully: "Il permesso %var0% è stato aggiunto al gruppo con successo."
       group_not_exist: "Il gruppo %var0% non esiste."
       level_not_exist: "Il mondo %var0% non esiste."
   setgroup: 
-    desc: "Imposta un gruppo per un utente. #64FF00"
+    desc: "Imposta un gruppo per un utente."
     usage: "Sintassi: /setgroup <giocatore> <gruppo> [mondo]"
     messages:
       access_denied_01: "You don't have permission to set a player's group to %var0%."
@@ -80,26 +80,26 @@ cmds:
       on_player_group_change: "Il tuo gruppo è stato cambiato in %var0%!"
       setgroup_successfully: "%var0% aggiunto al gruppo con successo."
   setuperm: 
-    desc: "Aggiunge un permesso ad un utente. #64FF00"
+    desc: "Aggiunge un permesso ad un utente."
     usage: "Sintassi: /setuperm <giocatore> <permesso> [mondo]"
     messages:
       level_not_exist: "Il mondo %var0% non esiste."
       uperm_added_successfully: "Permesso %var0% aggiunto a %var1% con successo."
   unsetgperm: 
-    desc: "Rimuove un permesso a un gruppo. #64FF00"
+    desc: "Rimuove un permesso a un gruppo."
     usage: "Sintassi: /unsetgperm <gruppo> <permesso> [mondo]"
     messages:
       gperm_removed_successfully: "Permesso %var0% rimosso al gruppo con successo."
       group_not_exist: "Il gruppo %var0% non esiste."
       level_not_exist: "Il mondo %var0% non esiste."
   unsetuperm: 
-    desc: "Rimuove un permesso a un utente. #64FF00"
+    desc: "Rimuove un permesso a un utente."
     usage: "Sintassi: /unsetuperm <giocatore> <permesso> [mondo]"
     messages: 
       level_not_exist: "Il mondo %var0% non esiste."
       uperm_removed_successfully: "Permesso %var0% rimosso a %var1% con successo."
   usrinfo: 
-    desc: "Mostra informazioni riguardo un utente. #64FF00"
+    desc: "Mostra informazioni riguardo un utente."
     usage: "Sintassi: /usrinfo <giocatore> [mondo]"
     messages:
       level_not_exist: "Il mondo %var0% non esiste."

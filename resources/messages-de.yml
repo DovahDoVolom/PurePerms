@@ -4,35 +4,35 @@
 # Original German language resource by @Exxarion, reworked by @thebigsmileXD
 
 ---
-messages-version: "1.2.0"
+messages-version: "1.2.3"
 language: "de"
 cmds:
   addgroup:
-    desc: "Fügt eine neue Gruppe zu der Liste hinzu. #64FF00"
+    desc: "Fügt eine neue Gruppe zu der Liste hinzu."
     usage: "Benutzung: /addgroup <Gruppe>"
     messages:
       group_added_successfully: "Gruppe %var0% wurde erfolgreich zu der Liste hinzugefügt."
       group_already_exists: "Gruppe %var0% existiert bereits."
       invalid_group_name: "Invalid Group Name."
   defgroup:
-    desc: "Setzt die Standardgruppe. #64FF00"
+    desc: "Setzt die Standardgruppe."
     usage: "Benutzung: /defgroup <Gruppe>"
     messages:
       defgroup_successfully: "Die Standardgruppe ist nun %var0%."
       group_not_exist: "Die Gruppe %var0% existiert NICHT"
   fperms:
-    desc: "Zeigt eine Liste aller Berechtigungen für ein Plugin. #64FF00"
+    desc: "Zeigt eine Liste aller Berechtigungen für ein Plugin."
     usage: "Benutzung: /fperms <Plugin>"
     messages:
       no_plugin_perms: "Plugin %var0% hat keine Berechtigungen."
       plugin_not_exist: "Plugin %var0% existiert NICHT."
       plugin_perms_list: "Liste aller Pluginberechtigunen für %var0% (%var1% / %var2%) : "
   groups:
-    desc: "Zeigt eine Liste aller Gruppen. #64FF00"
+    desc: "Zeigt eine Liste aller Gruppen."
     messages:
       all_registered_groups: "Alle registrierten Gruppen: %var0%"
   listgperms: 
-    desc: "Zeigt eine Liste aller Berechtigungen einer Gruppe. #64FF00"
+    desc: "Zeigt eine Liste aller Berechtigungen einer Gruppe."
     usage: "Benutzung: /listgperms <Gruppe> <Seite> [Welt]"
     messages:
       group_not_exist: "Gruppe %var0% existiert NICHT."
@@ -40,37 +40,37 @@ cmds:
       level_not_exist: "Welt %var0% existiert NICHT."
       no_group_perms: "Gruppe %var0% hat keine Gruppenberechtigungen."
   listuperms: 
-    desc: "Zeigt eine Liste aller permissions eines Nutzers. #64FF00"
+    desc: "Zeigt eine Liste aller permissions eines Nutzers."
     usage: "Benutzung: /listuperms <Spieler> <Seite> [Welt]"
     messages:
       level_not_exist: "Welt %var0% existiert NICHT."
       no_user_perms: "Spieler %var0% hat keine Nutzerberechtigungen."
       user_perms_list: "Liste aller Nutzerberechtigungen von %var0% (%var1% / %var2%) : " 
   ppinfo: 
-    desc: "Zeigt alle PurePerms Informationen einschließlich Autor, Version und so weiter. #64FF00"
+    desc: "Zeigt alle PurePerms Informationen einschließlich Autor, Version und so weiter."
     messages:
       ppinfo_console: "Du nutzt derzeit PurePerms v%var0% von %var1%."
       ppinfo_player: "Dieser Server nutzt PurePerms v%var0% von %var1%."
   ppreload: 
-    desc: "Lädt die Einstellungen von PurePerms neu. #64FF00"
+    desc: "Lädt die Einstellungen von PurePerms neu."
     messages: 
       successfully_reloaded: "Alle Einstellungen von PurePerms wurden erfolgreich neu geladen."
   rmgroup: 
-    desc: "Entfernt eine Gruppe von der Gruppenliste. #64FF00"
+    desc: "Entfernt eine Gruppe von der Gruppenliste."
     usage: "Benutzung: /rmgroup <Gruppe>"
     messages:
       group_removed_successfully: "%var0% wurde erfolgreich von der Gruppenliste entfernt."
       group_not_exist: "Gruppe %var0% existiert NICHT."
       invalid_group_name: "Invalid Group Name."
   setgperm: 
-    desc: "Fügt eine Berechtigung zu einer Gruppe hinzu. #64FF00"
+    desc: "Fügt eine Berechtigung zu einer Gruppe hinzu."
     usage: "Benutzung: /setgperm <Gruppe> <Berechtigung> [Welt]"
     messages:
       gperm_added_successfully: "Berechtigung %var0% wurde erfolgreich zur Gruppe hinzugefügt."
       group_not_exist: "Gruppe %var0% existiert NICHT."
       level_not_exist: "Welt %var0% existiert NICHT."
   setgroup: 
-    desc: "Setzt eine Gruppe für einen Spieler. #64FF00"
+    desc: "Setzt eine Gruppe für einen Spieler."
     usage: "Benutzung: /setgroup <Spieler> <Gruppe> [Welt]"
     messages:
       access_denied_01: "You don't have permission to set a player's group to %var0%."
@@ -80,26 +80,26 @@ cmds:
       on_player_group_change: "Deine PurePerms-Gruppe wurde zu %var0% geändert!"
       setgroup_successfully: "Spieler %var0% wurde erfolgreich zur Gruppe hinzugefügt."
   setuperm: 
-    desc: "Fügt eine Berechtigung zu einem Spieler hinzu. #64FF00"
+    desc: "Fügt eine Berechtigung zu einem Spieler hinzu."
     usage: "Benutzung: /setuperm <Spieler> <Berechtigung> [Welt]"
     messages:
       level_not_exist: "Welt %var0% existiert NICHT."
       uperm_added_successfully: "Berechtigung %var0% wurde erfolgreich zum Spieler %var1% hinzugefügt."
   unsetgperm: 
-    desc: "Entfernt eine Berechtigung von einer Gruppe. #64FF00"
+    desc: "Entfernt eine Berechtigung von einer Gruppe."
     usage: "Benutzung: /unsetgperm <Gruppe> <Berechtigung> [Welt]"
     messages:
       gperm_removed_successfully: "Berechtigung %var0% wurde erfolgreich von der Gruppe entfernt."
       group_not_exist: "Gruppe %var0% existiert NICHT."
       level_not_exist: "Welt %var0% existiert NICHT."
   unsetuperm: 
-    desc: "Entfernt eine Berechtigung vom Spieler. #64FF00"
+    desc: "Entfernt eine Berechtigung vom Spieler."
     usage: "Benutzung: /unsetuperm <Spieler> <Berechtigung> [Welt]"
     messages: 
       level_not_exist: "Welt %var0% existiert NICHT."
       uperm_removed_successfully: "Berechtigung %var0% wurde erfolgreich von %var1% entfernt."
   usrinfo: 
-    desc: "Zeigt Informationen zu einem Spieler. #64FF00"
+    desc: "Zeigt Informationen zu einem Spieler."
     usage: "Benutzung: /usrinfo <Spieler> [Welt]"
     messages:
       level_not_exist: "Welt %var0% existiert NICHT."

@@ -35,7 +35,7 @@ mysql-settings:
   password: "YourPasswordGoesHere"
   db: "YourDBNameGoesHere"
 
-# Special thanks to @jazzwhistle for helping me with this new kewl feature! ALL HAIL JAZZWHISTLEEEEEEE!
+# Special thanks to @jazzwhistle for helping me with this cool feature! #JAZZWHEEEEEEESSSSSSSTTTTTTTLE
 # Ranks that can only be set on console
 # Also, users with a superadmin-rank can only have their rank changed on console
 # - array

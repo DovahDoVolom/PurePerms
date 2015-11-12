@@ -3,35 +3,35 @@
 # Original Japanese Translation by onebone (jyc00410@gmail.com)
 # Translated into fluent Japanese by haniokasai (08/03/2015) (htek@haniokasai.com, @haniokasai for Twitter)
 ---
-messages-version: "1.2.0"
+messages-version: "1.2.3"
 language: "jp"
 cmds:
   addgroup:
-    desc: "新しいグループをリストに追加します。 #64FF00"
+    desc: "新しいグループをリストに追加します。"
     usage: "使用法: /addgroup <グループ>"
     messages:
       group_added_successfully: "%var0%をグループリストに追加しました。"
       group_already_exists: "グループ%var0%はすでに存在しています。"
       invalid_group_name: "Invalid Group Name."
   defgroup:
-    desc: "デフォルトのグループを決めることを許可します。 #64FF00"
+    desc: "デフォルトのグループを決めることを許可します。"
     usage: "Usage: /defgroup <group>"
     messages:
       defgroup_successfully: "デフォルトのグループは %var0%に設定されました."
       group_not_exist: "グループ%var0%は存在しません。"    
   fperms:
-    desc: "特定のプラグインの権限リストを表示します。 #64FF00"
+    desc: "特定のプラグインの権限リストを表示します。"
     usage: "使用法: /fperms <プラグイン>"
     messages:
       no_plugin_perms: "プラグイン%var0%は何の権限も持っていません。"
       plugin_not_exist: "プラグイン%var0%は存在しません。"
       plugin_perms_list: "プラグイン%var0%の権限 (%var1% / %var2%) : "
   groups:
-    desc: "グループリストを表示します。 #64FF00"
+    desc: "グループリストを表示します。"
     messages:
       all_registered_groups: "グループリスト：%var0%"
   listgperms:
-    desc: "グループの権限のリストを表示します。 #64FF00"
+    desc: "グループの権限のリストを表示します。"
     usage: "使用法: /listgperms <グループ> <ページ> [ワールド]"
     messages:
       group_not_exist: "グループ%var0%は存在しません。"
@@ -39,37 +39,37 @@ cmds:
       level_not_exist: "ワールド%var0%は存在しません。"
       no_group_perms: "グループ%var0%は何の権限も持っていません。"
   listuperms:
-    desc: "プレーヤーの権限を表示します。 #64FF00"
+    desc: "プレーヤーの権限を表示します。"
     usage: "使用法: /listuperms <プレーヤー> <ページ> [ワールド]"
     messages:
       level_not_exist: "ワールド%var0%は存在しません。"
       no_user_perms: "プレーヤー%var0%は何の権限も持っていません。"
       user_perms_list: "%var0%の権限を表示します (%var1% / %var2%) : "
   ppinfo:
-    desc: "PurePermsの情報、例えば作成者、バージョン、など #64FF00"
+    desc: "PurePermsの情報、例えば作成者、バージョン、など"
     messages:
       ppinfo_console: "いまあなたはPurePerms v%var0% by %var1%を使っています。"
       ppinfo_player: "このサーバーはPurePerms v%var0% by %var1%を使っています。"
   ppreload:
-    desc: "全てのPurePerms設定をリロードします。 #64FF00"
+    desc: "全てのPurePerms設定をリロードします。"
     messages:
       successfully_reloaded: "全てのプラグインの設定がリロードされました。"
   rmgroup:
-    desc: "グループを削除します。 #64FF00"
+    desc: "グループを削除します。"
     usage: "使用法: /rmgroup <グループ>"
     messages:
       group_removed_successfully: "グループ%var0%を削除しました。"
       group_not_exist: "グループ%var0%は存在しません。"
       invalid_group_name: "Invalid Group Name."
   setgperm:
-    desc: "グループに権限を追加します。 #64FF00"
+    desc: "グループに権限を追加します。"
     usage: "使用法: /setgperm <グループ> <権限> [ワールド]"
     messages:
       gperm_added_successfully: "権限%var0%をグループに追加しました。"
       group_not_exist: "グループ%var0%は存在しません。"
       level_not_exist: "ワールド%var0%は存在しません。"
   setgroup:
-    desc: "プレーヤーのグループを設定します。 #64FF00"
+    desc: "プレーヤーのグループを設定します。"
     usage: "使用法: /setgroup <プレーヤー> <グループ> [ワールド]"
     messages:
       access_denied_01: "You don't have permission to set a player's group to %var0%."
@@ -79,26 +79,26 @@ cmds:
       on_player_group_change: "あなたのグループは%var0%に変わりました!"
       setgroup_successfully: "%var0%をグループに追加しました。"
   setuperm:
-    desc: "権限をプレーヤーに追加します。 #64FF00"
+    desc: "権限をプレーヤーに追加します。"
     usage: "使用法: /setuperm <プレーヤー> <権限> [ワールド]"
     messages:
       level_not_exist: "ワールド%var0%は存在しません。"
       uperm_added_successfully: "権限%var0%を%var1%に追加しました。"
   unsetgperm:
-    desc: "グループから権限を削除します。 #64FF00"
+    desc: "グループから権限を削除します。"
     usage: "使用法: /unsetgperm <グループ> <権限> [ワールド]"
     messages:
       gperm_removed_successfully: "権限%var0%をグループから削除しました。"
       group_not_exist: "グループ%var0%は存在しません。"
       level_not_exist: "ワールド%var0%は存在しません。"
   unsetuperm:
-    desc: "プレーヤーから権限を削除します。 #64FF00"
+    desc: "プレーヤーから権限を削除します。"
     usage: "使用法: /unsetuperm <プレーヤー> <権限> [ワールド]"
     messages:
       level_not_exist: "ワールド%var0%は存在しません。"
       uperm_removed_successfully: "権限%var0%をグループ%var1%から削除しました。"
   usrinfo:
-    desc: "プレーヤーの情報を表示します。 #64FF00"
+    desc: "プレーヤーの情報を表示します。"
     usage: "使用法: /usrinfo <プレーヤー> [ワールド]"
     messages:
       level_not_exist: "ワールド%var0%は存在しません。"

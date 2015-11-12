@@ -2,35 +2,35 @@
 # PurePerms by 64FF00 (xktiverz@gmail.com, @64ff00 for Twitter)
 
 ---
-messages-version: "1.2.0"
+messages-version: "1.2.3"
 language: "en"
 cmds:
   addgroup:
-    desc: "Adds a new group to the groups list. #64FF00"
+    desc: "Adds a new group to the groups list."
     usage: "Usage: /addgroup <group>"
     messages:
       group_added_successfully: "Added %var0% to the group list successfully."
       group_already_exists: "Group %var0% already exists."
       invalid_group_name: "Invalid Group Name."
   defgroup:
-    desc: "Allows you to set default group. #64FF00"
+    desc: "Allows you to set default group."
     usage: "Usage: /defgroup <group>"
     messages:
       defgroup_successfully: "Default group has been successfully set to %var0%."
       group_not_exist: "Group %var0% does NOT exist."
   fperms:
-    desc: "Shows a list of all permissions for a specific plugin. #64FF00"
+    desc: "Shows a list of all permissions for a specific plugin."
     usage: "Usage: /fperms <plugin>"
     messages:
       no_plugin_perms: "Plugin %var0% doesn't have any permissions."
       plugin_not_exist: "Plugin %var0% does NOT exist."
       plugin_perms_list: "List of all plugin permissions from %var0% (%var1% / %var2%) : "
   groups:
-    desc: "Shows a list of all groups. #64FF00"
+    desc: "Shows a list of all groups."
     messages:
       all_registered_groups: "All registered groups: %var0%"
   listgperms: 
-    desc: "Shows a list of all permissions from a group. #64FF00"
+    desc: "Shows a list of all permissions from a group."
     usage: "Usage: /listgperms <group> <page> [world]"
     messages:
       group_not_exist: "Group %var0% does NOT exist."
@@ -38,37 +38,37 @@ cmds:
       level_not_exist: "World %var0% does NOT exist."
       no_group_perms: "Group %var0% doesn't have any group permissions."
   listuperms: 
-    desc: "Shows a list of all permissions from a user. #64FF00"
+    desc: "Shows a list of all permissions from a user."
     usage: "Usage: /listuperms <player> <page> [world]"
     messages:
       level_not_exist: "World %var0% does NOT exist."
       no_user_perms: "Player %var0% doesn't have any user permissions."
       user_perms_list: "List of all user permissions from %var0% (%var1% / %var2%) : " 
   ppinfo: 
-    desc: "Get current PurePerms information including author, version, and etc. #64FF00"
+    desc: "Get current PurePerms information including author, version, and etc."
     messages:
       ppinfo_console: "You are currently using PurePerms v%var0% by %var1%."
       ppinfo_player: "This server is using PurePerms v%var0% by %var1%."
   ppreload: 
-    desc: "Reloads all PurePerms configurations. #64FF00"
+    desc: "Reloads all PurePerms configurations."
     messages: 
       successfully_reloaded: "All plugin configurations have been successfully reloaded."
   rmgroup: 
-    desc: "Removes a group from the groups list. #64FF00"
+    desc: "Removes a group from the groups list."
     usage: "Usage: /rmgroup <group>"
     messages:
       group_removed_successfully: "Removed %var0% from the group list successfully."
       group_not_exist: "Group %var0% does NOT exist."
       invalid_group_name: "Invalid Group Name."
   setgperm: 
-    desc: "Adds a permission to the group. #64FF00"
+    desc: "Adds a permission to the group."
     usage: "Usage: /setgperm <group> <permission> [world]"
     messages:
       gperm_added_successfully: "Added permission %var0% to the group successfully."
       group_not_exist: "Group %var0% does NOT exist."
       level_not_exist: "World %var0% does NOT exist."
   setgroup: 
-    desc: "Sets group for the user. #64FF00"
+    desc: "Sets group for the user."
     usage: "Usage: /setgroup <player> <group> [world]"
     messages:
       access_denied_01: "You don't have permission to set a player's group to %var0%."
@@ -78,26 +78,26 @@ cmds:
       on_player_group_change: "Your group has been changed to a / an %var0%!"
       setgroup_successfully: "Added %var0% to the group successfully."
   setuperm: 
-    desc: "Adds a permission to the user. #64FF00"
+    desc: "Adds a permission to the user."
     usage: "Usage: /setuperm <player> <permission> [world]"
     messages:
       level_not_exist: "World %var0% does NOT exist."
       uperm_added_successfully: "Added permission %var0% to %var1% successfully."
   unsetgperm: 
-    desc: "Removes a permission from the group. #64FF00"
+    desc: "Removes a permission from the group."
     usage: "Usage: /unsetgperm <group> <permission> [world]"
     messages:
       gperm_removed_successfully: "Removed permission %var0% from the group successfully."
       group_not_exist: "Group %var0% does NOT exist."
       level_not_exist: "World %var0% does NOT exist."
   unsetuperm: 
-    desc: "Removes a permission from the user. #64FF00"
+    desc: "Removes a permission from the user."
     usage: "Usage: /unsetuperm <player> <permission> [world]"
     messages: 
       level_not_exist: "World %var0% does NOT exist."
       uperm_removed_successfully: "Removed permission %var0% from %var1% successfully."
   usrinfo: 
-    desc: "Shows info about a user. #64FF00"
+    desc: "Shows info about a user."
     usage: "Usage: /usrinfo <player> [world]"
     messages:
       level_not_exist: "World %var0% does NOT exist."
