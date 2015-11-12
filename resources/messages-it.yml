@@ -13,7 +13,7 @@ cmds:
     messages:
       group_added_successfully: "Il gruppo %var0% è stato aggiunto con successo."
       group_already_exists: "Il gruppo %var0% esiste già."
-      invalid_group_name: "Invalid Group Name."
+      invalid_group_name: "Nome del gruppo non valido."
   defgroup:
     desc: "Permette di impostare un gruppo predefinito." 
     usage: "Sintassi: /defgroup <group>"
@@ -61,7 +61,7 @@ cmds:
     messages:
       group_removed_successfully: "Il gruppo %var0% è stato rimosso con successo."
       group_not_exist: "Il gruppo %var0% non esiste."
-      invalid_group_name: "Invalid Group Name."
+      invalid_group_name: "Nome del gruppo non valido."
   setgperm: 
     desc: "Aggiunge un permesso a un gruppo."
     usage: "Sintassi: /setgperm <gruppo> <permesso> [mondo]"
