@@ -54,7 +54,7 @@ class UserDataManager
         // TODO: ...
         if($group === null)
         {
-            $this->plugin->getLogger()->critical("Invalid group name found in " . $player->getName() . "'s player data (World: " . $levelName . ")");
+            $this->plugin->getLogger()->critical("Invalid group name found in " . $player->getName() . "'s player data (World: " . ($levelName === null ? "GLOBAL" : $levelName) . ")");
             $this->plugin->getLogger()->critical("Restoring the group data to default settings");
 
             $defaultGroup = $this->plugin->getDefaultGroup();

@@ -186,7 +186,7 @@ class PurePerms extends PluginBase
                 $provider = new DefaultProvider($this);
 
                 if($onEnable === true)
-                    $this->getLogger()->warning($this->getMessage("logger_messages.setProvider_NotFound"));
+                    $this->getLogger()->warning($this->getMessage("logger_messages.setProvider_NotFound", "'$providerName'"));
 
                 break;
         }
@@ -474,7 +474,7 @@ class PurePerms extends PluginBase
      */
     public function isValidProvider()
     {
-        if(!isset($this->provider) || $this->provider == null || !($this->provider instanceof ProviderInterface))
+        if(!isset($this->provider) || $this->provider === null || !($this->provider instanceof ProviderInterface))
             return false;
 
         return true;
@@ -643,17 +643,6 @@ class PurePerms extends PluginBase
         {
             if($this->userDataMgr->getGroup($player) === $group)
                 $this->updatePermissions($player);
-
-            if($this->getConfigValue("enable-multiworld-perms") == true)
-            {
-                foreach($this->getServer()->getLevels() as $level)
-                {
-                    $levelName = $level->getName();
-
-                    if($this->userDataMgr->getGroup($player, $levelName) === $group)
-                        $this->updatePermissions($player, $levelName);
-                }
-            }
         }
     }
 
