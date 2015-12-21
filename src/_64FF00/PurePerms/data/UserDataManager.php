@@ -107,7 +107,8 @@ class UserDataManager
      */
     public function getWorldData(IPlayer $player, $levelName)
     {
-        if($levelName === null) $levelName = $this->plugin->getServer()->getDefaultLevel()->getName();
+        if($levelName === null)
+            $levelName = $this->plugin->getServer()->getDefaultLevel()->getName();
 
         if(!isset($this->getData($player)["worlds"][$levelName]))
         {
@@ -159,7 +160,7 @@ class UserDataManager
         }
         else
         {
-            $worldData = $this->getWorldData($levelName);
+            $worldData = $this->getWorldData($player, $levelName);
 
             $worldData["group"] = $group->getName();
 
