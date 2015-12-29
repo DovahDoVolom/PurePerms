@@ -99,10 +99,11 @@ class PPGroup
         foreach($this->getInheritedGroups() as $inheritedGroup)
         {
             $inheritedGroupPermissions = $inheritedGroup->getGroupPermissions($levelName);
-            
+
             if($inheritedGroupPermissions === null) $inheritedGroupPermissions = [];
-            
-            $permissions = array_merge($permissions, $inheritedGroupPermissions);
+
+            // Fixed by @mad-hon (https://github.com/mad-hon) / Tysm! :D
+            $permissions = array_merge($inheritedGroupPermissions, $permissions);
         }
         
         return $permissions;
