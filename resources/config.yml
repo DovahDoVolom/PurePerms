@@ -1,6 +1,8 @@
 
 # PurePerms by 64FF00 (xktiverz@gmail.com, @64ff00 for Twitter)
 
+# 제 블로그 이외에 허락없이 마음대로 플러그인 배포하실 시에는 바로 한국어 파일 삭제 조치하고 공유 중단합니다
+
 ---
 # Set default data provider for PurePerms
 # - mysql, yaml, sqlite3
@@ -10,7 +12,6 @@ data-provider: yaml
 # - en, ko, jp, ru, ua, it, sp, cz, sk, de, idn
 # English message resource by @64FF00 and @Samueljh1 (GitHub)
 # Korean message resource by @64FF00 (GitHub)
-# 제 블로그 이외에 허락없이 마음대로 플러그인 배포하실 시에는 바로 한국어 파일 삭제 조치하고 공유 중단합니다
 # Japanese message resource by @onebone (<3) and @haniokasai (GitHub)
 # Russian message resource by @vvzar and @Pub4Game (GitHub)
 # Ukrainian messages resource by @samalero (GitHub)
@@ -25,6 +26,10 @@ default-language: en
 # Setting this option will allow you to use per-world permissions
 # - true / false
 enable-multiworld-perms: false
+
+# Enables PPNoeul, a 'pointless' security management system for PurePerms
+# - true / false
+enable-noeul-sixtyfour: false
 
 # // NOT FINISHED YET
 # MySQL Settings (Only configure this if you are going to use MySQL data provider)

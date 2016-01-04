@@ -18,6 +18,7 @@ use _64FF00\PurePerms\cmd\UnsetGPerm;
 use _64FF00\PurePerms\cmd\UnsetUPerm;
 use _64FF00\PurePerms\cmd\UsrInfo;
 use _64FF00\PurePerms\data\UserDataManager;
+use _64FF00\PurePerms\noeul\NoeulAPI;
 use _64FF00\PurePerms\provider\DefaultProvider;
 use _64FF00\PurePerms\provider\MySQLProvider;
 use _64FF00\PurePerms\provider\ProviderInterface;
@@ -73,6 +74,8 @@ class PurePerms extends PluginBase
         $this->saveDefaultConfig();
 
         $this->messages = new PPMessages($this);
+
+        $this->noeulAPI = new NoeulAPI($this);
 
         $this->userDataMgr = new UserDataManager($this);
 
