@@ -50,11 +50,20 @@ cmds:
     desc: "Prijimajte aktualny PurePerms informacie, vratane autora, verzia, atd."
     messages:
       ppinfo_console: "Prave pouzivas PurePerms v%var0% od %var1%."
-      ppinfo_player: "Tento server pouziva PurePerms v%var0% by %var1%."
+      ppinfo_player: "Tento server pouziva PurePerms v%var0% by %var1%."	  
   ppreload: 
     desc: "Znovu nacita vsetky konfiguracie PurePerms."
     messages: 
       successfully_reloaded: "Vsetky konfiguracie a pluginy boli uspesne obnovene."
+  ppsudo:
+    desc: "Registers or logs into your Noeul account."
+    usage: "Usage: /ppsudo <login / register / unregister>"
+    messages:
+      deauth_01: "This server uses Noeul v%var0% to protect your account."
+      deauth_02: "You must authenticate your account first."
+      deauth_03: "Please register or login to your account using /ppsudo command"
+      successfully_logged_in: "You are now logged in."	 
+      successfully_registered: "Your account has been successfully registered."  
   rmgroup: 
     desc: "Vymaze skupinu zo zoznamu skupin."
     usage: "Pouzitie: /rmgroup <Skupina>"

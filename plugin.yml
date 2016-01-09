@@ -46,3 +46,8 @@ permissions:
             description: "Allows you to remove a permission from the user."
           pperms.command.usrinfo:
             description: "Allows you to see info about a user."
+      pperms.noeul:
+        description: "Allows you to access all 'Noeul' related features."
+        children:
+          pperms.noeul.ppsudo:
+            description: "Allows you to use the Noeul 'ppsudo' command."

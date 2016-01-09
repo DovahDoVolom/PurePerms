@@ -56,6 +56,15 @@ cmds:
     desc: "Recarga las configuraciones de PurePerms."
     messages:
       successfully_reloaded: "Todas las configuraciones del plugin han sido recargadas."
+  ppsudo:
+    desc: "Registers or logs into your Noeul account."
+    usage: "Usage: /ppsudo <login / register / unregister>"
+    messages:
+      deauth_01: "This server uses Noeul v%var0% to protect your account."
+      deauth_02: "You must authenticate your account first."
+      deauth_03: "Please register or login to your account using /ppsudo command"
+      successfully_logged_in: "You are now logged in."	 
+      successfully_registered: "Your account has been successfully registered."  
   rmgroup:
     desc: "Elimina un grupo de la lista."
     usage: "Uso: /rmgroup <grupo>"

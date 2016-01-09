@@ -4,7 +4,13 @@ namespace _64FF00\PurePerms\noeul;
 
 use _64FF00\PurePerms\PurePerms;
 
+use pocketmine\IPlayer;
+
+use pocketmine\permission\PermissionAttachment;
+
 use pocketmine\Player;
+
+use pocketmine\utils\TextFormat;
 
 class NoeulAPI
 {
@@ -21,6 +27,14 @@ class NoeulAPI
           888  888    "Y8888P"        888  888        888        "Y8888P"   "Y8888P"
     */
 
+    /*
+     * 1. 플레이어가 접속하고 SimpleAuth 인증이 끝나면 모든 퍼미션 차단 후 메시지 출력
+     * 2. 플레이어 등록이 되어있지 않으면 새로 등록
+     * 3. 명령어와 비밀번호 입력 후 퍼미션 다시 설정
+     */
+
+    const NOEUL_VERSION = 'INDEV';
+
     private $needAuth = [];
 
     public function __construct(PurePerms $plugin)
@@ -28,24 +42,51 @@ class NoeulAPI
         $this->plugin = $plugin;
     }
 
-    // TODO
+    /**
+     * @param Player $player
+     * @return bool
+     */
     public function auth(Player $player)
     {
+        // TODO
+
         if($this->isAuthed($player))
             return true;
+
+        if(isset($this->needAuth[spl_object_hash($player)]))
+        {
+            $attachment = $this->needAuth[spl_object_hash($player)];
+
+            $player->removeAttachment($attachment);
+
+            unset($this->needAuth[spl_object_hash($player)]);
+        }
+
+        return true;
     }
 
-    // TODO
+    /**
+     * @param Player $player
+     * @return bool
+     */
     public function deAuth(Player $player)
     {
-        $this->needAuth[spl_object_hash($player)] = true;
+        $attachment = $player->addAttachment($this->plugin);
+
+        $this->removePermissions($attachment);
+
+        $this->needAuth[spl_object_hash($player)] = $attachment;
+
+        $this->sendAuthMsg($player);
+
+        return true;
     }
 
     /**
      * @param $password
      * @return bool|string
      */
-    public function hash($password)
+    private function hash($password)
     {
         return password_hash($password, PASSWORD_BCRYPT);
     }
@@ -65,5 +106,79 @@ class NoeulAPI
     public function isNoeulEnabled()
     {
         return $this->plugin->getConfigValue("enable-noeul-sixtyfour");
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAlreadyRegistered($player)
+    {
+        return !($this->plugin->getUserDataMgr()->getNode($player, 'noeulPW') === null);
+    }
+
+    /**
+     * @param IPlayer $player
+     * @param $password
+     * @return bool
+     */
+    public function register(IPlayer $player, $password)
+    {
+        if(!$this->isAlreadyRegistered($player))
+        {
+            $hash = $this->hash($password);
+
+            $this->plugin->getUserDataMgr()->setNode($player, 'noeulPW', $hash);
+
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * @param PermissionAttachment $attachment
+     */
+    private function removePermissions(PermissionAttachment $attachment)
+    {
+        $permissions = [];
+
+        foreach($this->plugin->getServer()->getPluginManager()->getPermissions() as $permission)
+        {
+            $permissions[$permission->getName()] = false;
+        }
+
+        $permissions["pocketmine.command.help"] = true;
+        $permissions["pperms.noeul.ppsudo"] = true;
+
+        ksort($permissions);
+
+        $attachment->setPermissions($permissions);
+    }
+
+    /**
+     * @param Player $player
+     */
+    public function sendAuthMsg(Player $player)
+    {
+        $player->sendMessage(TextFormat::RED . "[PurePerms] " . $this->plugin->getMessage("cmds.ppsudo.messages.deauth_01", self::NOEUL_VERSION));
+        $player->sendMessage(TextFormat::RED . "[PurePerms] " . $this->plugin->getMessage("cmds.ppsudo.messages.deauth_02"));
+
+        $player->sendMessage(TextFormat::RED . "[PurePerms] " . $this->plugin->getMessage("cmds.ppsudo.messages.deauth_03"));
+    }
+
+    /**
+     * @param IPlayer $player
+     * @return bool
+     */
+    public function unregister(IPlayer $player)
+    {
+        if($this->isAlreadyRegistered($player))
+        {
+            $this->plugin->getUserDataMgr()->removeNode($player, 'noeulPW');
+
+            return true;
+        }
+
+        return false;
     }
 }

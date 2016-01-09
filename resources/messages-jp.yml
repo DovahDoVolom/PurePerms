@@ -14,13 +14,8 @@ cmds:
       group_already_exists: "グループ%var0%はすでに存在しています。"
       invalid_group_name: "存在しないグループ名です。"
   defgroup:
-<<<<<<< HEAD
     desc: "デフォルトのグループを決めることを許可します。"
-    usage: "Usage: /defgroup <group>"
-=======
-    desc: "デフォルトのグループを決めることを許可します。 #64FF00"
     usage: "使い方: /defgroup <グループ>"
->>>>>>> origin/master
     messages:
       defgroup_successfully: "デフォルトのグループは %var0%に設定されました."
       group_not_exist: "グループ%var0%は存在しません。"    
@@ -59,6 +54,15 @@ cmds:
     desc: "全てのPurePerms設定をリロードします。"
     messages:
       successfully_reloaded: "全てのプラグインの設定がリロードされました。"
+  ppsudo:
+    desc: "Registers or logs into your Noeul account."
+    usage: "Usage: /ppsudo <login / register / unregister>"
+    messages:
+      deauth_01: "This server uses Noeul v%var0% to protect your account."
+      deauth_02: "You must authenticate your account first."
+      deauth_03: "Please register or login to your account using /ppsudo command"
+      successfully_logged_in: "You are now logged in."	 
+      successfully_registered: "Your account has been successfully registered."  	  
   rmgroup:
     desc: "グループを削除します。"
     usage: "使用法: /rmgroup <グループ>"

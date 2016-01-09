@@ -4,21 +4,20 @@ messages-version: "1.2.0"
 language: "idn"
 cmds:
   addgroup:
-    desc: "Adds a new group to the groups list. #64FF00"
-    desc: "Menambahkan grup baru ke daftar grup. #64FF00"
+    desc: "Menambahkan grup baru ke daftar grup."
     usage: "Command: /addgroup <group>"
     messages:
       group_added_successfully: "Berhasil Menambahkan %var0% ke daftar grup."
       group_already_exists: "Grup %var0% telah ada."
       invalid_group_name: "Nama grup salah."
   defgroup:
-    desc: "Mengizinkan anda untuk set grup normal. #64FF00"
+    desc: "Mengizinkan anda untuk set grup normal."
     usage: "Command: /defgroup <group>"
     messages:
       defgroup_successfully: "Grup normal telah diset menjadi %var0%."
       group_not_exist: "Grup %var0% tidak ada."
   fperms:
-    desc: "Menampilkan semua permission dari sebuah plugin. #64FF00"
+    desc: "Menampilkan semua permission dari sebuah plugin."
     usage: "Command: /fperms <plugin>"
     messages:
       no_plugin_perms: "Plugin %var0% tidak mempunyai permission."
@@ -44,30 +43,39 @@ cmds:
       no_user_perms: "Permain %var0% tidak mempunyai permission."
       user_perms_list: "Daftar semua permission pemain dari %var0% (%var1% / %var2%) : " 
   ppinfo: 
-    desc: "Mendapatkan info PurePerm termasuk penulis, versi, dll. #64FF00"
+    desc: "Mendapatkan info PurePerm termasuk penulis, versi, dll."
     messages:
       ppinfo_console: "Kamu memakai PurePerms v%var0% oleh %var1%."
       ppinfo_player: "Server ini memakai PurePerms v%var0% oleh %var1%."
   ppreload: 
-    desc: "Reload semua konfigurasi PurePerms. #64FF00"
+    desc: "Reload semua konfigurasi PurePerms."
     messages: 
       successfully_reloaded: "Semua konfigurasi telah di reload."
+  ppsudo:
+    desc: "Registers or logs into your Noeul account."
+    usage: "Usage: /ppsudo <login / register / unregister>"
+    messages:
+      deauth_01: "This server uses Noeul v%var0% to protect your account."
+      deauth_02: "You must authenticate your account first."
+      deauth_03: "Please register or login to your account using /ppsudo command"
+      successfully_logged_in: "You are now logged in."	 
+      successfully_registered: "Your account has been successfully registered."    
   rmgroup: 
-    desc: "Menghapus sebuah grup dari daftar grup. #64FF00"
+    desc: "Menghapus sebuah grup dari daftar grup."
     usage: "Command: /rmgroup <group>"
     messages:
       group_removed_successfully: "Berhasil menghapus %var0% dari daftar grup."
       group_not_exist: "Grup %var0% tidak ada."
       invalid_group_name: "Nama grup salah."
   setgperm: 
-    desc: "Menambahkan permission ke grup. #64FF00"
+    desc: "Menambahkan permission ke grup."
     usage: "command: /setgperm <group> <permission> [world]"
     messages:
       gperm_added_successfully: "Berhasil menambahkan permission %var0% ke dalam grup.."
       group_not_exist: "Grup %var0% tidak ada."
       level_not_exist: "World %var0% tidak ada."
   setgroup: 
-    desc: "Set grup untuk permain. #64FF00"
+    desc: "Set grup untuk permain."
     usage: "Command: /setgroup <player> <group> [world]"
     messages:
       access_denied_01: "Kamu tidak mempunyai permission untuk set pemain ke group %var0%."
@@ -78,26 +86,26 @@ cmds:
       on_player_group_change: "Grup kamu telah berhasil diubah menjadi %var0%!"
       setgroup_successfully: "Berhasil menambahkan %var0% kedalam grup."
   setuperm: 
-    desc: "Menambahkan permission ke pemain. #64FF00"
+    desc: "Menambahkan permission ke pemain."
     usage: "Command: /setuperm <player> <permission> [world]"
     messages:
       level_not_exist: "World %var0% tidak ada."
       uperm_added_successfully: "Berhasil menambahkan permission %var0% ke %var1%."
   unsetgperm: 
-    desc: "Menghapus permission dari grup. #64FF00"
+    desc: "Menghapus permission dari grup."
     usage: "Command: /unsetgperm <group> <permission> [world]"
     messages:
       gperm_removed_successfully: "berhasil menghapus permission %var0% dari grup."
       group_not_exist: "Grup %var0% tidak ada."
       level_not_exist: "World %var0% tidak ada."
   unsetuperm: 
-    desc: "Menghapus permission dari pemain. #64FF00"
+    desc: "Menghapus permission dari pemain."
     usage: "Command: /unsetuperm <player> <permission> [world]"
     messages: 
       level_not_exist: "World %var0% tidak ada."
       uperm_removed_successfully: "Berhasil menghapus permisson %var0% dari %var1%."
   usrinfo: 
-    desc: "Menampilkan info dari pemain. #64FF00"
+    desc: "Menampilkan info dari pemain."
     usage: "Command: /usrinfo <player> [world]"
     messages:
       level_not_exist: "World %var0% tidak ada."

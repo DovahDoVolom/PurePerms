@@ -10,6 +10,7 @@ use _64FF00\PurePerms\cmd\ListGPerms;
 use _64FF00\PurePerms\cmd\ListUPerms;
 use _64FF00\PurePerms\cmd\PPInfo;
 use _64FF00\PurePerms\cmd\PPReload;
+use _64FF00\PurePerms\cmd\PPSudo;
 use _64FF00\PurePerms\cmd\RmGroup;
 use _64FF00\PurePerms\cmd\SetGPerm;
 use _64FF00\PurePerms\cmd\SetGroup;
@@ -61,6 +62,9 @@ class PurePerms extends PluginBase
     /** @var PPMessages $messages */
     private $messages;
 
+    /** @var NoeulAPI $noeulAPI */
+    private $noeulAPI;
+
     /** @var ProviderInterface $provider */
     private $provider;
 
@@ -96,6 +100,8 @@ class PurePerms extends PluginBase
 
         $this->setProvider();
 
+        $this->sortGroupPermissions();
+
         $this->checkForUUIDSupport();
 
         $this->registerPlayers();
@@ -128,6 +134,9 @@ class PurePerms extends PluginBase
     private function registerCommands()
     {
         $commandMap = $this->getServer()->getCommandMap();
+
+        if($this->getNoeulAPI()->isNoeulEnabled())
+            $commandMap->register("ppsudo", new PPSudo($this, "ppsudo", $this->getMessage("cmds.ppsudo.desc") . ' #64FF00'));
 
         $commandMap->register("addgroup", new AddGroup($this, "addgroup", $this->getMessage("cmds.addgroup.desc") . ' #64FF00'));
         $commandMap->register("defgroup", new DefGroup($this, "defgroup", $this->getMessage("cmds.defgroup.desc") . ' #64FF00'));
@@ -368,6 +377,14 @@ class PurePerms extends PluginBase
     }
 
     /**
+     * @return NoeulAPI
+     */
+    public function getNoeulAPI()
+    {
+        return $this->noeulAPI;
+    }
+
+    /**
      * @param PPGroup $group
      * @return array
      */
@@ -516,6 +533,8 @@ class PurePerms extends PluginBase
 
         if(!$this->isValidProvider())
             $this->setProvider(false);
+
+        $this->sortGroupPermissions();
     }
 
     /**
@@ -580,7 +599,8 @@ class PurePerms extends PluginBase
      */
     public function updateGroups()
     {
-        if(!$this->isValidProvider()) throw new \RuntimeException("Failed to load groups: Invalid Data Provider");
+        if(!$this->isValidProvider())
+            throw new \RuntimeException("Failed to load groups: Invalid Data Provider");
 
         // Make group list empty first to reload it
         $this->groups = [];

@@ -57,6 +57,15 @@ cmds:
     desc: "모든 PurePerms 설정 파일들을 다시 로드합니다."
     messages: 
       successfully_reloaded: "모든 설정 파일들이 다시 로드되었습니다."
+  ppsudo:
+    desc: "Registers or logs into your Noeul account."
+    usage: "Usage: /ppsudo <login / register / unregister>"
+    messages:
+      deauth_01: "This server uses Noeul v%var0% to protect your account."
+      deauth_02: "You must authenticate your account first."
+      deauth_03: "Please register or login to your account using /ppsudo command"
+      successfully_logged_in: "You are now logged in."	 
+      successfully_registered: "Your account has been successfully registered."  	  
   rmgroup: 
     desc: "그룹을 제거합니다."
     usage: "사용법: /rmgroup <제거할 그룹 이름>"
