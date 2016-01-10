@@ -56,13 +56,19 @@ cmds:
       successfully_reloaded: "全てのプラグインの設定がリロードされました。"
   ppsudo:
     desc: "Registers or logs into your Noeul account."
-    usage: "Usage: /ppsudo <login / register / unregister>"
+    usage: "Usage: /ppsudo <login / register>"
     messages:
+      already_registered: "This account is already registered."
       deauth_01: "This server uses Noeul v%var0% to protect your account."
       deauth_02: "You must authenticate your account first."
       deauth_03: "Please register or login to your account using /ppsudo command"
+      invalid_sender: "This command should be only used in-game."
+      login_usage: "Usage: /ppsudo login <password>"
+      not_registered: "This account is not registered."
+      register_usage: "Usage: /ppsudo register <password>"
       successfully_logged_in: "You are now logged in."	 
-      successfully_registered: "Your account has been successfully registered."  	  
+      successfully_registered: "Your account has been successfully registered."
+      unregister_usage: "Usage: /ppsudo unregister <password>" 		 
   rmgroup:
     desc: "グループを削除します。"
     usage: "使用法: /rmgroup <グループ>"

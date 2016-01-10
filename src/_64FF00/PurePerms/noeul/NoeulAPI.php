@@ -62,6 +62,8 @@ class NoeulAPI
             unset($this->needAuth[spl_object_hash($player)]);
         }
 
+        $player->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.ppsudo.messages.successfully_logged_in"));
+
         return true;
     }
 
@@ -86,9 +88,19 @@ class NoeulAPI
      * @param $password
      * @return bool|string
      */
-    private function hash($password)
+    public function hash($password)
     {
         return password_hash($password, PASSWORD_BCRYPT);
+    }
+
+    /**
+     * @param $password
+     * @param $hash
+     * @return bool
+     */
+    public function hashEquals($password, $hash)
+    {
+        return password_verify($password, $hash);
     }
 
     /**
@@ -111,7 +123,7 @@ class NoeulAPI
     /**
      * @return bool
      */
-    public function isAlreadyRegistered($player)
+    public function isRegistered($player)
     {
         return !($this->plugin->getUserDataMgr()->getNode($player, 'noeulPW') === null);
     }
@@ -123,7 +135,7 @@ class NoeulAPI
      */
     public function register(IPlayer $player, $password)
     {
-        if(!$this->isAlreadyRegistered($player))
+        if(!$this->isRegistered($player))
         {
             $hash = $this->hash($password);
 
@@ -172,7 +184,7 @@ class NoeulAPI
      */
     public function unregister(IPlayer $player)
     {
-        if($this->isAlreadyRegistered($player))
+        if($this->isRegistered($player))
         {
             $this->plugin->getUserDataMgr()->removeNode($player, 'noeulPW');
 

@@ -59,7 +59,9 @@ class PPListener implements Listener
     {
         if(!$this->plugin->getNoeulAPI()->isAuthed($event->getPlayer()))
         {
-            // <-- SimpleAuth by @shoghicp -->
+            /*
+             * <-- SimpleAuth by @shoghicp -->
+             */
 
             $message = $event->getMessage();
 
@@ -79,12 +81,9 @@ class PPListener implements Listener
                     $this->plugin->getNoeulAPI()->sendAuthMsg($event->getPlayer());
                 }
             }
-            else
-            {
+            else {
                 $event->setCancelled(true);
             }
-
-            // <-- SimpleAuth by @shoghicp -->
         }
     }
 

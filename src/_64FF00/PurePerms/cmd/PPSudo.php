@@ -8,6 +8,8 @@ use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\command\PluginIdentifiableCommand;
 
+use pocketmine\Player;
+
 use pocketmine\utils\TextFormat;
 
 class PPSudo extends Command implements PluginIdentifiableCommand
@@ -50,6 +52,13 @@ class PPSudo extends Command implements PluginIdentifiableCommand
         if(!$this->testPermission($sender))
             return false;
 
+        if(!($sender instanceof Player))
+        {
+            $sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.ppsudo.messages.invalid_sender"));
+
+            return true;
+        }
+
         if(!isset($args[0]) || count($args) > 2)
         {
             $sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.ppsudo.usage"));
@@ -57,17 +66,53 @@ class PPSudo extends Command implements PluginIdentifiableCommand
             return true;
         }
 
+        $noeulAPI = $this->plugin->getNoeulAPI();
+
         switch(strtolower($args[0]))
         {
             case "login":
+
+                if(!$noeulAPI->isRegistered($sender))
+                {
+                    $sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.ppsudo.messages.not_registered"));
+
+                    return true;
+                }
+
+                if(!isset($args[1]))
+                {
+                    $sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.ppsudo.messages.login_usage"));
+
+                    return true;
+                }
+
+                $hash = $this->plugin->getUserDataMgr()->getNode($sender, 'noeulPW');
+
+                if($noeulAPI->hashEquals($args[1], $hash))
+                    $noeulAPI->auth($sender);
 
                 break;
 
             case "register":
 
-                break;
+                if($noeulAPI->isRegistered($sender))
+                {
+                    $sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.ppsudo.messages.already_registered"));
 
-            case "unregister":
+                    return true;
+                }
+
+                if(!isset($args[1]))
+                {
+                    $sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.ppsudo.messages.register_usage"));
+
+                    return true;
+                }
+
+                // TODO: MINIMUM PW LENGTH?
+
+                if($noeulAPI->register($sender, $args[1]))
+                    $noeulAPI->auth($sender);
 
                 break;
         }

