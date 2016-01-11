@@ -63,10 +63,11 @@ cmds:
       invalid_sender: "This command should be only used in-game."
       login_usage: "Usage: /ppsudo login <password>"
       not_registered: "This account is not registered."
+      password_too_short: "Your password does NOT meet minimum length (%var0%) requirements."
       register_usage: "Usage: /ppsudo register <password>"
       successfully_logged_in: "You are now logged in."	 
       successfully_registered: "Your account has been successfully registered."
-      unregister_usage: "Usage: /ppsudo unregister <password>" 	
+      unregister_usage: "Usage: /ppsudo unregister <password>" 
   rmgroup: 
     desc: "Menghapus sebuah grup dari daftar grup."
     usage: "Command: /rmgroup <group>"

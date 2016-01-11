@@ -109,7 +109,14 @@ class PPSudo extends Command implements PluginIdentifiableCommand
                     return true;
                 }
 
-                // TODO: MINIMUM PW LENGTH?
+                $mpl = $this->plugin->getConfigValue("noeul-minimum-pw-length");
+
+                if(mb_strlen($args[1]) < $mpl)
+                {
+                    $sender->sendMessage(TextFormat::RED . "[PurePerms] " . $this->plugin->getMessage("cmds.ppsudo.messages.password_too_short", $mpl));
+
+                    return true;
+                }
 
                 if($noeulAPI->register($sender, $args[1]))
                     $noeulAPI->auth($sender);
