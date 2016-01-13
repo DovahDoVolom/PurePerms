@@ -18,7 +18,6 @@ use _64FF00\PurePerms\cmd\SetUPerm;
 use _64FF00\PurePerms\cmd\UnsetGPerm;
 use _64FF00\PurePerms\cmd\UnsetUPerm;
 use _64FF00\PurePerms\cmd\UsrInfo;
-use _64FF00\PurePerms\data\ConfigUpdater;
 use _64FF00\PurePerms\data\UserDataManager;
 use _64FF00\PurePerms\noeul\NoeulAPI;
 use _64FF00\PurePerms\provider\DefaultProvider;
