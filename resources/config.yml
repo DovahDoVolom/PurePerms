@@ -29,7 +29,7 @@ enable-multiworld-perms: false
 
 # Enables 'Noeul', a 'pointless' security management system for PurePerms
 # - true / false
-enable-noeul-sixtyfour: true
+enable-noeul-sixtyfour: false
 
 # // NOT FINISHED YET
 # MySQL Settings (Only configure this if you are going to use MySQL data provider)

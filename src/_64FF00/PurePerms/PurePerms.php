@@ -57,8 +57,6 @@ class PurePerms extends PluginBase
 
     private $isGroupsLoaded = false;
 
-    private $isUUIDSupported = false;
-
     /** @var PPMessages $messages */
     private $messages;
 
@@ -102,8 +100,6 @@ class PurePerms extends PluginBase
 
         $this->sortGroupPermissions();
 
-        $this->checkForUUIDSupport();
-
         $this->registerPlayers();
 
         $this->getServer()->getPluginManager()->registerEvents(new PPListener($this), $this);
@@ -115,20 +111,6 @@ class PurePerms extends PluginBase
 
         if($this->isValidProvider())
             $this->provider->close();
-    }
-
-    private function checkForUUIDSupport()
-    {
-        $tempClasses = [];
-        $declaredClasses = \get_declared_classes();
-
-        foreach(array_values($declaredClasses) as $class)
-        {
-            $tempClasses[$class] = true;
-        }
-
-        if(isset($tempClasses['pocketmine\utils\UUID']))
-            $this->isUUIDSupported = true;
     }
 
     private function registerCommands()
@@ -466,16 +448,7 @@ class PurePerms extends PluginBase
      */
     public function getValidUUID(Player $player)
     {
-        if($this->isUUIDSupported)
-        {
-            if($player->getUniqueId() === null) return null;
-
-            $uniqueId = $player->getUniqueId()->toString();
-        }
-        else
-        {
-            $uniqueId = $player->getUniqueId();
-        }
+        $uniqueId = $player->getUniqueId()->toString();
 
         return $uniqueId;
     }

