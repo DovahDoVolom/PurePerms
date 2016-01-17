@@ -29,6 +29,17 @@ class PPGroup
         $this->name = $name;
     }
 
+    public function addParent(PPGroup $group)
+    {
+        // Adds a group to another group inheritance list.
+
+        $tempGroupData = $this->getData();
+
+        $tempGroupData["inheritance"][] = $group->getName();
+
+        $this->setData($tempGroupData);
+    }
+
     /**
      * @return mixed
      */
@@ -40,9 +51,9 @@ class PPGroup
     /**
      * @return array
      */
-    public function getInheritedGroups()
+    public function getParentGroups()
     {
-        $inheritedGroups = [];
+        $parentGroups = [];
         
         if(!is_array($this->getNode("inheritance")))
         {
@@ -51,14 +62,14 @@ class PPGroup
             return [];
         }
         
-        foreach($this->getNode("inheritance") as $inheritedGroupName)
+        foreach($this->getNode("inheritance") as $parentGroupName)
         {
-            $inheritedGroup = $this->plugin->getGroup($inheritedGroupName);
+            $parentGroup = $this->plugin->getGroup($parentGroupName);
             
-            if($inheritedGroup != null) $inheritedGroups[] = $inheritedGroup;
+            if($parentGroup != null) $parentGroups[] = $parentGroup;
         }
         
-        return $inheritedGroups;
+        return $parentGroups;
     }
 
     /**
@@ -95,15 +106,16 @@ class PPGroup
             return [];
         }
 
-        /** @var PPGroup $inheritedGroup */
-        foreach($this->getInheritedGroups() as $inheritedGroup)
+        /** @var PPGroup $parentGroup */
+        foreach($this->getParentGroups() as $parentGroup)
         {
-            $inheritedGroupPermissions = $inheritedGroup->getGroupPermissions($levelName);
+            $parentPermissions = $parentGroup->getGroupPermissions($levelName);
 
-            if($inheritedGroupPermissions === null) $inheritedGroupPermissions = [];
+            if($parentPermissions === null)
+                $parentPermissions = [];
 
             // Fixed by @mad-hon (https://github.com/mad-hon) / Tysm! :D
-            $permissions = array_merge($inheritedGroupPermissions, $permissions);
+            $permissions = array_merge($parentPermissions, $permissions);
         }
         
         return $permissions;
@@ -161,6 +173,17 @@ class PPGroup
             
             $this->setData($tempGroupData);
         }
+    }
+
+    public function removeParent(PPGroup $group)
+    {
+        // Removes a group from another group inheritance list.
+
+        $tempGroupData = $this->getData();
+
+        $tempGroupData["inheritance"] = array_diff($tempGroupData["inheritance"], [$group->getName()]);
+
+        $this->setData($tempGroupData);
     }
 
     /**

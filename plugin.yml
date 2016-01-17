@@ -17,6 +17,8 @@ permissions:
         children:
           pperms.command.addgroup:
             description: "Allows you to add a new group to the groups list."
+          pperms.command.addparent:
+            description: "Allows you to add a group to another group inheritance list."	
           pperms.command.defgroup:
             description: "Allows you to set the default group manually."
           pperms.command.fperms:
@@ -34,6 +36,8 @@ permissions:
             description: "Allows you to reload all PurePerms configurations."
           pperms.command.removegroup:
             description: "Allows you to remove a group from the groups list."
+          pperms.command.removeparent:
+            description: "Allows you to remove a group from another group inheritance list."		
           pperms.command.setgperm:
             description: "Allows you to add a permission to the group."
           pperms.command.setgroup:

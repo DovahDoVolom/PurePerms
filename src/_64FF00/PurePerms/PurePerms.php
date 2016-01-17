@@ -299,7 +299,7 @@ class PurePerms extends PluginBase
 
             foreach($defaultGroups as $defaultGroup)
             {
-                if(count($defaultGroup->getInheritedGroups()) === 0)
+                if(count($defaultGroup->getParentGroups()) === 0)
                 {
                     $this->setDefaultGroup($defaultGroup);
 
