@@ -18,7 +18,8 @@ cmds:
     desc: "Adds a group to another group inheritance list."
     usage: "Usage: /addparent <target_group> <parent_group>"
     messages:
-      addparent_successfully: "Added %var0% to group %var1%'s inheritance list."	  
+      addparent_successfully: "Added %var0% to group %var1%'s inheritance list."	 
+      invalid_parent_group: "Group %var0% already has the target group %var1% in its inheritance list."	  
   defgroup:
     desc: "Umoznuje nastavit vychozi skupiny."
     usage: "Pouzij: /defgroup <skupina>"

@@ -20,7 +20,8 @@ cmds:
     desc: "Adds a group to another group inheritance list."
     usage: "Usage: /addparent <target_group> <parent_group>"
     messages:
-      addparent_successfully: "Added %var0% to group %var1%'s inheritance list."	  
+      addparent_successfully: "Added %var0% to group %var1%'s inheritance list."	 
+      invalid_parent_group: "Group %var0% already has the target group %var1% in its inheritance list."	    
   defgroup:
     desc: "처음 들어온 플레이어가 속하게 될 기본 그룹을 설정합니다."
     usage: "사용법: /defgroup <그룹 이름>"

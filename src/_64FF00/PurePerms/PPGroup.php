@@ -33,11 +33,16 @@ class PPGroup
     {
         $tempGroupData = $this->getData();
 
+        if(in_array($this->getName(), $group->getParentGroups()))
+            return false;
+
         $tempGroupData["inheritance"][] = $group->getName();
 
         $this->setData($tempGroupData);
 
         $this->plugin->updatePlayersInGroup($this);
+
+        return true;
     }
 
     /**
@@ -184,6 +189,8 @@ class PPGroup
         $this->setData($tempGroupData);
 
         $this->plugin->updatePlayersInGroup($this);
+
+        return true;
     }
 
     /**
