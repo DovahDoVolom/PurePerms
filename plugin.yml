@@ -34,9 +34,9 @@ permissions:
             description: "Allows you to get current PurePerms information."
           pperms.command.ppreload:
             description: "Allows you to reload all PurePerms configurations."
-          pperms.command.removegroup:
+          pperms.command.rmgroup:
             description: "Allows you to remove a group from the groups list."
-          pperms.command.removeparent:
+          pperms.command.rmparent:
             description: "Allows you to remove a group from another group inheritance list."		
           pperms.command.setgperm:
             description: "Allows you to add a permission to the group."

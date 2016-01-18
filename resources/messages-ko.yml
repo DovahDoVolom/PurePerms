@@ -16,6 +16,11 @@ cmds:
       group_added_successfully: "그룹 %var0%이 추가되었습니다."
       group_already_exists: "%var0%이라는 이름을 가진 그룹이 이미 존재합니다."
       invalid_group_name: "올바르지 않은 그룹 이름입니다."
+  addparent:
+    desc: "Adds a group to another group inheritance list."
+    usage: "Usage: /addparent <target_group> <parent_group>"
+    messages:
+      addparent_successfully: "Added %var0% to group %var1%'s inheritance list."	  
   defgroup:
     desc: "처음 들어온 플레이어가 속하게 될 기본 그룹을 설정합니다."
     usage: "사용법: /defgroup <그룹 이름>"
@@ -80,6 +85,11 @@ cmds:
       group_removed_successfully: "그룹 %var0%이 제거되었습니다."
       group_not_exist: "%var0%이라는 이름을 가진 그룹이 존재하지 않습니다."
       invalid_group_name: "올바르지 않은 그룹 이름입니다."
+  rmparent:
+    desc: "Removes a group from another group inheritance list."
+    usage: "Usage: /rmparent <target_group> <parent_group>"
+    messages:
+      rmparent_successfully: "Removed %var0% from group %var1%'s inheritance list."		  
   setgperm: 
     desc: "그룹에 퍼미션을 추가합니다."
     usage: "사용법: /setgperm <퍼미션을 추가할 그룹> <퍼미션> [월드 이름]"

@@ -50,8 +50,21 @@ class AddParent extends Command implements PluginIdentifiableCommand
         if(!$this->testPermission($sender))
             return false;
 
-        // TODO
-        
+        if(count($args) < 2 || count($args) > 3)
+        {
+            $sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.addparent.usage"));
+
+            return true;
+        }
+
+        $target_group = $this->plugin->getGroup($args[0]);
+
+        $parent_group = $this->plugin->getGroup($args[1]);
+
+        $target_group->addParent($parent_group);
+
+        $sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.addparent.messages.addparent_successfully", $parent_group->getName(), $target_group->getName()));
+
         return true;
     }
     

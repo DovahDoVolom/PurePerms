@@ -14,6 +14,11 @@ cmds:
       group_added_successfully: "Gruppe %var0% wurde erfolgreich zu der Liste hinzugefügt."
       group_already_exists: "Gruppe %var0% existiert bereits."
       invalid_group_name: "Invalid Group Name."
+  addparent:
+    desc: "Adds a group to another group inheritance list."
+    usage: "Usage: /addparent <target_group> <parent_group>"
+    messages:
+      addparent_successfully: "Added %var0% to group %var1%'s inheritance list."	  
   defgroup:
     desc: "Setzt die Standardgruppe."
     usage: "Benutzung: /defgroup <Gruppe>"
@@ -78,6 +83,11 @@ cmds:
       group_removed_successfully: "%var0% wurde erfolgreich von der Gruppenliste entfernt."
       group_not_exist: "Gruppe %var0% existiert NICHT."
       invalid_group_name: "Invalid Group Name."
+  rmparent:
+    desc: "Removes a group from another group inheritance list."
+    usage: "Usage: /rmparent <target_group> <parent_group>"
+    messages:
+      rmparent_successfully: "Removed %var0% from group %var1%'s inheritance list."		  
   setgperm: 
     desc: "Fügt eine Berechtigung zu einer Gruppe hinzu."
     usage: "Benutzung: /setgperm <Gruppe> <Berechtigung> [Welt]"

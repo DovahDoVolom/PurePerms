@@ -12,6 +12,11 @@ cmds:
       group_added_successfully: "Added %var0% to the group list successfully."
       group_already_exists: "Group %var0% already exists."
       invalid_group_name: "Invalid Group Name."
+  addparent:
+    desc: "Adds a group to another group inheritance list."
+    usage: "Usage: /addparent <target_group> <parent_group>"
+    messages:
+      addparent_successfully: "Added %var0% to group %var1%'s inheritance list."	  
   defgroup:
     desc: "Allows you to set default group."
     usage: "Usage: /defgroup <group>"
@@ -76,6 +81,11 @@ cmds:
       group_removed_successfully: "Removed %var0% from the group list successfully."
       group_not_exist: "Group %var0% does NOT exist."
       invalid_group_name: "Invalid Group Name."
+  rmparent:
+    desc: "Removes a group from another group inheritance list."
+    usage: "Usage: /rmparent <target_group> <parent_group>"
+    messages:
+      rmparent_successfully: "Removed %var0% from group %var1%'s inheritance list."		  
   setgperm: 
     desc: "Adds a permission to the group."
     usage: "Usage: /setgperm <group> <permission> [world]"

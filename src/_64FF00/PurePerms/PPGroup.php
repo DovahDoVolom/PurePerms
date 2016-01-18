@@ -31,13 +31,13 @@ class PPGroup
 
     public function addParent(PPGroup $group)
     {
-        // Adds a group to another group inheritance list.
-
         $tempGroupData = $this->getData();
 
         $tempGroupData["inheritance"][] = $group->getName();
 
         $this->setData($tempGroupData);
+
+        $this->plugin->updatePlayersInGroup($this);
     }
 
     /**
@@ -177,13 +177,13 @@ class PPGroup
 
     public function removeParent(PPGroup $group)
     {
-        // Removes a group from another group inheritance list.
-
         $tempGroupData = $this->getData();
 
         $tempGroupData["inheritance"] = array_diff($tempGroupData["inheritance"], [$group->getName()]);
 
         $this->setData($tempGroupData);
+
+        $this->plugin->updatePlayersInGroup($this);
     }
 
     /**

@@ -14,6 +14,11 @@ cmds:
       group_added_successfully: "Група %var0% успішно створена."
       group_already_exists: "Помилка! Група %var0% вже існує."
       invalid_group_name: "Неприпустима назва для групи."
+  addparent:
+    desc: "Adds a group to another group inheritance list."
+    usage: "Usage: /addparent <target_group> <parent_group>"
+    messages:
+      addparent_successfully: "Added %var0% to group %var1%'s inheritance list."	  
   defgroup:
     desc: "Змінює групу за замовчуванням."
     usage: "Пример: /defgroup <група>"
@@ -78,6 +83,11 @@ cmds:
       group_removed_successfully: "Група %var0% успішно видалена."
       group_not_exist: "Група %var0% не існує."
       invalid_group_name: "Неприпустима назва для групи."
+  rmparent:
+    desc: "Removes a group from another group inheritance list."
+    usage: "Usage: /rmparent <target_group> <parent_group>"
+    messages:
+      rmparent_successfully: "Removed %var0% from group %var1%'s inheritance list."		  
   setgperm: 
     desc: "Додає дозвіл групі."
     usage: "Приклад: /setgperm <група> <дозвіл> [світ]"

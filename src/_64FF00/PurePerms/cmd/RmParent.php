@@ -36,7 +36,7 @@ class RmParent extends Command implements PluginIdentifiableCommand
         
         parent::__construct($name, $description);
         
-        $this->setPermission("pperms.command.removeparent");
+        $this->setPermission("pperms.command.rmparent");
     }
 
     /**
@@ -50,8 +50,21 @@ class RmParent extends Command implements PluginIdentifiableCommand
         if(!$this->testPermission($sender))
             return false;
 
-        // TODO
-        
+        if(count($args) < 2 || count($args) > 3)
+        {
+            $sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.rmparent.usage"));
+
+            return true;
+        }
+
+        $target_group = $this->plugin->getGroup($args[0]);
+
+        $parent_group = $this->plugin->getGroup($args[1]);
+
+        $target_group->removeParent($parent_group);
+
+        $sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.rmparent.messages.rmparent_successfully", $parent_group->getName(), $target_group->getName()));
+
         return true;
     }
     
