@@ -3,6 +3,7 @@
 namespace _64FF00\PurePerms;
 
 use _64FF00\PurePerms\cmd\AddGroup;
+use _64FF00\PurePerms\cmd\AddParent;
 use _64FF00\PurePerms\cmd\DefGroup;
 use _64FF00\PurePerms\cmd\FPerms;
 use _64FF00\PurePerms\cmd\Groups;
@@ -12,6 +13,7 @@ use _64FF00\PurePerms\cmd\PPInfo;
 use _64FF00\PurePerms\cmd\PPReload;
 use _64FF00\PurePerms\cmd\PPSudo;
 use _64FF00\PurePerms\cmd\RmGroup;
+use _64FF00\PurePerms\cmd\RmParent;
 use _64FF00\PurePerms\cmd\SetGPerm;
 use _64FF00\PurePerms\cmd\SetGroup;
 use _64FF00\PurePerms\cmd\SetUPerm;
@@ -121,6 +123,7 @@ class PurePerms extends PluginBase
             $commandMap->register("ppsudo", new PPSudo($this, "ppsudo", $this->getMessage("cmds.ppsudo.desc") . ' #64FF00'));
 
         $commandMap->register("addgroup", new AddGroup($this, "addgroup", $this->getMessage("cmds.addgroup.desc") . ' #64FF00'));
+        $commandMap->register("addparent", new AddParent($this, "addparent", $this->getMessage("cmds.addparent.desc") . ' #64FF00'));
         $commandMap->register("defgroup", new DefGroup($this, "defgroup", $this->getMessage("cmds.defgroup.desc") . ' #64FF00'));
         $commandMap->register("fperms", new FPerms($this, "fperms", $this->getMessage("cmds.fperms.desc") . ' #64FF00'));
         $commandMap->register("groups", new Groups($this, "groups", $this->getMessage("cmds.groups.desc") . ' #64FF00'));
@@ -129,6 +132,7 @@ class PurePerms extends PluginBase
         $commandMap->register("ppinfo", new PPInfo($this, "ppinfo", $this->getMessage("cmds.ppinfo.desc") . ' #64FF00'));
         $commandMap->register("ppreload", new PPReload($this, "ppreload", $this->getMessage("cmds.ppreload.desc") . ' #64FF00'));
         $commandMap->register("rmgroup", new RmGroup($this, "rmgroup", $this->getMessage("cmds.rmgroup.desc") . ' #64FF00'));
+        $commandMap->register("rmparent", new RmParent($this, "rmparent", $this->getMessage("cmds.rmparent.desc") . ' #64FF00'));
         $commandMap->register("setgperm", new SetGPerm($this, "setgperm", $this->getMessage("cmds.setgperm.desc") . ' #64FF00'));
         $commandMap->register("setgroup", new SetGroup($this, "setgroup", $this->getMessage("cmds.setgroup.desc") . ' #64FF00'));
         $commandMap->register("setuperm", new SetUPerm($this, "setuperm", $this->getMessage("cmds.setuperm.desc") . ' #64FF00'));
