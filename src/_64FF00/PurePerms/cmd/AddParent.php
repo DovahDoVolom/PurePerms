@@ -67,7 +67,7 @@ class AddParent extends Command implements PluginIdentifiableCommand
         }
         else
         {
-            $sender->sendMessage(TextFormat::RED . "[PurePerms] " . $this->plugin->getMessage("cmds.addparent.messages.invalid_parent_group", $parent_group->getName(), $target_group->getName()));
+            $sender->sendMessage(TextFormat::RED . "[PurePerms] " . $this->plugin->getMessage("cmds.addparent.messages.target_already_inherits", $parent_group->getName(), $target_group->getName()));
         }
 
         return true;

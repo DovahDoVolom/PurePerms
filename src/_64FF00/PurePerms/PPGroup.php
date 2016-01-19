@@ -33,7 +33,7 @@ class PPGroup
     {
         $tempGroupData = $this->getData();
 
-        if(in_array($this->getName(), $group->getParentGroups()))
+        if($this == $group || in_array($this->getName(), $group->getParentGroups()))
             return false;
 
         $tempGroupData["inheritance"][] = $group->getName();

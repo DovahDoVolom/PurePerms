@@ -16,7 +16,7 @@ cmds:
     usage: "Usage: /addparent <target_group> <parent_group>"
     messages:
       addparent_successfully: "Added %var0% to group %var1%'s inheritance list."	 
-      invalid_parent_group: "Group %var0% already has the target group %var1% in its inheritance list."	    
+      target_already_inherits: "Group %var0% already inherits %var1%."     
   defgroup:
     desc: "Mengizinkan anda untuk set grup normal."
     usage: "Command: /defgroup <group>"
