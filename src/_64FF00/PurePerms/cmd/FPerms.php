@@ -9,6 +9,7 @@ use pocketmine\command\CommandSender;
 use pocketmine\command\ConsoleCommandSender;
 use pocketmine\command\PluginIdentifiableCommand;
 
+use pocketmine\plugin\PluginBase;
 use pocketmine\utils\TextFormat;
 
 class FPerms extends Command implements PluginIdentifiableCommand
@@ -58,16 +59,16 @@ class FPerms extends Command implements PluginIdentifiableCommand
             return true;
         }
         
-        $plugin = $this->plugin->getServer()->getPluginManager()->getPlugin($args[0]);
+        $plugin = (strtolower($args[0]) === 'pocketmine' || strtolower($args[0]) === 'pmmp') ? 'pocketmine' : $this->plugin->getServer()->getPluginManager()->getPlugin($args[0]);
         
-        if($plugin == null)
+        if($plugin === null)
         {
             $sender->sendMessage(TextFormat::RED . "[PurePerms] " . $this->plugin->getMessage("cmds.fperms.messages.plugin_not_exist", $args[0]));
             
             return true;
         }
         
-        $permissions = $plugin->getDescription()->getPermissions();
+        $permissions = ($plugin instanceof PluginBase) ? $plugin->getDescription()->getPermissions() : $this->plugin->getPocketMinePerms();
         
         if(empty($permissions))
         {
@@ -95,7 +96,7 @@ class FPerms extends Command implements PluginIdentifiableCommand
             $pageNumber = $args[1];
         }
         
-        $sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.fperms.messages.plugin_perms_list", $plugin->getName(), $pageNumber, $maxPageNumber));
+        $sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.fperms.messages.plugin_perms_list", ($plugin instanceof PluginBase) ? $plugin->getName(): 'PocketMine-MP', $pageNumber, $maxPageNumber));
         
         foreach($chunkedPermissions[$pageNumber - 1] as $permission)
         {

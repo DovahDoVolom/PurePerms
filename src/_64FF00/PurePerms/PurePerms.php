@@ -29,6 +29,8 @@ use _64FF00\PurePerms\provider\SQLite3Provider;
 
 use pocketmine\IPlayer;
 
+use pocketmine\permission\DefaultPermissions;
+use pocketmine\permission\Permission;
 use pocketmine\permission\PermissionAttachment;
 
 use pocketmine\Player;
@@ -71,7 +73,7 @@ class PurePerms extends PluginBase
     /** @var UserDataManager $userDataMgr */
     private $userDataMgr;
 
-    private $attachments = [], $groups = [];
+    private $attachments = [], $groups = [], $pmDefaultPerms = [];
 
     public function onLoad()
     {
@@ -417,6 +419,21 @@ class PurePerms extends PluginBase
         $player = $this->getServer()->getPlayer($userName);
 
         return $player instanceof Player ? $player : $this->getServer()->getOfflinePlayer($userName);
+    }
+
+    public function getPocketMinePerms()
+    {
+        if($this->pmDefaultPerms === [])
+        {
+            /** @var Permission $permission */
+            foreach($this->getServer()->getPluginManager()->getPermissions() as $permission)
+            {
+                if(strpos($permission->getName(), DefaultPermissions::ROOT) !== false)
+                    $this->pmDefaultPerms[] = $permission;
+            }
+        }
+
+        return $this->pmDefaultPerms;
     }
 
     /**
