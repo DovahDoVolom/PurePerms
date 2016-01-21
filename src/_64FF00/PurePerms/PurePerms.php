@@ -29,6 +29,8 @@ use _64FF00\PurePerms\provider\SQLite3Provider;
 
 use pocketmine\IPlayer;
 
+use pocketmine\level\Level;
+
 use pocketmine\permission\DefaultPermissions;
 use pocketmine\permission\Permission;
 use pocketmine\permission\PermissionAttachment;
@@ -101,8 +103,6 @@ class PurePerms extends PluginBase
         $this->registerCommands();
 
         $this->setProvider();
-
-        $this->sortGroupPermissions();
 
         $this->registerPlayers();
 
@@ -421,6 +421,9 @@ class PurePerms extends PluginBase
         return $player instanceof Player ? $player : $this->getServer()->getOfflinePlayer($userName);
     }
 
+    /**
+     * @return array
+     */
     public function getPocketMinePerms()
     {
         if($this->pmDefaultPerms === [])
@@ -527,8 +530,6 @@ class PurePerms extends PluginBase
 
         if(!$this->isValidProvider())
             $this->setProvider(false);
-
-        $this->sortGroupPermissions();
     }
 
     /**
@@ -580,17 +581,25 @@ class PurePerms extends PluginBase
         $this->userDataMgr->setGroup($player, $group, $levelName);
     }
 
-    public function sortGroupPermissions()
+    public function sortGroupData()
     {
         foreach($this->getGroups() as $groupName => $ppGroup)
         {
             $ppGroup->sortPermissions();
+
+            if($this->getConfigValue("enable-multiworld-perms"))
+            {
+                /** @var Level $level */
+                foreach($this->getServer()->getLevels() as $level)
+                {
+                    $levelName = $level->getName();
+
+                    $ppGroup->createWorldData($levelName);
+                }
+            }
         }
     }
 
-    /**
-     * @SoBored ...
-     */
     public function updateGroups()
     {
         if(!$this->isValidProvider())
@@ -606,7 +615,7 @@ class PurePerms extends PluginBase
 
         $this->isGroupsLoaded = true;
 
-        $this->sortGroupPermissions();
+        $this->sortGroupData();
     }
 
     /**
@@ -622,7 +631,7 @@ class PurePerms extends PluginBase
 
             foreach($this->getPermissions($player, $levelName) as $permission)
             {
-                if($permission === "*")
+                if($permission === '*')
                 {
                     foreach($this->getServer()->getPluginManager()->getPermissions() as $tmp)
                     {

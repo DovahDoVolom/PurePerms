@@ -167,7 +167,7 @@ class UserDataManager
             $this->setWorldData($player, $levelName, $worldData);
         }
 
-        $event = new PPGroupChangedEvent($this->plugin, $player, $group);
+        $event = new PPGroupChangedEvent($this->plugin, $player, $group, $levelName);
 
         $this->plugin->getServer()->getPluginManager()->callEvent($event);
     }

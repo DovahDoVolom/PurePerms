@@ -40,8 +40,9 @@ class PPListener implements Listener
     public function onGroupChanged(PPGroupChangedEvent $event)
     {
         $player = $event->getPlayer();
+        $levelName = $event->getLevelName();
 
-        $this->plugin->updatePermissions($player);
+        $this->plugin->updatePermissions($player, $levelName);
     }
 
     /**

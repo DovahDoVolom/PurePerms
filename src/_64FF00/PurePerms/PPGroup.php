@@ -29,6 +29,10 @@ class PPGroup
         $this->name = $name;
     }
 
+    /**
+     * @param PPGroup $group
+     * @return bool
+     */
     public function addParent(PPGroup $group)
     {
         $tempGroupData = $this->getData();
@@ -43,6 +47,24 @@ class PPGroup
         $this->plugin->updatePlayersInGroup($this);
 
         return true;
+    }
+
+    /**
+     * @param $levelName
+     */
+    public function createWorldData($levelName)
+    {
+        if(!isset($this->getData()["worlds"][$levelName]))
+        {
+            $tempGroupData = $this->getData();
+
+            $tempGroupData["worlds"][$levelName] = [
+                "permissions" => [
+                ]
+            ];
+
+            $this->setData($tempGroupData);
+        }
     }
 
     /**
@@ -102,7 +124,7 @@ class PPGroup
      */
     public function getGroupPermissions($levelName = null)
     {
-        $permissions = $levelName != null ? $this->getWorldData($levelName)["permissions"] : $this->getNode("permissions");
+        $permissions = $levelName !== null ? $this->getWorldData($levelName)["permissions"] : $this->getNode("permissions");
         
         if(!is_array($permissions))
         {
@@ -142,17 +164,7 @@ class PPGroup
     {
         if($levelName == null) return null;
         
-        if(!isset($this->getData()["worlds"][$levelName]))
-        {
-            $tempGroupData = $this->getData();
-            
-            $tempGroupData["worlds"][$levelName] = [
-                "permissions" => [
-                ]
-            ];
-                
-            $this->setData($tempGroupData);
-        }
+        $this->createWorldData($levelName);
             
         return $this->getData()["worlds"][$levelName];
     }
@@ -180,6 +192,10 @@ class PPGroup
         }
     }
 
+    /**
+     * @param PPGroup $group
+     * @return bool
+     */
     public function removeParent(PPGroup $group)
     {
         $tempGroupData = $this->getData();
