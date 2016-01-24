@@ -1,7 +1,7 @@
 # Translator : DevilLord Red Eagle / Darius Ellert Klaus / facebook.com/darius.redeagle
 
 ---
-messages-version: "1.2.0"
+messages-version: "1.3.0-INDEV"
 language: "idn"
 cmds:
   addgroup:

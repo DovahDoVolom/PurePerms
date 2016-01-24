@@ -5,7 +5,7 @@
 # Fixed "ALMOST EVERYTHING" by @iksaku (GitHub) (Follow me on Twitter: @iksaku2) [Hype! ( ^ω^ )]
 
 ---
-messages-version: "1.2.3"
+messages-version: "1.3.0-INDEV"
 language: "sp"
 cmds:
   addgroup:

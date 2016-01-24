@@ -4,7 +4,7 @@
 # Translated in Italian by AnThOnEx (Twitter: @AryToNeX)
 
 ---
-messages-version: "1.2.3"
+messages-version: "1.3.0-INDEV"
 language: "it"
 cmds:
   addgroup:

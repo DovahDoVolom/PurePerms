@@ -241,7 +241,7 @@ class PurePerms extends PluginBase
 
     /**
      * @param Player $player
-     * @return null|\pocketmine\permission\PermissionAttachment
+     * @return null|PermissionAttachment
      */
     public function getAttachment(Player $player)
     {

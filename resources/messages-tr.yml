@@ -1,8 +1,10 @@
 
 # PurePerms by 64FF00 (xktiverz@gmail.com, @64ff00 for Twitter)
 
+# Turkish messages resource by @PainTR (GitHub)
+
 ---
-messages-version: "1.2.3"
+messages-version: "1.3.0-INDEV"
 language: "tr"
 cmds:
   addgroup:

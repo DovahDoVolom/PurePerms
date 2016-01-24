@@ -24,7 +24,7 @@ class DefaultProvider implements ProviderInterface
           888  888    "Y8888P"        888  888        888        "Y8888P"   "Y8888P"
     */
     
-    private $groups, $userDataFolder;
+    private $groups, $players;
 
     /**
      * @param PurePerms $plugin
@@ -35,12 +35,11 @@ class DefaultProvider implements ProviderInterface
 
         $this->plugin->saveResource("groups.yml");
 
-        $this->groups = new Config($this->plugin->getDataFolder() . "groups.yml", Config::YAML, [
-        ]);
+        $this->groups = new Config($this->plugin->getDataFolder() . "groups.yml", Config::YAML);
 
-        $this->userDataFolder = $this->plugin->getDataFolder() . "players/";
+        $this->plugin->saveResource("players.yml");
 
-        if(!file_exists($this->userDataFolder)) \mkdir($this->userDataFolder, 0777, true);
+        $this->players = new Config($this->plugin->getDataFolder() . "players.yml", Config::YAML);
     }
 
     /**
@@ -72,61 +71,26 @@ class DefaultProvider implements ProviderInterface
         return $this->groups->getAll();
     }
 
-    /**
-     * @param IPlayer $player
-     * @param bool $onUpdate
-     * @return array|Config
-     */
-    public function getPlayerConfig(IPlayer $player, $onUpdate = false)
+    public function getPlayerData(IPlayer $player)
     {
         $userName = $player->getName();
 
-        // TODO
-        if($onUpdate === true)
+        if(!$this->players->exists($userName))
         {
-            if(!file_exists($this->userDataFolder . strtolower($userName) . ".yml"))
-            {
-                return new Config($this->userDataFolder . strtolower($userName) . ".yml", Config::YAML, [
-                    "userName" => $userName,
-                    "group" => $this->plugin->getDefaultGroup()->getName(),
-                    "permissions" => [],
-                    "worlds" => []
-                ]);
-            }
-            else
-            {
-                return new Config($this->userDataFolder . strtolower($userName) . ".yml", Config::YAML, [
-                ]);
-            }
+            return [
+                "group" => $this->plugin->getDefaultGroup()->getName(),
+                "permissions" => [],
+                "worlds" => []
+            ];
         }
-        else
-        {
-            if(file_exists($this->userDataFolder . strtolower($userName) . ".yml"))
-            {
-                return new Config($this->userDataFolder . strtolower($userName) . ".yml", Config::YAML, [
-                ]);
-            }
-            else
-            {
-                return [
-                    "userName" => $userName,
-                    "group" => $this->plugin->getDefaultGroup()->getName(),
-                    "permissions" => [],
-                    "worlds" => []
-                ];
-            }
-        }
-    }
 
-    /**
-     * @param IPlayer $player
-     * @return array|Config
-     */
-    public function getPlayerData(IPlayer $player)
-    {
-        $userConfig = $this->getPlayerConfig($player);
+        $tempUserData = $this->players->get($userName);
 
-        return (($userConfig instanceof Config) ? $userConfig->getAll() : $userConfig);
+        if(isset($tempUserData["userName"]))
+            $tempUserData["userName"] = $userName;
+
+        // TODO: 'Default users shouldn't clutter the files' (MultiWorld)
+        return $tempUserData;
     }
 
     /**
@@ -158,13 +122,23 @@ class DefaultProvider implements ProviderInterface
 */
     public function setPlayerData(IPlayer $player, array $tempUserData)
     {
-        $userData = $this->getPlayerConfig($player, true);
+        $userName = $player->getName();
 
-        if(!$userData instanceof Config) throw new \RuntimeException("Failed to update player data: Invalid data type (" . get_class($userData) . ")");
+        if(!$this->players->exists($userName))
+        {
+            $this->players->set($userName, [
+                "group" => $this->plugin->getDefaultGroup()->getName(),
+                "permissions" => [],
+                "worlds" => []
+            ]);
+        }
 
-        $userData->setAll($tempUserData);
+        if(isset($tempUserData["userName"]))
+            unset($tempUserData["userName"]);
 
-        $userData->save();
+        $this->players->set($userName, $tempUserData);
+
+        $this->players->save();
     }
     
     public function close()

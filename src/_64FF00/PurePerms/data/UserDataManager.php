@@ -111,17 +111,11 @@ class UserDataManager
             $levelName = $this->plugin->getServer()->getDefaultLevel()->getName();
 
         if(!isset($this->getData($player)["worlds"][$levelName]))
-        {
-            $tempUserData = $this->getData($player);
-
-            $tempUserData["worlds"][$levelName] = [
+            return [
                 "group" => $this->plugin->getDefaultGroup()->getName(),
                 "permissions" => [
                 ]
             ];
-
-            $this->setData($player, $tempUserData);
-        }
 
         return $this->getData($player)["worlds"][$levelName];
     }
@@ -154,6 +148,8 @@ class UserDataManager
      */
     public function setGroup(IPlayer $player, PPGroup $group, $levelName)
     {
+        var_dump($levelName);
+
         if($levelName === null)
         {
             $this->setNode($player, "group", $group->getName());
@@ -215,14 +211,22 @@ class UserDataManager
 
     public function setWorldData(IPlayer $player, $levelName, array $worldData)
     {
-        if(isset($this->getData($player)["worlds"][$levelName]))
-        {
-            $tempUserData = $this->getData($player);
+        $tempUserData = $this->getData($player);
 
-            $tempUserData["worlds"][$levelName] = $worldData;
+        if(!isset($this->getData($player)["worlds"][$levelName]))
+        {
+            $tempUserData["worlds"][$levelName] = [
+                "group" => $this->plugin->getDefaultGroup()->getName(),
+                "permissions" => [
+                ]
+            ];
 
             $this->setData($player, $tempUserData);
         }
+
+        $tempUserData["worlds"][$levelName] = $worldData;
+
+        $this->setData($player, $tempUserData);
     }
 
     /**

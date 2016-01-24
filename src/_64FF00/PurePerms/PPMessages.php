@@ -19,6 +19,7 @@ class PPMessages
           888  888    "Y8888P"        888  888        888        "Y8888P"   "Y8888P"
     */
 
+    /** @var Config $messages */
     private $language, $messages;
     
     private $langList = [];

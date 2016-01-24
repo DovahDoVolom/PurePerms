@@ -8,6 +8,7 @@ use pocketmine\event\Listener;
 use pocketmine\event\entity\EntityLevelChangeEvent;
 use pocketmine\event\player\PlayerCommandPreprocessEvent;
 use pocketmine\event\player\PlayerJoinEvent;
+use pocketmine\event\player\PlayerMoveEvent;
 use pocketmine\event\player\PlayerQuitEvent;
 
 class PPListener implements Listener
@@ -40,9 +41,8 @@ class PPListener implements Listener
     public function onGroupChanged(PPGroupChangedEvent $event)
     {
         $player = $event->getPlayer();
-        $levelName = $event->getLevelName();
 
-        $this->plugin->updatePermissions($player, $levelName);
+        $this->plugin->updatePermissions($player);
     }
 
     /**
@@ -60,10 +60,7 @@ class PPListener implements Listener
     {
         if(!$this->plugin->getNoeulAPI()->isAuthed($event->getPlayer()))
         {
-            /*
-             * <-- SimpleAuth by @shoghicp -->
-             */
-
+            // From SimpleAuth plugin by @shoghicp (PocketMine Team)
             $message = $event->getMessage();
 
             if($message{0} === "/")
@@ -100,6 +97,17 @@ class PPListener implements Listener
 
         if($this->plugin->getNoeulAPI()->isNoeulEnabled())
             $this->plugin->getNoeulAPI()->deAuth($player);
+    }
+
+    public function onPlayerMove(PlayerMoveEvent $event)
+    {
+        if(!$this->plugin->getNoeulAPI()->isAuthed($event->getPlayer()))
+        {
+            $this->plugin->getNoeulAPI()->sendAuthMsg($event->getPlayer());
+
+            $event->setCancelled(true);
+            $event->getPlayer()->onGround = true;
+        }
     }
 
     /**
