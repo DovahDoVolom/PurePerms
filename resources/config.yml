@@ -5,7 +5,7 @@
 
 ---
 # Set default data provider for PurePerms
-# - mysql, yaml, sqlite3
+# - mysql, yaml
 data-provider: yaml
 
 # Set the default language for PurePerms (<3)

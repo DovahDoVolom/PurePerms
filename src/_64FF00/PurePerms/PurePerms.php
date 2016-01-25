@@ -141,6 +141,7 @@ class PurePerms extends PluginBase
         $commandMap->register("unsetgperm", new UnsetGPerm($this, "unsetgperm", $this->getMessage("cmds.unsetgperm.desc") . ' #64FF00'));
         $commandMap->register("unsetuperm", new UnsetUPerm($this, "unsetuperm", $this->getMessage("cmds.unsetuperm.desc") . ' #64FF00'));
         $commandMap->register("usrinfo", new UsrInfo($this, "usrinfo", $this->getMessage("cmds.usrinfo.desc") . ' #64FF00'));
+
     }
 
     /**
@@ -152,8 +153,7 @@ class PurePerms extends PluginBase
 
         switch(strtolower($providerName))
         {
-            /*
-               case "mysql":
+            case "mysql":
 
                 $provider = new MySQLProvider($this);
 
@@ -161,7 +161,6 @@ class PurePerms extends PluginBase
                     $this->getLogger()->info($this->getMessage("logger_messages.setProvider_MySQL"));
 
                 break;
-            */
 
             case "sqlite3":
 

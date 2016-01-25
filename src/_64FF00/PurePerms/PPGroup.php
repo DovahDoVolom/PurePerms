@@ -149,14 +149,6 @@ class PPGroup
     }
 
     /**
-     * @param null $levelName
-     */
-    public function getUsers($levelName = null)
-    {
-        // TODO
-    }
-
-    /**
      * @param $levelName
      * @return null
      */

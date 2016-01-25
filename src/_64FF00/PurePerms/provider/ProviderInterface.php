@@ -27,6 +27,8 @@ interface ProviderInterface
 
     public function getPlayerData(IPlayer $player);
 
+    public function getUsers();
+
     public function setGroupData(PPGroup $group, array $tempGroupData);
 
     public function setGroupsData(array $tempGroupsData);

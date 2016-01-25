@@ -86,11 +86,17 @@ class DefaultProvider implements ProviderInterface
 
         $tempUserData = $this->players->get($userName);
 
-        if(isset($tempUserData["userName"]))
-            $tempUserData["userName"] = $userName;
-
-        // TODO: 'Default users shouldn't clutter the files' (MultiWorld)
         return $tempUserData;
+    }
+
+    public function getUsers()
+    {
+        /*
+        if(empty($this->players->getAll()))
+            return null;
+
+        return $this->players->getAll();
+        */
     }
 
     /**

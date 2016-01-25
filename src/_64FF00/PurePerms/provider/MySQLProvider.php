@@ -23,7 +23,9 @@ class MySQLProvider implements ProviderInterface
           888  888    "Y8888P"        888  888        888        "Y8888P"   "Y8888P"
     */
     
-    private $db, $groupsData;
+    private $db;
+
+    private $groupsData = [];
 
     /**
      * @param PurePerms $plugin
@@ -35,21 +37,24 @@ class MySQLProvider implements ProviderInterface
         $mySQLSettings = $this->plugin->getConfigValue("mysql-settings");
 
         if(!isset($mySQLSettings["host"]) || !isset($mySQLSettings["port"]) || !isset($mySQLSettings["user"]) || !isset($mySQLSettings["password"]) || !isset($mySQLSettings["db"]))
-        {
-            $this->plugin->getLogger()->critical("Failed to connect to the MySQL database: Invalid MySQL settings");
-            $this->plugin->getServer()->getPluginManager()->disablePlugin($this->plugin);
-        }
+            throw new \RuntimeException("Failed to connect to the MySQL database: Invalid MySQL settings");
+
 
         $this->db = new \mysqli($mySQLSettings["host"], $mySQLSettings["user"], $mySQLSettings["password"], $mySQLSettings["db"], $mySQLSettings["port"]);
 
         if($this->db->connect_error)
-        {
-            $this->plugin->getLogger()->critical("Failed to connect to the MySQL database: " . $this->db->connect_error);
-            $this->plugin->getServer()->getPluginManager()->disablePlugin($this->plugin);
-        }
+            throw new \RuntimeException("Failed to connect to the MySQL database: " . $this->db->connect_error);
+
 
         $resource = $this->plugin->getResource("mysql_deploy.sql");
+
         $this->db->multi_query(stream_get_contents($resource));
+
+        while($this->db->more_results())
+        {
+            $this->db->next_result();
+        }
+
         fclose($resource);
         
         $this->loadGroupsData();
@@ -84,20 +89,52 @@ class MySQLProvider implements ProviderInterface
      */
     public function getPlayerData(IPlayer $player)
     {
+        $userData = [];
+
+        $result01 = $this->db->query("SELECT * FROM players;");
+
+        if($result01 instanceof \mysqli_result)
+        {
+            while ($currentRow = $result01->fetch_assoc())
+            {
+                $userData["group"] = $currentRow["userGroup"];
+                $userData["permissions"] =  $currentRow["permissions"];
+            }
+
+            $result01->free();
+        }
+
+        $result02 = $this->db->query("SELECT * FROM players_mw;");
+
+        if($result02 instanceof \mysqli_result)
+        {
+            while ($currentRow = $result02->fetch_assoc())
+            {
+                $userGroup = $currentRow["userGroup"];
+                $worldName = $currentRow["worldName"];
+                $worldPerms = explode(",", $currentRow["permissions"]);
+
+                $userData["worlds"][$worldName]["group"] = $userGroup;
+
+                $userData["worlds"][$worldName]["permissions"] = $worldPerms;
+            }
+
+            $result01->free();
+        }
+    }
+
+    public function getUsers()
+    {
+        // TODO
     }
 
     public function loadGroupsData()
     {
-        $this->groupsData = [];
-
-        $result01 = $this->db->query("
-            SELECT groupName, isDefault, inheritance, permissions
-            FROM groups;
-        ");
+        $result01 = $this->db->query("SELECT * FROM groups;");
 
         if($result01 instanceof \mysqli_result)
         {
-            while($currentRow = $result01->fetch_array(MYSQLI_ASSOC))
+            while($currentRow = $result01->fetch_assoc())
             {
                 $groupName = $currentRow["groupName"];
 
@@ -109,21 +146,17 @@ class MySQLProvider implements ProviderInterface
             $result01->free();
         }
 
-        $result02 = $this->db->query("
-            SELECT groupName, worldName, permissions
-            FROM groups_mw;
-        ");
+        $result02 = $this->db->query("SELECT * FROM groups_mw;");
 
         if($result02 instanceof \mysqli_result)
         {
-            while($currentRow = $result01->fetch_array(MYSQLI_ASSOC))
+            while($currentRow = $result02->fetch_assoc())
             {
                 $groupName = $currentRow["groupName"];
+                $worldName = $currentRow["worldName"];
+                $worldPerms = explode(",", $currentRow["permissions"]);
 
-                foreach($currentRow["worlds"] as $worldName => $worldPerms)
-                {
-                    $this->groupsData[$groupName]["worlds"][$worldName] = explode(",", $worldPerms);
-                }
+                $this->groupsData[$groupName]["worlds"][$worldName] = $worldPerms;
             }
 
             $result02->free();
@@ -135,7 +168,15 @@ class MySQLProvider implements ProviderInterface
      */
     public function removeGroupData($groupName)
     {
+        $result01 = $this->db->query("
+            DELETE FROM groups
+            WHERE groupName = " . $this->db->escape_string($groupName) . ";");
+
+        $result02 = $this->db->query("
+            DELETE OR IGNORE FROM groups_mw
+            WHERE groupName = " . $this->db->escape_string($groupName) . ";");
     }
+
 
     /**
      * @param PPGroup $group
@@ -159,7 +200,7 @@ class MySQLProvider implements ProviderInterface
 
         $tempGroupName01 = key($tempGroupData01);
 
-        if($tempGroupData01 != []) $this->removeGroupData($tempGroupName01);
+        if($tempGroupData01 !== []) $this->removeGroupData($tempGroupName01);
 
         foreach($tempGroupsData as $tempGroupName02 => $tempGroupData02)
         {
@@ -175,15 +216,43 @@ class MySQLProvider implements ProviderInterface
      */
     public function setPlayerData(IPlayer $player, array $tempUserData)
     {
+        // TODO
     }
 
     /**
-     * @param $groupName
-     * @param $tempGroupData
+     * @param PPGroup $group
+     * @param array $tempGroupData
      */
-    public function updateGroupData($groupName, $tempGroupData)
+    public function updateGroupData(PPGroup $group, array $tempGroupData)
     {
+        if(isset($tempGroupData["isDefault"]) and isset($tempGroupData["inheritance"]) and isset($tempGroupData["permissions"]))
+        {
+            $groupName = $group->getName();
+            $isDefault = $tempGroupData["isDefault"];
+            $inheritance = implode(",", $tempGroupData["inheritance"]);
+            $permissions = implode(",", $tempGroupData["permissions"]);
 
+            $this->db->query("INSERT OR REPLACE INTO groups
+                    (groupName, isDefault, inheritance, permissions)
+                    VALUES
+                    (" . $this->db->escape_string($groupName) . ", " . $this->db->escape_string($isDefault) . ", " . $this->db->escape_string($inheritance) . ", " . $this->db->escape_string($permissions) . ");");
+
+            if(isset($tempGroupData["worlds"]))
+            {
+                foreach($tempGroupData["worlds"] as $worldName => $worldData)
+                {
+                    $worldPerms = implode(",", $worldData["permissions"]);
+
+                    if(is_array($worldPerms))
+                    {
+                        $this->db->query("INSERT OR REPLACE INTO groups_mw
+                            (groupName, worldName, permissions)
+                            VALUES
+                            (" . $this->db->escape_string($groupName) . ", " . $this->db->escape_string($worldName) . ", " . $this->db->escape_string($worldPerms) . ");");
+                    }
+                }
+            }
+        }
     }
     
     public function close()

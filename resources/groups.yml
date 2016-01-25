@@ -28,7 +28,6 @@ Admin:
   worlds: []
 Owner:
   inheritance:
-  - Guest
   - Admin
   permissions:
   - essentials

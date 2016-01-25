@@ -148,8 +148,6 @@ class UserDataManager
      */
     public function setGroup(IPlayer $player, PPGroup $group, $levelName)
     {
-        var_dump($levelName);
-
         if($levelName === null)
         {
             $this->setNode($player, "group", $group->getName());
