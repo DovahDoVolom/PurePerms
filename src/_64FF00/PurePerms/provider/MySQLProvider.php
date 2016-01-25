@@ -201,7 +201,7 @@ class MySQLProvider implements ProviderInterface
         $tempGroupName01 = key($tempGroupData01);
 
         if($tempGroupData01 !== []) $this->removeGroupData($tempGroupName01);
-
+        
         foreach($tempGroupsData as $tempGroupName02 => $tempGroupData02)
         {
             $this->updateGroupData($tempGroupName02, $tempGroupData02);
@@ -220,14 +220,13 @@ class MySQLProvider implements ProviderInterface
     }
 
     /**
-     * @param PPGroup $group
+     * @param $groupName
      * @param array $tempGroupData
      */
-    public function updateGroupData(PPGroup $group, array $tempGroupData)
+    public function updateGroupData($groupName, array $tempGroupData)
     {
         if(isset($tempGroupData["isDefault"]) and isset($tempGroupData["inheritance"]) and isset($tempGroupData["permissions"]))
         {
-            $groupName = $group->getName();
             $isDefault = $tempGroupData["isDefault"];
             $inheritance = implode(",", $tempGroupData["inheritance"]);
             $permissions = implode(",", $tempGroupData["permissions"]);
