@@ -92,7 +92,7 @@ class UserDataManager
 
         if(!is_array($permissions))
         {
-            $this->plugin->getLogger()->critical("Invalid 'permissions' node given to " . __METHOD__);
+            $this->plugin->getLogger()->critical("Invalid 'permissions' node given to " . __METHOD__ . '()');
 
             return [];
         }

@@ -89,16 +89,20 @@ class MySQLProvider implements ProviderInterface
      */
     public function getPlayerData(IPlayer $player)
     {
-        $userData = [];
+        $userData = [
+            "userName" => $player->getName(),
+            "group" => $this->plugin->getDefaultGroup()->getName(),
+            "permissions" => []
+        ];
 
         $result01 = $this->db->query("SELECT * FROM players;");
 
         if($result01 instanceof \mysqli_result)
         {
-            while ($currentRow = $result01->fetch_assoc())
+            while($currentRow = $result01->fetch_assoc())
             {
                 $userData["group"] = $currentRow["userGroup"];
-                $userData["permissions"] =  $currentRow["permissions"];
+                $userData["permissions"] =  explode(",", $currentRow["permissions"]);
             }
 
             $result01->free();
@@ -108,7 +112,7 @@ class MySQLProvider implements ProviderInterface
 
         if($result02 instanceof \mysqli_result)
         {
-            while ($currentRow = $result02->fetch_assoc())
+            while($currentRow = $result02->fetch_assoc())
             {
                 $userGroup = $currentRow["userGroup"];
                 $worldName = $currentRow["worldName"];
@@ -119,8 +123,10 @@ class MySQLProvider implements ProviderInterface
                 $userData["worlds"][$worldName]["permissions"] = $worldPerms;
             }
 
-            $result01->free();
+            $result02->free();
         }
+
+        return $userData;
     }
 
     public function getUsers()
@@ -168,11 +174,11 @@ class MySQLProvider implements ProviderInterface
      */
     public function removeGroupData($groupName)
     {
-        $result01 = $this->db->query("
+         $this->db->query("
             DELETE FROM groups
             WHERE groupName = " . $this->db->escape_string($groupName) . ";");
 
-        $result02 = $this->db->query("
+        $this->db->query("
             DELETE OR IGNORE FROM groups_mw
             WHERE groupName = " . $this->db->escape_string($groupName) . ";");
     }
@@ -201,7 +207,7 @@ class MySQLProvider implements ProviderInterface
         $tempGroupName01 = key($tempGroupData01);
 
         if($tempGroupData01 !== []) $this->removeGroupData($tempGroupName01);
-        
+
         foreach($tempGroupsData as $tempGroupName02 => $tempGroupData02)
         {
             $this->updateGroupData($tempGroupName02, $tempGroupData02);
@@ -216,7 +222,41 @@ class MySQLProvider implements ProviderInterface
      */
     public function setPlayerData(IPlayer $player, array $tempUserData)
     {
-        // TODO
+        if(isset($tempUserData["group"]) and isset($tempUserData["permissions"]))
+        {
+            $userName = $player->getName();
+            $userGroup = $tempUserData["group"];
+            $permissions = implode(",", $tempUserData["permissions"]);
+
+            $this->db->query("INSERT INTO players
+                (userName, userGroup, permissions)
+                VALUES
+                ('" . $this->db->escape_string($userName) . "', '" . $this->db->escape_string($userGroup) . "', '" . $this->db->escape_string($permissions) . "')
+                ON DUPLICATE KEY UPDATE
+                userName = VALUES(userName),
+                userGroup = VALUES(userGroup),
+                permissions = VALUES(permissions);");
+
+            if(isset($tempGroupData["worlds"]))
+            {
+                foreach($tempGroupData["worlds"] as $worldName => $worldData)
+                {
+                    $worldGroup = $worldData["group"];
+                    $worldPerms = implode(",", $worldData["permissions"]);
+
+                    if(is_array($worldPerms))
+                    {
+                        $this->db->query("INSERT INTO players_mw
+                            (userName, worldName, userGroup, permissions)
+                            VALUES
+                            ('" . $this->db->escape_string($userName) . "', '" . $this->db->escape_string($worldName) . "', '" . $this->db->escape_string($worldGroup) . "', '" . $this->db->escape_string($worldPerms) . "')
+                            ON DUPLICATE KEY UPDATE
+                            worldName = VALUES(worldName),
+                            permissions = VALUES(permissions);");
+                    }
+                }
+            }
+        }
     }
 
     /**
@@ -231,10 +271,14 @@ class MySQLProvider implements ProviderInterface
             $inheritance = implode(",", $tempGroupData["inheritance"]);
             $permissions = implode(",", $tempGroupData["permissions"]);
 
-            $this->db->query("INSERT OR REPLACE INTO groups
-                    (groupName, isDefault, inheritance, permissions)
-                    VALUES
-                    (" . $this->db->escape_string($groupName) . ", " . $this->db->escape_string($isDefault) . ", " . $this->db->escape_string($inheritance) . ", " . $this->db->escape_string($permissions) . ");");
+            $this->db->query("INSERT INTO groups
+                (groupName, isDefault, inheritance, permissions)
+                VALUES
+                ('" . $this->db->escape_string($groupName) . "', '" . $this->db->escape_string($isDefault) . "', '" . $this->db->escape_string($inheritance) . "', '" . $this->db->escape_string($permissions) . "')
+                ON DUPLICATE KEY UPDATE
+                isDefault = VALUES(isDefault),
+                inheritance = VALUES(inheritance),
+                permissions = VALUES(permissions);");
 
             if(isset($tempGroupData["worlds"]))
             {
@@ -244,10 +288,13 @@ class MySQLProvider implements ProviderInterface
 
                     if(is_array($worldPerms))
                     {
-                        $this->db->query("INSERT OR REPLACE INTO groups_mw
+                        $this->db->query("INSERT INTO groups_mw
                             (groupName, worldName, permissions)
                             VALUES
-                            (" . $this->db->escape_string($groupName) . ", " . $this->db->escape_string($worldName) . ", " . $this->db->escape_string($worldPerms) . ");");
+                            ('" . $this->db->escape_string($groupName) . "', '" . $this->db->escape_string($worldName) . "', '" . $this->db->escape_string($worldPerms) . "')
+                            ON DUPLICATE KEY UPDATE
+                            worldName = VALUES(worldName),
+                            permissions = VALUES(permissions);");
                     }
                 }
             }
