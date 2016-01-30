@@ -25,7 +25,6 @@ use _64FF00\PurePerms\noeul\NoeulAPI;
 use _64FF00\PurePerms\provider\DefaultProvider;
 use _64FF00\PurePerms\provider\MySQLProvider;
 use _64FF00\PurePerms\provider\ProviderInterface;
-use _64FF00\PurePerms\provider\SQLite3Provider;
 
 use pocketmine\IPlayer;
 
@@ -159,15 +158,6 @@ class PurePerms extends PluginBase
 
                 if($onEnable === true)
                     $this->getLogger()->info($this->getMessage("logger_messages.setProvider_MySQL"));
-
-                break;
-
-            case "sqlite3":
-
-                $provider = new SQLite3Provider($this);
-
-                if($onEnable === true)
-                    $this->getLogger()->info($this->getMessage("logger_messages.setProvider_SQLite3"));
 
                 break;
 

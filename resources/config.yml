@@ -14,13 +14,13 @@ data-provider: yaml
 # Korean message resource by @64FF00 (GitHub)
 # Japanese message resource by @onebone and @haniokasai (GitHub)
 # Russian message resource by @vvzar and @Pub4Game (GitHub)
-# Ukrainian messages resource by @samalero (GitHub)
+# Ukrainian message resource by @samalero (GitHub)
 # Italian message resource by @AryToNeX (GitHub)
 # Spanish message resource by @iksaku and @JoahDave (Github) 
 # Czech message resource by @Michael2010117 (GitHub)
 # Slovak message resource by @Michael2010117 (GitHub)
 # German message resource by @Exxarion (GitHub)
-# Indonesian messages resource by @DevillordMCPE (GitHub)
+# Indonesian message resource by @DevillordMCPE (GitHub)
 # Turkish messages resource by @PainTR (GitHub)
 default-language: en
 
