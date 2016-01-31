@@ -52,7 +52,7 @@ class SetUPerm extends Command implements PluginIdentifiableCommand
         
         if(count($args) < 2 || count($args) > 3)
         {
-            $sender->sendMessage(TextFormat::BLUE . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.setuperm.usage"));
+            $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.setuperm.usage"));
             
             return true;
         }
@@ -79,7 +79,7 @@ class SetUPerm extends Command implements PluginIdentifiableCommand
         
         $this->plugin->getUserDataMgr()->setPermission($player, $permission, $levelName);
         
-        $sender->sendMessage(TextFormat::BLUE . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.setuperm.messages.uperm_added_successfully", $permission, $player->getName()));
+        $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.setuperm.messages.uperm_added_successfully", $permission, $player->getName()));
         
         return true;
     }

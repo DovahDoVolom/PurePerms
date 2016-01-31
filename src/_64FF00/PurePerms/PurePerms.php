@@ -35,6 +35,7 @@ use pocketmine\permission\DefaultPermissions;
 use pocketmine\Player;
 
 use pocketmine\plugin\PluginBase;
+
 use pocketmine\utils\UUID;
 
 class PurePerms extends PluginBase

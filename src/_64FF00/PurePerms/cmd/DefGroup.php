@@ -52,7 +52,7 @@ class DefGroup extends Command implements PluginIdentifiableCommand
 
         if(!isset($args[0]) || count($args) > 2)
         {
-            $sender->sendMessage(TextFormat::BLUE . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.defgroup.usage"));
+            $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.defgroup.usage"));
 
             return true;
         }
@@ -68,7 +68,7 @@ class DefGroup extends Command implements PluginIdentifiableCommand
 
         $this->plugin->setDefaultGroup($group);
 
-        $sender->sendMessage(TextFormat::BLUE . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.defgroup.messages.defgroup_successfully", $args[0]));
+        $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.defgroup.messages.defgroup_successfully", $args[0]));
         
         return true;
     }

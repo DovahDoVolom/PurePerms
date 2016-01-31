@@ -52,7 +52,7 @@ class AddGroup extends Command implements PluginIdentifiableCommand
         
         if(!isset($args[0]) || count($args) > 1)
         {
-            $sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.addgroup.usage"));
+            $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.addgroup.usage"));
             
             return true;
         }
@@ -61,7 +61,7 @@ class AddGroup extends Command implements PluginIdentifiableCommand
         
         if($result === PurePerms::SUCCESS)
         {
-            $sender->sendMessage(TextFormat::BLUE . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.addgroup.messages.group_added_successfully", $args[0]));
+            $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.addgroup.messages.group_added_successfully", $args[0]));
         }
         elseif($result === PurePerms::ALREADY_EXISTS)
         {

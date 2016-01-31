@@ -59,7 +59,7 @@ class Groups extends Command implements PluginIdentifiableCommand
         
         $result = substr($result, 0, -2);
         
-        $sender->sendMessage(TextFormat::BLUE . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.groups.messages.all_registered_groups", $result));
+        $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.groups.messages.all_registered_groups", $result));
         
         return true;
     }

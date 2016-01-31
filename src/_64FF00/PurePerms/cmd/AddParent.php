@@ -52,7 +52,7 @@ class AddParent extends Command implements PluginIdentifiableCommand
 
         if(count($args) < 2 || count($args) > 3)
         {
-            $sender->sendMessage(TextFormat::BLUE . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.addparent.usage"));
+            $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.addparent.usage"));
 
             return true;
         }
@@ -63,7 +63,7 @@ class AddParent extends Command implements PluginIdentifiableCommand
 
         if($target_group->addParent($parent_group))
         {
-            $sender->sendMessage(TextFormat::BLUE . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.addparent.messages.addparent_successfully", $parent_group->getName(), $target_group->getName()));
+            $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.addparent.messages.addparent_successfully", $parent_group->getName(), $target_group->getName()));
         }
         else
         {

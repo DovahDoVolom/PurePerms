@@ -52,7 +52,7 @@ class PPReload extends Command implements PluginIdentifiableCommand
         
         $this->plugin->reload();
         
-        $sender->sendMessage(TextFormat::BLUE . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.ppreload.messages.successfully_reloaded"));
+        $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.ppreload.messages.successfully_reloaded"));
         
         return true;
     }

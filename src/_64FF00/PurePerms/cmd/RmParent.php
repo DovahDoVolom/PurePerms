@@ -52,7 +52,7 @@ class RmParent extends Command implements PluginIdentifiableCommand
 
         if(count($args) < 2 || count($args) > 3)
         {
-            $sender->sendMessage(TextFormat::BLUE . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.rmparent.usage"));
+            $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.rmparent.usage"));
 
             return true;
         }
@@ -63,7 +63,7 @@ class RmParent extends Command implements PluginIdentifiableCommand
 
         $target_group->removeParent($parent_group);
 
-        $sender->sendMessage(TextFormat::BLUE . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.rmparent.messages.rmparent_successfully", $parent_group->getName(), $target_group->getName()));
+        $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.rmparent.messages.rmparent_successfully", $parent_group->getName(), $target_group->getName()));
 
         return true;
     }
