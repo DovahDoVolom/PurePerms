@@ -54,7 +54,7 @@ class ListGPerms extends Command implements PluginIdentifiableCommand
         
         if(count($args) < 1 || count($args) > 3)
         {
-            $sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.listgperms.usage"));
+            $sender->sendMessage(TextFormat::BLUE . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.listgperms.usage"));
             
             return true;
         }
@@ -63,7 +63,7 @@ class ListGPerms extends Command implements PluginIdentifiableCommand
         
         if($group == null) 
         {
-            $sender->sendMessage(TextFormat::RED . "[PurePerms] " . $this->plugin->getMessage("cmds.listgperms.messages.group_not_exist", $args[0]));
+            $sender->sendMessage(TextFormat::RED . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.listgperms.messages.group_not_exist", $args[0]));
             
             return true;
         }
@@ -76,7 +76,7 @@ class ListGPerms extends Command implements PluginIdentifiableCommand
             
             if($level == null)
             {
-                $sender->sendMessage(TextFormat::RED . "[PurePerms] " . $this->plugin->getMessage("cmds.setgperm.messages.level_not_exist", $args[2]));
+                $sender->sendMessage(TextFormat::RED . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.setgperm.messages.level_not_exist", $args[2]));
                 
                 return true;
             }
@@ -88,7 +88,7 @@ class ListGPerms extends Command implements PluginIdentifiableCommand
         
         if(empty($permissions))
         {
-            $sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.listgperms.messages.no_group_perms", $group->getName()));
+            $sender->sendMessage(TextFormat::BLUE . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.listgperms.messages.no_group_perms", $group->getName()));
             
             return true;
         }
@@ -112,11 +112,11 @@ class ListGPerms extends Command implements PluginIdentifiableCommand
             $pageNumber = $args[1];
         }
         
-        $sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.listgperms.messages.group_perms_list", $group->getName(), $pageNumber, $maxPageNumber));
+        $sender->sendMessage(TextFormat::BLUE . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.listgperms.messages.group_perms_list", $group->getName(), $pageNumber, $maxPageNumber));
         
         foreach($chunkedPermissions[$pageNumber - 1] as $permission)
         {
-            $sender->sendMessage(TextFormat::BLUE . "[PurePerms] - " . $permission);
+            $sender->sendMessage(TextFormat::BLUE .PurePerms::MAIN_PREFIX . ' - ' . $permission);
         }
         
         return true;

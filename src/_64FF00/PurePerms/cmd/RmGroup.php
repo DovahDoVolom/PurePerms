@@ -52,7 +52,7 @@ class RmGroup extends Command implements PluginIdentifiableCommand
         
         if(!isset($args[0]) || count($args) > 1)
         {
-            $sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.rmgroup.usage"));
+            $sender->sendMessage(TextFormat::BLUE . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.rmgroup.usage"));
             
             return true;
         }
@@ -61,15 +61,15 @@ class RmGroup extends Command implements PluginIdentifiableCommand
         
         if($result === PurePerms::SUCCESS)
         {
-            $sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.rmgroup.messages.group_removed_successfully", $args[0]));
+            $sender->sendMessage(TextFormat::BLUE . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.rmgroup.messages.group_removed_successfully", $args[0]));
         }
         elseif($result === PurePerms::INVALID_NAME)
         {
-            $sender->sendMessage(TextFormat::RED . "[PurePerms] " . $this->plugin->getMessage("cmds.rmgroup.messages.invalid_group_name", $args[0]));
+            $sender->sendMessage(TextFormat::RED . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.rmgroup.messages.invalid_group_name", $args[0]));
         }
         else
         {
-            $sender->sendMessage(TextFormat::RED . "[PurePerms] " . $this->plugin->getMessage("cmds.rmgroup.messages.group_not_exist", $args[0]));
+            $sender->sendMessage(TextFormat::RED . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.rmgroup.messages.group_not_exist", $args[0]));
         }
         
         return true;

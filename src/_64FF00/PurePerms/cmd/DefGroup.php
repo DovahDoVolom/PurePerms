@@ -52,7 +52,7 @@ class DefGroup extends Command implements PluginIdentifiableCommand
 
         if(!isset($args[0]) || count($args) > 2)
         {
-            $sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.defgroup.usage"));
+            $sender->sendMessage(TextFormat::BLUE . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.defgroup.usage"));
 
             return true;
         }
@@ -61,14 +61,14 @@ class DefGroup extends Command implements PluginIdentifiableCommand
 
         if($group === null)
         {
-            $sender->sendMessage(TextFormat::RED . "[PurePerms] " . $this->plugin->getMessage("cmds.defgroup.messages.group_not_exist", $args[0]));
+            $sender->sendMessage(TextFormat::RED . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.defgroup.messages.group_not_exist", $args[0]));
 
             return true;
         }
 
         $this->plugin->setDefaultGroup($group);
 
-        $sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.defgroup.messages.defgroup_successfully", $args[0]));
+        $sender->sendMessage(TextFormat::BLUE . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.defgroup.messages.defgroup_successfully", $args[0]));
         
         return true;
     }

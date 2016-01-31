@@ -54,14 +54,14 @@ class PPSudo extends Command implements PluginIdentifiableCommand
 
         if(!($sender instanceof Player))
         {
-            $sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.ppsudo.messages.invalid_sender"));
+            $sender->sendMessage(TextFormat::BLUE . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.ppsudo.messages.invalid_sender"));
 
             return true;
         }
 
         if(!isset($args[0]) || count($args) > 2)
         {
-            $sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.ppsudo.usage"));
+            $sender->sendMessage(TextFormat::BLUE . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.ppsudo.usage"));
 
             return true;
         }
@@ -74,14 +74,14 @@ class PPSudo extends Command implements PluginIdentifiableCommand
 
                 if(!$noeulAPI->isRegistered($sender))
                 {
-                    $sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.ppsudo.messages.not_registered"));
+                    $sender->sendMessage(TextFormat::BLUE . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.ppsudo.messages.not_registered"));
 
                     return true;
                 }
 
                 if(!isset($args[1]))
                 {
-                    $sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.ppsudo.messages.login_usage"));
+                    $sender->sendMessage(TextFormat::BLUE . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.ppsudo.messages.login_usage"));
 
                     return true;
                 }
@@ -97,14 +97,14 @@ class PPSudo extends Command implements PluginIdentifiableCommand
 
                 if($noeulAPI->isRegistered($sender))
                 {
-                    $sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.ppsudo.messages.already_registered"));
+                    $sender->sendMessage(TextFormat::BLUE . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.ppsudo.messages.already_registered"));
 
                     return true;
                 }
 
                 if(!isset($args[1]))
                 {
-                    $sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.ppsudo.messages.register_usage"));
+                    $sender->sendMessage(TextFormat::BLUE . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.ppsudo.messages.register_usage"));
 
                     return true;
                 }
@@ -113,7 +113,7 @@ class PPSudo extends Command implements PluginIdentifiableCommand
 
                 if(mb_strlen($args[1]) < $mpl)
                 {
-                    $sender->sendMessage(TextFormat::RED . "[PurePerms] " . $this->plugin->getMessage("cmds.ppsudo.messages.password_too_short", $mpl));
+                    $sender->sendMessage(TextFormat::RED . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.ppsudo.messages.password_too_short", $mpl));
 
                     return true;
                 }

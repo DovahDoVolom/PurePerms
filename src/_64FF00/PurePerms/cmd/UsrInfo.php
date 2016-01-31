@@ -54,7 +54,7 @@ class UsrInfo extends Command implements PluginIdentifiableCommand
         
         if(count($args) < 1 || count($args) > 2)
         {
-            $sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.usrinfo.usage"));
+            $sender->sendMessage(TextFormat::BLUE . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.usrinfo.usage"));
             
             return true;
         }
@@ -69,7 +69,7 @@ class UsrInfo extends Command implements PluginIdentifiableCommand
             
             if($level == null)
             {
-                $sender->sendMessage(TextFormat::RED . "[PurePerms] " . $this->plugin->getMessage("cmds.usrinfo.messages.level_not_exist", $args[1]));
+                $sender->sendMessage(TextFormat::RED . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.usrinfo.messages.level_not_exist", $args[1]));
                 
                 return true;
             }
@@ -79,19 +79,19 @@ class UsrInfo extends Command implements PluginIdentifiableCommand
         
         $status = $player instanceof Player ? TextFormat::GREEN . $this->plugin->getMessage("cmds.usrinfo.messages.status_online") : TextFormat::RED . $this->plugin->getMessage("cmds.usrinfo.messages.status_offline");
         
-        $sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.usrinfo.messages.usrinfo_header", $player->getName()));
+        $sender->sendMessage(TextFormat::BLUE . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.usrinfo.messages.usrinfo_header", $player->getName()));
 
-        $sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.usrinfo.messages.usrinfo_status", $status));
+        $sender->sendMessage(TextFormat::BLUE . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.usrinfo.messages.usrinfo_status", $status));
 
         $ip = $player instanceof Player ? TextFormat::GREEN . $player->getAddress() : TextFormat::RED . $this->plugin->getMessage("cmds.usrinfo.messages.unknown");
-        $sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.usrinfo.messages.usrinfo_ip", $ip));
+        $sender->sendMessage(TextFormat::BLUE . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.usrinfo.messages.usrinfo_ip", $ip));
 
         $uuid = $player instanceof Player ? TextFormat::GREEN . $player->getUniqueId()->toString() : TextFormat::RED . $this->plugin->getMessage("cmds.usrinfo.messages.unknown");
-        $sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.usrinfo.messages.usrinfo_uuid", $uuid));
+        $sender->sendMessage(TextFormat::BLUE . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.usrinfo.messages.usrinfo_uuid", $uuid));
 
         $userGroup = $this->plugin->getUserDataMgr()->getGroup($player, $levelName);
         
-        $sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.usrinfo.messages.usrinfo_group", TextFormat::GREEN . $userGroup->getName()));
+        $sender->sendMessage(TextFormat::BLUE . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.usrinfo.messages.usrinfo_group", TextFormat::GREEN . $userGroup->getName()));
         
         return true;
     }

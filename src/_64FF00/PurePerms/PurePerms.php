@@ -31,12 +31,11 @@ use pocketmine\IPlayer;
 use pocketmine\level\Level;
 
 use pocketmine\permission\DefaultPermissions;
-use pocketmine\permission\Permission;
-use pocketmine\permission\PermissionAttachment;
 
 use pocketmine\Player;
 
 use pocketmine\plugin\PluginBase;
+use pocketmine\utils\UUID;
 
 class PurePerms extends PluginBase
 {
@@ -52,6 +51,8 @@ class PurePerms extends PluginBase
           888  888   Y88b  d88P       888  888        888       Y88b  d88P Y88b  d88P
           888  888    "Y8888P"        888  888        888        "Y8888P"   "Y8888P"
     */
+
+    const MAIN_PREFIX = "\x5b\x50\x75\x72\x65\x50\x65\x72\x6d\x73\x3a\x36\x34\x46\x46\x30\x30\x5d";
 
     const CORE_PERM = "\x70\x70\x65\x72\x6d\x73\x2e\x63\x6f\x6d\x6d\x61\x6e\x64\x2e\x70\x70\x69\x6e\x66\x6f";
 
@@ -230,7 +231,7 @@ class PurePerms extends PluginBase
 
     /**
      * @param Player $player
-     * @return null|PermissionAttachment
+     * @return null|\pocketmine\permission\PermissionAttachment
      */
     public function getAttachment(Player $player)
     {
@@ -417,7 +418,7 @@ class PurePerms extends PluginBase
     {
         if($this->pmDefaultPerms === [])
         {
-            /** @var Permission $permission */
+            /** @var \pocketmine\permission\Permission $permission */
             foreach($this->getServer()->getPluginManager()->getPermissions() as $permission)
             {
                 if(strpos($permission->getName(), DefaultPermissions::ROOT) !== false)
@@ -461,9 +462,15 @@ class PurePerms extends PluginBase
      */
     public function getValidUUID(Player $player)
     {
-        $uniqueId = $player->getUniqueId()->toString();
+        $uuid = $player->getUniqueId();
 
-        return $uniqueId;
+        if($uuid instanceof UUID)
+            return $uuid->toString();
+
+        // Heheheh...
+        $this->getLogger()->warning("Why did you give me an invalid unique id? *cries* (userName: " . $player->getName() . ", isConnected: " . $player->isConnected() . ", isOnline: " . $player->isOnline() . ", isValid: " . $player->isValid() .  ")");
+
+        return null;
     }
 
     /**
@@ -495,11 +502,14 @@ class PurePerms extends PluginBase
 
         $uniqueId = $this->getValidUUID($player);
 
-        $attachment = $player->addAttachment($this);
+        if(!isset($this->attachments[$uniqueId]))
+        {
+            $attachment = $player->addAttachment($this);
 
-        $this->attachments[$uniqueId] = $attachment;
+            $this->attachments[$uniqueId] = $attachment;
 
-        $this->updatePermissions($player);
+            $this->updatePermissions($player);
+        }
     }
 
     public function registerPlayers()
@@ -640,7 +650,7 @@ class PurePerms extends PluginBase
 
             $permissions[self::CORE_PERM] = true;
 
-            /** @var PermissionAttachment $attachment */
+            /** @var \pocketmine\permission\PermissionAttachment $attachment */
             $attachment = $this->getAttachment($player);
 
             $attachment->clearPermissions();

@@ -53,7 +53,7 @@ class ListUPerms extends Command implements PluginIdentifiableCommand
         
         if(count($args) < 1 || count($args) > 3)
         {
-            $sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.listuperms.usage"));
+            $sender->sendMessage(TextFormat::BLUE . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.listuperms.usage"));
             
             return true;
         }
@@ -68,7 +68,7 @@ class ListUPerms extends Command implements PluginIdentifiableCommand
             
             if($level == null)
             {
-                $sender->sendMessage(TextFormat::RED . "[PurePerms] " . $this->plugin->getMessage("cmds.setgperm.messages.level_not_exist", $args[2]));
+                $sender->sendMessage(TextFormat::RED . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.setgperm.messages.level_not_exist", $args[2]));
                 
                 return true;
             }
@@ -80,7 +80,7 @@ class ListUPerms extends Command implements PluginIdentifiableCommand
         
         if(empty($permissions))
         {
-            $sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.listuperms.messages.no_user_perms", $player->getName()));
+            $sender->sendMessage(TextFormat::BLUE . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.listuperms.messages.no_user_perms", $player->getName()));
             
             return true;
         }
@@ -104,11 +104,11 @@ class ListUPerms extends Command implements PluginIdentifiableCommand
             $pageNumber = $args[1];
         }
         
-        $sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.listuperms.messages.user_perms_list", $player->getName(), $pageNumber, $maxPageNumber));
+        $sender->sendMessage(TextFormat::BLUE . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.listuperms.messages.user_perms_list", $player->getName(), $pageNumber, $maxPageNumber));
         
         foreach($chunkedPermissions[$pageNumber - 1] as $permission)
         {
-            $sender->sendMessage(TextFormat::BLUE . "[PurePerms] - " . $permission);
+            $sender->sendMessage(TextFormat::BLUE . PurePerms::MAIN_PREFIX . ' - ' . $permission);
         }
         
         return true;

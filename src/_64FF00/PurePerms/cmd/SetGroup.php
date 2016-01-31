@@ -57,7 +57,7 @@ class SetGroup extends Command implements PluginIdentifiableCommand
         
         if(count($args) < 2 || count($args) > 3)
         {
-            $sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.setgroup.usage"));
+            $sender->sendMessage(TextFormat::BLUE . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.setgroup.usage"));
             
             return true;
         }
@@ -68,7 +68,7 @@ class SetGroup extends Command implements PluginIdentifiableCommand
         
         if($group === null)
         {
-            $sender->sendMessage(TextFormat::RED . "[PurePerms] " . $this->plugin->getMessage("cmds.setgroup.messages.group_not_exist", $args[1]));
+            $sender->sendMessage(TextFormat::RED . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.setgroup.messages.group_not_exist", $args[1]));
             
             return true;
         }
@@ -81,7 +81,7 @@ class SetGroup extends Command implements PluginIdentifiableCommand
             
             if($level === null)
             {
-                $sender->sendMessage(TextFormat::RED . "[PurePerms] " . $this->plugin->getMessage("cmds.setgroup.messages.level_not_exist", $args[2]));
+                $sender->sendMessage(TextFormat::RED . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.setgroup.messages.level_not_exist", $args[2]));
                 
                 return true;
             }
@@ -100,7 +100,7 @@ class SetGroup extends Command implements PluginIdentifiableCommand
         {
             if(isset($tmpSuperAdminRanks[$group->getName()]))
             {
-                $sender->sendMessage(TextFormat::RED . "[PurePerms] " . $this->plugin->getMessage("cmds.setgroup.messages.access_denied_01", $group->getName()));
+                $sender->sendMessage(TextFormat::RED . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.setgroup.messages.access_denied_01", $group->getName()));
 
                 return true;
             }
@@ -109,7 +109,7 @@ class SetGroup extends Command implements PluginIdentifiableCommand
 
             if(isset($tmpSuperAdminRanks[$userGroup->getName()]))
             {
-                $sender->sendMessage(TextFormat::RED . "[PurePerms] " . $this->plugin->getMessage("cmds.setgroup.messages.access_denied_02", $userGroup->getName()));
+                $sender->sendMessage(TextFormat::RED . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.setgroup.messages.access_denied_02", $userGroup->getName()));
 
                 return true;
             }
@@ -117,12 +117,12 @@ class SetGroup extends Command implements PluginIdentifiableCommand
 
         $this->plugin->getUserDataMgr()->setGroup($player, $group, $levelName);
         
-        $sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.setgroup.messages.setgroup_successfully", $player->getName()));
+        $sender->sendMessage(TextFormat::BLUE . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.setgroup.messages.setgroup_successfully", $player->getName()));
         
         if($player instanceof Player)
         {
             if(!$this->plugin->getConfigValue("enable-multiworld-perms") || ($this->plugin->getConfigValue("enable-multiworld-perms") and $levelName === $player->getLevel()->getName()))
-                $player->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.setgroup.messages.on_player_group_change", strtolower($group->getName())));
+                $player->sendMessage(TextFormat::BLUE . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.setgroup.messages.on_player_group_change", strtolower($group->getName())));
         }
 
         return true;

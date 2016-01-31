@@ -54,7 +54,7 @@ class FPerms extends Command implements PluginIdentifiableCommand
         
         if(!isset($args[0]) || count($args) > 2)
         {
-            $sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.fperms.usage"));
+            $sender->sendMessage(TextFormat::BLUE . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.fperms.usage"));
             
             return true;
         }
@@ -63,7 +63,7 @@ class FPerms extends Command implements PluginIdentifiableCommand
         
         if($plugin === null)
         {
-            $sender->sendMessage(TextFormat::RED . "[PurePerms] " . $this->plugin->getMessage("cmds.fperms.messages.plugin_not_exist", $args[0]));
+            $sender->sendMessage(TextFormat::RED . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.fperms.messages.plugin_not_exist", $args[0]));
             
             return true;
         }
@@ -72,7 +72,7 @@ class FPerms extends Command implements PluginIdentifiableCommand
         
         if(empty($permissions))
         {
-            $sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.fperms.messages.no_plugin_perms", $plugin->getName()));
+            $sender->sendMessage(TextFormat::BLUE . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.fperms.messages.no_plugin_perms", $plugin->getName()));
             
             return true;
         }
@@ -96,11 +96,11 @@ class FPerms extends Command implements PluginIdentifiableCommand
             $pageNumber = $args[1];
         }
         
-        $sender->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.fperms.messages.plugin_perms_list", ($plugin instanceof PluginBase) ? $plugin->getName(): 'PocketMine-MP', $pageNumber, $maxPageNumber));
+        $sender->sendMessage(TextFormat::BLUE . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.fperms.messages.plugin_perms_list", ($plugin instanceof PluginBase) ? $plugin->getName(): 'PocketMine-MP', $pageNumber, $maxPageNumber));
         
         foreach($chunkedPermissions[$pageNumber - 1] as $permission)
         {
-            $sender->sendMessage(TextFormat::BLUE . "[PurePerms] - " . $permission->getName());
+            $sender->sendMessage(TextFormat::BLUE . PurePerms::MAIN_PREFIX . ' - ' . $permission->getName());
         }
         
         return true;
