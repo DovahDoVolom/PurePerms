@@ -205,7 +205,7 @@ class PurePerms extends PluginBase
      */
     public function addGroup($groupName)
     {
-        $groupsData = $this->getProvider()->getGroupsData(true);
+        $groupsData = $this->getProvider()->getGroupsData();
 
         if(!$this->isValidGroupName($groupName))
             return self::INVALID_NAME;
@@ -528,8 +528,12 @@ class PurePerms extends PluginBase
 
         $this->messages->reloadMessages();
 
-        if(!$this->isValidProvider())
-            $this->setProvider(false);
+        $this->setProvider(false);
+
+        foreach($this->getServer()->getOnlinePlayers() as $player)
+        {
+            $this->updatePermissions($player);
+        }
     }
 
     /**
@@ -541,7 +545,7 @@ class PurePerms extends PluginBase
         if(!$this->isValidGroupName($groupName))
             return self::INVALID_NAME;
 
-        $groupsData = $this->getProvider()->getGroupsData(true);
+        $groupsData = $this->getProvider()->getGroupsData();
 
         if(!isset($groupsData[$groupName]))
             return self::NOT_FOUND;

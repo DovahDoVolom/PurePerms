@@ -26,6 +26,8 @@ class PPListener implements Listener
           888  888    "Y8888P"        888  888        888        "Y8888P"   "Y8888P"
     */
 
+    private $plugin;
+
     /**
      * @param PurePerms $plugin
      */

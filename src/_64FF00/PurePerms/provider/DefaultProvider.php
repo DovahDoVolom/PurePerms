@@ -24,7 +24,7 @@ class DefaultProvider implements ProviderInterface
           888  888    "Y8888P"        888  888        888        "Y8888P"   "Y8888P"
     */
     
-    private $groups, $players;
+    private $groups, $players, $plugin;
 
     /**
      * @param PurePerms $plugin
@@ -84,9 +84,7 @@ class DefaultProvider implements ProviderInterface
             ];
         }
 
-        $tempUserData = $this->players->get($userName);
-
-        return $tempUserData;
+        return $this->players->get($userName);
     }
 
     public function getUsers()

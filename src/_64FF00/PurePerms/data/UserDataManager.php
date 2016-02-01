@@ -204,7 +204,7 @@ class UserDataManager
             $this->setWorldData($player, $levelName, $worldData);
         }
 
-        $this->plugin->updatePermissions($player, $levelName);
+        $this->plugin->updatePermissions($player);
     }
 
     public function setWorldData(IPlayer $player, $levelName, array $worldData)
@@ -255,6 +255,6 @@ class UserDataManager
             $this->setWorldData($player, $levelName, $worldData);
         }
 
-        $this->plugin->updatePermissions($player, $levelName);
+        $this->plugin->updatePermissions($player);
     }
 }

