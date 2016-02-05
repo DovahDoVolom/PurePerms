@@ -22,7 +22,11 @@ cmds:
       target_already_inherits: "Группа %var0% уже наследует %var1%."  
   defgroup:
     desc: "Изменяет группу по умолчанию."
+<<<<<<< HEAD
     usage: "Применение: /defgroup <группа> [мир]"
+=======
+    usage: "Применение: /defgroup <группа>"
+>>>>>>> origin/master
     messages:
       defgroup_successfully: "Группа по умолчанию успешно изменена на %var0%."
       group_not_exist: "Группа %var0% не существует."
