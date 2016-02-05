@@ -22,10 +22,11 @@ cmds:
       target_already_inherits: "Group %var0% already inherits %var1%." 	  
   defgroup:
     desc: "Змінює групу за замовчуванням."
-    usage: "Пример: /defgroup <група>"
+    usage: "Пример: /defgroup <група> [світ]"
     messages:
       defgroup_successfully: "Група за замовчуванням вдало змінена на %var0%."
-      group_not_exist: "Група %var0% не існує."     
+      group_not_exist: "Група %var0% не існує." 
+      level_not_exist: "Світ %var0% не існує."	  
   fperms:
     desc: "Показує список всіх дозволів для вказаного плагіну."
     usage: "Пример: /fperms <плагін>"

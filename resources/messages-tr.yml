@@ -22,10 +22,11 @@ cmds:
       target_already_inherits: "%var0% grubu zaten %var1% adlı grubun miras listesinde."     
   defgroup:
     desc: "Varsayılan grubu ayarlar."
-    usage: "Kullanış: /defgroup <grup>"
+    usage: "Kullanış: /defgroup <grup> [dünya]"
     messages:
       defgroup_successfully: "Varsayılan grup %var0% grubuna değiştirildi."
       group_not_exist: "%var0% adında bir grup yok."
+      level_not_exist: "%var0% adında bir dünya bulunmamakta."
   fperms:
     desc: "Belirlenen eklentinin yetkilerini listeler."
     usage: "Kullanış: /fperms <eklenti>"

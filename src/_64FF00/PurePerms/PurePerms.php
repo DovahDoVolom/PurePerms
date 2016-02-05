@@ -214,6 +214,7 @@ class PurePerms extends PluginBase
             return self::ALREADY_EXISTS;
 
         $groupsData[$groupName] = [
+            "alias" => "",
             "isDefault" => false,
             "inheritance" => [
             ],
@@ -263,15 +264,16 @@ class PurePerms extends PluginBase
     }
 
     /**
+     * @param null $levelName
      * @return PPGroup|null
      */
-    public function getDefaultGroup()
+    public function getDefaultGroup($levelName = null)
     {
         $defaultGroups = [];
 
         foreach($this->getGroups() as $defaultGroup)
         {
-            if($defaultGroup->isDefault())
+            if($defaultGroup->isDefault($levelName))
                 $defaultGroups[] = $defaultGroup;
         }
 
@@ -298,7 +300,7 @@ class PurePerms extends PluginBase
             {
                 if(count($defaultGroup->getParentGroups()) === 0)
                 {
-                    $this->setDefaultGroup($defaultGroup);
+                    $this->setDefaultGroup($defaultGroup, $levelName);
 
                     return $defaultGroup;
                 }
@@ -316,6 +318,13 @@ class PurePerms extends PluginBase
     {
         if(!isset($this->groups[$groupName]))
         {
+            /** @var PPGroup $group */
+            foreach($this->groups as $group)
+            {
+                if($group->getAlias() === $groupName)
+                    return $group;
+            }
+
             $this->getLogger()->debug($this->getMessage("logger_messages.getGroup_01", $groupName));
 
             return null;
@@ -561,18 +570,29 @@ class PurePerms extends PluginBase
 
     /**
      * @param PPGroup $group
+     * @param $levelName
      */
-    public function setDefaultGroup(PPGroup $group)
+    public function setDefaultGroup(PPGroup $group, $levelName = null)
     {
         foreach($this->getGroups() as $currentGroup)
         {
-            $isDefault = $currentGroup->getNode("isDefault");
+            if($levelName === null)
+            {
+                $isDefault = $currentGroup->getNode("isDefault");
 
-            if($isDefault)
-                $currentGroup->removeNode("isDefault");
+                if($isDefault)
+                    $currentGroup->removeNode("isDefault");
+            }
+            else
+            {
+                $isDefault = $currentGroup->getWorldNode($levelName, "isDefault");
+
+                if($isDefault)
+                    $currentGroup->removeWorldNode($levelName, "isDefault");
+            }
         }
 
-        $group->setDefault();
+        $group->setDefault($levelName);
     }
 
     /**

@@ -68,7 +68,23 @@ class DefGroup extends Command implements PluginIdentifiableCommand
             return true;
         }
 
-        $this->plugin->setDefaultGroup($group);
+        $levelName = null;
+
+        if(isset($args[1]))
+        {
+            $level = $this->plugin->getServer()->getLevelByName($args[1]);
+
+            if($level === null)
+            {
+                $sender->sendMessage(TextFormat::RED . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.degroup.messages.level_not_exist", $args[1]));
+
+                return true;
+            }
+
+            $levelName = $level->getName();
+        }
+
+        $this->plugin->setDefaultGroup($group, $levelName);
 
         $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.defgroup.messages.defgroup_successfully", $args[0]));
         

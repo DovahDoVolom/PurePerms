@@ -158,11 +158,15 @@ class MySQLProvider implements ProviderInterface
         {
             while($currentRow = $result02->fetch_assoc())
             {
+                $alias = $currentRow["alias"];
+                $isDefault = $currentRow["isDefault"];
                 $groupName = $currentRow["groupName"];
                 $worldName = $currentRow["worldName"];
                 $worldPerms = explode(",", $currentRow["permissions"]);
 
-                $this->groupsData[$groupName]["worlds"][$worldName] = $worldPerms;
+                $this->groupsData[$groupName]["worlds"][$worldName]["alias"] = $alias;
+                $this->groupsData[$groupName]["worlds"][$worldName]["isDefault"] = $isDefault;
+                $this->groupsData[$groupName]["worlds"][$worldName]["permissions"] = $worldPerms;
             }
 
             $result02->free();
@@ -267,15 +271,17 @@ class MySQLProvider implements ProviderInterface
     {
         if(isset($tempGroupData["isDefault"]) and isset($tempGroupData["inheritance"]) and isset($tempGroupData["permissions"]))
         {
+            $alias = $tempGroupData["alias"];
             $isDefault = $tempGroupData["isDefault"];
             $inheritance = implode(",", $tempGroupData["inheritance"]);
             $permissions = implode(",", $tempGroupData["permissions"]);
 
             $this->db->query("INSERT INTO groups
-                (groupName, isDefault, inheritance, permissions)
+                (groupName, alias, isDefault, inheritance, permissions)
                 VALUES
-                ('" . $this->db->escape_string($groupName) . "', '" . $this->db->escape_string($isDefault) . "', '" . $this->db->escape_string($inheritance) . "', '" . $this->db->escape_string($permissions) . "')
+                ('" . $this->db->escape_string($groupName) . "', '" . $this->db->escape_string($alias) . "', '" . $this->db->escape_string($isDefault) . "', '" . $this->db->escape_string($inheritance) . "', '" . $this->db->escape_string($permissions) . "')
                 ON DUPLICATE KEY UPDATE
+                alias = VALUES(alias),
                 isDefault = VALUES(isDefault),
                 inheritance = VALUES(inheritance),
                 permissions = VALUES(permissions);");
@@ -284,15 +290,19 @@ class MySQLProvider implements ProviderInterface
             {
                 foreach($tempGroupData["worlds"] as $worldName => $worldData)
                 {
+                    $alias = $worldData["alias"];
+                    $isDefault = $worldData["isDefault"];
                     $worldPerms = implode(",", $worldData["permissions"]);
 
                     if(is_array($worldPerms))
                     {
                         $this->db->query("INSERT INTO groups_mw
-                            (groupName, worldName, permissions)
+                            (groupName, alias, isDefault, worldName, permissions)
                             VALUES
-                            ('" . $this->db->escape_string($groupName) . "', '" . $this->db->escape_string($worldName) . "', '" . $this->db->escape_string($worldPerms) . "')
+                            ('" . $this->db->escape_string($groupName) . "', '" . $this->db->escape_string($alias) . "', '" . $this->db->escape_string($isDefault) . "', '" . $this->db->escape_string($worldName) . "', '" . $this->db->escape_string($worldPerms) . "')
                             ON DUPLICATE KEY UPDATE
+                            alias = VALUES(alias),
+                            isDefault = VALUES(isDefault),
                             worldName = VALUES(worldName),
                             permissions = VALUES(permissions);");
                     }

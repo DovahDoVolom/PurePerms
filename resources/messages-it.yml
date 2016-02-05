@@ -22,10 +22,11 @@ cmds:
       target_already_inherits: "Group %var0% already inherits %var1%."    
   defgroup:
     desc: "Permette di impostare un gruppo predefinito." 
-    usage: "Sintassi: /defgroup <group>"
+    usage: "Sintassi: /defgroup <gruppo> [mondo]"
     messages:
       defgroup_successfully: "Gruppo predefinito impostato in %var0% con successo."
-      group_not_exist: "Il gruppo %var0% non esiste."      
+      group_not_exist: "Il gruppo %var0% non esiste."
+      level_not_exist: "Il mondo %var0% non esiste."      
   fperms:
     desc: "Mostra una lista dei permessi di un plugin."
     usage: "Sintassi: /fperms <plugin>"

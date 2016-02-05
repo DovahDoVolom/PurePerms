@@ -78,7 +78,7 @@ class SetGPerm extends Command implements PluginIdentifiableCommand
         {
             $level = $this->plugin->getServer()->getLevelByName($args[2]);
             
-            if($level == null)
+            if($level === null)
             {
                 $sender->sendMessage(TextFormat::RED . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.setgperm.messages.level_not_exist", $args[2]));
                 

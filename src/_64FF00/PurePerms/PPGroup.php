@@ -59,12 +59,24 @@ class PPGroup
             $tempGroupData = $this->getData();
 
             $tempGroupData["worlds"][$levelName] = [
+                "isDefault" => false,
                 "permissions" => [
                 ]
             ];
 
             $this->setData($tempGroupData);
         }
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAlias()
+    {
+        if($this->getNode("alias") === null)
+            return $this->name;
+
+        return $this->getNode("alias");
     }
 
     /**
@@ -154,7 +166,7 @@ class PPGroup
      */
     public function getWorldData($levelName)
     {
-        if($levelName == null) return null;
+        if($levelName === null) return null;
         
         $this->createWorldData($levelName);
             
@@ -162,11 +174,31 @@ class PPGroup
     }
 
     /**
+     * @param $levelName
+     * @param $node
+     * @return null
+     */
+    public function getWorldNode($levelName, $node)
+    {
+        if(!isset($this->getWorldData($levelName)[$node])) return null;
+
+        return $this->getWorldData($levelName)[$node];
+    }
+
+    /**
+     * @param null $levelName
      * @return bool
      */
-    public function isDefault()
+    public function isDefault($levelName = null)
     {
-        return ($this->getNode("isDefault") == true);
+        if($levelName === null)
+        {
+            return ($this->getNode("isDefault") === true);
+        }
+        else
+        {
+            return ($this->getWorldData($levelName)["isDefault"] === true);
+        }
     }
 
     /**
@@ -202,16 +234,46 @@ class PPGroup
     }
 
     /**
+     * @param $levelName
+     * @param $node
+     */
+    public function removeWorldNode($levelName, $node)
+    {
+        $worldData = $this->getWorldData($levelName);
+
+        if(isset($worldData[$node]))
+        {
+            unset($worldData[$node]);
+
+            $this->setWorldData($levelName, $worldData);
+        }
+    }
+
+    /**
      * @param array $data
      */
     public function setData(array $data)
     {
         $this->plugin->getProvider()->setGroupData($this, $data);
     }
-    
-    public function setDefault()
+
+    /**
+     * @param null $levelName
+     */
+    public function setDefault($levelName = null)
     {
-        $this->setNode("isDefault", true);
+        if($levelName === null)
+        {
+            $this->setNode("isDefault", true);
+        }
+        else
+        {
+            $worldData = $this->getWorldData($levelName);
+
+            $worldData["isDefault"] = true;
+
+            $this->setWorldData($levelName, $worldData);
+        }
     }
 
     /**
@@ -269,6 +331,20 @@ class PPGroup
                 
             $this->setData($tempGroupData);
         }
+    }
+
+    /**
+     * @param $levelName
+     * @param $node
+     * @param $value
+     */
+    public function setWorldNode($levelName, $node, $value)
+    {
+        $worldData = $this->getWorldData($levelName);
+
+        $worldData[$node] = $value;
+
+        $this->setWorldData($levelName, $worldData);
     }
 
     public function sortPermissions()

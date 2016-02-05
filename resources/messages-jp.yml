@@ -21,10 +21,11 @@ cmds:
       target_already_inherits: "Group %var0% already inherits %var1%."     
   defgroup:
     desc: "デフォルトのグループを決めることを許可します。"
-    usage: "使い方: /defgroup <グループ>"
+    usage: "使い方: /defgroup <グループ> [ワールド]"
     messages:
       defgroup_successfully: "デフォルトのグループは %var0%に設定されました."
-      group_not_exist: "グループ%var0%は存在しません。"    
+      group_not_exist: "グループ%var0%は存在しません。"
+      level_not_exist: "ワールド%var0%は存在しません。"	  
   fperms:
     desc: "特定のプラグインの権限リストを表示します。"
     usage: "使用法: /fperms <プラグイン>"

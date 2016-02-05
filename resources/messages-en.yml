@@ -20,10 +20,11 @@ cmds:
       target_already_inherits: "Group %var0% already inherits %var1%."     
   defgroup:
     desc: "Allows you to set default group."
-    usage: "Usage: /defgroup <group>"
+    usage: "Usage: /defgroup <group> [world]"
     messages:
       defgroup_successfully: "Default group has been successfully set to %var0%."
       group_not_exist: "Group %var0% does NOT exist."
+      level_not_exist: "World %var0% does NOT exist."
   fperms:
     desc: "Shows a list of all permissions for a specific plugin."
     usage: "Usage: /fperms <plugin>"

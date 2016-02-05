@@ -19,10 +19,11 @@ cmds:
       target_already_inherits: "Group %var0% already inherits %var1%."     
   defgroup:
     desc: "Mengizinkan anda untuk set grup normal."
-    usage: "Command: /defgroup <group>"
+    usage: "Command: /defgroup <group> [world]"
     messages:
       defgroup_successfully: "Grup normal telah diset menjadi %var0%."
       group_not_exist: "Grup %var0% tidak ada."
+      level_not_exist: "World %var0% tidak ada."
   fperms:
     desc: "Menampilkan semua permission dari sebuah plugin."
     usage: "Command: /fperms <plugin>"

@@ -3,6 +3,7 @@
 
 ---
 Guest:
+  alias: 'gst'
   isDefault: true
   inheritance: []
   permissions:
@@ -15,6 +16,7 @@ Guest:
   - pperms.command.ppinfo
   worlds: []
 Admin:
+  alias: 'adm'
   inheritance:
   - Guest
   permissions:  
@@ -27,6 +29,7 @@ Admin:
   - pocketmine.command.time
   worlds: []
 Owner:
+  alias: 'owr'
   inheritance:
   - Admin
   permissions:
@@ -35,6 +38,7 @@ Owner:
   - pperms.command
   worlds: []
 OP:
+  alias: 'op'
   inheritance: []
   permissions:
   - '*'

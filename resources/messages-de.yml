@@ -22,10 +22,11 @@ cmds:
       target_already_inherits: "Group %var0% already inherits %var1%."    
   defgroup:
     desc: "Setzt die Standardgruppe."
-    usage: "Benutzung: /defgroup <Gruppe>"
+    usage: "Benutzung: /defgroup <Gruppe> [Welt]"
     messages:
       defgroup_successfully: "Die Standardgruppe ist nun %var0%."
       group_not_exist: "Die Gruppe %var0% existiert NICHT"
+      level_not_exist: "Welt %var0% existiert NICHT."
   fperms:
     desc: "Zeigt eine Liste aller Berechtigungen für ein Plugin."
     usage: "Benutzung: /fperms <Plugin>"

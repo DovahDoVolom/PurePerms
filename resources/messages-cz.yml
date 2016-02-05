@@ -22,10 +22,11 @@ cmds:
       target_already_inherits: "Group %var0% already inherits %var1%." 
   defgroup:
     desc: "Umoznuje nastavit vychozi skupiny."
-    usage: "Pouzij: /defgroup <skupina>"
+    usage: "Pouzij: /defgroup <skupina> [Svet]"
     messages:
       defgroup_successfully: "Vychozi skupina byla uspesne nastavena%var0%."
       group_not_exist: "Skupina %var0% neexistuje."
+      level_not_exist: "Svet %var0% neexistuje."
   fperms:
     desc: "Zobrazi seznam vsech povoleni pro konkretni plugin."
     usage: "Pouziti: /fperms <plugin>"

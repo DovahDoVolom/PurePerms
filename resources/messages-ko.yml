@@ -17,17 +17,18 @@ cmds:
       group_already_exists: "%var0%이라는 이름을 가진 그룹이 이미 존재합니다."
       invalid_group_name: "올바르지 않은 그룹 이름입니다."
   addparent:
-    desc: "Adds a group to another group inheritance list."
-    usage: "Usage: /addparent <target_group> <parent_group>"
+    desc: "선택한 그룹에 새로운 부모 그룹을 추가합니다."
+    usage: "사용법: /addparent <부모 그룹을 추가할 그룹 이름> <부모 그룹>"
     messages:
-      addparent_successfully: "Added %var0% to group %var1%'s inheritance list."	 
-      target_already_inherits: "Group %var0% already inherits %var1%."   
+      addparent_successfully: "이제 그룹 %var1%은 그룹 %var0%의 모든 퍼미션을 상속받습니다."	 
+      target_already_inherits: "그룹 %var1%는 이미 %var0%의 부모 그룹입니다."   
   defgroup:
     desc: "처음 들어온 플레이어가 속하게 될 기본 그룹을 설정합니다."
-    usage: "사용법: /defgroup <그룹 이름>"
+    usage: "사용법: /defgroup <그룹 이름> [월드 이름]"
     messages:
       defgroup_successfully: "기본 그룹이 %var0%로 설정되었습니다."
       group_not_exist: "%var0%이라는 이름을 가진 그룹이 존재하지 않습니다."
+      level_not_exist: "%var0%이라는 이름을 가진 월드가 존재하지 않습니다."
   fperms:
     desc: "특정 플러그인이 가진 모든 퍼미션 목록을 보여줍니다."
     usage: "사용법: /fperms <플러그인 이름>"
@@ -87,10 +88,10 @@ cmds:
       group_not_exist: "%var0%이라는 이름을 가진 그룹이 존재하지 않습니다."
       invalid_group_name: "올바르지 않은 그룹 이름입니다."
   rmparent:
-    desc: "Removes a group from another group inheritance list."
-    usage: "Usage: /rmparent <target_group> <parent_group>"
+    desc: "선택한 그룹에서 부모 그룹을 제거합니다."
+    usage: "사용법: /rmparent <부모 그룹을 제거할 그룹 이름> <부모 그룹>"
     messages:
-      rmparent_successfully: "Removed %var0% from group %var1%'s inheritance list."		  
+      rmparent_successfully: "이제 그룹 %var1%은 더 이상 그룹 %var1%의 퍼미션을 상속받지 않습니다."		  
   setgperm: 
     desc: "그룹에 퍼미션을 추가합니다."
     usage: "사용법: /setgperm <퍼미션을 추가할 그룹> <퍼미션> [월드 이름]"
