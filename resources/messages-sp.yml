@@ -141,7 +141,7 @@ cmds:
       usrinfo_ip: "IP: %var0%"
       usrinfo_uuid: "ID ÚNICA: %var0%"
       usrinfo_group: "GRUPO: %var0%"
-      unknown: "DESCONOSIDO"
+      unknown: "DESCONOCIDO"
 logger_messages:
   getConfigValue_01: "La llave %var0% no ha sido encontrada en config.yml."
   getDefaultGroup_01: "Se ha declarado más de un grupo como 'predeterminado' en el archivo de grupos."

@@ -159,7 +159,7 @@ class PurePerms extends PluginBase
                 $provider = new MySQLProvider($this);
 
                 if($onEnable === true)
-                    $this->getLogger()->info($this->getMessage("logger_messages.setProvider_MySQL"));
+                    $this->getLogger()->notice($this->getMessage("logger_messages.setProvider_MySQL"));
 
                 break;
 
@@ -168,7 +168,7 @@ class PurePerms extends PluginBase
                 $provider = new DefaultProvider($this);
 
                 if($onEnable === true)
-                    $this->getLogger()->info($this->getMessage("logger_messages.setProvider_YAML"));
+                    $this->getLogger()->notice($this->getMessage("logger_messages.setProvider_YAML"));
 
                 break;
 
