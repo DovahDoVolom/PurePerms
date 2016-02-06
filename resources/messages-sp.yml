@@ -3,6 +3,7 @@
 
 # Original Spanish message resource by @JoahDave (GitHub)
 # Fixed "ALMOST EVERYTHING" by @iksaku (GitHub) (Follow me on Twitter: @iksaku2) [Hype! ( ^ω^ )]
+# Fixed Some Errors and Translated some stuff By @TheKillerTacos
 
 ---
 messages-version: "1.3.0-INDEV"
@@ -14,18 +15,18 @@ cmds:
     messages:
       group_added_successfully: "%var0% ha sido añadido a la lista de grupos."
       group_already_exists: "El grupo %var0% ya existe."
-      invalid_group_name: "Invalid Group Name."
+      invalid_group_name: "Nombre de grupo Invalido."
   addparent:
-    desc: "Adds a group to another group inheritance list."
+    desc: "Añade un grupo a otro grupo a la lista de Herencia."
     usage: "Usage: /addparent <target_group> <parent_group>"
     messages:
-      addparent_successfully: "Added %var0% to group %var1%'s inheritance list."	 
-      target_already_inherits: "Group %var0% already inherits %var1%."  	  
+      addparent_successfully: "Añadido %var0% al grupo %var1% a la lista de Herencia."	 
+      target_already_inherits: "Grupo %var0% ya esta en la lista de Herencia %var1%."  	  
   defgroup:
-    desc: "Allows you to set default group."
+    desc: "Permite Poner el grupo Predeterminado."
     usage: "Usage: /defgroup <group> [mundo]"
     messages:
-      defgroup_successfully: "Default group has been successfully set to %var0%."
+      defgroup_successfully: "Grupo Predeterminado a sido cambiado a %var0%."
       group_not_exist: "El grupo %var0% NO existe."
       level_not_exist: "El mundo %var0% NO existe."	  
   fperms:
@@ -67,18 +68,18 @@ cmds:
     desc: "Registers or logs into your Noeul account."
     usage: "Usage: /ppsudo <login / register>"
     messages:
-      already_registered: "This account is already registered."
-      deauth_01: "This server uses Noeul v%var0% to protect your account."
-      deauth_02: "You must authenticate your account first."
-      deauth_03: "Please register or login to your account using /ppsudo command"
-      invalid_sender: "This command should be only used in-game."
-      login_usage: "Usage: /ppsudo login <password>"
-      not_registered: "This account is not registered."
-      password_too_short: "Your password does NOT meet minimum length (%var0%) requirements."
-      register_usage: "Usage: /ppsudo register <password>"
-      successfully_logged_in: "You are now logged in."	 
-      successfully_registered: "Your account has been successfully registered."
-      unregister_usage: "Usage: /ppsudo unregister <password>" 	
+      already_registered: "Esta cuenta ya esta registrada."
+      deauth_01: "El server usa Noeul v%var0% Para proteger tu cuenta."
+      deauth_02: "Debes auntenticar tu cuenta primero"
+      deauth_03: "Porfavor Registrate o logeate a tu acuenta usando /ppsudo command"
+      invalid_sender: "Este Comando solo se puede usar En-Juego."
+      login_usage: "Uso: /ppsudo login <contraseña>"
+      not_registered: "Esta cuenta no esta registrada."
+      password_too_short: "Tu Contraseña no tiene caracteres suficentes de (%var0%) Caracteres."
+      register_usage: "Uso: /ppsudo register <password>"
+      successfully_logged_in: "Ya esta logeado!."	 
+      successfully_registered: "Tu Cuenta a sido Registrada!."
+      unregister_usage: "Uso: /ppsudo unregister <contraseña>" 	
   rmgroup:
     desc: "Elimina un grupo de la lista."
     usage: "Uso: /rmgroup <grupo>"
@@ -102,11 +103,11 @@ cmds:
     desc: "Coloca al usuario en un grupo."
     usage: "Uso: /setgroup <usuario> <grupo> [mundo]"
     messages:
-      access_denied_01: "You don't have permission to set a player's group to %var0%."
-      access_denied_02: "You don't have permission to change group of a player with group %var0%."    
+      access_denied_01: "No tienes permisos para Poner el jugador en el grupo %var0%."
+      access_denied_02: "No tienes permisos para Cambiar el grupo de un jugaro con el grupo %var0%."    
       group_not_exist: "El grupo %var0% NO existe."
       level_not_exist: "El mundo %var0% NO existe."
-      on_player_group_change: "Your group has been changed to a / an %var0%!"
+      on_player_group_change: "Tu Grupo a cambiado a %var0%!"
       setgroup_successfully: "%var0% ha sido añadido al grupo."
   setuperm:
     desc: "Concede un permiso al usuario."
@@ -118,7 +119,7 @@ cmds:
     desc: "Revoca un permiso del grupo."
     usage: "Uso: /unsetgperm <grupo> <permiso> [mundo]"
     messages:
-      gperm_removed_successfully: "Se ha removido el permission %var0% del grupo."
+      gperm_removed_successfully: "Se ha removido el permiso %var0% del grupo."
       group_not_exist: "El grupo %var0% NO existe."
       level_not_exist: "El mundo %var0% NO existe."
   unsetuperm:
@@ -138,9 +139,9 @@ cmds:
       usrinfo_username: "NOMBRE DE USUARIO: %var0%"
       usrinfo_status: "ESTADO: %var0%"
       usrinfo_ip: "IP: %var0%"
-      usrinfo_uuid: "UNIQUE ID: %var0%"
+      usrinfo_uuid: "ID ÚNICA: %var0%"
       usrinfo_group: "GRUPO: %var0%"
-      unknown: "UNKNOWN"
+      unknown: "DESCONOSIDO"
 logger_messages:
   getConfigValue_01: "La llave %var0% no ha sido encontrada en config.yml."
   getDefaultGroup_01: "Se ha declarado más de un grupo como 'predeterminado' en el archivo de grupos."
@@ -151,10 +152,10 @@ logger_messages:
   onEnable_01: "El soporte multi-nivel se encuentra actualmente deshabilitado."
   onEnable_02: "¡No olvides habilitar el soporte multi-nivel (enable-multiworld-perms: true en config.yml) si quieres establecer permisos-por-mundo!"
   onEnable_03: "El soporte multi-nivel ha sido activado."
-  registerPlayer: "Registering player %var0%..."
-  setProvider_MySQL: "Nastavte poskytovatela dat na MySQL."
+  registerPlayer: "Registrando el Usuario %var0%..."
+  setProvider_MySQL: "Nastavte poskytovatela dat na MySQL." #What?
   setProvider_SQLite3: "Utilizando SQLite3 como proveedor."
   setProvider_YAML: "Utilizando YAML como proveedor."
   setProvider_NotFound: "El proveedor %var0% NO existe. Utilizando el proveedor predeterminado."
-  unregisterPlayer: "Unregistering player %var0%..."
+  unregisterPlayer: "DesRegistrando al Jugador %var0%..."
 ...
