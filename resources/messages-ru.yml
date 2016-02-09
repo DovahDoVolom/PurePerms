@@ -39,14 +39,14 @@ cmds:
     messages:
       all_registered_groups: "Все зарегистрированные группы: %var0%"
   grpinfo:
-    desc: "Shows info about a group."
+    desc: "Показывает информацию о группе."
     usage: "Применение: /grpinfo <группа> [мир]"
     messages:
       group_not_exist: "Группа %var0% не существует."
-      grpinfo_header: "-- Group Information for %var0% --" 
+      grpinfo_header: "-- Информация о группе %var0% --" 
       grpinfo_alias: "ALIAS: %var0%"
-      grpinfo_default: "DEFAULT: %var0%" 
-      grpinfo_parents: "PARENTS: %var0%"	  
+      grpinfo_default: "По умолчанию: %var0%" 
+      grpinfo_parents: "Родители: %var0%"	  
       level_not_exist: "Мир %var0% не существует."	  
   listgperms: 
     desc: "Показывает список всех разрешений для группы."
@@ -77,8 +77,8 @@ cmds:
     usage: "Применение: /ppsudo <авторизоваться / регистр>"
     messages:
       messages:
-      already_registered: "This account is already registered."
-      deauth_01: "This server uses Noeul v%var0% to protect your account."
+      already_registered: "Этот аккаунт уже зарегистрирован."
+      deauth_01: "Этот сервер использует Noeul v%var0% для защиты вашего аккаунта."
       deauth_02: "You must authenticate your account first."
       deauth_03: "Please register or login to your account using /ppsudo command"
       invalid_sender: "This command should be only used in-game."
