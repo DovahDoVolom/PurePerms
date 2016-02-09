@@ -51,17 +51,15 @@ class Groups extends Command implements PluginIdentifiableCommand
     {
         if(!$this->testPermission($sender))
             return false;
-        
-        $result = "";
-        
+
+        $result = [];
+
         foreach($this->plugin->getGroups() as $group)
         {
-            $result .= $group->getName() . ", ";
+            $result[] = $group->getName();
         }
         
-        $result = substr($result, 0, -2);
-        
-        $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.groups.messages.all_registered_groups", $result));
+        $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.groups.messages.all_registered_groups", implode(", ", $result)));
         
         return true;
     }

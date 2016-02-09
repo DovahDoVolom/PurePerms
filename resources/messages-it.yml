@@ -38,6 +38,16 @@ cmds:
     desc: "Mostra una lista dei gruppi."
     messages:
       all_registered_groups: "Tutti i gruppi registrati: %var0%"
+  grpinfo:
+    desc: "Shows info about a group."
+    usage: "Sintassi: /grpinfo <gruppo> [mondo]"
+    messages:
+      group_not_exist: "Il gruppo %var0% non esiste."
+      grpinfo_header: "-- Group Information for %var0% --" 
+      grpinfo_alias: "ALIAS: %var0%"
+      grpinfo_default: "DEFAULT: %var0%" 
+      grpinfo_parents: "PARENTS: %var0%"	  
+      level_not_exist: "Il mondo %var0% non esiste."
   listgperms: 
     desc: "Mostra una lista di tutti i permessi di un gruppo."
     usage: "Sintassi: /listgperms <gruppo> <pagina> [mondo]"
@@ -147,9 +157,9 @@ logger_messages:
   getDefaultGroup_03: "Impostando automaticamente il gruppo predefinito."
   getGroup_01: "Il gruppo %var0% non è stato trovato."
   getGroup_02: "Il gruppo %var0% ha dati non validi o corrotti."
-  onEnable_01: "Il supporto multimondo è disabilitato."
-  onEnable_02: "Non dimenticare di impostare nel config.yml l'opzione enable-multiworld-perms in true se vuoi usare i permessi specifici per ogni mondo!"
-  onEnable_03: "Il supporto multimondo è abilitato."
+  onLoad_01: "Il supporto multimondo è disabilitato."
+  onLoad_02: "Non dimenticare di impostare nel config.yml l'opzione enable-multiworld-perms in true se vuoi usare i permessi specifici per ogni mondo!"
+  onLoad_03: "Il supporto multimondo è abilitato."
   registerPlayer: "Registrando giocatore %var0%..."
   setProvider_SQLite3: "Il fornitore dati impostato è SQLite3."
   setProvider_YAML: "Il fornitore dati impostato è YAML."

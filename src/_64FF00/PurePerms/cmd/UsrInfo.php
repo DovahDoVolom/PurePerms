@@ -78,11 +78,10 @@ class UsrInfo extends Command implements PluginIdentifiableCommand
             
             $levelName = $level->getName();
         }
-        
-        $status = $player instanceof Player ? TextFormat::GREEN . $this->plugin->getMessage("cmds.usrinfo.messages.status_online") : TextFormat::RED . $this->plugin->getMessage("cmds.usrinfo.messages.status_offline");
-        
+
         $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.usrinfo.messages.usrinfo_header", $player->getName()));
 
+        $status = $player instanceof Player ? TextFormat::DARK_GREEN . $this->plugin->getMessage("cmds.usrinfo.messages.status_online") : TextFormat::RED . $this->plugin->getMessage("cmds.usrinfo.messages.status_offline");
         $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.usrinfo.messages.usrinfo_status", $status));
 
         $ip = $player instanceof Player ? TextFormat::DARK_GREEN . $player->getAddress() : TextFormat::RED . $this->plugin->getMessage("cmds.usrinfo.messages.unknown");

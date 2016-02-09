@@ -95,7 +95,7 @@ class MySQLProvider implements ProviderInterface
             "permissions" => []
         ];
 
-        $result01 = $this->db->query("SELECT * FROM players;");
+        $result01 = $this->db->query("SELECT * FROM players WHERE userName = '" .  $this->db->escape_string($player->getName()) . "';");
 
         if($result01 instanceof \mysqli_result)
         {
@@ -108,7 +108,7 @@ class MySQLProvider implements ProviderInterface
             $result01->free();
         }
 
-        $result02 = $this->db->query("SELECT * FROM players_mw;");
+        $result02 = $this->db->query("SELECT * FROM players_mw WHERE userName = '" .  $this->db->escape_string($player->getName()) . "';");
 
         if($result02 instanceof \mysqli_result)
         {
@@ -144,7 +144,8 @@ class MySQLProvider implements ProviderInterface
             {
                 $groupName = $currentRow["groupName"];
 
-                $this->groupsData[$groupName]["isDefault"] = $currentRow["isDefault"];
+                $this->groupsData[$groupName]["alias"] = $currentRow["alias"];
+                $this->groupsData[$groupName]["isDefault"] = $currentRow["isDefault"] === "1" ? true : false;
                 $this->groupsData[$groupName]["inheritance"] = $currentRow["inheritance"] !== "" ? explode(",", $currentRow["inheritance"]) : [];
                 $this->groupsData[$groupName]["permissions"] = explode(",", $currentRow["permissions"]);
             }
@@ -158,13 +159,11 @@ class MySQLProvider implements ProviderInterface
         {
             while($currentRow = $result02->fetch_assoc())
             {
-                $alias = $currentRow["alias"];
-                $isDefault = $currentRow["isDefault"];
+                $isDefault = $currentRow["isDefault"] === "1" ? true : false;
                 $groupName = $currentRow["groupName"];
                 $worldName = $currentRow["worldName"];
                 $worldPerms = explode(",", $currentRow["permissions"]);
 
-                $this->groupsData[$groupName]["worlds"][$worldName]["alias"] = $alias;
                 $this->groupsData[$groupName]["worlds"][$worldName]["isDefault"] = $isDefault;
                 $this->groupsData[$groupName]["worlds"][$worldName]["permissions"] = $worldPerms;
             }
@@ -180,11 +179,11 @@ class MySQLProvider implements ProviderInterface
     {
          $this->db->query("
             DELETE FROM groups
-            WHERE groupName = " . $this->db->escape_string($groupName) . ";");
+            WHERE groupName = '" . $this->db->escape_string($groupName) . "';");
 
         $this->db->query("
             DELETE OR IGNORE FROM groups_mw
-            WHERE groupName = " . $this->db->escape_string($groupName) . ";");
+            WHERE groupName = '" . $this->db->escape_string($groupName) . "';");
     }
 
 
@@ -237,7 +236,6 @@ class MySQLProvider implements ProviderInterface
                 VALUES
                 ('" . $this->db->escape_string($userName) . "', '" . $this->db->escape_string($userGroup) . "', '" . $this->db->escape_string($permissions) . "')
                 ON DUPLICATE KEY UPDATE
-                userName = VALUES(userName),
                 userGroup = VALUES(userGroup),
                 permissions = VALUES(permissions);");
 
@@ -248,14 +246,14 @@ class MySQLProvider implements ProviderInterface
                     $worldGroup = $worldData["group"];
                     $worldPerms = implode(",", $worldData["permissions"]);
 
-                    if(is_array($worldPerms))
+                    if(!is_array($worldPerms))
                     {
                         $this->db->query("INSERT INTO players_mw
                             (userName, worldName, userGroup, permissions)
                             VALUES
                             ('" . $this->db->escape_string($userName) . "', '" . $this->db->escape_string($worldName) . "', '" . $this->db->escape_string($worldGroup) . "', '" . $this->db->escape_string($worldPerms) . "')
                             ON DUPLICATE KEY UPDATE
-                            worldName = VALUES(worldName),
+                            userGroup = VALUES(userGroup),
                             permissions = VALUES(permissions);");
                     }
                 }
@@ -272,7 +270,7 @@ class MySQLProvider implements ProviderInterface
         if(isset($tempGroupData["isDefault"]) and isset($tempGroupData["inheritance"]) and isset($tempGroupData["permissions"]))
         {
             $alias = $tempGroupData["alias"];
-            $isDefault = $tempGroupData["isDefault"];
+            $isDefault = $tempGroupData["isDefault"] === true ? "1" : "0";
             $inheritance = implode(",", $tempGroupData["inheritance"]);
             $permissions = implode(",", $tempGroupData["permissions"]);
 
@@ -290,18 +288,16 @@ class MySQLProvider implements ProviderInterface
             {
                 foreach($tempGroupData["worlds"] as $worldName => $worldData)
                 {
-                    $alias = $worldData["alias"];
-                    $isDefault = $worldData["isDefault"];
+                    $isDefault = $worldData["isDefault"]  === true ? "1" : "0";
                     $worldPerms = implode(",", $worldData["permissions"]);
 
-                    if(is_array($worldPerms))
+                    if(!is_array($worldPerms))
                     {
                         $this->db->query("INSERT INTO groups_mw
-                            (groupName, alias, isDefault, worldName, permissions)
+                            (groupName, isDefault, worldName, permissions)
                             VALUES
-                            ('" . $this->db->escape_string($groupName) . "', '" . $this->db->escape_string($alias) . "', '" . $this->db->escape_string($isDefault) . "', '" . $this->db->escape_string($worldName) . "', '" . $this->db->escape_string($worldPerms) . "')
+                            ('" . $this->db->escape_string($groupName) . "', '" . $this->db->escape_string($isDefault) . "', '" . $this->db->escape_string($worldName) . "', '" . $this->db->escape_string($worldPerms) . "')
                             ON DUPLICATE KEY UPDATE
-                            alias = VALUES(alias),
                             isDefault = VALUES(isDefault),
                             worldName = VALUES(worldName),
                             permissions = VALUES(permissions);");

@@ -38,6 +38,16 @@ cmds:
     desc: "Var olan grupları listeler."
     messages:
       all_registered_groups: "Var olan gruplar: %var0%"
+  grpinfo:
+    desc: "Shows info about a group."
+    usage: "Usage: /grpinfo <grup> [dünya]"
+    messages:
+      group_not_exist: "%var0% adında bir grup yok."
+      grpinfo_header: "-- Group Information for %var0% --" 
+      grpinfo_alias: "ALIAS: %var0%"
+      grpinfo_default: "DEFAULT: %var0%" 
+      grpinfo_parents: "PARENTS: %var0%"	  
+      level_not_exist: "%var0% adında bir dünya bulunmamakta."  
   listgperms: 
     desc: "Bir grubun bütün yetkilerini listeler."
     usage: "Kullanış: /listgperms <grup> <sayfa> [dünya]"
@@ -147,9 +157,9 @@ logger_messages:
   getDefaultGroup_03: "Varsayılan grup otomatik ayarlandı."
   getGroup_01: "%var0% adlı grup bulunamadı."
   getGroup_02: "%var0% geçersiz veya bozuk veri içeriyor."
-  onEnable_01: "Multiworld desteği devre dışı."
-  onEnable_02: "enable-multiworld-perms seçeneğini config.yml dosyasında per-world yetkisini kullanmak için aktif etmeyi unutmayınız!"
-  onEnable_03: "Multiworld desteği etkin."
+  onLoad_01: "Multiworld desteği devre dışı."
+  onLoad_02: "enable-multiworld-perms seçeneğini config.yml dosyasında per-world yetkisini kullanmak için aktif etmeyi unutmayınız!"
+  onLoad_03: "Multiworld desteği etkin."
   registerPlayer: "%var0% oyuncusu kayda geçirildi..."
   setProvider_MySQL: "Veri sağlayıcısı MySQL ayarlandı."
   setProvider_SQLite3: "Veri sağlayıcısı SQLite3 ayarlandı."

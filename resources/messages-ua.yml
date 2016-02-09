@@ -38,6 +38,16 @@ cmds:
     desc: "Показує список всіх груп."
     messages:
       all_registered_groups: "Всі зарєстровані групи: %var0%"
+  grpinfo:
+    desc: "Shows info about a group."
+    usage: "Приклад: /grpinfo <група> [світ]"
+    messages:
+      group_not_exist: "Група %var0% не існує."
+      grpinfo_header: "-- Group Information for %var0% --" 
+      grpinfo_alias: "ALIAS: %var0%"
+      grpinfo_default: "DEFAULT: %var0%" 
+      grpinfo_parents: "PARENTS: %var0%"	  
+      level_not_exist: "Світ %var0% не існує."	  
   listgperms: 
     desc: "Показує список всіх дозволів для групи."
     usage: "Приклад: /listgperms <група> <сторінка> [світ]"
@@ -147,9 +157,9 @@ logger_messages:
   getDefaultGroup_03: "Група з параметром Default позначається автоматично."
   getGroup_01: "Група %var0% не знайдена."
   getGroup_02: "Група %var0% має неправильні чи пошкоджені дані."
-  onEnable_01: "Підтримка декількох світів зараз вимкнена."
-  onEnable_02: "Не забудьте встановити для параметру enable-multiworld-perms в файлі config.yml значення true, якщо хочете змінити різні дозволи в різних світах!"
-  onEnable_03: "Поддержка декількох світів увімкнена."
+  onLoad_01: "Підтримка декількох світів зараз вимкнена."
+  onLoad_02: "Не забудьте встановити для параметру enable-multiworld-perms в файлі config.yml значення true, якщо хочете змінити різні дозволи в різних світах!"
+  onLoad_03: "Поддержка декількох світів увімкнена."
   registerPlayer: "Реєстрація гравця %var0%..."
   setProvider_MySQL: "Тип сховища даних - MySQL."
   setProvider_SQLite3: "Тип сховища даних  - SQLite3."

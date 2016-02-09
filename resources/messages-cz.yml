@@ -38,6 +38,16 @@ cmds:
     desc: "Ukazat list vsech skupin."
     messages:
       all_registered_groups: "Vsechny registrovane skupiny: %var0%"
+  grpinfo:
+    desc: "Shows info about a group."
+    usage: "Usage: /grpinfo <skupina> [Svet]"
+    messages:
+      group_not_exist: "Skupina %var0% neexistuje."
+      grpinfo_header: "-- Group Information for %var0% --" 
+      grpinfo_alias: "ALIAS: %var0%"
+      grpinfo_default: "DEFAULT: %var0%" 
+      grpinfo_parents: "PARENTS: %var0%"	  
+      level_not_exist: "Svet %var0% neexistuje."  
   listgperms: 
     desc: "Ukazat seznam vsech prav pro skupiny."
     usage: "Pouzij: /listgperms <skupina> <strana> [Svet]"
@@ -147,9 +157,9 @@ logger_messages:
   getDefaultGroup_03: "Automaticke nastavovani vychozi skupiny."
   getGroup_01: "Skupina %var0% nenalezena"
   getGroup_02: "Skupina %var0% ma neplatna nebo poskozena data"
-  onEnable_01: "Podpora MultiSveta je v soucasne dobe zakazana."
-  onEnable_02: "Nezapomente nastavit moznost enable-multiworld-perms v config.yml na true jestli chcete pouzit MultiSvet opravneni!"
-  onEnable_03: "Podpora Multisveta povolena."
+  onLoad_01: "Podpora MultiSveta je v soucasne dobe zakazana."
+  onLoad_02: "Nezapomente nastavit moznost enable-multiworld-perms v config.yml na true jestli chcete pouzit MultiSvet opravneni!"
+  onLoad_03: "Podpora Multisveta povolena."
   registerPlayer: "Registering player %var0%..."
   setProvider_MySQL: "Nastavte poskytovatele dat do MySQL."
   setProvider_SQLite3: "Nastavte poskytovatele dat na vychozi SQLite3."

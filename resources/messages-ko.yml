@@ -39,7 +39,17 @@ cmds:
   groups:
     desc: "모든 그룹 목록을 보여줍니다."
     messages:
-      all_registered_groups: "모든 그룹들: %var0%"
+      all_registered_groups: "모든 그룹: %var0%"
+  grpinfo:
+    desc: "그룹 정보를 보여줍니다. (별칭, 부모 그룹 등)"
+    usage: "사용법: /grpinfo <정보를 볼 그룹> [월드 이름]"
+    messages:
+      group_not_exist: "%var0%이라는 이름을 가진 그룹이 존재하지 않습니다."
+      grpinfo_header: "-- %var0%의 그룹 정보 --" 
+      grpinfo_alias: "별칭: %var0%"
+      grpinfo_default: "디폴트 그룹인가요: %var0%" 
+      grpinfo_parents: "부모 그룹: %var0%"	  
+      level_not_exist: "%var0%이라는 이름을 가진 월드가 존재하지 않습니다."  
   listgperms: 
     desc: "그룹의 모든 퍼미션들을 보여줍니다."
     usage: "사용법: /listgperms <퍼미션을 볼 그룹> <페이지> [월드 이름]"
@@ -134,7 +144,7 @@ cmds:
     messages:
       status_online: "온라인입니다! :D"
       status_offline: "오프라인이네요 :'("
-      usrinfo_header: "<--- %var0%의 플레이어 정보 --->"
+      usrinfo_header: "-- %var0%의 플레이어 정보 --"
       usrinfo_username: "플레이어 이름: %var0%"
       usrinfo_status: "접속 상태: %var0%"
       usrinfo_ip: "아이피: %var0%"
@@ -148,9 +158,9 @@ logger_messages:
   getDefaultGroup_03: "기본 그룹을 자동으로 설정하는 중입니다..."
   getGroup_01: "그룹 %var0%를 찾을 수 없습니다."
   getGroup_02: "그룹 %var0%가 잘못되었거나 손상된 데이터를 포함하고 있습니다."
-  onEnable_01: "다중 월드 지원 기능은 현재 비활성화되어 있습니다."
-  onEnable_02: "다중 월드 지원 기능을 사용하시려면 반드시 config.yml에서 enable-multiworld-perms 옵션을 true로 설정해주세요."
-  onEnable_03: "다중 월드 지원 기능이 활성화되었습니다."
+  onLoad_01: "다중 월드 지원 기능은 현재 비활성화되어 있습니다."
+  onLoad_02: "다중 월드 지원 기능을 사용하시려면 반드시 config.yml에서 enable-multiworld-perms 옵션을 true로 설정해주세요."
+  onLoad_03: "다중 월드 지원 기능이 활성화되었습니다."
   registerPlayer: "플레이어 %var0% 등록 중..."
   setProvider_MySQL: "MySQL 형식으로 데이터가 저장됩니다."
   setProvider_SQLite3: "SQLite3 형식으로 데이터가 저장됩니다."

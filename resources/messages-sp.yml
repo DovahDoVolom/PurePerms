@@ -40,6 +40,16 @@ cmds:
     desc: "Muestra la lista de todos los grupos disponibles."
     messages:
       all_registered_groups: "Grupos registrados: %var0%"
+  grpinfo:
+    desc: "Shows info about a group."
+    usage: "Uso: /grpinfo <grupo> [mundo]"
+    messages:
+      group_not_exist: "El grupo %var0% NO existe."
+      grpinfo_header: "-- Group Information for %var0% --" 
+      grpinfo_alias: "ALIAS: %var0%"
+      grpinfo_default: "DEFAULT: %var0%" 
+      grpinfo_parents: "PARENTS: %var0%"	  
+      level_not_exist: "El mundo %var0% NO existe."	  
   listgperms:
     desc: "Muestra una lista con todos los permisos de un grupo."
     usage: "Uso: /listgperms <grupo> <página> [mundo]"
@@ -149,9 +159,9 @@ logger_messages:
   getDefaultGroup_03: "Estableciendo automáticamente el grupo 'predeterminado'."
   getGroup_01: "No se ha encontrado el grupo %var0%"
   getGroup_02: "El grupo %var0% contiene información inválida o corrupta"
-  onEnable_01: "El soporte multi-nivel se encuentra actualmente deshabilitado."
-  onEnable_02: "¡No olvides habilitar el soporte multi-nivel (enable-multiworld-perms: true en config.yml) si quieres establecer permisos-por-mundo!"
-  onEnable_03: "El soporte multi-nivel ha sido activado."
+  onLoad_01: "El soporte multi-nivel se encuentra actualmente deshabilitado."
+  onLoad_02: "¡No olvides habilitar el soporte multi-nivel (enable-multiworld-perms: true en config.yml) si quieres establecer permisos-por-mundo!"
+  onLoad_03: "El soporte multi-nivel ha sido activado."
   registerPlayer: "Registrando el Usuario %var0%..."
   setProvider_MySQL: "Nastavte poskytovatela dat na MySQL." #What?
   setProvider_SQLite3: "Utilizando SQLite3 como proveedor."

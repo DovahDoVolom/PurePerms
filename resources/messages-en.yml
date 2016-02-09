@@ -36,6 +36,16 @@ cmds:
     desc: "Shows a list of all groups."
     messages:
       all_registered_groups: "All registered groups: %var0%"
+  grpinfo:
+    desc: "Shows info about a group."
+    usage: "Usage: /grpinfo <group> [world]"
+    messages:
+      group_not_exist: "Group %var0% does NOT exist."
+      grpinfo_header: "-- Group Information for %var0% --" 
+      grpinfo_alias: "ALIAS: %var0%"
+      grpinfo_default: "DEFAULT: %var0%" 
+      grpinfo_parents: "PARENTS: %var0%"	  
+      level_not_exist: "World %var0% does NOT exist."
   listgperms: 
     desc: "Shows a list of all permissions from a group."
     usage: "Usage: /listgperms <group> <page> [world]"
@@ -143,11 +153,11 @@ logger_messages:
   getDefaultGroup_01: "More than one default group was declared in the groups file."
   getDefaultGroup_02: "No default group was found in the groups file."
   getDefaultGroup_03: "Setting the default group automatically."
-  getGroup_01: "Group %var0% not found"
-  getGroup_02: "Group %var0% has invalid or corrupted data"
-  onEnable_01: "Multiworld support is currently disabled."
-  onEnable_02: "Don't forget to set enable-multiworld-perms option in config.yml to true if you want to use per-world permissions!"
-  onEnable_03: "Multiworld support enabled."
+  getGroup_01: "Group %var0% not found."
+  getGroup_02: "Group %var0% has invalid or corrupted data."
+  onLoad_01: "Multiworld support is currently disabled."
+  onLoad_02: "Don't forget to set enable-multiworld-perms option in config.yml to true if you want to use per-world permissions!"
+  onLoad_03: "Multiworld support enabled."
   registerPlayer: "Registering player %var0%..."
   setProvider_MySQL: "Set data provider to MySQL."
   setProvider_SQLite3: "Set data provider to SQLite3."

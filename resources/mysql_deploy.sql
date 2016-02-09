@@ -13,7 +13,7 @@
 
 CREATE TABLE IF NOT EXISTS groups(
   groupName VARCHAR(64) PRIMARY KEY NOT NULL,
-  alias VARCHAR(32) NOT NULL,
+  alias VARCHAR(32) DEFAULT '' NOT NULL,
   isDefault BOOLEAN DEFAULT 0 NOT NULL,
   inheritance TEXT NOT NULL,
   permissions TEXT NOT NULL
@@ -26,7 +26,6 @@ INSERT IGNORE INTO groups (groupName, alias, isDefault, inheritance, permissions
 
 CREATE TABLE IF NOT EXISTS groups_mw(
   groupName VARCHAR(64) PRIMARY KEY NOT NULL,
-  alias VARCHAR(32) DEFAULT '' NOT NULL,
   isDefault BOOLEAN DEFAULT 0 NOT NULL,
   worldName TEXT NOT NULL,
   permissions TEXT NOT NULL

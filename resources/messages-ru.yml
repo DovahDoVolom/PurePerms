@@ -38,6 +38,16 @@ cmds:
     desc: "Показывает список всех групп."
     messages:
       all_registered_groups: "Все зарегистрированные группы: %var0%"
+  grpinfo:
+    desc: "Shows info about a group."
+    usage: "Применение: /grpinfo <группа> [мир]"
+    messages:
+      group_not_exist: "Группа %var0% не существует."
+      grpinfo_header: "-- Group Information for %var0% --" 
+      grpinfo_alias: "ALIAS: %var0%"
+      grpinfo_default: "DEFAULT: %var0%" 
+      grpinfo_parents: "PARENTS: %var0%"	  
+      level_not_exist: "Мир %var0% не существует."	  
   listgperms: 
     desc: "Показывает список всех разрешений для группы."
     usage: "Применение: /listgperms <группа> <страница> [мир]"
@@ -148,9 +158,9 @@ logger_messages:
   getDefaultGroup_03: "Группа с параметром Default назначается автоматически."
   getGroup_01: "Группа %var0% не найдена."
   getGroup_02: "Группа %var0% имеет неправильные или поврежденные данные."
-  onEnable_01: "Поддержка мульти миров в настоящее время отключена."
-  onEnable_02: "Не забудьте установить для параметра enable-multiworld-perms в файле config.yml значение true, если хотите иметь разные разрешения в различных мирах!"
-  onEnable_03: "Поддержка мульти миров включена."
+  onLoad_01: "Поддержка мульти миров в настоящее время отключена."
+  onLoad_02: "Не забудьте установить для параметра enable-multiworld-perms в файле config.yml значение true, если хотите иметь разные разрешения в различных мирах!"
+  onLoad_03: "Поддержка мульти миров включена."
   registerPlayer: "Регистрация игрока %var0%..."
   setProvider_MySQL: "Тип хранилища данных - MySQL."
   setProvider_SQLite3: "Тип хранилища данных  - SQLite3."

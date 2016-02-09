@@ -7,6 +7,7 @@ use _64FF00\PurePerms\cmd\AddParent;
 use _64FF00\PurePerms\cmd\DefGroup;
 use _64FF00\PurePerms\cmd\FPerms;
 use _64FF00\PurePerms\cmd\Groups;
+use _64FF00\PurePerms\cmd\GrpInfo;
 use _64FF00\PurePerms\cmd\ListGPerms;
 use _64FF00\PurePerms\cmd\ListUPerms;
 use _64FF00\PurePerms\cmd\PPInfo;
@@ -80,6 +81,9 @@ class PurePerms extends PluginBase
 
     public function onLoad()
     {
+        $this->getServer()->getLogger()->notice(base64_decode('UHVyZVBlcm1zIGJ5IDY0RkYwMCAoVHdpdHRlcjogQDY0RkYwMCkKCiAgODg4ICA4ODggICAgLmQ4ODg4Yi4gICAgICBkODg4OCAgODg4ODg4ODg4OCA4ODg4ODg4ODg4IC5kODg4OGIuICAgLmQ4ODg4Yi4gCiAgODg4ICA4ODggICBkODhQICBZODhiICAgIGQ4UDg4OCAgODg4ICAgICAgICA4ODggICAgICAgZDg4UCAgWTg4YiBkODhQICBZODhiCjg4ODg4ODg4ODg4OCA4ODggICAgICAgICAgZDhQIDg4OCAgODg4ICAgICAgICA4ODggICAgICAgODg4ICAgIDg4OCA4ODggICAgODg4CiAgODg4ICA4ODggICA4ODhkODg4Yi4gICBkOFAgIDg4OCAgODg4ODg4OCAgICA4ODg4ODg4ICAgODg4ICAgIDg4OCA4ODggICAgODg4CiAgODg4ICA4ODggICA4ODhQICJZODhiIGQ4OCAgIDg4OCAgODg4ICAgICAgICA4ODggICAgICAgODg4ICAgIDg4OCA4ODggICAgODg4Cjg4ODg4ODg4ODg4OCA4ODggICAgODg4IDg4ODg4ODg4ODggODg4ICAgICAgICA4ODggICAgICAgODg4ICAgIDg4OCA4ODggICAgODg4CiAgODg4ICA4ODggICBZODhiICBkODhQICAgICAgIDg4OCAgODg4ICAgICAgICA4ODggICAgICAgWTg4YiAgZDg4UCBZODhiICBkODhQCiAgODg4ICA4ODggICAgIlk4ODg4UCIgICAgICAgIDg4OCAgODg4ICAgICAgICA4ODggICAgICAgICJZODg4OFAiICAgIlk4ODg4UCIgCg==['));
+
+        // TODO: Hmm...
         $this->saveDefaultConfig();
 
         $this->messages = new PPMessages($this);
@@ -90,12 +94,12 @@ class PurePerms extends PluginBase
 
         if($this->getConfigValue("enable-multiworld-perms") === false)
         {
-            $this->getLogger()->notice($this->getMessage("logger_messages.onEnable_01"));
-            $this->getLogger()->notice($this->getMessage("logger_messages.onEnable_02"));
+            $this->getLogger()->notice($this->getMessage("logger_messages.onLoad_01"));
+            $this->getLogger()->notice($this->getMessage("logger_messages.onLoad_02"));
         }
         else
         {
-            $this->getLogger()->notice($this->getMessage("logger_messages.onEnable_03"));
+            $this->getLogger()->notice($this->getMessage("logger_messages.onLoad_03"));
         }
     }
     
@@ -130,6 +134,7 @@ class PurePerms extends PluginBase
         $commandMap->register("defgroup", new DefGroup($this, "defgroup", $this->getMessage("cmds.defgroup.desc") . ' #64FF00'));
         $commandMap->register("fperms", new FPerms($this, "fperms", $this->getMessage("cmds.fperms.desc") . ' #64FF00'));
         $commandMap->register("groups", new Groups($this, "groups", $this->getMessage("cmds.groups.desc") . ' #64FF00'));
+        $commandMap->register("grpinfo", new GrpInfo($this, "grpinfo", $this->getMessage("cmds.grpinfo.desc") . ' #64FF00'));
         $commandMap->register("listgperms", new ListGPerms($this, "listgperms", $this->getMessage("cmds.listgperms.desc") . ' #64FF00'));
         $commandMap->register("listuperms", new ListUPerms($this, "listuperms", $this->getMessage("cmds.listuperms.desc") . ' #64FF00'));
         $commandMap->register("ppinfo", new PPInfo($this, "ppinfo", $this->getMessage("cmds.ppinfo.desc") . ' #64FF00'));

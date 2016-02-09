@@ -35,6 +35,16 @@ cmds:
     desc: "Menampilkan datar dari semua grup. #64FF00"
     messages:
       all_registered_groups: "Grup yang telah terdaftar: %var0%"
+  grpinfo:
+    desc: "Shows info about a group."
+    usage: "Command: /grpinfo <group> [world]"
+    messages:
+      group_not_exist: "Grup %var0% tidak ada."
+      grpinfo_header: "-- Group Information for %var0% --" 
+      grpinfo_alias: "ALIAS: %var0%"
+      grpinfo_default: "DEFAULT: %var0%" 
+      grpinfo_parents: "PARENTS: %var0%"	  
+      level_not_exist: "World %var0% tidak ada."
   listgperms: 
     desc: "Menampilkan semua permission dari grup. #64FF00"
     usage: "Command: /listgperms <group> <page> [world]"
@@ -145,10 +155,9 @@ logger_messages:
   getDefaultGroup_03: "Menset grup normal otomatis."
   getGroup_01: "Grup %var0% tidak ada"
   getGroup_02: "Grup %var0% error atau data korup"
-  onEnable_01: "Akses Multiworld tidak aktif."
-  onEnable_02: "Don't forget to set enable-multiworld-perms option in config.yml to true if you want to use per-world permissions!"
-  onEnable_02: "Jangan lupa set enable-multiworld-perms di config.yml ke true jika kamu ingin memakai per-multiworld-perms !"
-  onEnable_03: "Akses Multiworld diaktifkan."
+  onLoad_01: "Akses Multiworld tidak aktif."
+  onLoad_02: "Jangan lupa set enable-multiworld-perms di config.yml ke true jika kamu ingin memakai per-multiworld-perms !"
+  onLoad_03: "Akses Multiworld diaktifkan."
   registerPlayer: "Mendaftarkan Pemain %var0%..."
   setProvider_MySQL: "Set data provider ke MySQL."
   setProvider_SQLite3: "Set data provider ke SQLite3."
