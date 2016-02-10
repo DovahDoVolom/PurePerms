@@ -2,13 +2,12 @@
 
 namespace _64FF00\PurePerms\cmd;
 
+use _64FF00\PurePerms\PPGroup;
 use _64FF00\PurePerms\PurePerms;
 
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\command\PluginIdentifiableCommand;
-
-use pocketmine\Player;
 
 use pocketmine\utils\TextFormat;
 
@@ -94,12 +93,18 @@ class GrpInfo extends Command implements PluginIdentifiableCommand
         $isDefault = $group->isDefault($levelName) ? TextFormat::DARK_GREEN . "YES" : TextFormat::RED . "NO";
         $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.grpinfo.messages.grpinfo_default", $isDefault));
 
-        $parents = TextFormat::DARK_GREEN . "...";
+        $result = TextFormat::DARK_GREEN . "...";
+
+        /** @var PPGroup $tempGroup */
+        foreach($group->getParentGroups() as $tempGroup)
+        {
+            $parents[] = $tempGroup->getName();
+        }
 
         if(!empty($group->getParentGroups()))
-            $parents = TextFormat::DARK_GREEN . implode(",", $group->getParentGroups());
+            $result = TextFormat::DARK_GREEN . implode(",", $parents);
 
-        $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.grpinfo.messages.grpinfo_parents", $parents));
+        $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.grpinfo.messages.grpinfo_parents", $result));
 
         return true;
     }
