@@ -4,7 +4,7 @@
 # Russian language resource by @0-Eclipse-0, @vvzar, @Pub4Game and @seetch
 
 ---
-messages-version: "1.2.3"
+messages-version: "1.3.0-INDEV"
 language: "ru"
 cmds:
   addgroup:

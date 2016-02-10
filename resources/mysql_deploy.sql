@@ -12,7 +12,8 @@
 */
 
 CREATE TABLE IF NOT EXISTS groups(
-  groupName VARCHAR(64) PRIMARY KEY NOT NULL,
+  id INT(16) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  groupName VARCHAR(64) NOT NULL,
   alias VARCHAR(32) DEFAULT '' NOT NULL,
   isDefault BOOLEAN DEFAULT 0 NOT NULL,
   inheritance TEXT NOT NULL,
@@ -25,20 +26,23 @@ INSERT IGNORE INTO groups (groupName, alias, isDefault, inheritance, permissions
 INSERT IGNORE INTO groups (groupName, alias, isDefault, inheritance, permissions) VALUES ('OP', 'op', 0, '', '*');
 
 CREATE TABLE IF NOT EXISTS groups_mw(
-  groupName VARCHAR(64) PRIMARY KEY NOT NULL,
+  id INT(16) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  groupName VARCHAR(64) NOT NULL,
   isDefault BOOLEAN DEFAULT 0 NOT NULL,
   worldName TEXT NOT NULL,
   permissions TEXT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS players(
-  userName VARCHAR(16) PRIMARY KEY NOT NULL,
+  id INT(16) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  userName VARCHAR(16) NOT NULL,
   userGroup VARCHAR(32) NOT NULL,
   permissions TEXT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS players_mw(
-  userName VARCHAR(16) PRIMARY KEY NOT NULL,
+  id INT(16) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  userName VARCHAR(16) NOT NULL,
   worldName TEXT NOT NULL,
   userGroup VARCHAR(32) NOT NULL,
   permissions TEXT NOT NULL
