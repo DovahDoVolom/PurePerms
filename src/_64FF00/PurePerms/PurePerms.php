@@ -483,7 +483,7 @@ class PurePerms extends PluginBase
             return $uuid->toString();
 
         // Heheheh...
-        $this->getLogger()->warning("Why did you give me an invalid unique id? *cries* (userName: " . $player->getName() . ", isConnected: " . $player->isConnected() . ", isOnline: " . $player->isOnline() . ", isValid: " . $player->isValid() .  ")");
+        $this->getLogger()->warning("Why did you give me an invalid unique id? *cries* (userName: " . $player->getName() . ", isConnected: " . ($player->isConnected() ? "true" : "false") . ", isOnline: " . ($player->isOnline() ? "true" : "false") . ", isValid: " . ($player->isValid() ? "true" : "false") .  ")");
 
         return null;
     }
