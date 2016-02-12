@@ -295,19 +295,17 @@ class PurePerms extends PluginBase
             elseif(count($defaultGroups) <= 0)
             {
                 $this->getLogger()->warning($this->getMessage("logger_messages.getDefaultGroup_02"));
-
-                $defaultGroups = $this->getGroups();
             }
 
             $this->getLogger()->info($this->getMessage("logger_messages.getDefaultGroup_03"));
 
-            foreach($defaultGroups as $defaultGroup)
+            foreach($this->getGroups() as $tempGroup)
             {
-                if(count($defaultGroup->getParentGroups()) === 0)
+                if(count($tempGroup->getParentGroups()) === 0)
                 {
-                    $this->setDefaultGroup($defaultGroup, $levelName);
+                    $this->setDefaultGroup($tempGroup, $levelName);
 
-                    return $defaultGroup;
+                    return $tempGroup;
                 }
             }
         }

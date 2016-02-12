@@ -4,7 +4,7 @@
 # Turkish messages resource by @PainTR (GitHub)
 
 ---
-messages-version: "1.3.0-INDEV"
+messages-version: "1.3.1"
 language: "tr"
 cmds:
   addgroup:
@@ -166,4 +166,5 @@ logger_messages:
   setProvider_YAML: "Veri sağlayıcısı YAML ayarlandı."
   setProvider_NotFound: "%var0% sağlayıcısı mevcut değil. Varsayılan veri sağlayıcısına değiştiriliyor."
   unregisterPlayer: "%var0% adlı oyuncunun kaydı siliniyor..."
+  YAMLProvider_InvalidGroupsSettings: "INVALID GROUPS.YML SETTINGS: Please check if you have an invalid or corrupted groups.yml."
 ...

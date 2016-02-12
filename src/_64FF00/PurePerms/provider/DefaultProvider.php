@@ -23,7 +23,7 @@ class DefaultProvider implements ProviderInterface
           888  888   Y88b  d88P       888  888        888       Y88b  d88P Y88b  d88P
           888  888    "Y8888P"        888  888        888        "Y8888P"   "Y8888P"
     */
-    
+
     private $groups, $players, $plugin;
 
     /**
@@ -37,6 +37,9 @@ class DefaultProvider implements ProviderInterface
 
         $this->groups = new Config($this->plugin->getDataFolder() . "groups.yml", Config::YAML);
 
+        if(empty($this->groups->getAll()))
+            throw new \RuntimeException($this->plugin->getMessage("logger_messages.YAMLProvider_InvalidGroupsSettings"));
+
         $this->plugin->saveResource("players.yml");
 
         $this->players = new Config($this->plugin->getDataFolder() . "players.yml", Config::YAML);
@@ -49,7 +52,7 @@ class DefaultProvider implements ProviderInterface
     public function getGroupData(PPGroup $group)
     {
         $groupName = $group->getName();
-        
+
         if(!isset($this->getGroupsData()[$groupName]) || !is_array($this->getGroupsData()[$groupName])) return [];
 
         return $this->getGroupsData()[$groupName];
@@ -123,7 +126,7 @@ class DefaultProvider implements ProviderInterface
     /**
      * @param IPlayer $player
      * @param array $tempUserData
-*/
+     */
     public function setPlayerData(IPlayer $player, array $tempUserData)
     {
         $userName = $player->getName();
@@ -144,7 +147,7 @@ class DefaultProvider implements ProviderInterface
 
         $this->players->save();
     }
-    
+
     public function close()
     {
     }

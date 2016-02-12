@@ -166,4 +166,5 @@ logger_messages:
   setProvider_YAML: "Datenprovider wird auf YAML gesetzt."
   setProvider_NotFound: "Provider %var0% existiert NICHT. Datenprovider wird auf Standard zurückgesetzt."
   unregisterPlayer: "Spieler %var0% wird abgemeldet"
+  YAMLProvider_InvalidGroupsSettings: "INVALID GROUPS.YML SETTINGS: Please check if you have an invalid or corrupted groups.yml."
 ...

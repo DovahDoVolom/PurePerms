@@ -6,7 +6,7 @@
 # 제 블로그 이외에 허락없이 마음대로 플러그인 배포하실 시에는 바로 한국어 파일 삭제 조치하고 공유 중단합니다
 
 ---
-messages-version: "1.3.0-INDEV"
+messages-version: "1.3.1"
 language: "ko"
 cmds:
   addgroup:
@@ -167,4 +167,5 @@ logger_messages:
   setProvider_YAML: "YAML 방식으로 데이터가 저장됩니다."
   setProvider_Invalid: "올바르지 않은 데이터 저장 방식입니다. 자동으로 YAML 방식으로 데이터가 저장됩니다."
   unregisterPlayer: "플레이어 %var0% 등록 해제 중..."
+  YAMLProvider_InvalidGroupsSettings: "INVALID GROUPS.YML SETTINGS: Please check if you have an invalid or corrupted groups.yml."
 ...
