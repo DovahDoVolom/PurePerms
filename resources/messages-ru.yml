@@ -167,5 +167,5 @@ logger_messages:
   setProvider_YAML: "Тип хранилища данных - YAML."
   setProvider_NotFound: "Провайдер данных %var0% не существует. Устанавливается стандартный тип хранилища данных."
   unregisterPlayer: "Отмена регистрации игрока %var0%..."
-  YAMLProvider_InvalidGroupsSettings: "INVALID GROUPS.YML SETTINGS: Please check if you have an invalid or corrupted groups.yml."
+  YAMLProvider_InvalidGroupsSettings: "ИНВАЛИД GROUPS.YML НАСТРОЙКИ: Пожалуйста, проверьте, если у вас есть недопустимое или поврежден groups.yml."
 ...
