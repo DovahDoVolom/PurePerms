@@ -30,6 +30,14 @@ class PPGroup
     }
 
     /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->name;
+    }
+
+    /**
      * @param PPGroup $group
      * @return bool
      */
@@ -88,27 +96,33 @@ class PPGroup
     }
 
     /**
+     * @param null $levelName
      * @return array
      */
-    public function getParentGroups()
+    public function getGroupPermissions($levelName = null)
     {
-        $parentGroups = [];
-        
-        if(!is_array($this->getNode("inheritance")))
+        $permissions = $levelName !== null ? $this->getWorldData($levelName)["permissions"] : $this->getNode("permissions");
+
+        if(!is_array($permissions))
         {
-            $this->plugin->getLogger()->critical("Invalid 'inheritance' node given to " .  __METHOD__);
-            
+            $this->plugin->getLogger()->critical("Invalid 'permissions' node given to " .  __METHOD__);
+
             return [];
         }
-        
-        foreach($this->getNode("inheritance") as $parentGroupName)
+
+        /** @var PPGroup $parentGroup */
+        foreach($this->getParentGroups() as $parentGroup)
         {
-            $parentGroup = $this->plugin->getGroup($parentGroupName);
-            
-            if($parentGroup != null) $parentGroups[] = $parentGroup;
+            $parentPermissions = $parentGroup->getGroupPermissions($levelName);
+
+            if($parentPermissions === null)
+                $parentPermissions = [];
+
+            // Fixed by @mad-hon (https://github.com/mad-hon) / Tysm! :D
+            $permissions = array_merge($parentPermissions, $permissions);
         }
-        
-        return $parentGroups;
+
+        return $permissions;
     }
 
     /**
@@ -131,33 +145,28 @@ class PPGroup
     }
 
     /**
-     * @param null $levelName
-     * @return array|mixed
+     * @return array
      */
-    public function getGroupPermissions($levelName = null)
+    public function getParentGroups()
     {
-        $permissions = $levelName !== null ? $this->getWorldData($levelName)["permissions"] : $this->getNode("permissions");
-        
-        if(!is_array($permissions))
+        $parentGroups = [];
+
+        if(!is_array($this->getNode("inheritance")))
         {
-            $this->plugin->getLogger()->critical("Invalid 'permissions' node given to " .  __METHOD__);
-            
+            $this->plugin->getLogger()->critical("Invalid 'inheritance' node given to " .  __METHOD__);
+
             return [];
         }
 
-        /** @var PPGroup $parentGroup */
-        foreach($this->getParentGroups() as $parentGroup)
+        foreach($this->getNode("inheritance") as $parentGroupName)
         {
-            $parentPermissions = $parentGroup->getGroupPermissions($levelName);
+            $parentGroup = $this->plugin->getGroup($parentGroupName);
 
-            if($parentPermissions === null)
-                $parentPermissions = [];
-
-            // Fixed by @mad-hon (https://github.com/mad-hon) / Tysm! :D
-            $permissions = array_merge($parentPermissions, $permissions);
+            if($parentGroup !== null)
+                $parentGroups[] = $parentGroup;
         }
-        
-        return $permissions;
+
+        return $parentGroups;
     }
 
     /**

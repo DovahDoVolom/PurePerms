@@ -351,7 +351,7 @@ class PurePerms extends PluginBase
      */
     public function getGroups()
     {
-        if($this->isGroupsLoaded != true)
+        if($this->isGroupsLoaded !== true)
             throw new \RuntimeException("No groups loaded, maybe a provider error?");
 
         return $this->groups;
@@ -639,6 +639,9 @@ class PurePerms extends PluginBase
         {
             $this->groups[$groupName] = new PPGroup($this, $groupName);
         }
+
+        if(empty($this->groups))
+            throw new \RuntimeException("No groups found, I guess there's definitely something wrong with your data provider");
 
         $this->isGroupsLoaded = true;
 

@@ -20,11 +20,6 @@ CREATE TABLE IF NOT EXISTS groups(
   permissions TEXT NOT NULL
 );
 
-INSERT IGNORE INTO groups (groupName, alias, isDefault, inheritance, permissions) VALUES ('Guest', 'gst', 1, '', '-essentials.kit,-essentials.kit.other,-pocketmine.command.me,pchat.colored.format,pchat.colored.nametag,pocketmine.command.list,pperms.command.ppinfo');
-INSERT IGNORE INTO groups (groupName, alias, isDefault, inheritance, permissions) VALUES ('Admin', 'adm', 0, 'Guest', 'essentials.gamemode,pocketmine.broadcast,pocketmine.command.gamemode,pocketmine.command.give,pocketmine.command.kick,pocketmine.command.teleport,pocketmine.command.time');
-INSERT IGNORE INTO groups (groupName, alias, isDefault, inheritance, permissions) VALUES ('Owner', 'owr', 0, 'Admin', 'essentials,pocketmine.command,pperms.command');
-INSERT IGNORE INTO groups (groupName, alias, isDefault, inheritance, permissions) VALUES ('OP', 'op', 0, '', '*');
-
 CREATE TABLE IF NOT EXISTS groups_mw(
   id INT(16) PRIMARY KEY NOT NULL AUTO_INCREMENT,
   groupName VARCHAR(64) NOT NULL,
