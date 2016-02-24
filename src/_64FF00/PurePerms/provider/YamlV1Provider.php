@@ -9,7 +9,7 @@ use pocketmine\IPlayer;
 
 use pocketmine\utils\Config;
 
-class YamlV2Provider implements ProviderInterface
+class YamlV1Provider implements ProviderInterface
 {
     /*
         PurePerms by 64FF00 (Twitter: @64FF00)
