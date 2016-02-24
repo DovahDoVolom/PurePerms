@@ -19,6 +19,8 @@ class PPGroup
 
     private $name, $plugin;
 
+    private $parents = [];
+
     /**
      * @param PurePerms $plugin
      * @param $name
@@ -145,28 +147,29 @@ class PPGroup
     }
 
     /**
-     * @return array
+     * @return PPGroup[]
      */
     public function getParentGroups()
     {
-        $parentGroups = [];
-
-        if(!is_array($this->getNode("inheritance")))
+        if($this->parents === [])
         {
-            $this->plugin->getLogger()->critical("Invalid 'inheritance' node given to " .  __METHOD__);
+            if(!is_array($this->getNode("inheritance")))
+            {
+                $this->plugin->getLogger()->critical("Invalid 'inheritance' node given to " . __METHOD__);
 
-            return [];
+                return [];
+            }
+
+            foreach($this->getNode("inheritance") as $parentGroupName)
+            {
+                $parentGroup = $this->plugin->getGroup($parentGroupName);
+
+                if($parentGroup !== null)
+                    $this->parents[] = $parentGroup;
+            }
         }
 
-        foreach($this->getNode("inheritance") as $parentGroupName)
-        {
-            $parentGroup = $this->plugin->getGroup($parentGroupName);
-
-            if($parentGroup !== null)
-                $parentGroups[] = $parentGroup;
-        }
-
-        return $parentGroups;
+        return $this->parents;
     }
 
     /**
@@ -175,7 +178,8 @@ class PPGroup
      */
     public function getWorldData($levelName)
     {
-        if($levelName === null) return null;
+        if($levelName === null)
+            return null;
         
         $this->createWorldData($levelName);
             

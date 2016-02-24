@@ -4,7 +4,7 @@
 # Translated in Italian by AnThOnEx (Twitter: @AryToNeX)
 
 ---
-messages-version: "1.3.1"
+messages-version: "1.3.2"
 language: "it"
 cmds:
   addgroup:
@@ -161,8 +161,9 @@ logger_messages:
   onLoad_02: "Non dimenticare di impostare nel config.yml l'opzione enable-multiworld-perms in true se vuoi usare i permessi specifici per ogni mondo!"
   onLoad_03: "Il supporto multimondo è abilitato."
   registerPlayer: "Registrando giocatore %var0%..."
-  setProvider_SQLite3: "Il fornitore dati impostato è SQLite3."
-  setProvider_YAML: "Il fornitore dati impostato è YAML."
+  setProvider_MySQL: "Il fornitore dati impostato è MySQL."
+  setProvider_YAMLv1: "Il fornitore dati impostato è YAMLv1."
+  setProvider_YAMLv2: "Il fornitore dati impostato è YAMLv2."
   setProvider_NotFound: "Il fornitore %var0% non esiste. Impostando il fornitore dati predefinito."
   unregisterPlayer: "Togliendo la registrazione al giocatore %var0%..."
   YAMLProvider_InvalidGroupsSettings: "INVALID GROUPS.YML SETTINGS: Please check if you have an invalid or corrupted groups.yml."

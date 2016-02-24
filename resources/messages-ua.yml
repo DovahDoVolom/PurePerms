@@ -4,7 +4,7 @@
 # Ukrainian messages resource by @samalero (GitHub)
 
 ---
-messages-version: "1.3.1"
+messages-version: "1.3.2"
 language: "ua"
 cmds:
   addgroup:
@@ -162,8 +162,8 @@ logger_messages:
   onLoad_03: "Поддержка декількох світів увімкнена."
   registerPlayer: "Реєстрація гравця %var0%..."
   setProvider_MySQL: "Тип сховища даних - MySQL."
-  setProvider_SQLite3: "Тип сховища даних  - SQLite3."
-  setProvider_YAML: "Тип сховища даних - YAML."
+  setProvider_YAMLv1: "Тип сховища даних - YAMLv1."
+  setProvider_YAMLv2: "Тип сховища даних - YAMLv2."
   setProvider_NotFound: "Провайдер даних %var0% не існує. Встановлено стандартний тип сховища даних."
   unregisterPlayer: "Відміна реєстрації гравця %var0%..."
   YAMLProvider_InvalidGroupsSettings: "INVALID GROUPS.YML SETTINGS: Please check if you have an invalid or corrupted groups.yml."

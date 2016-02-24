@@ -2,7 +2,7 @@
 # PurePerms by 64FF00 (xktiverz@gmail.com, @64ff00 for Twitter)
 
 ---
-messages-version: "1.3.1"
+messages-version: "1.3.2"
 language: "en"
 cmds:
   addgroup:
@@ -160,8 +160,8 @@ logger_messages:
   onLoad_03: "Multiworld support enabled."
   registerPlayer: "Registering player %var0%..."
   setProvider_MySQL: "Set data provider to MySQL."
-  setProvider_SQLite3: "Set data provider to SQLite3."
-  setProvider_YAML: "Set data provider to YAML."
+  setProvider_YAMLv1: "Set data provider to YAMLv1."
+  setProvider_YAMLv2: "Set data provider to YAMLv2."
   setProvider_NotFound: "Provider %var0% does NOT exist. Setting the data provider to default."
   unregisterPlayer: "Unregistering player %var0%..."
   YAMLProvider_InvalidGroupsSettings: "INVALID GROUPS.YML SETTINGS: Please check if you have an invalid or corrupted groups.yml."

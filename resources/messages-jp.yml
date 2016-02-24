@@ -3,7 +3,7 @@
 # Original Japanese Translation by onebone (jyc00410@gmail.com)
 # Translated into fluent Japanese by haniokasai (11/04/2015) (htek@haniokasai.com, @haniokasai for Twitter)
 ---
-messages-version: "1.3.1"
+messages-version: "1.3.2"
 language: "jp"
 cmds:
   addgroup:
@@ -161,8 +161,8 @@ logger_messages:
   onLoad_03: "マルチワールド対応が有効です。"
   registerPlayer: "プレイヤーを%var0%に登録しています..."
   setProvider_MySQL: "MYSQLにデーター管理方式が設定されました。"
-  setProvider_SQLite3: "SQLite3にデーター管理方式が設定されました。"
-  setProvider_YAML: "YAMLにデーター管理方式が設定されました。"
+  setProvider_YAMLv1: "YAMLv1にデーター管理方式が設定されました。"
+  setProvider_YAMLv2: "YAMLv2にデーター管理方式が設定されました。"
   setProvider_NotFound: "データー管理方式%var0%は存在しません。デフォルトの方式に設定しました。"
   unregisterPlayer: "プレイヤーを%var0%から解除してます..."
   YAMLProvider_InvalidGroupsSettings: "INVALID GROUPS.YML SETTINGS: Please check if you have an invalid or corrupted groups.yml."

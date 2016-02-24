@@ -26,6 +26,7 @@ use _64FF00\PurePerms\noeul\NoeulAPI;
 use _64FF00\PurePerms\provider\DefaultProvider;
 use _64FF00\PurePerms\provider\MySQLProvider;
 use _64FF00\PurePerms\provider\ProviderInterface;
+use _64FF00\PurePerms\provider\YamlV2Provider;
 
 use pocketmine\IPlayer;
 
@@ -168,12 +169,21 @@ class PurePerms extends PluginBase
 
                 break;
 
-            case "yaml":
+            case "yamlv1":
 
                 $provider = new DefaultProvider($this);
 
                 if($onEnable === true)
-                    $this->getLogger()->notice($this->getMessage("logger_messages.setProvider_YAML"));
+                    $this->getLogger()->notice($this->getMessage("logger_messages.setProvider_YAMLv1"));
+
+                break;
+
+            case "yamlv2":
+
+                $provider = new YamlV2Provider($this);
+
+                if($onEnable === true)
+                    $this->getLogger()->notice($this->getMessage("logger_messages.setProvider_YAMLv2"));
 
                 break;
 

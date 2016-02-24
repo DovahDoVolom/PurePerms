@@ -4,7 +4,7 @@
 # Slovak message resource by @Michael2010117 (GitHub)
 
 ---
-messages-version: "1.3.1"
+messages-version: "1.3.2"
 language: "sk"
 cmds:
   addgroup:
@@ -162,8 +162,8 @@ logger_messages:
   onLoad_03: "Podpora Multisveta povolena."
   registerPlayer: "Registering player %var0%..."
   setProvider_MySQL: "Nastavte poskytovatela dat na MySQL."
-  setProvider_SQLite3: "Nastavte poskytovatela dat na vychodiskove SQLite3."
-  setProvider_YAML: "Nastavte poskytovatela dat na YAML."
+  setProvider_YAMLv1: "Nastavte poskytovatela dat na YAMLv1."
+  setProvider_YAMLv2: "Nastavte poskytovatela dat na YAMLv2."
   setProvider_NotFound: "Poskytovatel %var0% nastavujem sprostredkovatela dat na predvolene nastavenia."
   unregisterPlayer: "Unregistering player %var0%..."
   YAMLProvider_InvalidGroupsSettings: "INVALID GROUPS.YML SETTINGS: Please check if you have an invalid or corrupted groups.yml."

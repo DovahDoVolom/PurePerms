@@ -4,7 +4,7 @@
 # Original German language resource by @Exxarion, reworked by @thebigsmileXD
 
 ---
-messages-version: "1.3.0-INDEV"
+messages-version: "1.3.2"
 language: "de"
 cmds:
   addgroup:
@@ -162,8 +162,8 @@ logger_messages:
   onLoad_03: "Unterstützung für mehrere Welten ist aktiviert."
   registerPlayer: "Spieler %var0% wird angemeldet"
   setProvider_MySQL: "Datenprovider wird auf MySQL gesetzt."
-  setProvider_SQLite3: "Datenprovider wird auf SQLite3 gesetzt."
-  setProvider_YAML: "Datenprovider wird auf YAML gesetzt."
+  setProvider_YAMLv1: "Datenprovider wird auf YAMLv1 gesetzt."
+  setProvider_YAMLv2: "Datenprovider wird auf YAMLv2 gesetzt."
   setProvider_NotFound: "Provider %var0% existiert NICHT. Datenprovider wird auf Standard zurückgesetzt."
   unregisterPlayer: "Spieler %var0% wird abgemeldet"
   YAMLProvider_InvalidGroupsSettings: "INVALID GROUPS.YML SETTINGS: Please check if you have an invalid or corrupted groups.yml."
