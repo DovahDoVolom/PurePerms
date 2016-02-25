@@ -84,7 +84,6 @@ class PurePerms extends PluginBase
     {
         $this->getServer()->getLogger()->notice(base64_decode('UHVyZVBlcm1zIGJ5IDY0RkYwMCAoVHdpdHRlcjogQDY0RkYwMCkKCiAgODg4ICA4ODggICAgLmQ4ODg4Yi4gICAgICBkODg4OCAgODg4ODg4ODg4OCA4ODg4ODg4ODg4IC5kODg4OGIuICAgLmQ4ODg4Yi4gCiAgODg4ICA4ODggICBkODhQICBZODhiICAgIGQ4UDg4OCAgODg4ICAgICAgICA4ODggICAgICAgZDg4UCAgWTg4YiBkODhQICBZODhiCjg4ODg4ODg4ODg4OCA4ODggICAgICAgICAgZDhQIDg4OCAgODg4ICAgICAgICA4ODggICAgICAgODg4ICAgIDg4OCA4ODggICAgODg4CiAgODg4ICA4ODggICA4ODhkODg4Yi4gICBkOFAgIDg4OCAgODg4ODg4OCAgICA4ODg4ODg4ICAgODg4ICAgIDg4OCA4ODggICAgODg4CiAgODg4ICA4ODggICA4ODhQICJZODhiIGQ4OCAgIDg4OCAgODg4ICAgICAgICA4ODggICAgICAgODg4ICAgIDg4OCA4ODggICAgODg4Cjg4ODg4ODg4ODg4OCA4ODggICAgODg4IDg4ODg4ODg4ODggODg4ICAgICAgICA4ODggICAgICAgODg4ICAgIDg4OCA4ODggICAgODg4CiAgODg4ICA4ODggICBZODhiICBkODhQICAgICAgIDg4OCAgODg4ICAgICAgICA4ODggICAgICAgWTg4YiAgZDg4UCBZODhiICBkODhQCiAgODg4ICA4ODggICAgIlk4ODg4UCIgICAgICAgIDg4OCAgODg4ICAgICAgICA4ODggICAgICAgICJZODg4OFAiICAgIlk4ODg4UCIgCg==['));
 
-        // TODO: Hmm...
         $this->saveDefaultConfig();
 
         $this->messages = new PPMessages($this);
@@ -245,7 +244,6 @@ class PurePerms extends PluginBase
 
         return self::SUCCESS;
     }
-
     /**
      * @param Player $player
      * @return null|\pocketmine\permission\PermissionAttachment
@@ -490,8 +488,7 @@ class PurePerms extends PluginBase
         if($uuid instanceof UUID)
             return $uuid->toString();
 
-        // Heheheh...
-        $this->getLogger()->warning("Why did you give me an invalid unique id? *cries* (userName: " . $player->getName() . ", isConnected: " . ($player->isConnected() ? "true" : "false") . ", isOnline: " . ($player->isOnline() ? "true" : "false") . ", isValid: " . ($player->isValid() ? "true" : "false") .  ")");
+        $this->getLogger()->debug("Why did you give me an invalid unique id? *cries* (userName: " . $player->getName() . ", isConnected: " . ($player->isConnected() ? "true" : "false") . ", isOnline: " . ($player->isOnline() ? "true" : "false") . ", isValid: " . ($player->isValid() ? "true" : "false") .  ")");
 
         return null;
     }
@@ -640,7 +637,7 @@ class PurePerms extends PluginBase
     public function updateGroups()
     {
         if(!$this->isValidProvider())
-            throw new \RuntimeException("Failed to load groups: Invalid Data Provider");
+            throw new \RuntimeException("Failed to load groups: Invalid data provider");
 
         // Make group list empty first to reload it
         $this->groups = [];
@@ -651,7 +648,7 @@ class PurePerms extends PluginBase
         }
 
         if(empty($this->groups))
-            throw new \RuntimeException("No groups found, I guess there's definitely something wrong with your data provider");
+            throw new \RuntimeException("No groups found, I guess there's definitely something wrong with your data provider... *cough cough*");
 
         $this->isGroupsLoaded = true;
 
@@ -669,6 +666,7 @@ class PurePerms extends PluginBase
 
             $permissions = [];
 
+            /** @var string $permission */
             foreach($this->getPermissions($player, $levelName) as $permission)
             {
                 if($permission === '*')

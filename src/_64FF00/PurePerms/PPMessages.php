@@ -113,7 +113,7 @@ class PPMessages
         
         $this->plugin->getLogger()->info("Setting default language to '" . $defaultLang . "'");
         
-        if(version_compare($this->getVersion(), $this->plugin->getPPVersion()) == -1)
+        if(version_compare($this->getVersion(), $this->plugin->getPPVersion()) === -1)
         {
             $this->plugin->saveResource("messages-" . $this->language . ".yml", true);
         
