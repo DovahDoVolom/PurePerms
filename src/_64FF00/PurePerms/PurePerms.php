@@ -157,6 +157,8 @@ class PurePerms extends PluginBase
     {
         $providerName = $this->getConfigValue("data-provider");
 
+        $provider = new DefaultProvider($this);
+
         switch(strtolower($providerName))
         {
             case "mysql":
@@ -179,8 +181,6 @@ class PurePerms extends PluginBase
 
             case "yamlv2":
 
-                $provider = new DefaultProvider($this);
-
                 if($onEnable === true)
                     $this->getLogger()->notice($this->getMessage("logger_messages.setProvider_YAMLv2"));
 
@@ -188,15 +188,13 @@ class PurePerms extends PluginBase
 
             default:
 
-                $provider = new DefaultProvider($this);
-
                 if($onEnable === true)
                     $this->getLogger()->warning($this->getMessage("logger_messages.setProvider_NotFound", "'$providerName'"));
 
                 break;
         }
 
-        if(!$this->isValidProvider())
+        if($provider instanceof ProviderInterface)
             $this->provider = $provider;
 
         $this->updateGroups();
@@ -507,7 +505,7 @@ class PurePerms extends PluginBase
      */
     public function isValidProvider()
     {
-        if(!isset($this->provider) || $this->provider === null || !($this->provider instanceof ProviderInterface))
+        if(!isset($this->provider) || ($this->provider === null) || !($this->provider instanceof ProviderInterface))
             return false;
 
         return true;
