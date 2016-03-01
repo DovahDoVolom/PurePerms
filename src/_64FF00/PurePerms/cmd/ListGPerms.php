@@ -90,7 +90,7 @@ class ListGPerms extends Command implements PluginIdentifiableCommand
         
         if(empty($permissions))
         {
-            $sender->sendMessage(TextFormat::BLUE . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.listgperms.messages.no_group_perms", $group->getName()));
+            $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.listgperms.messages.no_group_perms", $group->getName()));
             
             return true;
         }

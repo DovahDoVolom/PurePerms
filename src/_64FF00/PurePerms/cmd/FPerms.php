@@ -56,7 +56,7 @@ class FPerms extends Command implements PluginIdentifiableCommand
         
         if(!isset($args[0]) || count($args) > 2)
         {
-            $sender->sendMessage(TextFormat::BLUE . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.fperms.usage"));
+            $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.fperms.usage"));
             
             return true;
         }
@@ -74,12 +74,12 @@ class FPerms extends Command implements PluginIdentifiableCommand
         
         if(empty($permissions))
         {
-            $sender->sendMessage(TextFormat::BLUE . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.fperms.messages.no_plugin_perms", $plugin->getName()));
+            $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.fperms.messages.no_plugin_perms", $plugin->getName()));
             
             return true;
         }
         
-        $pageHeight = $sender instanceof ConsoleCommandSender ? 24 : 6;
+        $pageHeight = $sender instanceof ConsoleCommandSender ? 48 : 6;
                 
         $chunkedPermissions = array_chunk($permissions, $pageHeight); 
         
@@ -98,11 +98,11 @@ class FPerms extends Command implements PluginIdentifiableCommand
             $pageNumber = $args[1];
         }
         
-        $sender->sendMessage(TextFormat::BLUE . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.fperms.messages.plugin_perms_list", ($plugin instanceof PluginBase) ? $plugin->getName(): 'PocketMine-MP', $pageNumber, $maxPageNumber));
+        $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.fperms.messages.plugin_perms_list", ($plugin instanceof PluginBase) ? $plugin->getName(): 'PocketMine-MP', $pageNumber, $maxPageNumber));
         
         foreach($chunkedPermissions[$pageNumber - 1] as $permission)
         {
-            $sender->sendMessage(TextFormat::BLUE . PurePerms::MAIN_PREFIX . ' - ' . $permission->getName());
+            $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' - ' . $permission->getName());
         }
         
         return true;

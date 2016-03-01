@@ -76,7 +76,7 @@ class DefaultProvider implements ProviderInterface
 
     public function getPlayerData(IPlayer $player)
     {
-        $userName = $player->getName();
+        $userName = strtolower($player->getName());
 
         if(!$this->players->exists($userName))
         {
@@ -129,7 +129,7 @@ class DefaultProvider implements ProviderInterface
      */
     public function setPlayerData(IPlayer $player, array $tempUserData)
     {
-        $userName = $player->getName();
+        $userName = strtolower($player->getName());
 
         if(!$this->players->exists($userName))
         {

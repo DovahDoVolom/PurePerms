@@ -62,7 +62,7 @@ class NoeulAPI
             unset($this->needAuth[spl_object_hash($player)]);
         }
 
-        $player->sendMessage(TextFormat::BLUE . "[PurePerms] " . $this->plugin->getMessage("cmds.ppsudo.messages.successfully_logged_in"));
+        $player->sendMessage(TextFormat::GREEN . "[PurePerms] " . $this->plugin->getMessage("cmds.ppsudo.messages.successfully_logged_in"));
 
         return true;
     }
