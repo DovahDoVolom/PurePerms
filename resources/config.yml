@@ -36,10 +36,8 @@ enable-multiworld-perms: false
 # - true / false
 enable-noeul-sixtyfour: false
 
-# // NOT FINISHED YET
 # MySQL Settings (Only configure this if you are going to use MySQL data provider)
 mysql-settings:
-  # Thank you for 100k downloads btw... Love you all <3 #64FF00
   host: "PurePerms-FTW.loveyou.all"
   port: 3306
   user: "YourUsernameGoesHere"

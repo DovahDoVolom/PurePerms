@@ -86,6 +86,8 @@ class PurePerms extends PluginBase
 
         $this->saveDefaultConfig();
 
+        $this->fixConfig();
+
         $this->messages = new PPMessages($this);
 
         $this->noeulAPI = new NoeulAPI($this);
@@ -120,6 +122,32 @@ class PurePerms extends PluginBase
 
         if($this->isValidProvider())
             $this->provider->close();
+    }
+
+    private function fixConfig()
+    {
+        $config = $this->getConfig();
+
+        if(!$config->get("default-language"))
+            $config->set("default-language", "en");
+
+        if(!$config->get("disable-op"))
+            $config->set("disable-op", true);
+
+        if(!$config->get("enable-multiworld-perms"))
+            $config->set("enable-multiworld-perms", false);
+
+        if(!$config->get("enable-noeul-sixtyfour"))
+            $config->set("enable-noeul-sixtyfour", false);
+
+        if(!$config->get("noeul-minimum-pw-length"))
+            $config->set("noeul-minimum-pw-length", 6);
+
+        if(!$config->get("superadmin-ranks"))
+            $config->set("superadmin-ranks", ["OP"]);
+
+        $this->saveConfig();
+        $this->reloadConfig();
     }
 
     private function registerCommands()
