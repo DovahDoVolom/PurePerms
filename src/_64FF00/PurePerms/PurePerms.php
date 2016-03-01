@@ -687,6 +687,11 @@ class PurePerms extends PluginBase
 
             $permissions[self::CORE_PERM] = true;
 
+            $disableOp = $this->getConfigValue("disable-op");
+
+            if($disableOp)
+                $permissions["pocketmine.command.op"] = false;
+
             /** @var \pocketmine\permission\PermissionAttachment $attachment */
             $attachment = $this->getAttachment($player);
 
