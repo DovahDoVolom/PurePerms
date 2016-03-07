@@ -11,7 +11,7 @@
       888  888    "Y8888P"        888  888        888        "Y8888P"   "Y8888P"
 */
 
-INSERT INTO groups (groupName, alias, isDefault, inheritance, permissions) VALUES ('Guest', 'gst', 1, '', '-essentials.kit,-essentials.kit.other,-pocketmine.command.me,pchat.colored.format,pchat.colored.nametag,pocketmine.command.list,pperms.command.ppinfo');
-INSERT INTO groups (groupName, alias, isDefault, inheritance, permissions) VALUES ('Admin', 'adm', 0, 'Guest', 'essentials.gamemode,pocketmine.broadcast,pocketmine.command.gamemode,pocketmine.command.give,pocketmine.command.kick,pocketmine.command.teleport,pocketmine.command.time');
-INSERT INTO groups (groupName, alias, isDefault, inheritance, permissions) VALUES ('Owner', 'owr', 0, 'Admin', 'essentials,pocketmine.command,pperms.command');
-INSERT INTO groups (groupName, alias, isDefault, inheritance, permissions) VALUES ('OP', 'op', 0, '', '*');
+INSERT IGNORE INTO groups (groupName, alias, isDefault, inheritance, permissions) VALUES ('Guest', 'gst', 1, '', '-essentials.kit,-essentials.kit.other,-pocketmine.command.me,pchat.colored.format,pchat.colored.nametag,pocketmine.command.list,pperms.command.ppinfo');
+INSERT IGNORE INTO groups (groupName, alias, isDefault, inheritance, permissions) VALUES ('Admin', 'adm', 0, 'Guest', 'essentials.gamemode,pocketmine.broadcast,pocketmine.command.gamemode,pocketmine.command.give,pocketmine.command.kick,pocketmine.command.teleport,pocketmine.command.time');
+INSERT IGNORE INTO groups (groupName, alias, isDefault, inheritance, permissions) VALUES ('Owner', 'owr', 0, 'Admin', 'essentials,pocketmine.command,pperms.command');
+INSERT IGNORE INTO groups (groupName, alias, isDefault, inheritance, permissions) VALUES ('OP', 'op', 0, '', '*');

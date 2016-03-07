@@ -10,6 +10,8 @@ use pocketmine\event\player\PlayerCommandPreprocessEvent;
 use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\event\player\PlayerMoveEvent;
 use pocketmine\event\player\PlayerQuitEvent;
+use pocketmine\event\TranslationContainer;
+use pocketmine\utils\TextFormat;
 
 class PPListener implements Listener
 {
@@ -60,29 +62,37 @@ class PPListener implements Listener
 
     public function onPlayerCommand(PlayerCommandPreprocessEvent $event)
     {
-        if(!$this->plugin->getNoeulAPI()->isAuthed($event->getPlayer()))
-        {
-            // From SimpleAuth plugin by @shoghicp (PocketMine Team)
-            $message = $event->getMessage();
+        $message = $event->getMessage();
+        $player = $event->getPlayer();
 
-            if($message{0} === "/")
+        if($message{0} === "/")
+        {
+            $command = substr($message, 1);
+            $args = explode(" ", $command);
+
+            if(!$this->plugin->getNoeulAPI()->isAuthed($event->getPlayer()))
             {
                 $event->setCancelled(true);
 
-                $command = substr($message, 1);
-                $args = explode(" ", $command);
-
                 if($args[0] === "ppsudo" or $args[0] === "help")
                 {
-                    $this->plugin->getServer()->dispatchCommand($event->getPlayer(), $command);
+                    $this->plugin->getServer()->dispatchCommand($player, $command);
                 }
                 else
                 {
-                    $this->plugin->getNoeulAPI()->sendAuthMsg($event->getPlayer());
+                    $this->plugin->getNoeulAPI()->sendAuthMsg($player);
                 }
             }
-            else {
-                $event->setCancelled(true);
+            else
+            {
+                $disableOp = $this->plugin->getConfigValue("disable-op");
+
+                if($disableOp and $args[0] === "op")
+                {
+                    $event->setCancelled(true);
+
+                    $player->sendMessage(new TranslationContainer(TextFormat::RED . "%commands.generic.permission"));
+                }
             }
         }
     }

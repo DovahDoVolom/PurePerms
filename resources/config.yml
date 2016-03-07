@@ -24,10 +24,6 @@ data-provider: yamlv1
 # Turkish messages resource by @PainTR (GitHub)
 default-language: en
 
-# Disable /op permission for all players
-# - true / false
-disable-op: true
-
 # Setting this option will allow you to use per-world permissions
 # - true / false
 enable-multiworld-perms: false

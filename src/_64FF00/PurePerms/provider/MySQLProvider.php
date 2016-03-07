@@ -45,7 +45,6 @@ class MySQLProvider implements ProviderInterface
         if($this->db->connect_error)
             throw new \RuntimeException("Failed to connect to the MySQL database: " . $this->db->connect_error);
 
-
         $resource = $this->plugin->getResource("mysql_deploy_01.sql");
 
         $this->db->multi_query(stream_get_contents($resource));
@@ -56,7 +55,7 @@ class MySQLProvider implements ProviderInterface
         }
 
         fclose($resource);
-        
+
         $this->loadGroupsData();
 
         $this->plugin->getServer()->getScheduler()->scheduleRepeatingTask(new PPMySQLTask($this->plugin, $this->db), 1200);
