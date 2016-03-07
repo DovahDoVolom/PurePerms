@@ -166,5 +166,5 @@ logger_messages:
   setProvider_YAMLv2: "Veri sağlayıcısı YAMLv2 ayarlandı."
   setProvider_NotFound: "%var0% sağlayıcısı mevcut değil. Varsayılan veri sağlayıcısına değiştiriliyor."
   unregisterPlayer: "%var0% adlı oyuncunun kaydı siliniyor..."
-  YAMLProvider_InvalidGroupsSettings: "INVALID GROUPS.YML SETTINGS: Please check if you have an invalid or corrupted groups.yml."
+  YAMLProvider_InvalidGroupsSettings: "BİLİNMEYEN GROUPS.YML AYARI: Lütfen groups.yml dosyasındaki geçersiz veya bozuk dosyaları kontrol edin."
 ...
