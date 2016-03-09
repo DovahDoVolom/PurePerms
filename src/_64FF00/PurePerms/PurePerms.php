@@ -128,22 +128,22 @@ class PurePerms extends PluginBase
     {
         $config = $this->getConfig();
 
-        if(!$config->get("default-language"))
+        if(!$config->exists("default-language"))
             $config->set("default-language", "en");
 
-        if(!$config->get("disable-op"))
+        if(!$config->exists("disable-op"))
             $config->set("disable-op", true);
 
-        if(!$config->get("enable-multiworld-perms"))
+        if(!$config->exists("enable-multiworld-perms"))
             $config->set("enable-multiworld-perms", false);
 
-        if(!$config->get("enable-noeul-sixtyfour"))
+        if(!$config->exists("enable-noeul-sixtyfour"))
             $config->set("enable-noeul-sixtyfour", false);
 
-        if(!$config->get("noeul-minimum-pw-length"))
+        if(!$config->exists("noeul-minimum-pw-length"))
             $config->set("noeul-minimum-pw-length", 6);
 
-        if(!$config->get("superadmin-ranks"))
+        if(!$config->exists("superadmin-ranks"))
             $config->set("superadmin-ranks", ["OP"]);
 
         $this->saveConfig();
