@@ -82,7 +82,7 @@ class PurePerms extends PluginBase
 
     public function onLoad()
     {
-        $this->getServer()->getLogger()->notice(base64_decode('UHVyZVBlcm1zIGJ5IDY0RkYwMCAoVHdpdHRlcjogQDY0RkYwMCkKCiAgODg4ICA4ODggICAgLmQ4ODg4Yi4gICAgICBkODg4OCAgODg4ODg4ODg4OCA4ODg4ODg4ODg4IC5kODg4OGIuICAgLmQ4ODg4Yi4gCiAgODg4ICA4ODggICBkODhQICBZODhiICAgIGQ4UDg4OCAgODg4ICAgICAgICA4ODggICAgICAgZDg4UCAgWTg4YiBkODhQICBZODhiCjg4ODg4ODg4ODg4OCA4ODggICAgICAgICAgZDhQIDg4OCAgODg4ICAgICAgICA4ODggICAgICAgODg4ICAgIDg4OCA4ODggICAgODg4CiAgODg4ICA4ODggICA4ODhkODg4Yi4gICBkOFAgIDg4OCAgODg4ODg4OCAgICA4ODg4ODg4ICAgODg4ICAgIDg4OCA4ODggICAgODg4CiAgODg4ICA4ODggICA4ODhQICJZODhiIGQ4OCAgIDg4OCAgODg4ICAgICAgICA4ODggICAgICAgODg4ICAgIDg4OCA4ODggICAgODg4Cjg4ODg4ODg4ODg4OCA4ODggICAgODg4IDg4ODg4ODg4ODggODg4ICAgICAgICA4ODggICAgICAgODg4ICAgIDg4OCA4ODggICAgODg4CiAgODg4ICA4ODggICBZODhiICBkODhQICAgICAgIDg4OCAgODg4ICAgICAgICA4ODggICAgICAgWTg4YiAgZDg4UCBZODhiICBkODhQCiAgODg4ICA4ODggICAgIlk4ODg4UCIgICAgICAgIDg4OCAgODg4ICAgICAgICA4ODggICAgICAgICJZODg4OFAiICAgIlk4ODg4UCIgCg==['));
+        $this->getServer()->getLogger()->notice(base64_decode('UHVyZVBlcm1zIGJ5IDY0RkYwMCAmIFByb2plY3RJbmZpbml0eSEgI0xFRVQuQ0MNCg0KICA4ODggIDg4OCAgICAuZDg4ODhiLiAgICAgIGQ4ODg4ICA4ODg4ODg4ODg4IDg4ODg4ODg4ODggLmQ4ODg4Yi4gICAuZDg4ODhiLiANCiAgODg4ICA4ODggICBkODhQICBZODhiICAgIGQ4UDg4OCAgODg4ICAgICAgICA4ODggICAgICAgZDg4UCAgWTg4YiBkODhQICBZODhiDQo4ODg4ODg4ODg4ODggODg4ICAgICAgICAgIGQ4UCA4ODggIDg4OCAgICAgICAgODg4ICAgICAgIDg4OCAgICA4ODggODg4ICAgIDg4OA0KICA4ODggIDg4OCAgIDg4OGQ4ODhiLiAgIGQ4UCAgODg4ICA4ODg4ODg4ICAgIDg4ODg4ODggICA4ODggICAgODg4IDg4OCAgICA4ODgNCiAgODg4ICA4ODggICA4ODhQICJZODhiIGQ4OCAgIDg4OCAgODg4ICAgICAgICA4ODggICAgICAgODg4ICAgIDg4OCA4ODggICAgODg4DQo4ODg4ODg4ODg4ODggODg4ICAgIDg4OCA4ODg4ODg4ODg4IDg4OCAgICAgICAgODg4ICAgICAgIDg4OCAgICA4ODggODg4ICAgIDg4OA0KICA4ODggIDg4OCAgIFk4OGIgIGQ4OFAgICAgICAgODg4ICA4ODggICAgICAgIDg4OCAgICAgICBZODhiICBkODhQIFk4OGIgIGQ4OFANCiAgODg4ICA4ODggICAgIlk4ODg4UCIgICAgICAgIDg4OCAgODg4ICAgICAgICA4ODggICAgICAgICJZODg4OFAiICAgIlk4ODg4UCIgDQo='));
 
         $this->saveDefaultConfig();
 
@@ -185,8 +185,6 @@ class PurePerms extends PluginBase
     {
         $providerName = $this->getConfigValue("data-provider");
 
-        $provider = new DefaultProvider($this);
-
         switch(strtolower($providerName))
         {
             case "mysql":
@@ -209,12 +207,16 @@ class PurePerms extends PluginBase
 
             case "yamlv2":
 
+                $provider = new DefaultProvider($this);
+
                 if($onEnable === true)
                     $this->getLogger()->notice($this->getMessage("logger_messages.setProvider_YAMLv2"));
 
                 break;
 
             default:
+
+                $provider = new DefaultProvider($this);
 
                 if($onEnable === true)
                     $this->getLogger()->warning($this->getMessage("logger_messages.setProvider_NotFound", "'$providerName'"));

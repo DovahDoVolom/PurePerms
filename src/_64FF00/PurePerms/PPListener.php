@@ -7,10 +7,11 @@ use _64FF00\PurePerms\event\PPGroupChangedEvent;
 use pocketmine\event\Listener;
 use pocketmine\event\entity\EntityLevelChangeEvent;
 use pocketmine\event\player\PlayerCommandPreprocessEvent;
-use pocketmine\event\player\PlayerJoinEvent;
+use pocketmine\event\player\PlayerLoginEvent;
 use pocketmine\event\player\PlayerMoveEvent;
 use pocketmine\event\player\PlayerQuitEvent;
 use pocketmine\event\TranslationContainer;
+
 use pocketmine\utils\TextFormat;
 
 class PPListener implements Listener
@@ -98,10 +99,10 @@ class PPListener implements Listener
     }
 
     /**
-     * @param PlayerJoinEvent $event
+     * @param PlayerLoginEvent $event
      * @priority LOWEST
      */
-    public function onPlayerJoin(PlayerJoinEvent $event)
+    public function onPlayerLogin(PlayerLoginEvent $event)
     {
         $player = $event->getPlayer();
 
