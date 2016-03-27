@@ -66,7 +66,7 @@ class PPListener implements Listener
         $message = $event->getMessage();
         $player = $event->getPlayer();
 
-        if($message{0} === "/")
+        if(substr($message, 0, 1) === "/")
         {
             $command = substr($message, 1);
             $args = explode(" ", $command);
