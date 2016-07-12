@@ -4,7 +4,7 @@
 # Czech language resource by @Michael2010117
 
 ---
-messages-version: "1.3.2"
+messages-version: "1.4.0_01"
 language: "cz"
 cmds:
   addgroup:
@@ -109,7 +109,7 @@ cmds:
       level_not_exist: "Svet %var0% neexistuje."
   setgroup: 
     desc: "Nastavi skupinu pro uzivatele."
-    usage: "Pouziti: /setgroup <hrac> <skupina> [Svet]"
+    usage: "Pouziti: /setgroup <hrac> <skupina> <exp_date> [Svet]"
     messages:
       access_denied_01: "You don't have permission to set a player's group to %var0%."
       access_denied_02: "You don't have permission to change group of a player with group %var0%."        

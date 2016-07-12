@@ -114,7 +114,8 @@ class UserDataManager
             return [
                 "group" => $this->plugin->getDefaultGroup($levelName)->getName(),
                 "permissions" => [
-                ]
+                ],
+                "time" => -1
             ];
 
         return $this->getData($player)["worlds"][$levelName];
@@ -145,12 +146,16 @@ class UserDataManager
      * @param IPlayer $player
      * @param PPGroup $group
      * @param $levelName
+     * @param int $time
      */
-    public function setGroup(IPlayer $player, PPGroup $group, $levelName)
+    public function setGroup(IPlayer $player, PPGroup $group, $levelName, $time = -1)
     {
         if($levelName === null)
         {
             $this->setNode($player, "group", $group->getName());
+
+            // TODO: Multiworld Support
+            $this->setNode($player, "time", $time);
         }
         else
         {
@@ -216,7 +221,8 @@ class UserDataManager
             $tempUserData["worlds"][$levelName] = [
                 "group" => $this->plugin->getDefaultGroup()->getName(),
                 "permissions" => [
-                ]
+                ],
+                "time" => -1
             ];
 
             $this->setData($player, $tempUserData);

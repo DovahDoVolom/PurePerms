@@ -6,7 +6,7 @@
 # Fixed Some Errors and Translated some stuff By @TheKillerTacos
 
 ---
-messages-version: "1.3.2"
+messages-version: "1.4.0_01"
 language: "sp"
 cmds:
   addgroup:
@@ -111,7 +111,7 @@ cmds:
       level_not_exist: "El mundo %var0% NO existe."
   setgroup:
     desc: "Coloca al usuario en un grupo."
-    usage: "Uso: /setgroup <usuario> <grupo> [mundo]"
+    usage: "Uso: /setgroup <usuario> <grupo> <exp_date> [mundo]"
     messages:
       access_denied_01: "No tienes permisos para Poner el jugador en el grupo %var0%."
       access_denied_02: "No tienes permisos para Cambiar el grupo de un jugaro con el grupo %var0%."    

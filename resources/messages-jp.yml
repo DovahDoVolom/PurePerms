@@ -3,7 +3,7 @@
 # Original Japanese Translation by onebone (jyc00410@gmail.com)
 # Translated into fluent Japanese by haniokasai (11/04/2015) (htek@haniokasai.com, @haniokasai for Twitter)
 ---
-messages-version: "1.3.2"
+messages-version: "1.4.0_01"
 language: "jp"
 cmds:
   addgroup:
@@ -108,7 +108,7 @@ cmds:
       level_not_exist: "ワールド%var0%は存在しません。"
   setgroup:
     desc: "プレーヤーのグループを設定します。"
-    usage: "使用法: /setgroup <プレーヤー> <グループ> [ワールド]"
+    usage: "使用法: /setgroup <プレーヤー> <グループ> <exp_date> [ワールド]"
     messages:
       access_denied_01: "あなたはプレイヤーのグループを%var0%にする権限がありません。"
       access_denied_02: "あなたはグループを持つ%var0%プレイヤーのグループを変える権限がありません。"    

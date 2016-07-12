@@ -33,7 +33,7 @@ class NoeulAPI
      * 3. 명령어와 비밀번호 입력 후 퍼미션 다시 설정
      */
 
-    const NOEUL_VERSION = 'INDEV';
+    const NOEUL_VERSION = '1.0.0';
 
     private $needAuth = [];
 
@@ -62,7 +62,7 @@ class NoeulAPI
             unset($this->needAuth[spl_object_hash($player)]);
         }
 
-        $player->sendMessage(TextFormat::GREEN . "[PurePerms] " . $this->plugin->getMessage("cmds.ppsudo.messages.successfully_logged_in"));
+        $player->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.ppsudo.messages.successfully_logged_in"));
 
         return true;
     }
@@ -172,10 +172,10 @@ class NoeulAPI
      */
     public function sendAuthMsg(Player $player)
     {
-        $player->sendMessage(TextFormat::RED . "[PurePerms] " . $this->plugin->getMessage("cmds.ppsudo.messages.deauth_01", self::NOEUL_VERSION));
-        $player->sendMessage(TextFormat::RED . "[PurePerms] " . $this->plugin->getMessage("cmds.ppsudo.messages.deauth_02"));
+        $player->sendMessage(TextFormat::RED . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.ppsudo.messages.deauth_01", self::NOEUL_VERSION));
+        $player->sendMessage(TextFormat::RED . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.ppsudo.messages.deauth_02"));
 
-        $player->sendMessage(TextFormat::RED . "[PurePerms] " . $this->plugin->getMessage("cmds.ppsudo.messages.deauth_03"));
+        $player->sendMessage(TextFormat::RED . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.ppsudo.messages.deauth_03"));
     }
 
     /**

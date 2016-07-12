@@ -27,6 +27,7 @@ use _64FF00\PurePerms\provider\DefaultProvider;
 use _64FF00\PurePerms\provider\MySQLProvider;
 use _64FF00\PurePerms\provider\ProviderInterface;
 use _64FF00\PurePerms\provider\YamlV1Provider;
+use _64FF00\PurePerms\task\PPExpDateCheckTask;
 
 use pocketmine\IPlayer;
 
@@ -114,6 +115,8 @@ class PurePerms extends PluginBase
         $this->registerPlayers();
 
         $this->getServer()->getPluginManager()->registerEvents(new PPListener($this), $this);
+
+        $this->getServer()->getScheduler()->scheduleRepeatingTask(new PPExpDateCheckTask($this), 0, 72000);
     }
 
     public function onDisable()
@@ -272,6 +275,20 @@ class PurePerms extends PluginBase
 
         return self::SUCCESS;
     }
+
+    /**
+     * @param $date
+     * @return int
+     * Example: $date = '1d2h3m';
+     */
+    public function date2Int($date)
+    {
+        if(preg_match("/([0-9]+)d([0-9]+)h([0-9]+)m/", $date, $result_array) and count($result_array) === 4)
+            return time() + ($result_array[1] * 86400) + ($result_array[2] * 3600) + ($result_array[3] * 60);
+
+        return -1;
+    }
+
     /**
      * @param Player $player
      * @return null|\pocketmine\permission\PermissionAttachment
@@ -637,10 +654,11 @@ class PurePerms extends PluginBase
      * @param IPlayer $player
      * @param PPGroup $group
      * @param null $levelName
+     * @param int $time
      */
-    public function setGroup(IPlayer $player, PPGroup $group, $levelName = null)
+    public function setGroup(IPlayer $player, PPGroup $group, $levelName = null, $time = -1)
     {
-        $this->userDataMgr->setGroup($player, $group, $levelName);
+        $this->userDataMgr->setGroup($player, $group, $levelName, $time);
     }
 
     public function sortGroupData()

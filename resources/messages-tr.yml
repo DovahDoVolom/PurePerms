@@ -4,7 +4,7 @@
 # Turkish messages resource by @PainTR (GitHub)
 
 ---
-messages-version: "1.3.2"
+messages-version: "1.4.0_01"
 language: "tr"
 cmds:
   addgroup:
@@ -109,7 +109,7 @@ cmds:
       level_not_exist: "%var0% adında bir dünya bulunmamakta."
   setgroup: 
     desc: "Belirlenen kullanıcının grubunu belirler."
-    usage: "Usage: /setgroup <oyuncu> <grup> [dünya]"
+    usage: "Usage: /setgroup <oyuncu> <grup> <exp_date> [dünya]"
     messages:
       access_denied_01: "Belirlenen oyuncunun grubunu %var0% grubuna değiştirmeye yetkiniz yok."
       access_denied_02: "Belirlenen oyuncunun grubunu %var0% grubuna değiştirmeye yetkiniz yok."    

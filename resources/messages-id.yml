@@ -4,7 +4,7 @@
 # Translator : DevilLord Red Eagle / Darius Ellert Klaus / facebook.com/darius.redeagle
 
 ---
-messages-version: "1.3.2"
+messages-version: "1.4.0_01"
 language: "idn"
 cmds:
   addgroup:
@@ -109,7 +109,7 @@ cmds:
       level_not_exist: "World %var0% tidak ada."
   setgroup: 
     desc: "Set grup untuk permain."
-    usage: "Command: /setgroup <player> <group> [world]"
+    usage: "Command: /setgroup <player> <group> <exp_date> [world]"
     messages:
       access_denied_01: "Kamu tidak mempunyai permission untuk set pemain ke group %var0%."
       access_denied_02: "You don't have permission to change group of a player with group %var0%."  

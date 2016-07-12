@@ -83,7 +83,8 @@ class DefaultProvider implements ProviderInterface
             return [
                 "group" => $this->plugin->getDefaultGroup()->getName(),
                 "permissions" => [],
-                "worlds" => []
+                "worlds" => [],
+                "time" => -1
             ];
         }
 
@@ -136,7 +137,8 @@ class DefaultProvider implements ProviderInterface
             $this->players->set($userName, [
                 "group" => $this->plugin->getDefaultGroup()->getName(),
                 "permissions" => [],
-                "worlds" => []
+                "worlds" => [],
+                "time" => -1
             ]);
         }
 

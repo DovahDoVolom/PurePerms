@@ -4,7 +4,7 @@
 # Russian language resource by @0-Eclipse-0, @vvzar, @Pub4Game and @seetch
 
 ---
-messages-version: "1.3.2"
+messages-version: "1.4.0_01"
 language: "ru"
 cmds:
   addgroup:
@@ -109,7 +109,7 @@ cmds:
       level_not_exist: "Мир %var0% не существует."
   setgroup: 
     desc: "Добавляет игрока в группу."
-    usage: "Применение: /setgroup <игрок> <группа> [мир]"
+    usage: "Применение: /setgroup <игрок> <группа> <exp_date> [мир]"
     messages: 
       access_denied_01: "Вы не вправе устанавливать группу игрока чтобы %var0%."
       access_denied_02: "Вы не имеет права изменить группу игрока с группой %var0%."    

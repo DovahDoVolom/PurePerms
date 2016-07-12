@@ -57,7 +57,7 @@ class SetGroup extends Command implements PluginIdentifiableCommand
             return false;
         }
         
-        if(count($args) < 2 || count($args) > 3)
+        if(count($args) < 2 || count($args) > 4)
         {
             $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.setgroup.usage"));
             
@@ -74,16 +74,21 @@ class SetGroup extends Command implements PluginIdentifiableCommand
             
             return true;
         }
+
+        $time = -1;
+
+        if(isset($args[2]))
+            $time = $this->plugin->date2Int($args[2]);
         
         $levelName = null;
         
-        if(isset($args[2]))
+        if(isset($args[3]))
         {
-            $level = $this->plugin->getServer()->getLevelByName($args[2]);
+            $level = $this->plugin->getServer()->getLevelByName($args[3]);
             
             if($level === null)
             {
-                $sender->sendMessage(TextFormat::RED . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.setgroup.messages.level_not_exist", $args[2]));
+                $sender->sendMessage(TextFormat::RED . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.setgroup.messages.level_not_exist", $args[3]));
                 
                 return true;
             }
@@ -91,7 +96,7 @@ class SetGroup extends Command implements PluginIdentifiableCommand
             $levelName = $level->getName();
         }
 
-		$superAdminRanks = $this->plugin->getConfigValue("superadmin-ranks");
+        $superAdminRanks = $this->plugin->getConfigValue("superadmin-ranks");
 
         foreach(array_values($superAdminRanks) as $value)
         {
@@ -117,7 +122,7 @@ class SetGroup extends Command implements PluginIdentifiableCommand
             }
         }
 
-        $this->plugin->getUserDataMgr()->setGroup($player, $group, $levelName);
+        $this->plugin->getUserDataMgr()->setGroup($player, $group, $levelName, $time);
         
         $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.setgroup.messages.setgroup_successfully", $player->getName()));
         

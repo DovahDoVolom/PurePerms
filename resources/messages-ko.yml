@@ -6,7 +6,7 @@
 # 제 블로그 이외에 허락없이 마음대로 플러그인 배포하실 시에는 바로 한국어 파일 삭제 조치하고 공유 중단합니다
 
 ---
-messages-version: "1.3.2"
+messages-version: "1.4.0_01"
 language: "ko"
 cmds:
   addgroup:
@@ -111,7 +111,7 @@ cmds:
       level_not_exist: "%var0%이라는 이름을 가진 월드가 존재하지 않습니다."
   setgroup: 
     desc: "플레이어의 그룹을 설정합니다."
-    usage: "사용법: /setgroup <그룹을 설정할 플레이어> <그룹 이름> [월드 이름]"
+    usage: "사용법: /setgroup <그룹을 설정할 플레이어> <그룹 이름> <exp_date> [월드 이름]"
     messages:
       access_denied_01: "플레이어 그룹을 %var0%으로 설정할 수 있는 권한이 없습니다."
       access_denied_02: "그룹 %var0%에 속한 플레이어의 그룹을 변경할 수 있는 권한이 없습니다."
