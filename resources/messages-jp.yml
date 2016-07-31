@@ -14,11 +14,11 @@ cmds:
       group_already_exists: "グループ%var0%はすでに存在しています。"
       invalid_group_name: "存在しないグループ名です。"
   addparent:
-    desc: "Adds a group to another group inheritance list."
-    usage: "Usage: /addparent <target_group> <parent_group>"
+    desc: "グループを別のグループの継承リストに追加します。."
+    usage: "使用法: /addparent <操作対象のグループ> <親グループ>"
     messages:
-      addparent_successfully: "Added %var0% to group %var1%'s inheritance list."	 
-      target_already_inherits: "Group %var0% already inherits %var1%."     
+      addparent_successfully: "%var0%をグループ　%var1%の継承リストに追加しました."	 
+      target_already_inherits: "グループ　%var0% は 継承リストに既に追加されています　%var1%."     
   defgroup:
     desc: "デフォルトのグループを決めることを許可します。"
     usage: "使い方: /defgroup <グループ> [ワールド]"
@@ -38,14 +38,14 @@ cmds:
     messages:
       all_registered_groups: "グループリスト：%var0%"
   grpinfo:
-    desc: "Shows info about a group."
+    desc: "グループについての情報を表示します。"
     usage: "使用法: /grpinfo <グループ> [ワールド]"
     messages:
       group_not_exist: "グループ%var0%は存在しません。"
-      grpinfo_header: "-- Group Information for %var0% --" 
-      grpinfo_alias: "ALIAS: %var0%"
-      grpinfo_default: "DEFAULT: %var0%" 
-      grpinfo_parents: "PARENTS: %var0%"	  
+      grpinfo_header: "-- %var0%　のグループ情報 --" 
+      grpinfo_alias: "エイリアス: %var0%"
+      grpinfo_default: "デフォルト: %var0%" 
+      grpinfo_parents: "親: %var0%"	  
       level_not_exist: "ワールド%var0%は存在しません。"
   listgperms:
     desc: "グループの権限のリストを表示します。"
@@ -72,21 +72,21 @@ cmds:
     messages:
       successfully_reloaded: "全てのプラグインの設定がリロードされました。"
   ppsudo:
-    desc: "Registers or logs into your Noeul account."
+    desc: "登録またはノウル アカウントにログインします。"
     usage: "Usage: /ppsudo <login / register>"
     messages:
-      already_registered: "This account is already registered."
-      deauth_01: "This server uses Noeul v%var0% to protect your account."
-      deauth_02: "You must authenticate your account first."
-      deauth_03: "Please register or login to your account using /ppsudo command"
-      invalid_sender: "This command should be only used in-game."
-      login_usage: "Usage: /ppsudo login <password>"
-      not_registered: "This account is not registered."
-      password_too_short: "Your password does NOT meet minimum length (%var0%) requirements."
-      register_usage: "Usage: /ppsudo register <password>"
-      successfully_logged_in: "You are now logged in."	 
-      successfully_registered: "Your account has been successfully registered."
-      unregister_usage: "Usage: /ppsudo unregister <password>" 
+      already_registered: "このアカウントは既に登録されています"
+      deauth_01: "ノウル v %var0% は、あなたのアカウントを保護するために使用されます。"
+      deauth_02: "まずあなたのアカウントを認証する必要があります。"
+      deauth_03: "ログインまたは登録をして、/ppsudo コマンドを使ってください"
+      invalid_sender: "このコマンドはゲーム内のみで使用できます"
+      login_usage: "使用法: /ppsudo login <パスワード>"
+      not_registered: "このアカウントは登録されていません"
+      password_too_short: "パスワードは(%var0%)文字以上必要です"
+      register_usage: "Usage: /ppsudo register <パスワード>"
+      successfully_logged_in: "ログインしました"	 
+      successfully_registered: "あなたのアカウントは登録されました"
+      unregister_usage: "Usage: /ppsudo unregister <パスワード>" 
   rmgroup:
     desc: "グループを削除します。"
     usage: "使用法: /rmgroup <グループ>"
@@ -95,10 +95,10 @@ cmds:
       group_not_exist: "グループ%var0%は存在しません。"
       invalid_group_name: "存在しないグループ名です。"
   rmparent:
-    desc: "Removes a group from another group inheritance list."
-    usage: "Usage: /rmparent <target_group> <parent_group>"
+    desc: "別のグループの継承リストからグループを削除します。"
+    usage: "使い方: /rmparent <操作対象のグループ> <親グループ>"
     messages:
-      rmparent_successfully: "Removed %var0% from group %var1%'s inheritance list."		  
+      rmparent_successfully: "%var0%を、グループ%var1%'の継承リストから削除しました"		  
   setgperm:
     desc: "グループに権限を追加します。"
     usage: "使用法: /setgperm <グループ> <権限> [ワールド]"
@@ -165,5 +165,5 @@ logger_messages:
   setProvider_YAMLv2: "YAMLv2にデーター管理方式が設定されました。"
   setProvider_NotFound: "データー管理方式%var0%は存在しません。デフォルトの方式に設定しました。"
   unregisterPlayer: "プレイヤーを%var0%から解除してます..."
-  YAMLProvider_InvalidGroupsSettings: "INVALID GROUPS.YML SETTINGS: Please check if you have an invalid or corrupted groups.yml."
+  YAMLProvider_InvalidGroupsSettings: "GROUPS.YMLの設定が間違っています: groups.yml が無効、または壊れているかどうかに確認してください。"
 ‌...
