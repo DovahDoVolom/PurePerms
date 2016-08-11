@@ -111,7 +111,7 @@ cmds:
       level_not_exist: "El mundo %var0% NO existe."
   setgroup:
     desc: "Coloca al usuario en un grupo."
-    usage: "Uso: /setgroup <usuario> <grupo> <exp_date> [mundo]"
+    usage: "Uso: /setgroup <usuario> <grupo> <exp_time> [mundo]"
     messages:
       access_denied_01: "No tienes permisos para Poner el jugador en el grupo %var0%."
       access_denied_02: "No tienes permisos para Cambiar el grupo de un jugaro con el grupo %var0%."    
@@ -151,6 +151,7 @@ cmds:
       usrinfo_ip: "IP: %var0%"
       usrinfo_uuid: "ID ÚNICA: %var0%"
       usrinfo_group: "GRUPO: %var0%"
+      usrinfo_exp: "ExpTime: %var0%"
       unknown: "DESCONOCIDO"
 logger_messages:
   getConfigValue_01: "La llave %var0% no ha sido encontrada en config.yml."

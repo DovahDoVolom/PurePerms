@@ -108,7 +108,7 @@ cmds:
       level_not_exist: "ワールド%var0%は存在しません。"
   setgroup:
     desc: "プレーヤーのグループを設定します。"
-    usage: "使用法: /setgroup <プレーヤー> <グループ> <exp_date> [ワールド]"
+    usage: "使用法: /setgroup <プレーヤー> <グループ> <exp_time> [ワールド]"
     messages:
       access_denied_01: "あなたはプレイヤーのグループを%var0%にする権限がありません。"
       access_denied_02: "あなたはグループを持つ%var0%プレイヤーのグループを変える権限がありません。"    
@@ -148,6 +148,7 @@ cmds:
       usrinfo_ip: "IP: %var0%"
       usrinfo_uuid: "ユニークID: %var0%"
       usrinfo_group: "グループ: %var0%"
+      usrinfo_exp: "ExpTime: %var0%"
       unknown: "不明"
 logger_messages:
   getConfigValue_01: "キー%var0%はconfig.ymlにありませんでした。"

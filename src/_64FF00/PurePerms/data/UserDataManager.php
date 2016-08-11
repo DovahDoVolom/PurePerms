@@ -40,6 +40,14 @@ class UserDataManager
         return $this->plugin->getProvider()->getPlayerData($player);
     }
 
+    public function getExpDate(IPlayer $player, $levelName = null)
+    {
+        $expDate = $levelName !== null ? $this->getWorldData($player, $levelName)["expTime"] : $this->getNode($player, "expTime");
+
+        // TODO
+        return $expDate;
+    }
+
     /**
      * @param IPlayer $player
      * @param null $levelName
@@ -115,7 +123,7 @@ class UserDataManager
                 "group" => $this->plugin->getDefaultGroup($levelName)->getName(),
                 "permissions" => [
                 ],
-                "time" => -1
+                "expTime" => -1
             ];
 
         return $this->getData($player)["worlds"][$levelName];
@@ -153,15 +161,14 @@ class UserDataManager
         if($levelName === null)
         {
             $this->setNode($player, "group", $group->getName());
-
-            // TODO: Multiworld Support
-            $this->setNode($player, "time", $time);
+            $this->setNode($player, "expTime", $time);
         }
         else
         {
             $worldData = $this->getWorldData($player, $levelName);
 
             $worldData["group"] = $group->getName();
+            $worldData["expTime"] = $time;
 
             $this->setWorldData($player, $levelName, $worldData);
         }
@@ -222,7 +229,7 @@ class UserDataManager
                 "group" => $this->plugin->getDefaultGroup()->getName(),
                 "permissions" => [
                 ],
-                "time" => -1
+                "expTime" => -1
             ];
 
             $this->setData($player, $tempUserData);

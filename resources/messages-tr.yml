@@ -109,7 +109,7 @@ cmds:
       level_not_exist: "%var0% adında bir dünya bulunmamakta."
   setgroup: 
     desc: "Belirlenen kullanıcının grubunu belirler."
-    usage: "Usage: /setgroup <oyuncu> <grup> <exp_date> [dünya]"
+    usage: "Usage: /setgroup <oyuncu> <grup> <exp_time> [dünya]"
     messages:
       access_denied_01: "Belirlenen oyuncunun grubunu %var0% grubuna değiştirmeye yetkiniz yok."
       access_denied_02: "Belirlenen oyuncunun grubunu %var0% grubuna değiştirmeye yetkiniz yok."    
@@ -149,6 +149,7 @@ cmds:
       usrinfo_ip: "IP: %var0%"
       usrinfo_uuid: "ÖZGÜN ID: %var0%"
       usrinfo_group: "GRUP: %var0%"
+      usrinfo_exp: "ExpTime: %var0%"
       unknown: "BİLİNMİYOR"
 logger_messages:
   getConfigValue_01: "%var0% kilidi config.yml dosyasında bulunamadı."

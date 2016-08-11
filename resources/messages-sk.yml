@@ -109,7 +109,7 @@ cmds:
       level_not_exist: "Svet %var0% neexistuje."
   setgroup: 
     desc: "Nastavi skupinu pre uzivatele."
-    usage: "Pouzitie: /setgroup <hrac> <skupina> <exp_date> [Svet]"
+    usage: "Pouzitie: /setgroup <hrac> <skupina> <exp_time> [Svet]"
     messages:
       access_denied_01: "You don't have permission to set a player's group to %var0%."
       access_denied_02: "You don't have permission to change group of a player with group %var0%."        
@@ -149,6 +149,7 @@ cmds:
       usrinfo_ip: "IP: %var0%"
       usrinfo_uuid: "UNYKATNE ID: %var0%"
       usrinfo_group: "SKUPINA: %var0%"
+      usrinfo_exp: "ExpTime: %var0%"
       unknown: "NEZNAMY"
 logger_messages:
   getConfigValue_01: "Klic %var0% nebol najdeny v config.yml."

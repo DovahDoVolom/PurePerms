@@ -4,6 +4,7 @@ namespace _64FF00\PurePerms;
 
 use _64FF00\PurePerms\event\PPGroupChangedEvent;
 
+use _64FF00\PurePerms\event\PPRankExpiredEvent;
 use pocketmine\event\Listener;
 use pocketmine\event\entity\EntityLevelChangeEvent;
 use pocketmine\event\player\PlayerCommandPreprocessEvent;
@@ -144,5 +145,16 @@ class PPListener implements Listener
         $player = $event->getPlayer();
 
         $this->plugin->unregisterPlayer($player);
+    }
+
+    /**
+     * @param PPRankExpiredEvent $event
+     * @priority LOWEST
+     */
+    public function onRankExpired(PPRankExpiredEvent $event)
+    {
+        $player = $event->getPlayer();
+
+        $this->plugin->setGroup($player, $this->plugin->getDefaultGroup());
     }
 }

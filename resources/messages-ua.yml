@@ -109,7 +109,7 @@ cmds:
       level_not_exist: "Світ %var0% не існує."
   setgroup: 
     desc: "Додає гравця в групу."
-    usage: "Пример: /setgroup <гравець> <група> <exp_date> [світ]"
+    usage: "Пример: /setgroup <гравець> <група> <exp_time> [світ]"
     messages: 
       access_denied_01: "You don't have permission to set a player's group to %var0%."
       access_denied_02: "You don't have permission to change group of a player with group %var0%."
@@ -149,6 +149,7 @@ cmds:
       usrinfo_ip: "IP: %var0%"
       usrinfo_uuid: "UNIQUE ID: %var0%"
       usrinfo_group: "ГРУПА: %var0%"
+      usrinfo_exp: "ExpTime: %var0%"
       unknown: "Невідомо"
 logger_messages:
   getConfigValue_01: "Ключ %var0% не знайдено в файлі config.yml."

@@ -109,7 +109,7 @@ cmds:
       level_not_exist: "Il mondo %var0% non esiste."
   setgroup: 
     desc: "Imposta un gruppo per un utente."
-    usage: "Sintassi: /setgroup <giocatore> <gruppo> <exp_date> [mondo]"
+    usage: "Sintassi: /setgroup <giocatore> <gruppo> <exp_time> [mondo]"
     messages:
       access_denied_01: "You don't have permission to set a player's group to %var0%."
       access_denied_02: "You don't have permission to change group of a player with group %var0%."        
@@ -149,6 +149,7 @@ cmds:
       usrinfo_ip: "IP: %var0%"
       usrinfo_uuid: "ID UNIVOCO: %var0%"
       usrinfo_group: "GRUPPO: %var0%"
+      usrinfo_exp: "ExpTime: %var0%"
       unknown: "SCONOSCIUTO"
 logger_messages:
   getConfigValue_01: "Chiave %var0% non trovata in config.yml."

@@ -109,7 +109,7 @@ cmds:
       level_not_exist: "Welt %var0% existiert NICHT."
   setgroup: 
     desc: "Setzt eine Gruppe für einen Spieler."
-    usage: "Benutzung: /setgroup <Spieler> <Gruppe> <exp_date> [Welt]"
+    usage: "Benutzung: /setgroup <Spieler> <Gruppe> <exp_time> [Welt]"
     messages:
       access_denied_01: "You don't have permission to set a player's group to %var0%."
       access_denied_02: "You don't have permission to change group of a player with group %var0%."        
@@ -149,6 +149,7 @@ cmds:
       usrinfo_ip: "IP: %var0%"
       usrinfo_uuid: "EINZIGARTIGE ID: %var0%"
       usrinfo_group: "GRUPPE: %var0%"
+      usrinfo_exp: "ExpTime: %var0%"
       unknown: "UNBEKANNT"
 logger_messages:
   getConfigValue_01: "Schlüssel %var0% wurde nicht in der config.yml gefunden."

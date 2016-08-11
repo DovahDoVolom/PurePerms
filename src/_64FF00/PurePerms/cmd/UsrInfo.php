@@ -91,9 +91,11 @@ class UsrInfo extends Command implements PluginIdentifiableCommand
         $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.usrinfo.messages.usrinfo_uuid", $uuid));
 
         $userGroup = $this->plugin->getUserDataMgr()->getGroup($player, $levelName);
-        
         $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.usrinfo.messages.usrinfo_group", TextFormat::DARK_GREEN . $userGroup->getName()));
-        
+
+        $expDate = $this->plugin->getUserDataMgr()->getExpDate($player, $levelName);
+        $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.usrinfo.messages.usrinfo_exp", TextFormat::DARK_GREEN . $expDate));
+
         return true;
     }
     

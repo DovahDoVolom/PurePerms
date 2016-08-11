@@ -75,10 +75,10 @@ class SetGroup extends Command implements PluginIdentifiableCommand
             return true;
         }
 
-        $time = -1;
+        $expTime = -1;
 
         if(isset($args[2]))
-            $time = $this->plugin->date2Int($args[2]);
+            $expTime = $this->plugin->date2Int($args[2]);
         
         $levelName = null;
         
@@ -122,7 +122,7 @@ class SetGroup extends Command implements PluginIdentifiableCommand
             }
         }
 
-        $this->plugin->getUserDataMgr()->setGroup($player, $group, $levelName, $time);
+        $this->plugin->getUserDataMgr()->setGroup($player, $group, $levelName, $expTime);
         
         $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.setgroup.messages.setgroup_successfully", $player->getName()));
         

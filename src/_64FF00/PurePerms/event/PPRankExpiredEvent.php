@@ -1,13 +1,15 @@
 <?php
 
-namespace _64FF00\PurePerms\task;
+namespace _64FF00\PurePerms\event;
 
-use _64FF00\PurePerms\event\PPRankExpiredEvent;
+use _64FF00\PurePerms\PPGroup;
 use _64FF00\PurePerms\PurePerms;
 
-use pocketmine\scheduler\PluginTask;
+use pocketmine\event\plugin\PluginEvent;
 
-class PPExpDateCheckTask extends PluginTask
+use pocketmine\IPlayer;
+
+class PPRankExpiredEvent extends PluginEvent
 {
     /*
         PurePerms by 64FF00 (Twitter: @64FF00)
@@ -22,33 +24,43 @@ class PPExpDateCheckTask extends PluginTask
           888  888    "Y8888P"        888  888        888        "Y8888P"   "Y8888P"
     */
 
-    private $plugin;
+    public static $handlerList = null;
 
     /**
      * @param PurePerms $plugin
+     * @param IPlayer $player
+     * @param PPGroup $group
+     * @param $levelName
      */
-    public function __construct(PurePerms $plugin)
+    public function __construct(PurePerms $plugin, IPlayer $player, $levelName)
     {
         parent::__construct($plugin);
 
-        $this->plugin = $plugin;
+        $this->player = $player;
+        $this->levelName = $levelName;
     }
 
     /**
-     * @param $currentTick
+     * @return \pocketmine\level\Level
      */
-    public function onRun($currentTick)
+    public function getLevel()
     {
-        foreach($this->plugin->getServer()->getOnlinePlayers() as $player)
-        {
-            if(time() === $this->plugin->getUserDataMgr()->getNode($player, "expTime"))
-            {
-                $levelName = $this->plugin->getConfigValue("enable-multiworld-perms") ? $player->getLevel()->getName() : null;
+        return $this->getPlugin()->getServer()->getLevelByName($this->levelName);
+    }
 
-                $event = new PPRankExpiredEvent($this->plugin, $player, $levelName);
+    /**
+     * @return string
+     */
+    public function getLevelName()
+    {
+        return $this->levelName;
+    }
 
-                $this->plugin->getServer()->getPluginManager()->callEvent($event);
-            }
-        }
+    /**
+     * @return IPlayer
+     */
+    public function getPlayer()
+    {
+        return $this->player;
     }
 }

@@ -109,7 +109,7 @@ cmds:
       level_not_exist: "Мир %var0% не существует."
   setgroup: 
     desc: "Добавляет игрока в группу."
-    usage: "Применение: /setgroup <игрок> <группа> <exp_date> [мир]"
+    usage: "Применение: /setgroup <игрок> <группа> <exp_time> [мир]"
     messages: 
       access_denied_01: "Вы не вправе устанавливать группу игрока чтобы %var0%."
       access_denied_02: "Вы не имеет права изменить группу игрока с группой %var0%."    
@@ -149,6 +149,7 @@ cmds:
       usrinfo_ip: "IP: %var0%"
       usrinfo_uuid: "УНИКАЛЬНЫЙ ID: %var0%"
       usrinfo_group: "ГРУППА: %var0%"
+      usrinfo_exp: "ExpTime: %var0%"
       unknown: "Неизвестно"
 logger_messages:
   getConfigValue_01: "Ключ %var0% не найден в файле config.yml."
