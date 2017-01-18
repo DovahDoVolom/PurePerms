@@ -1,0 +1,8 @@
+--- # Poggit-CI Manifest. Open the CI at https://poggit.pmmp.io/ci/Awzaw/PurePerms
+branches:
+- master
+projects:
+  PurePerms:
+    path: ""
+    icon: PurePerms.png
+...
