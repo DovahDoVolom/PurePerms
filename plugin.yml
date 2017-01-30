@@ -4,7 +4,7 @@
 name: PurePerms
 main: _64FF00\PurePerms\PurePerms
 version: "1.4.0-INDEV"
-api: [1.13.0, 2.0.0]
+api: [1.13.0, 2.0.0, 3.0.0-ALPHA1, 3.0.0-ALPHA2, 3.0.0-ALPHA3]
 load: POSTWORLD
 author: "64FF00 & ProjectInfinity"
 website: https://github.com/PurePlugins/PurePerms
