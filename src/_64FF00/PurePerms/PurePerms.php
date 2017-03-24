@@ -116,7 +116,7 @@ class PurePerms extends PluginBase
 
         $this->getServer()->getPluginManager()->registerEvents(new PPListener($this), $this);
 
-        $this->getServer()->getScheduler()->scheduleRepeatingTask(new PPExpDateCheckTask($this), 0, 72000);
+        $this->getServer()->getScheduler()->scheduleRepeatingTask(new PPExpDateCheckTask($this), 72000);
     }
 
     public function onDisable()
@@ -457,7 +457,7 @@ class PurePerms extends PluginBase
      */
     public function getPermissions(IPlayer $player, $levelName)
     {
-        // TODO: Fix this damn shit
+        // TODO: Fix this
         $group = $this->userDataMgr->getGroup($player, $levelName);
 
         $groupPerms = $group->getGroupPermissions($levelName);
@@ -703,13 +703,17 @@ class PurePerms extends PluginBase
 
     /**
      * @param IPlayer $player
+     * @param string $levelName
      */
-    public function updatePermissions(IPlayer $player)
+    public function updatePermissions(IPlayer $player, string $levelName = null)
     {
         if($player instanceof Player)
         {
-            $levelName = $this->getConfigValue("enable-multiworld-perms") ? $player->getLevel()->getName() : null;
-
+            if($this->getConfigValue("enable-multiworld-perms") == null) {
+                $levelName = null;
+            }elseif($levelName == null) {
+                $levelName = $player->getLevel()->getName();
+            }
             $permissions = [];
 
             /** @var string $permission */

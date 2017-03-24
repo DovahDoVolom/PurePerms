@@ -57,13 +57,15 @@ class PPListener implements Listener
 
     /**
      * @param EntityLevelChangeEvent $event
-     * @priority LOWEST
+     * @priority MONITOR
      */
     public function onLevelChange(EntityLevelChangeEvent $event)
     {
+        if($event->isCancelled()) return;
+
         $player = $event->getEntity();
 
-        $this->plugin->updatePermissions($player);
+        $this->plugin->updatePermissions($player, $event->getTarget()->getName());
     }
 
     public function onPlayerCommand(PlayerCommandPreprocessEvent $event)
