@@ -3,20 +3,15 @@
 namespace _64FF00\PurePerms;
 
 use _64FF00\PurePerms\event\PPGroupChangedEvent;
-
 use _64FF00\PurePerms\event\PPRankExpiredEvent;
 use pocketmine\event\Listener;
 use pocketmine\event\entity\EntityLevelChangeEvent;
 use pocketmine\event\player\PlayerCommandPreprocessEvent;
 use pocketmine\event\player\PlayerLoginEvent;
-use pocketmine\event\player\PlayerMoveEvent;
 use pocketmine\event\player\PlayerPreLoginEvent;
 use pocketmine\event\player\PlayerQuitEvent;
-
 use pocketmine\event\TranslationContainer;
-
 use pocketmine\Player;
-
 use pocketmine\utils\TextFormat;
 
 class PPListener implements Listener
@@ -64,8 +59,9 @@ class PPListener implements Listener
         if($event->isCancelled()) return;
 
         $player = $event->getEntity();
-
-        $this->plugin->updatePermissions($player, $event->getTarget()->getName());
+        if($player instanceof Player) {
+            $this->plugin->updatePermissions($player, $event->getTarget()->getName());
+        }
     }
 
     public function onPlayerCommand(PlayerCommandPreprocessEvent $event)

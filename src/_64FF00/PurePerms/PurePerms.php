@@ -412,7 +412,7 @@ class PurePerms extends PluginBase
 
     /**
      * @param $node
-     * @param ...$vars
+     * @param array ...$vars
      * @return string
      */
     public function getMessage($node, ...$vars)
@@ -703,7 +703,7 @@ class PurePerms extends PluginBase
 
     /**
      * @param IPlayer $player
-     * @param string $levelName
+     * @param string|null $levelName
      */
     public function updatePermissions(IPlayer $player, string $levelName = null)
     {
@@ -714,6 +714,7 @@ class PurePerms extends PluginBase
             }elseif($levelName == null) {
                 $levelName = $player->getLevel()->getName();
             }
+
             $permissions = [];
 
             /** @var string $permission */
