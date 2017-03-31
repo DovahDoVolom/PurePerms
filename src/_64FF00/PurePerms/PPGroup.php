@@ -290,8 +290,10 @@ class PPGroup
     }
 
     /**
-     * @param $permission
-     * @param null $levelName
+     * @param string $permission
+     * @param string|null $levelName
+     *
+     * @return bool
      */
     public function setGroupPermission($permission, $levelName = null)
     {

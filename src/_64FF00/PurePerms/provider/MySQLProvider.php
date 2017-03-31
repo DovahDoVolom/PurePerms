@@ -22,7 +22,7 @@ class MySQLProvider implements ProviderInterface
           888  888   Y88b  d88P       888  888        888       Y88b  d88P Y88b  d88P
           888  888    "Y8888P"        888  888        888        "Y8888P"   "Y8888P"
     */
-    
+
     private $db, $plugin;
 
     private $groupsData = [];

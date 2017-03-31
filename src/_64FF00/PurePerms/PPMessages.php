@@ -53,7 +53,7 @@ class PPMessages
 
     /**
      * @param $node
-     * @param ...$vars
+     * @param array ...$vars
      * @return mixed|null
      */
     public function getMessage($node, ...$vars)

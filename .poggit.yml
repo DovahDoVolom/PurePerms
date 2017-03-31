@@ -1,8 +1,9 @@
---- # Poggit-CI Manifest. Open the CI at https://poggit.pmmp.io/ci/Awzaw/PurePerms
+--- # Poggit-CI Manifest. Open the CI at https://poggit.pmmp.io/ci/poggit-orphanage/PurePerms
 branches:
 - master
+- multiworld-fix
 projects:
   PurePerms:
     path: ""
-    icon: icon.png
+    icon: icon128.png
 ...
