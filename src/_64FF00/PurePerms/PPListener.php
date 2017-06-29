@@ -9,6 +9,7 @@ use pocketmine\event\entity\EntityLevelChangeEvent;
 use pocketmine\event\player\PlayerCommandPreprocessEvent;
 use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\event\player\PlayerQuitEvent;
+use pocketmine\event\player\PlayerLoginEvent;
 use pocketmine\event\TranslationContainer;
 use pocketmine\Player;
 use pocketmine\utils\TextFormat;
@@ -104,7 +105,7 @@ class PPListener implements Listener
      * @param PlayerJoinEvent $event
      * @priority LOWEST
      */
-    public function onPlayerJoin(PlayerJoinEvent $event)
+    public function onPlayerLogin(PlayerLoginEvent $event)
     {
         $player = $event->getPlayer();
 
