@@ -7,7 +7,7 @@ use _64FF00\PurePerms\PurePerms;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\command\PluginIdentifiableCommand;
-
+use pocketmine\plugin\Plugin;
 use pocketmine\Player;
 
 use pocketmine\utils\TextFormat;
@@ -49,7 +49,7 @@ class PPSudo extends Command implements PluginIdentifiableCommand
      * @param array $args
      * @return bool
      */
-    public function execute(CommandSender $sender, $label, array $args)
+    public function execute(CommandSender $sender, string $label, array $args) : bool
     {
         if(!$this->testPermission($sender))
             return false;
@@ -129,7 +129,7 @@ class PPSudo extends Command implements PluginIdentifiableCommand
         return true;
     }
     
-    public function getPlugin()
+    public function getPlugin() : Plugin
     {
         return $this->plugin;
     }

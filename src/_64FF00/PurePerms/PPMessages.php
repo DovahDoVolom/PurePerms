@@ -80,7 +80,7 @@ class PPMessages
     /**
      * @return mixed
      */
-    public function getVersion()
+    public function getVersion() : string
     {
         $version = $this->messages->get("messages-version");
 
