@@ -3,8 +3,8 @@
 
 name: PurePerms
 main: _64FF00\PurePerms\PurePerms
-version: 1.4.1-dev1
-api: 3.0.0-ALPHA7
+version: 1.4.1-1.alpha8
+api: [3.0.0-ALPHA7, 3.0.0-ALPHA8]
 load: POSTWORLD
 author: "64FF00 & ProjectInfinity"
 website: https://github.com/PurePlugins/PurePerms
