@@ -38,7 +38,7 @@ class PPMySQLTask extends PluginTask
     /**
      * @param $currentTick
      */
-    public function onRun($currentTick)
+    public function onRun(int $currentTick)
     {
         if($this->db->ping())
         {
