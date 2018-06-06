@@ -5,9 +5,9 @@ namespace _64FF00\PurePerms\task;
 use _64FF00\PurePerms\event\PPRankExpiredEvent;
 use _64FF00\PurePerms\PurePerms;
 
-use pocketmine\scheduler\PluginTask;
+use pocketmine\scheduler\Task;
 
-class PPExpDateCheckTask extends PluginTask
+class PPExpDateCheckTask extends Task
 {
     /*
         PurePerms by 64FF00 (Twitter: @64FF00)
@@ -22,15 +22,11 @@ class PPExpDateCheckTask extends PluginTask
           888  888    "Y8888P"        888  888        888        "Y8888P"   "Y8888P"
     */
 
-    private $plugin;
-
     /**
      * @param PurePerms $plugin
      */
     public function __construct(PurePerms $plugin)
     {
-        parent::__construct($plugin);
-
         $this->plugin = $plugin;
     }
 

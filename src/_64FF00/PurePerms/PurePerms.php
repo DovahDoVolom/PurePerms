@@ -116,7 +116,7 @@ class PurePerms extends PluginBase
 
         $this->getServer()->getPluginManager()->registerEvents(new PPListener($this), $this);
 
-        $this->getServer()->getScheduler()->scheduleRepeatingTask(new PPExpDateCheckTask($this), 72000);
+        $this->getScheduler()->scheduleRepeatingTask(new PPExpDateCheckTask($this), 72000);
     }
 
     public function onDisable()

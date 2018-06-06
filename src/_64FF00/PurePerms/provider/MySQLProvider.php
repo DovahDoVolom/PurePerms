@@ -58,7 +58,7 @@ class MySQLProvider implements ProviderInterface
 
         $this->loadGroupsData();
 
-        $this->plugin->getServer()->getScheduler()->scheduleRepeatingTask(new PPMySQLTask($this->plugin, $this->db), 1200);
+        $this->plugin->getScheduler()->scheduleRepeatingTask(new PPMySQLTask($this->plugin, $this->db), 1200);
     }
 
     /**
