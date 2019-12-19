@@ -95,12 +95,12 @@ class PurePerms extends PluginBase
 
         if($this->getConfigValue("enable-multiworld-perms") === false)
         {
-            $this->getLogger()->notice($this->getMessage("logger_messages.onLoad_01"));
-            $this->getLogger()->notice($this->getMessage("logger_messages.onLoad_02"));
+            $this->getLogger()->info($this->getMessage("logger_messages.onLoad_01"));
+            $this->getLogger()->info($this->getMessage("logger_messages.onLoad_02"));
         }
         else
         {
-            $this->getLogger()->notice($this->getMessage("logger_messages.onLoad_03"));
+            $this->getLogger()->info($this->getMessage("logger_messages.onLoad_03"));
         }
     }
     
