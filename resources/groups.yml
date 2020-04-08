@@ -1,16 +1,26 @@
+
+# PurePerms by 64FF00 (xktiverz@gmail.com, @64ff00 for Twitter)
+
 ---
 Guest:
-  def-group: true
+  alias: 'gst'
+  isDefault: true
   inheritance: []
   permissions:
-  - pocketmine.command.list
+  - -essentials.kit
+  - -essentials.kit.other
   - -pocketmine.command.me
+  - pchat.colored.format
+  - pchat.colored.nametag
+  - pocketmine.command.list
   - pperms.command.ppinfo
   worlds: []
 Admin:
-  inheritance: 
+  alias: 'adm'
+  inheritance:
   - Guest
-  permissions:
+  permissions:  
+  - essentials.gamemode
   - pocketmine.broadcast
   - pocketmine.command.gamemode
   - pocketmine.command.give
@@ -19,11 +29,18 @@ Admin:
   - pocketmine.command.time
   worlds: []
 Owner:
-  inheritance: 
-  - Guest
+  alias: 'owr'
+  inheritance:
   - Admin
   permissions:
+  - essentials
   - pocketmine.command
   - pperms.command
+  worlds: []
+OP:
+  alias: 'op'
+  inheritance: []
+  permissions:
+  - '*'
   worlds: []
 ...

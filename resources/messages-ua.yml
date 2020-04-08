@@ -1,0 +1,171 @@
+
+# PurePerms by 64FF00 (xktiverz@gmail.com, @64ff00 for Twitter)
+
+# Ukrainian messages resource by @samalero (GitHub)
+
+---
+messages-version: "1.4.0_01"
+language: "ua"
+cmds:
+  addgroup:
+    desc: "Додає нову групу в список груп"
+    usage: "Приклад: /addgroup <група>"
+    messages:
+      group_added_successfully: "Група %var0% успішно створена."
+      group_already_exists: "Помилка! Група %var0% вже існує."
+      invalid_group_name: "Неприпустима назва для групи."
+  addparent:
+    desc: "Adds a group to another group inheritance list."
+    usage: "Usage: /addparent <target_group> <parent_group>"
+    messages:
+      addparent_successfully: "Added %var0% to group %var1%'s inheritance list."	 
+      target_already_inherits: "Group %var0% already inherits %var1%." 	  
+  defgroup:
+    desc: "Змінює групу за замовчуванням."
+    usage: "Пример: /defgroup <група> [світ]"
+    messages:
+      defgroup_successfully: "Група за замовчуванням вдало змінена на %var0%."
+      group_not_exist: "Група %var0% не існує." 
+      level_not_exist: "Світ %var0% не існує."	  
+  fperms:
+    desc: "Показує список всіх дозволів для вказаного плагіну."
+    usage: "Пример: /fperms <плагін>"
+    messages:
+      no_plugin_perms: "У плагіна %var0% немає ніяких дозволів."
+      plugin_not_exist: "Плагін %var0% не знайдено."
+      plugin_perms_list: "Список всіх дозволів для плагіну %var0% (%var1% / %var2%):"
+  groups:
+    desc: "Показує список всіх груп."
+    messages:
+      all_registered_groups: "Всі зарєстровані групи: %var0%"
+  grpinfo:
+    desc: "Shows info about a group."
+    usage: "Приклад: /grpinfo <група> [світ]"
+    messages:
+      group_not_exist: "Група %var0% не існує."
+      grpinfo_header: "-- Group Information for %var0% --" 
+      grpinfo_alias: "ALIAS: %var0%"
+      grpinfo_default: "DEFAULT: %var0%" 
+      grpinfo_parents: "PARENTS: %var0%"	  
+      level_not_exist: "Світ %var0% не існує."	  
+  listgperms: 
+    desc: "Показує список всіх дозволів для групи."
+    usage: "Приклад: /listgperms <група> <сторінка> [світ]"
+    messages:
+      group_not_exist: "Група %var0% не існує."
+      group_perms_list: "Список всіх дозволів для групи %var0% (%var1% / %var2%):"
+      level_not_exist: "Світ %var0% не існує."
+      no_group_perms: "У групи %var0% немає ніяких дозволів."
+  listuperms: 
+    desc: "Показує список всіх дозволів для вказаного гравця."
+    usage: "Приклад: /listuperms <гравець> <сторінка> [світ]"
+    messages:
+      level_not_exist: "Світ %var0% не існує."
+      no_user_perms: "У гравця %var0% немає ніяких користувацьких дозволів."
+      user_perms_list: "Список всіх дозволів для гравця %var0% (%var1% / %var2%):" 
+  ppinfo: 
+    desc: "Показує всю інформацію про плагін PurePerms, включаючи версію, автора і т.д."
+    messages:
+      ppinfo_console: "Ви використовуєте PurePerms версії v%var0% від %var1%."
+      ppinfo_player: "На цьому сервері використовується PurePerms версії v%var0% від %var1%."
+  ppreload: 
+    desc: "Перезавантажує всі налаштування PurePerms."
+    messages: 
+      successfully_reloaded: "Всі налаштування плагіну були успішно перезавантажені."
+  ppsudo:
+    desc: "Registers or logs into your Noeul account."
+    usage: "Usage: /ppsudo <login / register>"
+    messages:
+      already_registered: "This account is already registered."
+      deauth_01: "This server uses Noeul v%var0% to protect your account."
+      deauth_02: "You must authenticate your account first."
+      deauth_03: "Please register or login to your account using /ppsudo command"
+      invalid_sender: "This command should be only used in-game."
+      login_usage: "Usage: /ppsudo login <password>"
+      not_registered: "This account is not registered."
+      password_too_short: "Your password does NOT meet minimum length (%var0%) requirements."
+      register_usage: "Usage: /ppsudo register <password>"
+      successfully_logged_in: "You are now logged in."	 
+      successfully_registered: "Your account has been successfully registered."
+      unregister_usage: "Usage: /ppsudo unregister <password>" 
+  rmgroup: 
+    desc: "Видаляє указану групу."
+    usage: "Приклад: /rmgroup <група>"
+    messages:
+      group_removed_successfully: "Група %var0% успішно видалена."
+      group_not_exist: "Група %var0% не існує."
+      invalid_group_name: "Неприпустима назва для групи."
+  rmparent:
+    desc: "Removes a group from another group inheritance list."
+    usage: "Usage: /rmparent <target_group> <parent_group>"
+    messages:
+      rmparent_successfully: "Removed %var0% from group %var1%'s inheritance list."		  
+  setgperm: 
+    desc: "Додає дозвіл групі."
+    usage: "Приклад: /setgperm <група> <дозвіл> [світ]"
+    messages:
+      gperm_added_successfully: "Дозвіл %var0% успішно додано в групу."
+      group_not_exist: "Група %var0% не існує."
+      level_not_exist: "Світ %var0% не існує."
+  setgroup: 
+    desc: "Додає гравця в групу."
+    usage: "Пример: /setgroup <гравець> <група> <exp_time> [світ]"
+    messages: 
+      access_denied_01: "You don't have permission to set a player's group to %var0%."
+      access_denied_02: "You don't have permission to change group of a player with group %var0%."
+      group_not_exist: "Група %var0% не існує."
+      level_not_exist: "Світ %var0% не існує."
+      on_player_group_change: "Ваша група змінена на %var0%!"
+      setgroup_successfully: "Гравець %var0% успішно доданий в групу."
+  setuperm: 
+    desc: "Додає дозвіл користувачу."
+    usage: "Приклад: /setuperm <гравець> <дозвіл> [світ]"
+    messages:
+      level_not_exist: "Світ %var0% не існує."
+      uperm_added_successfully: "Дозвіл %var0% успішно додано гравцю %var1%."
+  unsetgperm: 
+    desc: "Забирає дозвіл у групи."
+    usage: "Приклад: /unsetgperm <група> <дозвіл> [світ]"
+    messages:
+      gperm_removed_successfully: "Дозвіл %var0% успішно забрано у групи."
+      group_not_exist: "Група %var0% не існує."
+      level_not_exist: "Світ %var0% не існує."
+  unsetuperm: 
+    desc: "Забирає дозвіл у гравця."
+    usage: "Приклад: /unsetuperm <гравець> <дозвіл> [світ]"
+    messages: 
+      level_not_exist: "Світ %var0% не існує."
+      uperm_removed_successfully: "Дозвіл %var0% успішно забрано у гравця %var1%."
+  usrinfo: 
+    desc: "Показує інформацію про гравця."
+    usage: "Приклад: /usrinfo <гравець> [світ]"
+    messages:
+      level_not_exist: "Світ %var0% не існує."
+      status_online: "ОНЛАЙН!"
+      status_offline: "ОФФЛАЙН."
+      usrinfo_header: "<--- Інформація про гравця %var0% --->"
+      usrinfo_username: "ГРАВЕЦЬ: %var0%"
+      usrinfo_status: "СТАТУС: %var0%"
+      usrinfo_ip: "IP: %var0%"
+      usrinfo_uuid: "UNIQUE ID: %var0%"
+      usrinfo_group: "ГРУПА: %var0%"
+      usrinfo_exp: "ExpTime: %var0%"
+      unknown: "Невідомо"
+logger_messages:
+  getConfigValue_01: "Ключ %var0% не знайдено в файлі config.yml."
+  getDefaultGroup_01: "Було вказано більше однієї групи, встановленої за замовчуванням в файлі groups.yml."
+  getDefaultGroup_02: "Не знайдено ні однієї групи, позначеної за замовчуванням в файлі groups.yml."
+  getDefaultGroup_03: "Група з параметром Default позначається автоматично."
+  getGroup_01: "Група %var0% не знайдена."
+  getGroup_02: "Група %var0% має неправильні чи пошкоджені дані."
+  onLoad_01: "Підтримка декількох світів зараз вимкнена."
+  onLoad_02: "Не забудьте встановити для параметру enable-multiworld-perms в файлі config.yml значення true, якщо хочете змінити різні дозволи в різних світах!"
+  onLoad_03: "Поддержка декількох світів увімкнена."
+  registerPlayer: "Реєстрація гравця %var0%..."
+  setProvider_MySQL: "Тип сховища даних - MySQL."
+  setProvider_YAMLv1: "Тип сховища даних - YAMLv1."
+  setProvider_YAMLv2: "Тип сховища даних - YAMLv2."
+  setProvider_NotFound: "Провайдер даних %var0% не існує. Встановлено стандартний тип сховища даних."
+  unregisterPlayer: "Відміна реєстрації гравця %var0%..."
+  YAMLProvider_InvalidGroupsSettings: "INVALID GROUPS.YML SETTINGS: Please check if you have an invalid or corrupted groups.yml."
+...

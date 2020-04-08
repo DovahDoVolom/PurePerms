@@ -1,0 +1,170 @@
+# PurePerms by 64FF00 (xktiverz@gmail.com, @64ff00 for Twitter)
+
+# Original Japanese Translation by onebone (jyc00410@gmail.com)
+# Translated into fluent Japanese by haniokasai (11/04/2015) (htek@haniokasai.com, @haniokasai for Twitter)
+---
+messages-version: "1.4.0_01"
+language: "jp"
+cmds:
+  addgroup:
+    desc: "新しいグループをリストに追加します。"
+    usage: "使用法: /addgroup <グループ>"
+    messages:
+      group_added_successfully: "%var0%をグループリストに追加しました。"
+      group_already_exists: "グループ%var0%はすでに存在しています。"
+      invalid_group_name: "存在しないグループ名です。"
+  addparent:
+    desc: "グループを別のグループの継承リストに追加します。."
+    usage: "使用法: /addparent <操作対象のグループ> <親グループ>"
+    messages:
+      addparent_successfully: "%var0%をグループ　%var1%の継承リストに追加しました."	 
+      target_already_inherits: "グループ　%var0% は 継承リストに既に追加されています　%var1%."     
+  defgroup:
+    desc: "デフォルトのグループを決めることを許可します。"
+    usage: "使い方: /defgroup <グループ> [ワールド]"
+    messages:
+      defgroup_successfully: "デフォルトのグループは %var0%に設定されました."
+      group_not_exist: "グループ%var0%は存在しません。"
+      level_not_exist: "ワールド%var0%は存在しません。"	  
+  fperms:
+    desc: "特定のプラグインの権限リストを表示します。"
+    usage: "使用法: /fperms <プラグイン>"
+    messages:
+      no_plugin_perms: "プラグイン%var0%は何の権限も持っていません。"
+      plugin_not_exist: "プラグイン%var0%は存在しません。"
+      plugin_perms_list: "プラグイン%var0%の権限 (%var1% / %var2%) : "
+  groups:
+    desc: "グループリストを表示します。"
+    messages:
+      all_registered_groups: "グループリスト：%var0%"
+  grpinfo:
+    desc: "グループについての情報を表示します。"
+    usage: "使用法: /grpinfo <グループ> [ワールド]"
+    messages:
+      group_not_exist: "グループ%var0%は存在しません。"
+      grpinfo_header: "-- %var0%　のグループ情報 --" 
+      grpinfo_alias: "エイリアス: %var0%"
+      grpinfo_default: "デフォルト: %var0%" 
+      grpinfo_parents: "親: %var0%"	  
+      level_not_exist: "ワールド%var0%は存在しません。"
+  listgperms:
+    desc: "グループの権限のリストを表示します。"
+    usage: "使用法: /listgperms <グループ> <ページ> [ワールド]"
+    messages:
+      group_not_exist: "グループ%var0%は存在しません。"
+      group_perms_list: "%var0%のグループの権限一覧を表示します　(%var1% / %var2%) : "
+      level_not_exist: "ワールド%var0%は存在しません。"
+      no_group_perms: "グループ%var0%は何の権限も持っていません。"
+  listuperms:
+    desc: "プレーヤーの権限を表示します。"
+    usage: "使用法: /listuperms <プレーヤー> <ページ> [ワールド]"
+    messages:
+      level_not_exist: "ワールド%var0%は存在しません。"
+      no_user_perms: "プレーヤー%var0%は何の権限も持っていません。"
+      user_perms_list: "%var0%の権限を表示します (%var1% / %var2%) : "
+  ppinfo:
+    desc: "PurePermsの情報、例えば作成者、バージョン、など"
+    messages:
+      ppinfo_console: "いまあなたはPurePerms v%var0% by %var1%を使っています。"
+      ppinfo_player: "このサーバーはPurePerms v%var0% by %var1%を使っています。"
+  ppreload:
+    desc: "全てのPurePerms設定をリロードします。"
+    messages:
+      successfully_reloaded: "全てのプラグインの設定がリロードされました。"
+  ppsudo:
+    desc: "登録またはノウル アカウントにログインします。"
+    usage: "Usage: /ppsudo <login / register>"
+    messages:
+      already_registered: "このアカウントは既に登録されています"
+      deauth_01: "ノウル v %var0% は、あなたのアカウントを保護するために使用されます。"
+      deauth_02: "まずあなたのアカウントを認証する必要があります。"
+      deauth_03: "ログインまたは登録をして、/ppsudo コマンドを使ってください"
+      invalid_sender: "このコマンドはゲーム内のみで使用できます"
+      login_usage: "使用法: /ppsudo login <パスワード>"
+      not_registered: "このアカウントは登録されていません"
+      password_too_short: "パスワードは(%var0%)文字以上必要です"
+      register_usage: "Usage: /ppsudo register <パスワード>"
+      successfully_logged_in: "ログインしました"	 
+      successfully_registered: "あなたのアカウントは登録されました"
+      unregister_usage: "Usage: /ppsudo unregister <パスワード>" 
+  rmgroup:
+    desc: "グループを削除します。"
+    usage: "使用法: /rmgroup <グループ>"
+    messages:
+      group_removed_successfully: "グループ%var0%を削除しました。"
+      group_not_exist: "グループ%var0%は存在しません。"
+      invalid_group_name: "存在しないグループ名です。"
+  rmparent:
+    desc: "別のグループの継承リストからグループを削除します。"
+    usage: "使い方: /rmparent <操作対象のグループ> <親グループ>"
+    messages:
+      rmparent_successfully: "%var0%を、グループ%var1%'の継承リストから削除しました"		  
+  setgperm:
+    desc: "グループに権限を追加します。"
+    usage: "使用法: /setgperm <グループ> <権限> [ワールド]"
+    messages:
+      gperm_added_successfully: "権限%var0%をグループに追加しました。"
+      group_not_exist: "グループ%var0%は存在しません。"
+      level_not_exist: "ワールド%var0%は存在しません。"
+  setgroup:
+    desc: "プレーヤーのグループを設定します。"
+    usage: "使用法: /setgroup <プレーヤー> <グループ> <exp_time> [ワールド]"
+    messages:
+      access_denied_01: "あなたはプレイヤーのグループを%var0%にする権限がありません。"
+      access_denied_02: "あなたはグループを持つ%var0%プレイヤーのグループを変える権限がありません。"    
+      group_not_exist: "グループ%var0%は存在しません。"
+      level_not_exist: "ワールド%var0%は存在しません。"
+      on_player_group_change: "あなたのグループは%var0%に変わりました!"
+      setgroup_successfully: "%var0%をグループに追加しました。"
+  setuperm:
+    desc: "権限をプレーヤーに追加します。"
+    usage: "使用法: /setuperm <プレーヤー> <権限> [ワールド]"
+    messages:
+      level_not_exist: "ワールド%var0%は存在しません。"
+      uperm_added_successfully: "権限%var0%を%var1%に追加しました。"
+  unsetgperm:
+    desc: "グループから権限を削除します。"
+    usage: "使用法: /unsetgperm <グループ> <権限> [ワールド]"
+    messages:
+      gperm_removed_successfully: "権限%var0%をグループから削除しました。"
+      group_not_exist: "グループ%var0%は存在しません。"
+      level_not_exist: "ワールド%var0%は存在しません。"
+  unsetuperm:
+    desc: "プレーヤーから権限を削除します。"
+    usage: "使用法: /unsetuperm <プレーヤー> <権限> [ワールド]"
+    messages:
+      level_not_exist: "ワールド%var0%は存在しません。"
+      uperm_removed_successfully: "権限%var0%をグループ%var1%から削除しました。"
+  usrinfo:
+    desc: "プレーヤーの情報を表示します。"
+    usage: "使用法: /usrinfo <プレーヤー> [ワールド]"
+    messages:
+      level_not_exist: "ワールド%var0%は存在しません。"
+      status_online: "オンライン!"
+      status_offline: "オフライン..."
+      usrinfo_header: "-- %var0%の情報 --"
+      usrinfo_username: "名前: %var0%"
+      usrinfo_status: "状態: %var0%"
+      usrinfo_ip: "IP: %var0%"
+      usrinfo_uuid: "ユニークID: %var0%"
+      usrinfo_group: "グループ: %var0%"
+      usrinfo_exp: "ExpTime: %var0%"
+      unknown: "不明"
+logger_messages:
+  getConfigValue_01: "キー%var0%はconfig.ymlにありませんでした。"
+  getDefaultGroup_01: "基本グループが２つ以上に設定されています。"
+  getDefaultGroup_02: "基本グループが設定されていません。"
+  getDefaultGroup_03: "基本グループを自動的に設定します。"
+  getGroup_01: "グループ%var0%は存在しません。"
+  getGroup_02: "グループ%var0%は不正です。"
+  onLoad_01: "マルチワールド対応が現在無効です。"
+  onLoad_02: "per-world（ワールドごとの)権限を使用するには、config.ymlのenable-multiworld-permissionをtrueに設定することを忘れないでください！"
+  onLoad_03: "マルチワールド対応が有効です。"
+  registerPlayer: "プレイヤーを%var0%に登録しています..."
+  setProvider_MySQL: "MYSQLにデーター管理方式が設定されました。"
+  setProvider_YAMLv1: "YAMLv1にデーター管理方式が設定されました。"
+  setProvider_YAMLv2: "YAMLv2にデーター管理方式が設定されました。"
+  setProvider_NotFound: "データー管理方式%var0%は存在しません。デフォルトの方式に設定しました。"
+  unregisterPlayer: "プレイヤーを%var0%から解除してます..."
+  YAMLProvider_InvalidGroupsSettings: "GROUPS.YMLの設定が間違っています: groups.yml が無効、または壊れているかどうかに確認してください。"
+‌...

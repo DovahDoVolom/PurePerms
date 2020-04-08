@@ -1,0 +1,171 @@
+
+# PurePerms by 64FF00 (xktiverz@gmail.com, @64ff00 for Twitter)
+
+# Turkish messages resource by @PainTR (GitHub)
+
+---
+messages-version: "1.4.0_01"
+language: "tr"
+cmds:
+  addgroup:
+    desc: "Grup listesine yeni grup eklersiniz."
+    usage: "Kullanış: /addgroup <grup>"
+    messages:
+      group_added_successfully: "%var0% grubu başarı ile gruplara eklendi."
+      group_already_exists: "%var0% grubu zaten bulunmakta."
+      invalid_group_name: "Geçersiz Grup İsmi."
+  addparent:
+    desc: "Başka bir grup için miras grubu listesi oluştur."
+    usage: "Kullanış: /addparent <hedef_grup> <ana_grup>"
+    messages:
+      addparent_successfully: "%var0% adı grup %var1% adlı grubun miras listesine eklendi."	 
+      target_already_inherits: "%var0% grubu zaten %var1% adlı grubun miras listesinde."     
+  defgroup:
+    desc: "Varsayılan grubu ayarlar."
+    usage: "Kullanış: /defgroup <grup> [dünya]"
+    messages:
+      defgroup_successfully: "Varsayılan grup %var0% grubuna değiştirildi."
+      group_not_exist: "%var0% adında bir grup yok."
+      level_not_exist: "%var0% adında bir dünya bulunmamakta."
+  fperms:
+    desc: "Belirlenen eklentinin yetkilerini listeler."
+    usage: "Kullanış: /fperms <eklenti>"
+    messages:
+      no_plugin_perms: "%var0% eklentisinin hiç bir yetkisi bulunmamakta."
+      plugin_not_exist: "%var0% eklentisi bulunamadı."
+      plugin_perms_list: "Belirlenen eklentinin bütün yetkileri %var0% (%var1% / %var2%) : "
+  groups:
+    desc: "Var olan grupları listeler."
+    messages:
+      all_registered_groups: "Var olan gruplar: %var0%"
+  grpinfo:
+    desc: "Shows info about a group."
+    usage: "Usage: /grpinfo <grup> [dünya]"
+    messages:
+      group_not_exist: "%var0% adında bir grup yok."
+      grpinfo_header: "-- Group Information for %var0% --" 
+      grpinfo_alias: "ALIAS: %var0%"
+      grpinfo_default: "DEFAULT: %var0%" 
+      grpinfo_parents: "PARENTS: %var0%"	  
+      level_not_exist: "%var0% adında bir dünya bulunmamakta."  
+  listgperms: 
+    desc: "Bir grubun bütün yetkilerini listeler."
+    usage: "Kullanış: /listgperms <grup> <sayfa> [dünya]"
+    messages:
+      group_not_exist: "%var0% adında bir grup yok."
+      group_perms_list: "Belirlenen grubun bütün yetkileri %var0% (%var1% / %var2%) : "
+      level_not_exist: "%var0% adında bir dünya bulunmamakta."
+      no_group_perms: "%var0% adındaki grubun hiç bir yetkisi bulunmamakta."
+  listuperms: 
+    desc: "Bir kullanıcının bütün yetkilerini listeler."
+    usage: "Kullanış: /listuperms <oyuncu> <sayfa> [dünya]"
+    messages:
+      level_not_exist: "%var0% adında bir dünya yok."
+      no_user_perms: "%var0% adındaki kullanıcının hiç bir yetkisi bulunmamakta."
+      user_perms_list: "Belirlenen kullanıcının bütün yetkileri %var0% (%var1% / %var2%) : " 
+  ppinfo: 
+    desc: "Mevcut PupePerms kurucusunu, sürümünü vb. gösterir."
+    messages:
+      ppinfo_console: "Şuan PurePerms v%var0% sürümünü kullanıyorsunuz. By: %var1%"
+      ppinfo_player: "Bu sunucu PurePerms v%var0% sürümünü kullanıyor. By: %var1%"
+  ppreload: 
+    desc: "Bütün PurePerms ayarlarını yeniden yükler."
+    messages: 
+      successfully_reloaded: "Bütün eklenti ayarları başarı ile yeniden yüklendi."
+  ppsudo:
+    desc: "Noeul hesabınıza kayıt olursunuz veya giriş yaparsınız."
+    usage: "Kullanış: /ppsudo <login / register>"
+    messages:
+      already_registered: "Bu hesap zaten kayıt oldu."
+      deauth_01: "Bu sunucu Noeul v%var0% sürümünü hesabınızı korumak için kullanıyor."
+      deauth_02: "Öncelikle hesabınıza giriş yapmanız gerekmektedir."
+      deauth_03: "Lütfen hesabınıza kayıt olun veya giriş yapınız: /ppsudo command"
+      invalid_sender: "Bu komut oyun içinde kullanılabilir."
+      login_usage: "Kullanış: /ppsudo login <şifre>"
+      not_registered: "Bu hesap kayıt olmadı."
+      password_too_short: "Şifreniz minimum karakter sayısının altında olmamalı (%var0%)"
+      register_usage: "Kullanış: /ppsudo register <şifre>"
+      successfully_logged_in: "Hesabınıza giriş yaptınız."	 
+      successfully_registered: "Hesabınız başarı ile kayıt oldu."
+      unregister_usage: "Kullanış: /ppsudo unregister <şifre>" 	
+  rmgroup: 
+    desc: "Grup listesinden grup siler."
+    usage: "Kullanış: /rmgroup <grup>"
+    messages:
+      group_removed_successfully: "%var0% grubu grup listesinden başarı ile kaldırıldı."
+      group_not_exist: "%var0% adında bir grup bulunmamakta."
+      invalid_group_name: "Geçersiz Grup Adı."
+  rmparent:
+    desc: "Belirlenen grubun ana gruptan mirasını kaldırır."
+    usage: "Kullanış: /rmparent <hedef_grup> <ana_grup>"
+    messages:
+      rmparent_successfully: "%var0% adlı grubun mirası %var1% adlı gruptan kaldırıldı."		  
+  setgperm: 
+    desc: "Belirlenen gruba yetki ekler."
+    usage: "Kullanış: /setgperm <grup> <yetki> [dünya]"
+    messages:
+      gperm_added_successfully: "%var0% yetkisi gruba başarı ile eklendi."
+      group_not_exist: "%var0% adında bir grup bulunmamakta."
+      level_not_exist: "%var0% adında bir dünya bulunmamakta."
+  setgroup: 
+    desc: "Belirlenen kullanıcının grubunu belirler."
+    usage: "Usage: /setgroup <oyuncu> <grup> <exp_time> [dünya]"
+    messages:
+      access_denied_01: "Belirlenen oyuncunun grubunu %var0% grubuna değiştirmeye yetkiniz yok."
+      access_denied_02: "Belirlenen oyuncunun grubunu %var0% grubuna değiştirmeye yetkiniz yok."    
+      group_not_exist: "%var0% adında bir grup bulunmamakta."
+      level_not_exist: "%var0% adında bir dünya bulunmamakta."
+      on_player_group_change: "Grubunuz %var0% adlı gruba değiştirildi!"
+      setgroup_successfully: "%var0% adlı oyuncunun grubu başarı ile değiştirildi."
+  setuperm: 
+    desc: "Belirlenen kullanıcıya yetki verir."
+    usage: "Kullanış: /setuperm <oyuncu> <yetki> [dünya]"
+    messages:
+      level_not_exist: "%var0% adında bir dünya bulunmamakta."
+      uperm_added_successfully: "%var0% yetkisi %var1% adlı oyuncuya başarı ile verildi."
+  unsetgperm: 
+    desc: "Bir grubun yetkisini kaldırır."
+    usage: "Kullanış: /unsetgperm <grup> <yetki> [dünya]"
+    messages:
+      gperm_removed_successfully: "%var0% yetkisi gruptan başarılı ile kaldırıldı."
+      group_not_exist: "%var0% adında bir grup bulunmamakta."
+      level_not_exist: "%var0% adında bir dünya bulunmamakta."
+  unsetuperm: 
+    desc: "Bir kullanıcının yetkisini kaldırır."
+    usage: "Kullanış: /unsetuperm <oyuncu> <yetki> [dünya]"
+    messages: 
+      level_not_exist: "%var0% adında bir dünya bulunmamakta."
+      uperm_removed_successfully: "%var0% yetkisi %var1% adlı oyuncudan başarı ile kaldırıldı."
+  usrinfo: 
+    desc: "Bir kullanıcının bilgilerini listeler."
+    usage: "Kullanış: /usrinfo <oyuncu> [dünya]"
+    messages:
+      level_not_exist: "%var0% adında bir dünya yok."
+      status_online: "ÇEVRİMİÇİ!"
+      status_offline: "ÇEVRİMDIŞI..."
+      usrinfo_header: "-- %var0% adlı kullanıcının bilgileri --"
+      usrinfo_username: "KULLANICI ADI: %var0%"
+      usrinfo_status: "DURUM: %var0%"
+      usrinfo_ip: "IP: %var0%"
+      usrinfo_uuid: "ÖZGÜN ID: %var0%"
+      usrinfo_group: "GRUP: %var0%"
+      usrinfo_exp: "ExpTime: %var0%"
+      unknown: "BİLİNMİYOR"
+logger_messages:
+  getConfigValue_01: "%var0% kilidi config.yml dosyasında bulunamadı."
+  getDefaultGroup_01: "Birden fazla varsayılan grup tespit edildi."
+  getDefaultGroup_02: "Groups dosyasında varsayılan grup ayarı bulunamadı."
+  getDefaultGroup_03: "Varsayılan grup otomatik ayarlandı."
+  getGroup_01: "%var0% adlı grup bulunamadı."
+  getGroup_02: "%var0% geçersiz veya bozuk veri içeriyor."
+  onLoad_01: "Multiworld desteği devre dışı."
+  onLoad_02: "enable-multiworld-perms seçeneğini config.yml dosyasında per-world yetkisini kullanmak için aktif etmeyi unutmayınız!"
+  onLoad_03: "Multiworld desteği etkin."
+  registerPlayer: "%var0% oyuncusu kayda geçirildi..."
+  setProvider_MySQL: "Veri sağlayıcısı MySQL ayarlandı."
+  setProvider_YAMLv1: "Veri sağlayıcısı YAMLv1 ayarlandı."
+  setProvider_YAMLv2: "Veri sağlayıcısı YAMLv2 ayarlandı."
+  setProvider_NotFound: "%var0% sağlayıcısı mevcut değil. Varsayılan veri sağlayıcısına değiştiriliyor."
+  unregisterPlayer: "%var0% adlı oyuncunun kaydı siliniyor..."
+  YAMLProvider_InvalidGroupsSettings: "BİLİNMEYEN GROUPS.YML AYARI: Lütfen groups.yml dosyasındaki geçersiz veya bozuk dosyaları kontrol edin."
+...
