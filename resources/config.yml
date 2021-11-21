@@ -19,6 +19,10 @@ default-language: en
 # - true / false
 disable-op: true
 
+# Setting this option will allow you to use per-world permissions (Unstable)
+# - true / false
+enable-multiworld-perms: false
+
 # Enables 'Noeul', a 'pointless' security management system for PurePerms
 # - true / false
 enable-noeul-sixtyfour: false
