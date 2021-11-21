@@ -1,8 +1,8 @@
 <?php
 
-namespace _64FF00\PurePerms\task;
+namespace _64FF00\PurePerms\Task;
 
-use _64FF00\PurePerms\event\PPRankExpiredEvent;
+use _64FF00\PurePerms\EventManager\PPRankExpiredEvent;
 use _64FF00\PurePerms\PurePerms;
 
 use pocketmine\scheduler\Task;

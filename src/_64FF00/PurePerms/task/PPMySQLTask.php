@@ -1,6 +1,6 @@
 <?php
 
-namespace _64FF00\PurePerms\task;
+namespace _64FF00\PurePerms\Task;
 
 use _64FF00\PurePerms\PurePerms;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace _64FF00\PurePerms\noeul;
+namespace _64FF00\PurePerms\Noeul;
 
 use _64FF00\PurePerms\PurePerms;
 
