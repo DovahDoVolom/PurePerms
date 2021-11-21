@@ -66,10 +66,6 @@ cmds:
     messages:
       ppinfo_console: "You are currently using PurePerms v%var0% by %var1%."
       ppinfo_player: "This server is using PurePerms v%var0% by %var1%."
-  ppreload: 
-    desc: "Reloads all PurePerms configurations."
-    messages: 
-      successfully_reloaded: "All plugin configurations have been successfully reloaded."
   ppsudo:
     desc: "Registers or logs into your Noeul account."
     usage: "Usage: /ppsudo <login / register>"
