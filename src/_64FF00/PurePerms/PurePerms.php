@@ -11,7 +11,6 @@ use _64FF00\PurePerms\Commands\GrpInfo;
 use _64FF00\PurePerms\Commands\ListGPerms;
 use _64FF00\PurePerms\Commands\ListUPerms;
 use _64FF00\PurePerms\Commands\PPInfo;
-use _64FF00\PurePerms\Commands\PPReload;
 use _64FF00\PurePerms\Commands\PPSudo;
 use _64FF00\PurePerms\Commands\RmGroup;
 use _64FF00\PurePerms\Commands\RmParent;
@@ -137,7 +136,6 @@ class PurePerms extends PluginBase
         $commandMap->register("pureperms", new ListGPerms($this, "listgperms", $this->getMessage("cmds.listgperms.desc") . ' #64FF00'));
         $commandMap->register("pureperms", new ListUPerms($this, "listuperms", $this->getMessage("cmds.listuperms.desc") . ' #64FF00'));
         $commandMap->register("pureperms", new PPInfo($this, "ppinfo", $this->getMessage("cmds.ppinfo.desc") . ' #64FF00'));
-        $commandMap->register("pureperms", new PPReload($this, "ppreload", $this->getMessage("cmds.ppreload.desc") . ' #64FF00'));
         $commandMap->register("pureperms", new RmGroup($this, "rmgroup", $this->getMessage("cmds.rmgroup.desc") . ' #64FF00'));
         $commandMap->register("pureperms", new RmParent($this, "rmparent", $this->getMessage("cmds.rmparent.desc") . ' #64FF00'));
         $commandMap->register("pureperms", new SetGPerm($this, "setgperm", $this->getMessage("cmds.setgperm.desc") . ' #64FF00'));
@@ -503,18 +501,6 @@ class PurePerms extends PluginBase
         foreach($this->getServer()->getOnlinePlayers() as $player)
         {
             $this->registerPlayer($player);
-        }
-    }
-
-    public function reload()
-    {
-        $this->reloadConfig();
-        $this->saveDefaultConfig();
-        $this->messages->reloadMessages();
-        $this->setProvider(false);
-        foreach($this->getServer()->getOnlinePlayers() as $player)
-        {
-            $this->updatePermissions($player);
         }
     }
 

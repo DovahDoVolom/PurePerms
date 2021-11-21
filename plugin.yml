@@ -41,9 +41,6 @@ permissions:
   pperms.command.grpinfo:
     default: op
     description: "Nothing"
-  pperms.command.ppreload:
-    default: op
-    description: "Allows you to reload all PurePerms configurations."
   pperms.command.rmgroup:
     default: op
     description: "Allows you to remove a group from the groups list."
