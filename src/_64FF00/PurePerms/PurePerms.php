@@ -22,6 +22,7 @@ use _64FF00\PurePerms\Commands\UnsetGPerm;
 use _64FF00\PurePerms\Commands\UnsetUPerm;
 use _64FF00\PurePerms\Commands\UsrInfo;
 use _64FF00\PurePerms\DataManager\UserDataManager;
+use _64FF00\PurePerms\DataProviders\SQLite3Provider;
 use _64FF00\PurePerms\Noeul\NoeulAPI;
 use _64FF00\PurePerms\DataProviders\DefaultProvider;
 use _64FF00\PurePerms\DataProviders\MySQLProvider;
@@ -163,6 +164,11 @@ class PurePerms extends PluginBase
                     $this->getLogger()->notice($this->getMessage("logger_messages.setProvider_MySQL"));
                 break;
 
+            case "sqlite3":
+                $provider = new SQLite3Provider($this);
+                if($onEnable === true)
+                    $this->getLogger()->notice($this->getMessage("logger_messages.setProvider_SQLITE3"));
+                break;
             case "json":
                 $provider = new JsonProvider($this);
                 if($onEnable === true)
