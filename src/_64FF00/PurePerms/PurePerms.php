@@ -175,7 +175,7 @@ class PurePerms extends PluginBase
             case "json":
                 $provider = new JsonProvider($this);
                 if($onEnable === true)
-                    $this->getLogger()->notice($this->getMessage("logger_messages.setProvider_Json"));
+                    $this->getLogger()->notice($this->getMessage("logger_messages.setProvider_JSON"));
                 break;
             default:
                 $provider = new DefaultProvider($this);
