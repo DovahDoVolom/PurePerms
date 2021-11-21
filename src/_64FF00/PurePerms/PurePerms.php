@@ -272,15 +272,15 @@ class PurePerms extends PluginBase
     }
 
     /**
-     * @param null $levelName
+     * @param null $WorldName
      * @return PPGroup|null
      */
-    public function getDefaultGroup($levelName = null)
+    public function getDefaultGroup($WorldName = null)
     {
         $defaultGroups = [];
         foreach($this->getGroups() as $defaultGroup)
         {
-            if($defaultGroup->isDefault($levelName))
+            if($defaultGroup->isDefault($WorldName))
                 $defaultGroups[] = $defaultGroup;
         }
 
@@ -305,7 +305,7 @@ class PurePerms extends PluginBase
             {
                 if(count($tempGroup->getParentGroups()) === 0)
                 {
-                    $this->setDefaultGroup($tempGroup, $levelName);
+                    $this->setDefaultGroup($tempGroup, $WorldName);
 
                     return $tempGroup;
                 }
@@ -377,10 +377,10 @@ class PurePerms extends PluginBase
         $users = [];
         foreach($this->getServer()->getOnlinePlayers() as $player)
         {
-            foreach($this->getServer()->getWorldManager()->getWorlds() as $level)
+            foreach($this->getServer()->getWorldManager()->getWorlds() as $World)
             {
-                $levelName = $level->getDisplayName();
-                if($this->userDataMgr->getGroup($player, $levelName) === $group)
+                $WorldName = $World->getDisplayName();
+                if($this->userDataMgr->getGroup($player, $WorldName) === $group)
                     $users[] = $player;
             }
         }
@@ -390,15 +390,15 @@ class PurePerms extends PluginBase
 
     /**
      * @param IPlayer $player
-     * @param $levelName
+     * @param $WorldName
      * @return array
      */
-    public function getPermissions(IPlayer $player, $levelName)
+    public function getPermissions(IPlayer $player, $WorldName)
     {
         // TODO: Fix this
-        $group = $this->userDataMgr->getGroup($player, $levelName);
-        $groupPerms = $group->getGroupPermissions($levelName);
-        $userPerms = $this->userDataMgr->getUserPermissions($player, $levelName);
+        $group = $this->userDataMgr->getGroup($player, $WorldName);
+        $groupPerms = $group->getGroupPermissions($WorldName);
+        $userPerms = $this->userDataMgr->getUserPermissions($player, $WorldName);
 
         return array_merge($groupPerms, $userPerms);
     }
@@ -545,13 +545,13 @@ class PurePerms extends PluginBase
 
     /**
      * @param PPGroup $group
-     * @param $levelName
+     * @param $WorldName
      */
-    public function setDefaultGroup(PPGroup $group, $levelName = null)
+    public function setDefaultGroup(PPGroup $group, $WorldName = null)
     {
         foreach($this->getGroups() as $currentGroup)
         {
-            if($levelName === null)
+            if($WorldName === null)
             {
                 $isDefault = $currentGroup->getNode("isDefault");
 
@@ -560,24 +560,24 @@ class PurePerms extends PluginBase
             }
             else
             {
-                $isDefault = $currentGroup->getWorldNode($levelName, "isDefault");
+                $isDefault = $currentGroup->getWorldNode($WorldName, "isDefault");
                 if($isDefault)
-                    $currentGroup->removeWorldNode($levelName, "isDefault");
+                    $currentGroup->removeWorldNode($WorldName, "isDefault");
             }
         }
 
-        $group->setDefault($levelName);
+        $group->setDefault($WorldName);
     }
 
     /**
      * @param IPlayer $player
      * @param PPGroup $group
-     * @param null $levelName
+     * @param null $WorldName
      * @param int $time
      */
-    public function setGroup(IPlayer $player, PPGroup $group, $levelName = null, $time = -1)
+    public function setGroup(IPlayer $player, PPGroup $group, $WorldName = null, $time = -1)
     {
-        $this->userDataMgr->setGroup($player, $group, $levelName, $time);
+        $this->userDataMgr->setGroup($player, $group, $WorldName, $time);
     }
 
     public function sortGroupData()
@@ -588,12 +588,11 @@ class PurePerms extends PluginBase
 
             if($this->getConfigValue("enable-multiworld-perms"))
             {
-                /** @var World $level */
-                foreach($this->getServer()->getWorldManager()->getWorlds() as $level)
+                /** @var World $World */
+                foreach($this->getServer()->getWorldManager()->getWorlds() as $World)
                 {
-                    $levelName = $level->getDisplayName();
-
-                    $ppGroup->createWorldData($levelName);
+                    $WorldName = $World->getDisplayName();
+                    $ppGroup->createWorldData($WorldName);
                 }
             }
         }
@@ -617,20 +616,20 @@ class PurePerms extends PluginBase
 
     /**
      * @param IPlayer $player
-     * @param string|null $levelName
+     * @param string|null $WorldName
      */
-    public function updatePermissions(IPlayer $player, string $levelName = null)
+    public function updatePermissions(IPlayer $player, string $WorldName = null)
     {
         if($player instanceof Player)
         {
             if($this->getConfigValue("enable-multiworld-perms") == null) {
-                $levelName = null;
-            }elseif($levelName == null) {
-                $levelName = $player->getWorld()->getDisplayName();
+                $WorldName = null;
+            }elseif($WorldName == null) {
+                $WorldName = $player->getWorld()->getDisplayName();
             }
             $permissions = [];
             /** @var string $permission */
-            foreach($this->getPermissions($player, $levelName) as $permission)
+            foreach($this->getPermissions($player, $WorldName) as $permission)
             {
                 if($permission === '*')
                 {

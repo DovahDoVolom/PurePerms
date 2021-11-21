@@ -62,10 +62,8 @@ class SetGroup extends Command implements PluginOwned
             $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.setgroup.usage"));
             return true;
         }
-        
         $player = $this->plugin->getPlayer($args[0]);
         $group = $this->plugin->getGroup($args[1]);
-        
         if($group === null)
         {
             $sender->sendMessage(TextFormat::RED . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.setgroup.messages.group_not_exist", $args[1]));
@@ -75,17 +73,17 @@ class SetGroup extends Command implements PluginOwned
         $expTime = -1;
         if(isset($args[2]))
             $expTime = $this->plugin->date2Int($args[2]);
-        $levelName = null;
+        $WorldName = null;
         if(isset($args[3]))
         {
-            $level = $this->plugin->getServer()->getWorldManager()->getWorldByName($args[3]);
-            if($level === null)
+            $world = $this->plugin->getServer()->getWorldManager()->getWorldByName($args[3]);
+            if($world === null)
             {
                 $sender->sendMessage(TextFormat::RED . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.setgroup.messages.level_not_exist", $args[3]));
                 return true;
             }
-            
-            $levelName = $level->getDisplayName();
+
+            $WorldName = $world->getDisplayName();
         }
 
         $superAdminRanks = $this->plugin->getConfigValue("superadmin-ranks");
@@ -102,7 +100,7 @@ class SetGroup extends Command implements PluginOwned
                 return true;
             }
 
-            $userGroup = $this->plugin->getUserDataMgr()->getGroup($player, $levelName);
+            $userGroup = $this->plugin->getUserDataMgr()->getGroup($player, $WorldName);
             if(isset($tmpSuperAdminRanks[$userGroup->getName()]))
             {
                 $sender->sendMessage(TextFormat::RED . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.setgroup.messages.access_denied_02", $userGroup->getName()));
@@ -110,13 +108,13 @@ class SetGroup extends Command implements PluginOwned
             }
         }
 
-        $this->plugin->getUserDataMgr()->setGroup($player, $group, $levelName, $expTime);
+        $this->plugin->getUserDataMgr()->setGroup($player, $group, $WorldName, $expTime);
         
         $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.setgroup.messages.setgroup_successfully", $player->getName()));
         
         if($player instanceof Player)
         {
-            if(!$this->plugin->getConfigValue("enable-multiworld-perms") || ($this->plugin->getConfigValue("enable-multiworld-perms") and $levelName === $player->getWorld()->getDisplayName()))
+            if(!$this->plugin->getConfigValue("enable-multiworld-perms") || ($this->plugin->getConfigValue("enable-multiworld-perms") and $WorldName === $player->getWorld()->getDisplayName()))
                 $player->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.setgroup.messages.on_player_group_change", strtolower($group->getName())));
         }
 

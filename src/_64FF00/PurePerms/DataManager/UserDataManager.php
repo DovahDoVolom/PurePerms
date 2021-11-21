@@ -40,29 +40,29 @@ class UserDataManager
         return $this->plugin->getProvider()->getPlayerData($player);
     }
 
-    public function getExpDate(IPlayer $player, $levelName = null)
+    public function getExpDate(IPlayer $player, $WorldName = null)
     {
-        $expDate = $levelName !== null ? $this->getWorldData($player, $levelName)["expTime"] : $this->getNode($player, "expTime");
+        $expDate = $WorldName !== null ? $this->getWorldData($player, $WorldName)["expTime"] : $this->getNode($player, "expTime");
         // TODO
         return $expDate;
     }
 
     /**
      * @param IPlayer $player
-     * @param null $levelName
+     * @param null $WorldName
      * @return PPGroup|null
      */
-    public function getGroup(IPlayer $player, $levelName = null)
+    public function getGroup(IPlayer $player, $WorldName = null)
     {
-        $groupName = $levelName !== null ? $this->getWorldData($player, $levelName)["group"] : $this->getNode($player, "group");
+        $groupName = $WorldName !== null ? $this->getWorldData($player, $WorldName)["group"] : $this->getNode($player, "group");
         $group = $this->plugin->getGroup($groupName);
         // TODO: ...
         if($group === null)
         {
-            $this->plugin->getLogger()->critical("Invalid group name found in " . $player->getName() . "'s player data (World: " . ($levelName === null ? "GLOBAL" : $levelName) . ")");
+            $this->plugin->getLogger()->critical("Invalid group name found in " . $player->getName() . "'s player data (World: " . ($WorldName === null ? "GLOBAL" : $WorldName) . ")");
             $this->plugin->getLogger()->critical("Restoring the group data to 'default'");
-            $defaultGroup = $this->plugin->getDefaultGroup($levelName);
-            $this->setGroup($player, $defaultGroup, $levelName);
+            $defaultGroup = $this->plugin->getDefaultGroup($WorldName);
+            $this->setGroup($player, $defaultGroup, $WorldName);
             return $defaultGroup;
         }
 
@@ -83,12 +83,12 @@ class UserDataManager
     }
 
     /**
-     * @param null $levelName
+     * @param null $WorldName
      * @return array
      */
-    public function getUserPermissions(IPlayer $player, $levelName = null)
+    public function getUserPermissions(IPlayer $player, $WorldName = null)
     {
-        $permissions = $levelName != null ? $this->getWorldData($player, $levelName)["permissions"] : $this->getNode($player, "permissions");
+        $permissions = $WorldName != null ? $this->getWorldData($player, $WorldName)["permissions"] : $this->getNode($player, "permissions");
         if(!is_array($permissions))
         {
             $this->plugin->getLogger()->critical("Invalid 'permissions' node given to " . __METHOD__ . '()');
@@ -99,21 +99,21 @@ class UserDataManager
 
     /**
      * @param IPlayer $player
-     * @param $levelName
+     * @param $WorldName
      * @return array
      */
-    public function getWorldData(IPlayer $player, $levelName)
+    public function getWorldData(IPlayer $player, $WorldName)
     {
-        if($levelName === null)
-            $levelName = $this->plugin->getServer()->getWorldManager()->getDefaultWorld()->getDisplayName();
-        if(!isset($this->getData($player)["worlds"][$levelName]))
+        if($WorldName === null)
+            $WorldName = $this->plugin->getServer()->getWorldManager()->getDefaultWorld()->getDisplayName();
+        if(!isset($this->getData($player)["worlds"][$WorldName]))
             return [
-                "group" => $this->plugin->getDefaultGroup($levelName)->getName(),
+                "group" => $this->plugin->getDefaultGroup($WorldName)->getName(),
                 "permissions" => [
                 ],
                 "expTime" => -1
             ];
-        return $this->getData($player)["worlds"][$levelName];
+        return $this->getData($player)["worlds"][$WorldName];
     }
 
     public function removeNode(IPlayer $player, $node)
@@ -138,25 +138,25 @@ class UserDataManager
     /**
      * @param IPlayer $player
      * @param PPGroup $group
-     * @param $levelName
+     * @param $WorldName
      * @param int $time
      */
-    public function setGroup(IPlayer $player, PPGroup $group, $levelName, $time = -1)
+    public function setGroup(IPlayer $player, PPGroup $group, $WorldName, $time = -1)
     {
-        if($levelName === null)
+        if($WorldName === null)
         {
             $this->setNode($player, "group", $group->getName());
             $this->setNode($player, "expTime", $time);
         }
         else
         {
-            $worldData = $this->getWorldData($player, $levelName);
+            $worldData = $this->getWorldData($player, $WorldName);
             $worldData["group"] = $group->getName();
             $worldData["expTime"] = $time;
-            $this->setWorldData($player, $levelName, $worldData);
+            $this->setWorldData($player, $WorldName, $worldData);
         }
 
-        $event = new PPGroupChangedEvent($this->plugin, $player, $group, $levelName);
+        $event = new PPGroupChangedEvent($this->plugin, $player, $group, $WorldName);
 
         $event->call();
     }
@@ -176,11 +176,11 @@ class UserDataManager
     /**
      * @param IPlayer $player
      * @param $permission
-     * @param null $levelName
+     * @param null $WorldName
      */
-    public function setPermission(IPlayer $player, $permission, $levelName = null)
+    public function setPermission(IPlayer $player, $permission, $WorldName = null)
     {
-        if($levelName === null)
+        if($WorldName === null)
         {
             $tempUserData = $this->getData($player);
             $tempUserData["permissions"][] = $permission;
@@ -188,20 +188,20 @@ class UserDataManager
         }
         else
         {
-            $worldData = $this->getWorldData($player, $levelName);
+            $worldData = $this->getWorldData($player, $WorldName);
             $worldData["permissions"][] = $permission;
-            $this->setWorldData($player, $levelName, $worldData);
+            $this->setWorldData($player, $WorldName, $worldData);
         }
 
         $this->plugin->updatePermissions($player);
     }
 
-    public function setWorldData(IPlayer $player, $levelName, array $worldData)
+    public function setWorldData(IPlayer $player, $WorldName, array $worldData)
     {
         $tempUserData = $this->getData($player);
-        if(!isset($this->getData($player)["worlds"][$levelName]))
+        if(!isset($this->getData($player)["worlds"][$WorldName]))
         {
-            $tempUserData["worlds"][$levelName] = [
+            $tempUserData["worlds"][$WorldName] = [
                 "group" => $this->plugin->getDefaultGroup()->getName(),
                 "permissions" => [
                 ],
@@ -210,18 +210,18 @@ class UserDataManager
 
             $this->setData($player, $tempUserData);
         }
-        $tempUserData["worlds"][$levelName] = $worldData;
+        $tempUserData["worlds"][$WorldName] = $worldData;
         $this->setData($player, $tempUserData);
     }
 
     /**
      * @param IPlayer $player
      * @param $permission
-     * @param null $levelName
+     * @param null $WorldName
      */
-    public function unsetPermission(IPlayer $player, $permission, $levelName = null)
+    public function unsetPermission(IPlayer $player, $permission, $WorldName = null)
     {
-        if($levelName === null)
+        if($WorldName === null)
         {
             $tempUserData = $this->getData($player);
             if(!in_array($permission, $tempUserData["permissions"])) return;
@@ -230,10 +230,10 @@ class UserDataManager
         }
         else
         {
-            $worldData = $this->getWorldData($player, $levelName);
+            $worldData = $this->getWorldData($player, $WorldName);
             if(!in_array($permission, $worldData["permissions"])) return;
             $worldData["permissions"] = array_diff($worldData["permissions"], [$permission]);
-            $this->setWorldData($player, $levelName, $worldData);
+            $this->setWorldData($player, $WorldName, $worldData);
         }
 
         $this->plugin->updatePermissions($player);

@@ -68,20 +68,20 @@ class UnsetGPerm extends Command implements PluginOwned
         }
         
         $permission = $args[1];
-        $levelName = null;
+        $WorldName = null;
         if(isset($args[2]))
         {
-            $level = $this->plugin->getServer()->getWorldManager()->getWorldByName($args[2]);
-            if($level == null)
+            $world = $this->plugin->getServer()->getWorldManager()->getWorldByName($args[2]);
+            if($world == null)
             {
                 $sender->sendMessage(TextFormat::RED . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.unsetgperm.messages.level_not_exist", $args[2]));
                 return true;
             }
-            
-            $levelName = $level->getDisplayName();
+
+            $WorldName = $world->getDisplayName();
         }
         
-        $group->unsetGroupPermission($permission, $levelName);
+        $group->unsetGroupPermission($permission, $WorldName);
         $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.unsetgperm.messages.gperm_removed_successfully", $permission));
         
         return true;

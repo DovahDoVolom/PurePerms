@@ -64,20 +64,20 @@ class ListGPerms extends Command implements PluginOwned
             $sender->sendMessage(TextFormat::RED . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.listgperms.messages.group_not_exist", $args[0]));
             return true;
         }
-        
-        $levelName = null;
+
+        $WorldName = null;
         if(isset($args[2]))
         {
-            $level = $this->plugin->getServer()->getWorldManager()->getWorldByName($args[2]);
-            if($level == null)
+            $World = $this->plugin->getServer()->getWorldManager()->getWorldByName($args[2]);
+            if($World == null)
             {
                 $sender->sendMessage(TextFormat::RED . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.setgperm.messages.level_not_exist", $args[2]));
                 return true;
             }
-            $levelName = $level->getDisplayName();
+            $WorldName = $World->getDisplayName();
         }
         
-        $permissions = $group->getGroupPermissions($levelName);
+        $permissions = $group->getGroupPermissions($WorldName);
         
         if(empty($permissions))
         {

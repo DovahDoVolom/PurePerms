@@ -64,22 +64,22 @@ class GrpInfo extends Command implements PluginOwned
             $sender->sendMessage(TextFormat::RED . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.grpinfo.messages.group_not_exist", $args[0]));
             return true;
         }
-        $levelName = null;
+        $WorldName = null;
 
         if(isset($args[1]))
         {
-            $level = $this->plugin->getServer()->getLevelByName($args[1]);
-            if($level === null)
+            $World = $this->plugin->getServer()->getLevelByName($args[1]);
+            if($World === null)
             {
                 $sender->sendMessage(TextFormat::RED . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.grpinfo.messages.level_not_exist", $args[1]));
                 return true;
             }
-            $levelName = $level->getName();
+            $WorldName = $World->getName();
         }
         $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.grpinfo.messages.grpinfo_header", $group->getName()));
         $alias = TextFormat::DARK_GREEN . $group->getAlias();
         $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.grpinfo.messages.grpinfo_alias", $alias));
-        $isDefault = $group->isDefault($levelName) ? TextFormat::DARK_GREEN . "YES" : TextFormat::RED . "NO";
+        $isDefault = $group->isDefault($WorldName) ? TextFormat::DARK_GREEN . "YES" : TextFormat::RED . "NO";
         $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.grpinfo.messages.grpinfo_default", $isDefault));
         $result = TextFormat::DARK_GREEN . "...";
 

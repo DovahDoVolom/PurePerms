@@ -61,18 +61,18 @@ class UsrInfo extends Command implements PluginOwned
             return true;
         }
         $player = $this->plugin->getPlayer($args[0]);
-        $levelName = null;
+        $WorldName = null;
         if(isset($args[1]))
         {
-            $level = $this->plugin->getServer()->getWorldManager()->getWorldByName($args[1]);
+            $world = $this->plugin->getServer()->getWorldManager()->getWorldByName($args[1]);
             
-            if($level == null)
+            if($world == null)
             {
                 $sender->sendMessage(TextFormat::RED . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.usrinfo.messages.level_not_exist", $args[1]));
                 
                 return true;
             }
-            $levelName = $level->getDisplayName();
+            $WorldName = $world->getDisplayName();
         }
 
         $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.usrinfo.messages.usrinfo_header", $player->getName()));
@@ -82,9 +82,9 @@ class UsrInfo extends Command implements PluginOwned
         $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.usrinfo.messages.usrinfo_ip", $ip));
         $uuid = $player instanceof Player ? TextFormat::DARK_GREEN . $player->getUniqueId()->toString() : TextFormat::RED . $this->plugin->getMessage("cmds.usrinfo.messages.unknown");
         $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.usrinfo.messages.usrinfo_uuid", $uuid));
-        $userGroup = $this->plugin->getUserDataMgr()->getGroup($player, $levelName);
+        $userGroup = $this->plugin->getUserDataMgr()->getGroup($player, $WorldName);
         $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.usrinfo.messages.usrinfo_group", TextFormat::DARK_GREEN . $userGroup->getName()));
-        $expDate = $this->plugin->getUserDataMgr()->getExpDate($player, $levelName);
+        $expDate = $this->plugin->getUserDataMgr()->getExpDate($player, $WorldName);
         $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.usrinfo.messages.usrinfo_exp", TextFormat::DARK_GREEN . $expDate));
 
         return true;

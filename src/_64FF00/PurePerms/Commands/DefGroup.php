@@ -64,19 +64,19 @@ class DefGroup extends Command implements PluginOwned
             $sender->sendMessage(TextFormat::RED . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.defgroup.messages.group_not_exist", $args[0]));
             return true;
         }
-        $levelName = null;
+        $WorldName = null;
         if(isset($args[1]))
         {
-            $level = $this->plugin->getServer()->getWorldManager()->getWorldByName($args[1]);
-            if($level === null)
+            $World = $this->plugin->getServer()->getWorldManager()->getWorldByName($args[1]);
+            if($World === null)
             {
                 $sender->sendMessage(TextFormat::RED . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.defgroup.messages.level_not_exist", $args[1]));
                 return true;
             }
 
-            $levelName = $level->getDisplayName();
+            $WorldName = $World->getDisplayName();
         }
-        $this->plugin->setDefaultGroup($group, $levelName);
+        $this->plugin->setDefaultGroup($group, $WorldName);
         $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.defgroup.messages.defgroup_successfully", $args[0]));
         
         return true;

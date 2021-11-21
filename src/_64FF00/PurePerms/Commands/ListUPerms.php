@@ -59,20 +59,20 @@ class ListUPerms extends Command implements PluginOwned
         }
         
         $player = $this->plugin->getPlayer($args[0]);
-        $levelName = null;
+        $WorldName = null;
         if(isset($args[2]))
         {
-            $level = $this->plugin->getServer()->getWorldManager()->getWorldByName($args[2]);
-            if($level == null)
+            $World = $this->plugin->getServer()->getWorldManager()->getWorldByName($args[2]);
+            if($World == null)
             {
                 $sender->sendMessage(TextFormat::RED . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.setgperm.messages.level_not_exist", $args[2]));
                 return true;
             }
-            
-            $levelName = $level->getDisplayName();
+
+            $WorldName = $World->getDisplayName();
         }
         
-        $permissions = $this->plugin->getUserDataMgr()->getUserPermissions($player, $levelName);
+        $permissions = $this->plugin->getUserDataMgr()->getUserPermissions($player, $WorldName);
         if(empty($permissions))
         {
             $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.listuperms.messages.no_user_perms", $player->getName()));
