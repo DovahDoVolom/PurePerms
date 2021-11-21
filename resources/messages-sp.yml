@@ -165,7 +165,7 @@ logger_messages:
   onLoad_03: "El soporte multi-nivel ha sido activado."
   registerPlayer: "Registrando el Usuario %var0%..."
   setProvider_MySQL: "Utilizando MySQL como proveedor."
-  setProvider_YAML: "Utilizando YAML como proveedor."
+  setProvider_JSON: "Utilizando JSON como proveedor."
   setProvider_NotFound: "El proveedor %var0% NO existe. Utilizando el proveedor predeterminado."
   unregisterPlayer: "DesRegistrando al Jugador %var0%..."
   YAMLProvider_InvalidGroupsSettings: "INVALID GROUPS.YML SETTINGS: Please check if you have an invalid or corrupted groups.yml."

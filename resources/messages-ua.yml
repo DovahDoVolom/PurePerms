@@ -163,7 +163,7 @@ logger_messages:
   onLoad_03: "Поддержка декількох світів увімкнена."
   registerPlayer: "Реєстрація гравця %var0%..."
   setProvider_MySQL: "Тип сховища даних - MySQL."
-  setProvider_YAML: "Тип сховища даних - YAML."
+  setProvider_JSON: "Тип сховища даних - JSON."
   setProvider_NotFound: "Провайдер даних %var0% не існує. Встановлено стандартний тип сховища даних."
   unregisterPlayer: "Відміна реєстрації гравця %var0%..."
   YAMLProvider_InvalidGroupsSettings: "INVALID GROUPS.YML SETTINGS: Please check if you have an invalid or corrupted groups.yml."

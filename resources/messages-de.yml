@@ -163,7 +163,7 @@ logger_messages:
   onLoad_03: "Unterstützung für mehrere Welten ist aktiviert."
   registerPlayer: "Spieler %var0% wird angemeldet"
   setProvider_MySQL: "Datenprovider wird auf MySQL gesetzt."
-  setProvider_YAML: "Datenprovider wird auf YAML gesetzt."
+  setProvider_JSON: "Datenprovider wird auf JSON gesetzt."
   setProvider_NotFound: "Provider %var0% existiert NICHT. Datenprovider wird auf Standard zurückgesetzt."
   unregisterPlayer: "Spieler %var0% wird abgemeldet"
   YAMLProvider_InvalidGroupsSettings: "INVALID GROUPS.YML SETTINGS: Please check if you have an invalid or corrupted groups.yml."

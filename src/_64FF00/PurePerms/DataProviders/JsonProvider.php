@@ -10,7 +10,7 @@ use pocketmine\player\IPlayer;
 use pocketmine\utils\Config;
 use RuntimeException;
 
-class YamlProvider implements ProviderInterface
+class JsonProvider implements ProviderInterface
 {
     /*
         PurePerms by 64FF00 (Twitter: @64FF00)
@@ -81,9 +81,9 @@ class YamlProvider implements ProviderInterface
         // TODO
         if($onUpdate === true)
         {
-            if(!file_exists($this->userDataFolder . strtolower($userName) . ".yml"))
+            if(!file_exists($this->userDataFolder . strtolower($userName) . ".json"))
             {
-                return new Config($this->userDataFolder . strtolower($userName) . ".yml", Config::YAML, [
+                return new Config($this->userDataFolder . strtolower($userName) . ".json", Config::YAML, [
                     "userName" => $userName,
                     "group" => $this->plugin->getDefaultGroup()->getName(),
                     "permissions" => [],
@@ -93,15 +93,15 @@ class YamlProvider implements ProviderInterface
             }
             else
             {
-                return new Config($this->userDataFolder . strtolower($userName) . ".yml", Config::YAML, [
+                return new Config($this->userDataFolder . strtolower($userName) . ".json", Config::YAML, [
                 ]);
             }
         }
         else
         {
-            if(file_exists($this->userDataFolder . strtolower($userName) . ".yml"))
+            if(file_exists($this->userDataFolder . strtolower($userName) . ".json"))
             {
-                return new Config($this->userDataFolder . strtolower($userName) . ".yml", Config::YAML, [
+                return new Config($this->userDataFolder . strtolower($userName) . ".json", Config::YAML, [
                 ]);
             }
             else

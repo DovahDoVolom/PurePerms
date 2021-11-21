@@ -164,7 +164,7 @@ logger_messages:
   onLoad_03: "다중 월드 지원 기능이 활성화되었습니다."
   registerPlayer: "플레이어 %var0% 등록 중..."
   setProvider_MySQL: "MySQL 형식으로 데이터가 저장됩니다."
-  setProvider_YAML: "YAMLv1 방식으로 데이터가 저장됩니다."
+  setProvider_JSON: "YAMLv1 방식으로 데이터가 저장됩니다."
   setProvider_Invalid: "올바르지 않은 데이터 저장 방식입니다. 자동으로 YAML 방식으로 데이터가 저장됩니다."
   unregisterPlayer: "플레이어 %var0% 등록 해제 중..."
   YAMLProvider_InvalidGroupsSettings: "INVALID GROUPS.YML SETTINGS: Please check if you have an invalid or corrupted groups.yml."

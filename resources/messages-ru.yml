@@ -163,7 +163,7 @@ logger_messages:
   onLoad_03: "Поддержка мульти миров включена."
   registerPlayer: "Регистрация игрока %var0%..."
   setProvider_MySQL: "Тип хранилища данных - MySQL."
-  setProvider_YAML: "Тип хранилища данных - YAML"
+  setProvider_JSON: "Тип хранилища данных - JSON"
   setProvider_NotFound: "Провайдер данных %var0% не существует. Устанавливается стандартный тип хранилища данных."
   unregisterPlayer: "Отмена регистрации игрока %var0%..."
   YAMLProvider_InvalidGroupsSettings: "недействительный GROUPS.YML НАСТРОЙКИ: Пожалуйста, проверьте, если у вас есть недопустимое или поврежден groups.yml."

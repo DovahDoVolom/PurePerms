@@ -163,7 +163,7 @@ logger_messages:
   onLoad_03: "Il supporto multimondo è abilitato."
   registerPlayer: "Registrando giocatore %var0%..."
   setProvider_MySQL: "Il fornitore dati impostato è MySQL."
-  setProvider_YAML: "Il fornitore dati impostato è YAML"
+  setProvider_JSON: "Il fornitore dati impostato è JSON"
   setProvider_NotFound: "Il fornitore %var0% non esiste. Impostando il fornitore dati predefinito."
   unregisterPlayer: "Togliendo la registrazione al giocatore %var0%..."
   YAMLProvider_InvalidGroupsSettings: "INVALID GROUPS.YML SETTINGS: Please check if you have an invalid or corrupted groups.yml."

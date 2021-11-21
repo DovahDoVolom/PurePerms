@@ -6,8 +6,8 @@
 ---
 # Set default data provider for PurePerms
 # - mysql (MYSQL Database)
-# - yaml (YAML Database)
-data-provider: yml
+# - json (JSON Database)
+data-provider: json
 
 # Set the default language for PurePerms (<3)
 # - en, ko, jp, ru, ua, it, sp, cz, sk, de, idn, tr

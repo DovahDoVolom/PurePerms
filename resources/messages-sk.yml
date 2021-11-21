@@ -163,7 +163,7 @@ logger_messages:
   onLoad_03: "Podpora Multisveta povolena."
   registerPlayer: "Registering player %var0%..."
   setProvider_MySQL: "Nastavte poskytovatela dat na MySQL."
-  setProvider_YAML: "Nastavte poskytovatela dat na YAML."
+  setProvider_JSON: "Nastavte poskytovatela dat na JSON."
   setProvider_NotFound: "Poskytovatel %var0% nastavujem sprostredkovatela dat na predvolene nastavenia."
   unregisterPlayer: "Unregistering player %var0%..."
   YAMLProvider_InvalidGroupsSettings: "INVALID GROUPS.YML SETTINGS: Please check if you have an invalid or corrupted groups.yml."
