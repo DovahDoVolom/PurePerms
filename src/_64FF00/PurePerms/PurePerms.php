@@ -26,7 +26,7 @@ use _64FF00\PurePerms\Noeul\NoeulAPI;
 use _64FF00\PurePerms\DataProviders\DefaultProvider;
 use _64FF00\PurePerms\DataProviders\MySQLProvider;
 use _64FF00\PurePerms\DataProviders\ProviderInterface;
-use _64FF00\PurePerms\DataProviders\YamlV1Provider;
+use _64FF00\PurePerms\DataProviders\YamlProvider;
 use _64FF00\PurePerms\Task\PPExpDateCheckTask;
 
 use pocketmine\permission\PermissionManager;
@@ -172,15 +172,10 @@ class PurePerms extends PluginBase
                     $this->getLogger()->notice($this->getMessage("logger_messages.setProvider_MySQL"));
                 break;
 
-            case "yamlv1":
-                $provider = new YamlV1Provider($this);
+            case "yml":
+                $provider = new YamlProvider($this);
                 if($onEnable === true)
-                    $this->getLogger()->notice($this->getMessage("logger_messages.setProvider_YAMLv1"));
-                break;
-            case "yamlv2":
-                $provider = new DefaultProvider($this);
-                if($onEnable === true)
-                    $this->getLogger()->notice($this->getMessage("logger_messages.setProvider_YAMLv2"));
+                    $this->getLogger()->notice($this->getMessage("logger_messages.setProvider_YAML"));
                 break;
             default:
                 $provider = new DefaultProvider($this);

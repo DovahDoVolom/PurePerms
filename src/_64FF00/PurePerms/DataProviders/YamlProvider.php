@@ -10,7 +10,7 @@ use pocketmine\player\IPlayer;
 use pocketmine\utils\Config;
 use RuntimeException;
 
-class YamlV1Provider implements ProviderInterface
+class YamlProvider implements ProviderInterface
 {
     /*
         PurePerms by 64FF00 (Twitter: @64FF00)
