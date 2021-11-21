@@ -37,9 +37,7 @@ class RmParent extends Command implements PluginOwned
     public function __construct(PurePerms $plugin, $name, $description)
     {
         $this->plugin = $plugin;
-        
         parent::__construct($name, $description);
-        
         $this->setPermission("pperms.command.rmparent");
     }
 
@@ -53,20 +51,15 @@ class RmParent extends Command implements PluginOwned
     {
         if(!$this->testPermission($sender))
             return false;
-
         if(count($args) < 2 || count($args) > 3)
         {
             $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.rmparent.usage"));
-
             return true;
         }
 
         $target_group = $this->plugin->getGroup($args[0]);
-
         $parent_group = $this->plugin->getGroup($args[1]);
-
         $target_group->removeParent($parent_group);
-
         $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.rmparent.messages.rmparent_successfully", $parent_group->getName(), $target_group->getName()));
 
         return true;

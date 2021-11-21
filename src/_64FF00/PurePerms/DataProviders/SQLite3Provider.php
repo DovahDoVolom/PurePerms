@@ -19,7 +19,6 @@ class SQLite3Provider implements ProviderInterface
 */
 
     private $db, $plugin;
-
     private $groupsData = [];
 
     /**
@@ -28,11 +27,8 @@ class SQLite3Provider implements ProviderInterface
     public function __construct(PurePerms $plugin)
     {
         $this->plugin = $plugin;
-
         $this->db = new \SQLite3($plugin->getDataFolder()."pureperms.db");
-
         $this->db->exec("");
-
         $this->loadGroupsData();
     }
 

@@ -37,9 +37,7 @@ class AddParent extends Command implements PluginOwned
     public function __construct(PurePerms $plugin, $name, $description)
     {
         $this->plugin = $plugin;
-        
         parent::__construct($name, $description);
-        
         $this->setPermission("pperms.command.addparent");
     }
 
@@ -53,7 +51,6 @@ class AddParent extends Command implements PluginOwned
     {
         if(!$this->testPermission($sender))
             return false;
-
         if(count($args) < 2 || count($args) > 3)
         {
             $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.addparent.usage"));
@@ -62,9 +59,7 @@ class AddParent extends Command implements PluginOwned
         }
 
         $target_group = $this->plugin->getGroup($args[0]);
-
         $parent_group = $this->plugin->getGroup($args[1]);
-
         if($target_group->addParent($parent_group))
         {
             $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.addparent.messages.addparent_successfully", $parent_group->getName(), $target_group->getName()));

@@ -43,7 +43,6 @@ class UserDataManager
     public function getExpDate(IPlayer $player, $levelName = null)
     {
         $expDate = $levelName !== null ? $this->getWorldData($player, $levelName)["expTime"] : $this->getNode($player, "expTime");
-
         // TODO
         return $expDate;
     }
@@ -56,19 +55,14 @@ class UserDataManager
     public function getGroup(IPlayer $player, $levelName = null)
     {
         $groupName = $levelName !== null ? $this->getWorldData($player, $levelName)["group"] : $this->getNode($player, "group");
-
         $group = $this->plugin->getGroup($groupName);
-
         // TODO: ...
         if($group === null)
         {
             $this->plugin->getLogger()->critical("Invalid group name found in " . $player->getName() . "'s player data (World: " . ($levelName === null ? "GLOBAL" : $levelName) . ")");
             $this->plugin->getLogger()->critical("Restoring the group data to 'default'");
-
             $defaultGroup = $this->plugin->getDefaultGroup($levelName);
-
             $this->setGroup($player, $defaultGroup, $levelName);
-
             return $defaultGroup;
         }
 
@@ -83,10 +77,8 @@ class UserDataManager
     public function getNode(IPlayer $player, $node)
     {
         $userData = $this->getData($player);
-
         if(!isset($userData[$node]))
             return null;
-
         return $userData[$node];
     }
 
@@ -97,14 +89,11 @@ class UserDataManager
     public function getUserPermissions(IPlayer $player, $levelName = null)
     {
         $permissions = $levelName != null ? $this->getWorldData($player, $levelName)["permissions"] : $this->getNode($player, "permissions");
-
         if(!is_array($permissions))
         {
             $this->plugin->getLogger()->critical("Invalid 'permissions' node given to " . __METHOD__ . '()');
-
             return [];
         }
-
         return $permissions;
     }
 
@@ -117,7 +106,6 @@ class UserDataManager
     {
         if($levelName === null)
             $levelName = $this->plugin->getServer()->getWorldManager()->getDefaultWorld()->getDisplayName();
-
         if(!isset($this->getData($player)["worlds"][$levelName]))
             return [
                 "group" => $this->plugin->getDefaultGroup($levelName)->getName(),
@@ -125,18 +113,15 @@ class UserDataManager
                 ],
                 "expTime" => -1
             ];
-
         return $this->getData($player)["worlds"][$levelName];
     }
 
     public function removeNode(IPlayer $player, $node)
     {
         $tempUserData = $this->getData($player);
-
         if(isset($tempUserData[$node]))
         {
             unset($tempUserData[$node]);
-
             $this->setData($player, $tempUserData);
         }
     }
@@ -166,10 +151,8 @@ class UserDataManager
         else
         {
             $worldData = $this->getWorldData($player, $levelName);
-
             $worldData["group"] = $group->getName();
             $worldData["expTime"] = $time;
-
             $this->setWorldData($player, $levelName, $worldData);
         }
 
@@ -186,9 +169,7 @@ class UserDataManager
     public function setNode(IPlayer $player, $node, $value)
     {
         $tempUserData = $this->getData($player);
-
         $tempUserData[$node] = $value;
-
         $this->setData($player, $tempUserData);
     }
 
@@ -202,17 +183,13 @@ class UserDataManager
         if($levelName === null)
         {
             $tempUserData = $this->getData($player);
-
             $tempUserData["permissions"][] = $permission;
-
             $this->setData($player, $tempUserData);
         }
         else
         {
             $worldData = $this->getWorldData($player, $levelName);
-
             $worldData["permissions"][] = $permission;
-
             $this->setWorldData($player, $levelName, $worldData);
         }
 
@@ -222,7 +199,6 @@ class UserDataManager
     public function setWorldData(IPlayer $player, $levelName, array $worldData)
     {
         $tempUserData = $this->getData($player);
-
         if(!isset($this->getData($player)["worlds"][$levelName]))
         {
             $tempUserData["worlds"][$levelName] = [
@@ -234,9 +210,7 @@ class UserDataManager
 
             $this->setData($player, $tempUserData);
         }
-
         $tempUserData["worlds"][$levelName] = $worldData;
-
         $this->setData($player, $tempUserData);
     }
 
@@ -250,21 +224,15 @@ class UserDataManager
         if($levelName === null)
         {
             $tempUserData = $this->getData($player);
-
             if(!in_array($permission, $tempUserData["permissions"])) return;
-
             $tempUserData["permissions"] = array_diff($tempUserData["permissions"], [$permission]);
-
             $this->setData($player, $tempUserData);
         }
         else
         {
             $worldData = $this->getWorldData($player, $levelName);
-
             if(!in_array($permission, $worldData["permissions"])) return;
-
             $worldData["permissions"] = array_diff($worldData["permissions"], [$permission]);
-
             $this->setWorldData($player, $levelName, $worldData);
         }
 

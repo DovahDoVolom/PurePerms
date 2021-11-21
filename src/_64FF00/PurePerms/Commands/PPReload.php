@@ -37,9 +37,7 @@ class PPReload extends Command implements PluginOwned
     public function __construct(PurePerms $plugin, $name, $description)
     {
         $this->plugin = $plugin;
-        
         parent::__construct($name, $description);
-        
         $this->setPermission("pperms.command.ppreload");
     }
 
@@ -53,11 +51,8 @@ class PPReload extends Command implements PluginOwned
     {
         if(!$this->testPermission($sender))
             return false;
-        
         $this->plugin->reload();
-        
         $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.ppreload.messages.successfully_reloaded"));
-        
         return true;
     }
     

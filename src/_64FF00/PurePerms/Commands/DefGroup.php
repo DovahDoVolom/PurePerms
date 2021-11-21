@@ -37,9 +37,7 @@ class DefGroup extends Command implements PluginOwned
     public function __construct(PurePerms $plugin, $name, $description)
     {
         $this->plugin = $plugin;
-        
         parent::__construct($name, $description);
-        
         $this->setPermission("pperms.command.defgroup");
     }
 
@@ -57,37 +55,28 @@ class DefGroup extends Command implements PluginOwned
         if(!isset($args[0]) || count($args) > 2)
         {
             $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.defgroup.usage"));
-
             return true;
         }
 
         $group = $this->plugin->getGroup($args[0]);
-
         if($group === null)
         {
             $sender->sendMessage(TextFormat::RED . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.defgroup.messages.group_not_exist", $args[0]));
-
             return true;
         }
-
         $levelName = null;
-
         if(isset($args[1]))
         {
             $level = $this->plugin->getServer()->getWorldManager()->getWorldByName($args[1]);
-
             if($level === null)
             {
                 $sender->sendMessage(TextFormat::RED . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.defgroup.messages.level_not_exist", $args[1]));
-
                 return true;
             }
 
             $levelName = $level->getDisplayName();
         }
-
         $this->plugin->setDefaultGroup($group, $levelName);
-
         $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.defgroup.messages.defgroup_successfully", $args[0]));
         
         return true;

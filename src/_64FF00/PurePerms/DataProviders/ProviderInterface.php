@@ -22,18 +22,11 @@ interface ProviderInterface
     */
 
     public function getGroupData(PPGroup $group);
-
     public function getGroupsData();
-
     public function getPlayerData(IPlayer $player);
-
     public function getUsers();
-
     public function setGroupData(PPGroup $group, array $tempGroupData);
-
     public function setGroupsData(array $tempGroupsData);
-
     public function setPlayerData(IPlayer $player, array $tempPlayerData);
-
     public function close();
 }

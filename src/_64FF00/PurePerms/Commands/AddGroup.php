@@ -37,9 +37,7 @@ class AddGroup extends Command implements PluginOwned
     public function __construct(PurePerms $plugin, $name, $description)
     {
         $this->plugin = $plugin;
-        
         parent::__construct($name, $description);
-        
         $this->setPermission("pperms.command.addgroup");
     }
 
@@ -53,16 +51,13 @@ class AddGroup extends Command implements PluginOwned
     {
         if(!$this->testPermission($sender))
             return false;
-        
         if(!isset($args[0]) || count($args) > 1)
         {
             $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.addgroup.usage"));
-            
             return true;
         }
 
         $result = $this->plugin->addGroup($args[0]);
-        
         if($result === PurePerms::SUCCESS)
         {
             $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.addgroup.messages.group_added_successfully", $args[0]));

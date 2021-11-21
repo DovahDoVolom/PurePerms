@@ -38,9 +38,7 @@ class PPInfo extends Command implements PluginOwned
     public function __construct(PurePerms $plugin, $name, $description)
     {
         $this->plugin = $plugin;
-        
         parent::__construct($name, $description);
-        
         $this->setPermission("pperms.command.ppinfo");
     }
 
@@ -54,10 +52,8 @@ class PPInfo extends Command implements PluginOwned
     {
         if(!$this->testPermission($sender))
             return false;
-
         $author = $this->plugin->getDescription()->getAuthors()[0];
         $version = $this->plugin->getDescription()->getVersion();
-
         if($sender instanceof ConsoleCommandSender)
         {
             $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.ppinfo.messages.ppinfo_console", $version, $author));

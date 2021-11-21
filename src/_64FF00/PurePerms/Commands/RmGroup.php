@@ -37,9 +37,7 @@ class RmGroup extends Command implements PluginOwned
     public function __construct(PurePerms $plugin, $name, $description)
     {
         $this->plugin = $plugin;
-        
         parent::__construct($name, $description);
-        
         $this->setPermission("pperms.command.rmgroup");
     }
 
@@ -53,16 +51,13 @@ class RmGroup extends Command implements PluginOwned
     {
         if(!$this->testPermission($sender))
             return false;
-        
         if(!isset($args[0]) || count($args) > 1)
         {
             $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.rmgroup.usage"));
-            
             return true;
         }
 
         $result = $this->plugin->removeGroup($args[0]);
-        
         if($result === PurePerms::SUCCESS)
         {
             $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.rmgroup.messages.group_removed_successfully", $args[0]));

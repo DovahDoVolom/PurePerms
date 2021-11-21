@@ -38,9 +38,7 @@ class GrpInfo extends Command implements PluginOwned
     public function __construct(PurePerms $plugin, $name, $description)
     {
         $this->plugin = $plugin;
-        
         parent::__construct($name, $description);
-        
         $this->setPermission("pperms.command.grpinfo");
     }
 
@@ -54,47 +52,35 @@ class GrpInfo extends Command implements PluginOwned
     {
         if(!$this->testPermission($sender))
             return false;
-        
         if(count($args) < 1 || count($args) > 2)
         {
             $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.grpinfo.usage"));
-            
             return true;
         }
 
         $group = $this->plugin->getGroup($args[0]);
-
         if($group === null)
         {
             $sender->sendMessage(TextFormat::RED . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.grpinfo.messages.group_not_exist", $args[0]));
-
             return true;
         }
-
         $levelName = null;
 
         if(isset($args[1]))
         {
             $level = $this->plugin->getServer()->getLevelByName($args[1]);
-
             if($level === null)
             {
                 $sender->sendMessage(TextFormat::RED . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.grpinfo.messages.level_not_exist", $args[1]));
-
                 return true;
             }
-
             $levelName = $level->getName();
         }
-
         $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.grpinfo.messages.grpinfo_header", $group->getName()));
-
         $alias = TextFormat::DARK_GREEN . $group->getAlias();
         $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.grpinfo.messages.grpinfo_alias", $alias));
-
         $isDefault = $group->isDefault($levelName) ? TextFormat::DARK_GREEN . "YES" : TextFormat::RED . "NO";
         $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.grpinfo.messages.grpinfo_default", $isDefault));
-
         $result = TextFormat::DARK_GREEN . "...";
 
         /** @var PPGroup $tempGroup */
@@ -102,12 +88,9 @@ class GrpInfo extends Command implements PluginOwned
         {
             $parents[] = $tempGroup->getName();
         }
-
         if(!empty($group->getParentGroups()))
             $result = TextFormat::DARK_GREEN . implode(",", $parents);
-
         $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.grpinfo.messages.grpinfo_parents", $result));
-
         return true;
     }
     

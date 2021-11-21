@@ -18,7 +18,6 @@ class PPGroup
     */
 
     private $name, $plugin;
-
     private $parents = [];
 
     /**
@@ -46,16 +45,11 @@ class PPGroup
     public function addParent(PPGroup $group)
     {
         $tempGroupData = $this->getData();
-
         if($this === $group || in_array($this->getName(), $group->getParentGroups()))
             return false;
-
         $tempGroupData["inheritance"][] = $group->getName();
-
         $this->setData($tempGroupData);
-
         $this->plugin->updatePlayersInGroup($this);
-
         return true;
     }
 
@@ -73,7 +67,6 @@ class PPGroup
                 "permissions" => [
                 ]
             ];
-
             $this->setData($tempGroupData);
         }
     }
@@ -85,7 +78,6 @@ class PPGroup
     {
         if($this->getNode("alias") === null)
             return $this->name;
-
         return $this->getNode("alias");
     }
 
@@ -104,11 +96,9 @@ class PPGroup
     public function getGroupPermissions($levelName = null)
     {
         $permissions = $levelName !== null ? $this->getWorldData($levelName)["permissions"] : $this->getNode("permissions");
-
         if(!is_array($permissions))
         {
             $this->plugin->getLogger()->critical("Invalid 'permissions' node given to " .  __METHOD__);
-
             return [];
         }
 
@@ -116,14 +106,11 @@ class PPGroup
         foreach($this->getParentGroups() as $parentGroup)
         {
             $parentPermissions = $parentGroup->getGroupPermissions($levelName);
-
             if($parentPermissions === null)
                 $parentPermissions = [];
-
             // Fixed by @mad-hon (https://github.com/mad-hon) / Tysm! :D
             $permissions = array_merge($parentPermissions, $permissions);
         }
-
         return $permissions;
     }
 
@@ -142,7 +129,6 @@ class PPGroup
     public function getNode($node)
     {
         if(!isset($this->getData()[$node])) return null;
-        
         return $this->getData()[$node];
     }
 
@@ -156,14 +142,12 @@ class PPGroup
             if(!is_array($this->getNode("inheritance")))
             {
                 $this->plugin->getLogger()->critical("Invalid 'inheritance' node given to " . __METHOD__);
-
                 return [];
             }
 
             foreach($this->getNode("inheritance") as $parentGroupName)
             {
                 $parentGroup = $this->plugin->getGroup($parentGroupName);
-
                 if($parentGroup !== null)
                     $this->parents[] = $parentGroup;
             }
@@ -180,9 +164,7 @@ class PPGroup
     {
         if($levelName === null)
             return null;
-        
         $this->createWorldData($levelName);
-            
         return $this->getData()["worlds"][$levelName];
     }
 
@@ -194,7 +176,6 @@ class PPGroup
     public function getWorldNode($levelName, $node)
     {
         if(!isset($this->getWorldData($levelName)[$node])) return null;
-
         return $this->getWorldData($levelName)[$node];
     }
 
@@ -220,7 +201,6 @@ class PPGroup
     public function removeNode($node)
     {
         $tempGroupData = $this->getData();
-        
         if(isset($tempGroupData[$node]))
         {               
             unset($tempGroupData[$node]);   
@@ -236,11 +216,8 @@ class PPGroup
     public function removeParent(PPGroup $group)
     {
         $tempGroupData = $this->getData();
-
         $tempGroupData["inheritance"] = array_diff($tempGroupData["inheritance"], [$group->getName()]);
-
         $this->setData($tempGroupData);
-
         $this->plugin->updatePlayersInGroup($this);
 
         return true;
@@ -253,11 +230,9 @@ class PPGroup
     public function removeWorldNode($levelName, $node)
     {
         $worldData = $this->getWorldData($levelName);
-
         if(isset($worldData[$node]))
         {
             unset($worldData[$node]);
-
             $this->setWorldData($levelName, $worldData);
         }
     }
@@ -282,9 +257,7 @@ class PPGroup
         else
         {
             $worldData = $this->getWorldData($levelName);
-
             $worldData["isDefault"] = true;
-
             $this->setWorldData($levelName, $worldData);
         }
     }
@@ -300,20 +273,15 @@ class PPGroup
         if($levelName == null)
         {
             $tempGroupData = $this->getData();
-                    
             $tempGroupData["permissions"][] = $permission;
-            
             $this->setData($tempGroupData);
         }
         else
         {
             $worldData = $this->getWorldData($levelName);
-            
             $worldData["permissions"][] = $permission;
-            
             $this->setWorldData($levelName, $worldData);
         }
-
         $this->plugin->updatePlayersInGroup($this);
 
         return true;
@@ -326,9 +294,7 @@ class PPGroup
     public function setNode($node, $value)
     {
         $tempGroupData = $this->getData();
-        
         $tempGroupData[$node] = $value;
-            
         $this->setData($tempGroupData);
     }
 
@@ -341,9 +307,7 @@ class PPGroup
         if(isset($this->getData()["worlds"][$levelName]))
         {
             $tempGroupData = $this->getData();
-            
             $tempGroupData["worlds"][$levelName] = $worldData;
-                
             $this->setData($tempGroupData);
         }
     }
@@ -356,35 +320,28 @@ class PPGroup
     public function setWorldNode($levelName, $node, $value)
     {
         $worldData = $this->getWorldData($levelName);
-
         $worldData[$node] = $value;
-
         $this->setWorldData($levelName, $worldData);
     }
 
     public function sortPermissions()
     {
         $tempGroupData = $this->getData();
-            
         if(isset($tempGroupData["permissions"]))
         {
             $tempGroupData["permissions"] = array_unique($tempGroupData["permissions"]);
-
             sort($tempGroupData["permissions"]);
         }
         
         $isMultiWorldPermsEnabled = $this->plugin->getConfigValue("enable-multiworld-perms");
-        
         if($isMultiWorldPermsEnabled and isset($tempGroupData["worlds"]))
         {
             foreach($this->plugin->getServer()->getWorldManager()->getWorlds() as $level)
             {
                 $levelName = $level->getDisplayName();
-                        
                 if(isset($tempGroupData["worlds"][$levelName]))
                 {
                     $tempGroupData["worlds"][$levelName]["permissions"] = array_unique($tempGroupData["worlds"][$levelName]["permissions"]);
-
                     sort($tempGroupData["worlds"][$levelName]["permissions"]);
                 }
             }
@@ -403,26 +360,18 @@ class PPGroup
         if($levelName == null)
         {
             $tempGroupData = $this->getData();
-                    
             if(!in_array($permission, $tempGroupData["permissions"])) return false;
-
             $tempGroupData["permissions"] = array_diff($tempGroupData["permissions"], [$permission]);
-            
             $this->setData($tempGroupData);
         }
         else
         {
             $worldData = $this->getWorldData($levelName);
-            
             if(!in_array($permission, $worldData["permissions"])) return false;
-            
             $worldData["permissions"] = array_diff($worldData["permissions"], [$permission]);
-            
             $this->setWorldData($levelName, $worldData);
         }
-
         $this->plugin->updatePlayersInGroup($this);
-
         return true;
     }
 }

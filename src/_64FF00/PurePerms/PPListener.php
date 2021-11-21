@@ -45,7 +45,6 @@ class PPListener implements Listener
     public function onGroupChanged(PPGroupChangedEvent $event)
     {
         $player = $event->getPlayer();
-
         $this->plugin->updatePermissions($player);
     }
 
@@ -56,7 +55,6 @@ class PPListener implements Listener
     public function onLevelChange(EntityTeleportEvent $event)
     {
         if($event->isCancelled()) return;
-
         $player = $event->getEntity();
         if($player instanceof Player) {
             $this->plugin->updatePermissions($player, $event->getTo()->getWorld()->getDisplayName());
@@ -76,7 +74,6 @@ class PPListener implements Listener
             if(!$this->plugin->getNoeulAPI()->isAuthed($event->getPlayer()))
             {
                 $event->cancel();
-
                 if($args[0] === "ppsudo" or $args[0] === "help")
                 {
                     $this->plugin->getServer()->dispatchCommand($player, $command);
@@ -89,11 +86,9 @@ class PPListener implements Listener
             else
             {
                 $disableOp = $this->plugin->getConfigValue("disable-op");
-
                 if($disableOp and $args[0] === "op")
                 {
                     $event->cancel();
-
                     $player->sendMessage(new TranslationContainer(TextFormat::RED . "%commands.generic.permission"));
                 }
             }
@@ -107,12 +102,9 @@ class PPListener implements Listener
     public function onPlayerLogin(PlayerLoginEvent $event)
     {
         $player = $event->getPlayer();
-
         $this->plugin->registerPlayer($player);
-
         if($this->plugin->getNoeulAPI()->isNoeulEnabled())
             $this->plugin->getNoeulAPI()->deAuth($player);
-
         if(!$this->plugin->getNoeulAPI()->isAuthed($player))
             $this->plugin->getNoeulAPI()->sendAuthMsg($player);
     }
@@ -124,7 +116,6 @@ class PPListener implements Listener
     public function onPlayerQuit(PlayerQuitEvent $event)
     {
         $player = $event->getPlayer();
-
         $this->plugin->unregisterPlayer($player);
     }
 
@@ -135,7 +126,6 @@ class PPListener implements Listener
     public function onRankExpired(PPRankExpiredEvent $event)
     {
         $player = $event->getPlayer();
-
         $this->plugin->setGroup($player, $this->plugin->getDefaultGroup());
     }
 }

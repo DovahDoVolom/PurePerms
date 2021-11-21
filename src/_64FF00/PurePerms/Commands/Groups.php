@@ -37,9 +37,7 @@ class Groups extends Command implements PluginOwned
     public function __construct(PurePerms $plugin, $name, $description)
     {
         $this->plugin = $plugin;
-        
         parent::__construct($name, $description);
-        
         $this->setPermission("pperms.command.groups");
     }
 
@@ -55,14 +53,11 @@ class Groups extends Command implements PluginOwned
             return false;
 
         $result = [];
-
         foreach($this->plugin->getGroups() as $group)
         {
             $result[] = $group->getName();
         }
-        
         $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.groups.messages.all_registered_groups", implode(", ", $result)));
-        
         return true;
     }
     

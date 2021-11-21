@@ -33,17 +33,12 @@ class DefaultProvider implements ProviderInterface
     public function __construct(PurePerms $plugin)
     {
         $this->plugin = $plugin;
-
         $this->plugin->saveResource("groups.yml");
-
         $this->groups = new Config($this->plugin->getDataFolder() . "groups.yml", Config::YAML);
-
         if(empty($this->groups->getAll())){
 			throw new RuntimeException($this->plugin->getMessage("logger_messages.YAMLProvider_InvalidGroupsSettings"));
 		}
-
         $this->plugin->saveResource("players.yml");
-
         $this->players = new Config($this->plugin->getDataFolder() . "players.yml", Config::YAML);
     }
 
@@ -54,9 +49,7 @@ class DefaultProvider implements ProviderInterface
     public function getGroupData(PPGroup $group)
     {
         $groupName = $group->getName();
-
         if(!isset($this->getGroupsData()[$groupName]) || !is_array($this->getGroupsData()[$groupName])) return [];
-
         return $this->getGroupsData()[$groupName];
     }
 
@@ -110,9 +103,7 @@ class DefaultProvider implements ProviderInterface
     public function setGroupData(PPGroup $group, array $tempGroupData)
     {
         $groupName = $group->getName();
-
         $this->groups->set($groupName, $tempGroupData);
-
         $this->groups->save();
     }
 
@@ -122,7 +113,6 @@ class DefaultProvider implements ProviderInterface
     public function setGroupsData(array $tempGroupsData)
     {
         $this->groups->setAll($tempGroupsData);
-
         $this->groups->save();
     }
 
@@ -133,7 +123,6 @@ class DefaultProvider implements ProviderInterface
     public function setPlayerData(IPlayer $player, array $tempUserData)
     {
         $userName = strtolower($player->getName());
-
         if(!$this->players->exists($userName))
         {
             $this->players->set($userName, [
@@ -146,9 +135,7 @@ class DefaultProvider implements ProviderInterface
 
         if(isset($tempUserData["userName"]))
             unset($tempUserData["userName"]);
-
         $this->players->set($userName, $tempUserData);
-
         $this->players->save();
     }
 

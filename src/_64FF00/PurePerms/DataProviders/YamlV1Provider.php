@@ -35,13 +35,9 @@ class YamlV1Provider implements ProviderInterface
     public function __construct(PurePerms $plugin)
     {
         $this->plugin = $plugin;
-
         $this->plugin->saveResource("groups.yml");
-
         $this->groups = new Config($this->plugin->getDataFolder() . "groups.yml", Config::YAML, []);
-
         $this->userDataFolder = $this->plugin->getDataFolder() . "players/";
-
         if(!file_exists($this->userDataFolder))
             @mkdir($this->userDataFolder, 0777, true);
     }

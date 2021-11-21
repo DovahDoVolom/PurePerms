@@ -39,9 +39,7 @@ class PPSudo extends Command implements PluginOwned
     public function __construct(PurePerms $plugin, $name, $description)
     {
         $this->plugin = $plugin;
-        
         parent::__construct($name, $description);
-        
         $this->setPermission("pperms.noeul.ppsudo");
     }
 
@@ -55,23 +53,18 @@ class PPSudo extends Command implements PluginOwned
     {
         if(!$this->testPermission($sender))
             return false;
-
         if(!($sender instanceof Player))
         {
             $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.ppsudo.messages.invalid_sender"));
-
             return true;
         }
-
         if(!isset($args[0]) || count($args) > 2)
         {
             $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.ppsudo.usage"));
 
             return true;
         }
-
         $noeulAPI = $this->plugin->getNoeulAPI();
-
         switch(strtolower($args[0]))
         {
             case "login":
@@ -79,55 +72,42 @@ class PPSudo extends Command implements PluginOwned
                 if(!$noeulAPI->isRegistered($sender))
                 {
                     $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.ppsudo.messages.not_registered"));
-
                     return true;
                 }
-
                 if(!isset($args[1]))
                 {
                     $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.ppsudo.messages.login_usage"));
 
                     return true;
                 }
-
                 $hash = $this->plugin->getUserDataMgr()->getNode($sender, 'noeulPW');
 
                 if($noeulAPI->hashEquals($args[1], $hash))
                     $noeulAPI->auth($sender);
-
                 break;
 
             case "register":
-
                 if($noeulAPI->isRegistered($sender))
                 {
                     $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' '. $this->plugin->getMessage("cmds.ppsudo.messages.already_registered"));
-
                     return true;
                 }
-
                 if(!isset($args[1]))
                 {
                     $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.ppsudo.messages.register_usage"));
-
                     return true;
                 }
-
                 $mpl = $this->plugin->getConfigValue("noeul-minimum-pw-length");
 
                 if(mb_strlen($args[1]) < $mpl)
                 {
                     $sender->sendMessage(TextFormat::RED . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.ppsudo.messages.password_too_short", $mpl));
-
                     return true;
                 }
-
                 if($noeulAPI->register($sender, $args[1]))
                     $noeulAPI->auth($sender);
-
                 break;
         }
-        
         return true;
     }
     
