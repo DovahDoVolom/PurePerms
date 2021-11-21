@@ -39,9 +39,7 @@ class PPExpDateCheckTask extends Task
             if(time() === $this->plugin->getUserDataMgr()->getNode($player, "expTime"))
             {
                 $levelName = $this->plugin->getConfigValue("enable-multiworld-perms") ? $player->getWorld()->getDisplayName() : null;
-
                 $event = new PPRankExpiredEvent($this->plugin, $player, $levelName);
-
                 $event->call();
             }
         }

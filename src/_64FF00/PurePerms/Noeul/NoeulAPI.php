@@ -50,19 +50,15 @@ class NoeulAPI
     public function auth(Player $player)
     {
         // TODO
-
         if($this->isAuthed($player))
             return true;
 
         if(isset($this->needAuth[spl_object_hash($player)]))
         {
             $attachment = $this->needAuth[spl_object_hash($player)];
-
             $player->removeAttachment($attachment);
-
             unset($this->needAuth[spl_object_hash($player)]);
         }
-
         $player->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.ppsudo.messages.successfully_logged_in"));
 
         return true;
@@ -75,13 +71,9 @@ class NoeulAPI
     public function deAuth(Player $player)
     {
         $attachment = $player->addAttachment($this->plugin);
-
         $this->removePermissions($attachment);
-
         $this->needAuth[spl_object_hash($player)] = $attachment;
-
         $this->sendAuthMsg($player);
-
         return true;
     }
 
@@ -139,9 +131,7 @@ class NoeulAPI
         if(!$this->isRegistered($player))
         {
             $hash = $this->hash($password);
-
             $this->plugin->getUserDataMgr()->setNode($player, 'noeulPW', $hash);
-
             return true;
         }
 
@@ -154,17 +144,13 @@ class NoeulAPI
     private function removePermissions(PermissionAttachment $attachment)
     {
         $permissions = [];
-
         foreach(PermissionManager::getInstance()->getPermissions() as $permission)
         {
             $permissions[$permission->getName()] = false;
         }
-
         $permissions["pocketmine.command.help"] = true;
         $permissions["pperms.noeul.ppsudo"] = true;
-
         ksort($permissions);
-
         $attachment->setPermissions($permissions);
     }
 
@@ -175,7 +161,6 @@ class NoeulAPI
     {
         $player->sendMessage(TextFormat::RED . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.ppsudo.messages.deauth_01", self::NOEUL_VERSION));
         $player->sendMessage(TextFormat::RED . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.ppsudo.messages.deauth_02"));
-
         $player->sendMessage(TextFormat::RED . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.ppsudo.messages.deauth_03"));
     }
 
@@ -188,10 +173,8 @@ class NoeulAPI
         if($this->isRegistered($player))
         {
             $this->plugin->getUserDataMgr()->removeNode($player, 'noeulPW');
-
             return true;
         }
-
         return false;
     }
 }
