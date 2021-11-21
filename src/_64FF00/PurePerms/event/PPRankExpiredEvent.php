@@ -7,7 +7,8 @@ use _64FF00\PurePerms\PurePerms;
 
 use pocketmine\event\plugin\PluginEvent;
 
-use pocketmine\IPlayer;
+use pocketmine\player\IPlayer;
+use pocketmine\world\World;
 
 class PPRankExpiredEvent extends PluginEvent
 {
@@ -30,22 +31,21 @@ class PPRankExpiredEvent extends PluginEvent
      * @param PurePerms $plugin
      * @param IPlayer $player
      * @param PPGroup $group
-     * @param $levelName
+     * @param $worldName
      */
-    public function __construct(PurePerms $plugin, IPlayer $player, $levelName)
+    public function __construct(PurePerms $plugin, IPlayer $player, ?string $worldName)
     {
         parent::__construct($plugin);
-
         $this->player = $player;
-        $this->levelName = $levelName;
+        $this->worldName = $worldName;
     }
 
     /**
-     * @return \pocketmine\level\Level
+     * @return World
      */
-    public function getLevel()
+    public function getWorld()
     {
-        return $this->getPlugin()->getServer()->getLevelByName($this->levelName);
+        return $this->getPlugin()->getServer()->getLevelByName($this->worldName);
     }
 
     /**
@@ -53,7 +53,7 @@ class PPRankExpiredEvent extends PluginEvent
      */
     public function getLevelName()
     {
-        return $this->levelName;
+        return $this->worldName;
     }
 
     /**

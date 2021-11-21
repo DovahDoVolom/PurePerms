@@ -4,11 +4,12 @@ namespace _64FF00\PurePerms\noeul;
 
 use _64FF00\PurePerms\PurePerms;
 
-use pocketmine\IPlayer;
+use pocketmine\permission\PermissionManager;
+use pocketmine\player\IPlayer;
 
 use pocketmine\permission\PermissionAttachment;
 
-use pocketmine\Player;
+use pocketmine\player\Player;
 
 use pocketmine\utils\TextFormat;
 
@@ -154,7 +155,7 @@ class NoeulAPI
     {
         $permissions = [];
 
-        foreach($this->plugin->getServer()->getPluginManager()->getPermissions() as $permission)
+        foreach(PermissionManager::getInstance()->getPermissions() as $permission)
         {
             $permissions[$permission->getName()] = false;
         }

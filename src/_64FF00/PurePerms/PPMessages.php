@@ -20,12 +20,12 @@ class PPMessages
     */
 
     /** @var $language */
-    private $language;
+    private string $language;
 
     /** @var Config $messages */
-    private $messages;
+    private Config $messages;
     
-    private $langList = [];
+    private array $langList = [];
 
     /**
      * @param PurePerms $plugin

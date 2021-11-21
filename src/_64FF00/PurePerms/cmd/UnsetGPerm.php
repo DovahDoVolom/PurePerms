@@ -6,12 +6,14 @@ use _64FF00\PurePerms\PurePerms;
 
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
-use pocketmine\command\PluginIdentifiableCommand;
 use pocketmine\plugin\Plugin;
+use pocketmine\plugin\PluginOwned;
+use pocketmine\plugin\PluginOwnedTrait;
 use pocketmine\utils\TextFormat;
 
-class UnsetGPerm extends Command implements PluginIdentifiableCommand
+class UnsetGPerm extends Command implements PluginOwned
 {
+	use PluginOwnedTrait;
     /*
         PurePerms by 64FF00 (Twitter: @64FF00)
 
@@ -76,7 +78,7 @@ class UnsetGPerm extends Command implements PluginIdentifiableCommand
         
         if(isset($args[2]))
         {
-            $level = $this->plugin->getServer()->getLevelByName($args[2]);
+            $level = $this->plugin->getServer()->getWorldManager()->getWorldByName($args[2]);
             
             if($level == null)
             {
@@ -85,7 +87,7 @@ class UnsetGPerm extends Command implements PluginIdentifiableCommand
                 return true;
             }
             
-            $levelName = $level->getName();
+            $levelName = $level->getDisplayName();
         }
         
         $group->unsetGroupPermission($permission, $levelName);

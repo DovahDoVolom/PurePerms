@@ -6,7 +6,7 @@ use _64FF00\PurePerms\PPGroup;
 use _64FF00\PurePerms\PurePerms;
 use _64FF00\PurePerms\event\PPGroupChangedEvent;
 
-use pocketmine\IPlayer;
+use pocketmine\player\IPlayer;
 
 class UserDataManager
 {
@@ -116,7 +116,7 @@ class UserDataManager
     public function getWorldData(IPlayer $player, $levelName)
     {
         if($levelName === null)
-            $levelName = $this->plugin->getServer()->getDefaultLevel()->getName();
+            $levelName = $this->plugin->getServer()->getWorldManager()->getDefaultWorld()->getDisplayName();
 
         if(!isset($this->getData($player)["worlds"][$levelName]))
             return [
@@ -175,7 +175,7 @@ class UserDataManager
 
         $event = new PPGroupChangedEvent($this->plugin, $player, $group, $levelName);
 
-        $this->plugin->getServer()->getPluginManager()->callEvent($event);
+        $event->call();
     }
 
     /**

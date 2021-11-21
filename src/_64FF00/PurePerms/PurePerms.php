@@ -29,17 +29,19 @@ use _64FF00\PurePerms\provider\ProviderInterface;
 use _64FF00\PurePerms\provider\YamlV1Provider;
 use _64FF00\PurePerms\task\PPExpDateCheckTask;
 
-use pocketmine\IPlayer;
+use pocketmine\permission\PermissionManager;
+use pocketmine\player\IPlayer;
 
-use pocketmine\level\Level;
+use pocketmine\world\World;
 
 use pocketmine\permission\DefaultPermissions;
 
-use pocketmine\Player;
+use pocketmine\player\Player;
 
 use pocketmine\plugin\PluginBase;
 
-use pocketmine\utils\UUID;
+use Ramsey\Uuid\Uuid;
+use RuntimeException;
 
 class PurePerms extends PluginBase
 {
@@ -81,7 +83,7 @@ class PurePerms extends PluginBase
 
     private $attachments = [], $groups = [], $pmDefaultPerms = [];
 
-    public function onLoad()
+    public function onLoad(): void
     {
         $this->saveDefaultConfig();
 
@@ -104,7 +106,7 @@ class PurePerms extends PluginBase
         }
     }
     
-    public function onEnable()
+    public function onEnable(): void
     {
         $this->registerCommands();
 
@@ -117,7 +119,7 @@ class PurePerms extends PluginBase
         $this->getScheduler()->scheduleRepeatingTask(new PPExpDateCheckTask($this), 72000);
     }
 
-    public function onDisable()
+    public function onDisable(): void
     {
         $this->unregisterPlayers();
 
@@ -296,7 +298,7 @@ class PurePerms extends PluginBase
         $uniqueId = $this->getValidUUID($player);
 
         if(!isset($this->attachments[$uniqueId]))
-            throw new \RuntimeException("Tried to calculate permissions on " .  $player->getName() . " using null attachment");
+            throw new RuntimeException("Tried to calculate permissions on " .  $player->getName() . " using null attachment");
 
         return $this->attachments[$uniqueId];
     }
@@ -403,16 +405,11 @@ class PurePerms extends PluginBase
     public function getGroups()
     {
         if($this->isGroupsLoaded !== true)
-            throw new \RuntimeException("No groups loaded, maybe a provider error?");
+            throw new RuntimeException("No groups loaded, maybe a provider error?");
 
         return $this->groups;
     }
 
-    /**
-     * @param $node
-     * @param array ...$vars
-     * @return string
-     */
     public function getMessage($node, ...$vars)
     {
         return $this->messages->getMessage($node, ...$vars);
@@ -436,9 +433,9 @@ class PurePerms extends PluginBase
 
         foreach($this->getServer()->getOnlinePlayers() as $player)
         {
-            foreach($this->getServer()->getLevels() as $level)
+            foreach($this->getServer()->getWorldManager()->getWorlds() as $level)
             {
-                $levelName = $level->getName();
+                $levelName = $level->getDisplayName();
 
                 if($this->userDataMgr->getGroup($player, $levelName) === $group)
                     $users[] = $player;
@@ -470,7 +467,7 @@ class PurePerms extends PluginBase
      */
     public function getPlayer($userName)
     {
-        $player = $this->getServer()->getPlayer($userName);
+        $player = $this->getServer()->getPlayerByPrefix($userName);
 
         return $player instanceof Player ? $player : $this->getServer()->getOfflinePlayer($userName);
     }
@@ -483,7 +480,7 @@ class PurePerms extends PluginBase
         if($this->pmDefaultPerms === [])
         {
             /** @var \pocketmine\permission\Permission $permission */
-            foreach($this->getServer()->getPluginManager()->getPermissions() as $permission)
+            foreach(PermissionManager::getInstance()->getPermissions() as $permission)
             {
                 if(strpos($permission->getName(), DefaultPermissions::ROOT) !== false)
                     $this->pmDefaultPerms[] = $permission;
@@ -528,10 +525,10 @@ class PurePerms extends PluginBase
     {
         $uuid = $player->getUniqueId();
 
-        if($uuid instanceof UUID)
+        if($uuid instanceof Uuid)
             return $uuid->toString();
 
-        $this->getLogger()->debug("Invalid UUID detected! *cri* (userName: " . $player->getName() . ", isConnected: " . ($player->isConnected() ? "true" : "false") . ", isOnline: " . ($player->isOnline() ? "true" : "false") . ", isValid: " . ($player->isValid() ? "true" : "false") .  ")");
+        $this->getLogger()->debug("Invalid UUID detected! *cri* (userName: " . $player->getName() . ", isConnected: " . ($player->isConnected() ? "true" : "false") . ", isOnline: " . ($player->isOnline() ? "true" : "false") . ", isValid: " . (Uuid::isValid($uuid) ? "true" : "false") .  ")");
 
         return null;
     }
@@ -667,10 +664,10 @@ class PurePerms extends PluginBase
 
             if($this->getConfigValue("enable-multiworld-perms"))
             {
-                /** @var Level $level */
-                foreach($this->getServer()->getLevels() as $level)
+                /** @var World $level */
+                foreach($this->getServer()->getWorldManager()->getWorlds() as $level)
                 {
-                    $levelName = $level->getName();
+                    $levelName = $level->getDisplayName();
 
                     $ppGroup->createWorldData($levelName);
                 }
@@ -681,7 +678,7 @@ class PurePerms extends PluginBase
     public function updateGroups()
     {
         if(!$this->isValidProvider())
-            throw new \RuntimeException("Failed to load groups: Invalid data provider");
+            throw new RuntimeException("Failed to load groups: Invalid data provider");
 
         // Make group list empty first to reload it
         $this->groups = [];
@@ -692,7 +689,7 @@ class PurePerms extends PluginBase
         }
 
         if(empty($this->groups))
-            throw new \RuntimeException("No groups found, I guess there's definitely something wrong with your data provider... *cough cough*");
+            throw new RuntimeException("No groups found, I guess there's definitely something wrong with your data provider... *cough cough*");
 
         $this->isGroupsLoaded = true;
 
@@ -710,7 +707,7 @@ class PurePerms extends PluginBase
             if($this->getConfigValue("enable-multiworld-perms") == null) {
                 $levelName = null;
             }elseif($levelName == null) {
-                $levelName = $player->getLevel()->getName();
+                $levelName = $player->getWorld()->getDisplayName();
             }
 
             $permissions = [];
@@ -720,7 +717,7 @@ class PurePerms extends PluginBase
             {
                 if($permission === '*')
                 {
-                    foreach($this->getServer()->getPluginManager()->getPermissions() as $tmp)
+                    foreach(PermissionManager::getInstance()->getPermissions() as $tmp)
                     {
                         $permissions[$tmp->getName()] = true;
                     }

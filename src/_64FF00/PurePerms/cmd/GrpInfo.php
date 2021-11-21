@@ -7,12 +7,14 @@ use _64FF00\PurePerms\PurePerms;
 use pocketmine\plugin\Plugin;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
-use pocketmine\command\PluginIdentifiableCommand;
 
+use pocketmine\plugin\PluginOwned;
+use pocketmine\plugin\PluginOwnedTrait;
 use pocketmine\utils\TextFormat;
 
-class GrpInfo extends Command implements PluginIdentifiableCommand
+class GrpInfo extends Command implements PluginOwned
 {
+	use PluginOwnedTrait;
     /*
         PurePerms by 64FF00 (Twitter: @64FF00)
 

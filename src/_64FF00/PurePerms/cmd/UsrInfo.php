@@ -6,14 +6,18 @@ use _64FF00\PurePerms\PurePerms;
 
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
-use pocketmine\command\PluginIdentifiableCommand;
+use pocketmine\network\mcpe\NetworkSession;
+use pocketmine\network\NetworkSessionManager;
 use pocketmine\plugin\Plugin;
-use pocketmine\Player;
+use pocketmine\player\Player;
 
+use pocketmine\plugin\PluginOwned;
+use pocketmine\plugin\PluginOwnedTrait;
 use pocketmine\utils\TextFormat;
 
-class UsrInfo extends Command implements PluginIdentifiableCommand
+class UsrInfo extends Command implements PluginOwned
 {
+	use PluginOwnedTrait;
     /*
         PurePerms by 64FF00 (Twitter: @64FF00)
 
@@ -67,7 +71,7 @@ class UsrInfo extends Command implements PluginIdentifiableCommand
         
         if(isset($args[1]))
         {
-            $level = $this->plugin->getServer()->getLevelByName($args[1]);
+            $level = $this->plugin->getServer()->getWorldManager()->getWorldByName($args[1]);
             
             if($level == null)
             {
@@ -76,7 +80,7 @@ class UsrInfo extends Command implements PluginIdentifiableCommand
                 return true;
             }
             
-            $levelName = $level->getName();
+            $levelName = $level->getDisplayName();
         }
 
         $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.usrinfo.messages.usrinfo_header", $player->getName()));
@@ -84,7 +88,7 @@ class UsrInfo extends Command implements PluginIdentifiableCommand
         $status = $player instanceof Player ? TextFormat::DARK_GREEN . $this->plugin->getMessage("cmds.usrinfo.messages.status_online") : TextFormat::RED . $this->plugin->getMessage("cmds.usrinfo.messages.status_offline");
         $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.usrinfo.messages.usrinfo_status", $status));
 
-        $ip = $player instanceof Player ? TextFormat::DARK_GREEN . $player->getAddress() : TextFormat::RED . $this->plugin->getMessage("cmds.usrinfo.messages.unknown");
+        $ip = $player instanceof Player ? TextFormat::DARK_GREEN . $player->getNetworkSession()->getIp() : TextFormat::RED . $this->plugin->getMessage("cmds.usrinfo.messages.unknown");
         $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.usrinfo.messages.usrinfo_ip", $ip));
 
         $uuid = $player instanceof Player ? TextFormat::DARK_GREEN . $player->getUniqueId()->toString() : TextFormat::RED . $this->plugin->getMessage("cmds.usrinfo.messages.unknown");

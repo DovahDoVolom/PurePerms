@@ -23,6 +23,8 @@ class PPMySQLTask extends Task
 
     private $db;
 
+    private PurePerms $plugin;
+
     /**
      * @param PurePerms $plugin
      * @param \mysqli $db
@@ -33,10 +35,7 @@ class PPMySQLTask extends Task
         $this->db = $db;
     }
 
-    /**
-     * @param $currentTick
-     */
-    public function onRun(int $currentTick)
+    public function onRun(): void
     {
         if($this->db->ping())
         {

@@ -4,7 +4,7 @@ namespace _64FF00\PurePerms\provider;
 
 use _64FF00\PurePerms\PPGroup;
 
-use pocketmine\IPlayer;
+use pocketmine\player\IPlayer;
 
 interface ProviderInterface
 {
