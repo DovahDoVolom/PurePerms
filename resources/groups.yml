@@ -12,7 +12,7 @@ Guest:
   - pchat.colored.nametag
   - pocketmine.command.list
   - pperms.command.ppinfo
-  - worlds: []
+  worlds: []
 Admin:
   alias: 'adm'
   inheritance:
@@ -25,7 +25,7 @@ Admin:
   - pocketmine.command.kick
   - pocketmine.command.teleport
   - pocketmine.command.time
-  - worlds: []
+  worlds: []
 Owner:
   alias: 'owr'
   inheritance:
@@ -34,11 +34,11 @@ Owner:
   - essentials
   - pocketmine.command
   - pperms.command
-  - worlds: []
+  worlds: []
 OP:
   alias: 'op'
   inheritance: []
   permissions:
   - '*'
-  - worlds: []
+   worlds: []
 ...
