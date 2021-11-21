@@ -2,8 +2,8 @@
 
 namespace _64FF00\PurePerms;
 
-use _64FF00\PurePerms\event\PPGroupChangedEvent;
-use _64FF00\PurePerms\event\PPRankExpiredEvent;
+use _64FF00\PurePerms\EventManager\PPGroupChangedEvent;
+use _64FF00\PurePerms\EventManager\PPRankExpiredEvent;
 use pocketmine\event\Listener;
 use pocketmine\event\entity\EntityTeleportEvent;
 use pocketmine\event\player\PlayerCommandPreprocessEvent;

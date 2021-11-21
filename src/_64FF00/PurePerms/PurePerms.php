@@ -2,44 +2,39 @@
 
 namespace _64FF00\PurePerms;
 
-use _64FF00\PurePerms\cmd\AddGroup;
-use _64FF00\PurePerms\cmd\AddParent;
-use _64FF00\PurePerms\cmd\DefGroup;
-use _64FF00\PurePerms\cmd\FPerms;
-use _64FF00\PurePerms\cmd\Groups;
-use _64FF00\PurePerms\cmd\GrpInfo;
-use _64FF00\PurePerms\cmd\ListGPerms;
-use _64FF00\PurePerms\cmd\ListUPerms;
-use _64FF00\PurePerms\cmd\PPInfo;
-use _64FF00\PurePerms\cmd\PPReload;
-use _64FF00\PurePerms\cmd\PPSudo;
-use _64FF00\PurePerms\cmd\RmGroup;
-use _64FF00\PurePerms\cmd\RmParent;
-use _64FF00\PurePerms\cmd\SetGPerm;
-use _64FF00\PurePerms\cmd\SetGroup;
-use _64FF00\PurePerms\cmd\SetUPerm;
-use _64FF00\PurePerms\cmd\UnsetGPerm;
-use _64FF00\PurePerms\cmd\UnsetUPerm;
-use _64FF00\PurePerms\cmd\UsrInfo;
-use _64FF00\PurePerms\data\UserDataManager;
-use _64FF00\PurePerms\noeul\NoeulAPI;
-use _64FF00\PurePerms\provider\DefaultProvider;
-use _64FF00\PurePerms\provider\MySQLProvider;
-use _64FF00\PurePerms\provider\ProviderInterface;
-use _64FF00\PurePerms\provider\YamlV1Provider;
-use _64FF00\PurePerms\task\PPExpDateCheckTask;
+use _64FF00\PurePerms\Commands\AddGroup;
+use _64FF00\PurePerms\Commands\AddParent;
+use _64FF00\PurePerms\Commands\DefGroup;
+use _64FF00\PurePerms\Commands\FPerms;
+use _64FF00\PurePerms\Commands\Groups;
+use _64FF00\PurePerms\Commands\GrpInfo;
+use _64FF00\PurePerms\Commands\ListGPerms;
+use _64FF00\PurePerms\Commands\ListUPerms;
+use _64FF00\PurePerms\Commands\PPInfo;
+use _64FF00\PurePerms\Commands\PPReload;
+use _64FF00\PurePerms\Commands\PPSudo;
+use _64FF00\PurePerms\Commands\RmGroup;
+use _64FF00\PurePerms\Commands\RmParent;
+use _64FF00\PurePerms\Commands\SetGPerm;
+use _64FF00\PurePerms\Commands\SetGroup;
+use _64FF00\PurePerms\Commands\SetUPerm;
+use _64FF00\PurePerms\Commands\UnsetGPerm;
+use _64FF00\PurePerms\Commands\UnsetUPerm;
+use _64FF00\PurePerms\Commands\UsrInfo;
+use _64FF00\PurePerms\DataManager\UserDataManager;
+use _64FF00\PurePerms\Noeul\NoeulAPI;
+use _64FF00\PurePerms\DataProviders\DefaultProvider;
+use _64FF00\PurePerms\DataProviders\MySQLProvider;
+use _64FF00\PurePerms\DataProviders\ProviderInterface;
+use _64FF00\PurePerms\DataProviders\YamlV1Provider;
+use _64FF00\PurePerms\Task\PPExpDateCheckTask;
 
 use pocketmine\permission\PermissionManager;
 use pocketmine\player\IPlayer;
-
 use pocketmine\world\World;
-
 use pocketmine\permission\DefaultPermissions;
-
 use pocketmine\player\Player;
-
 use pocketmine\plugin\PluginBase;
-
 use Ramsey\Uuid\Uuid;
 use RuntimeException;
 
