@@ -85,15 +85,6 @@ class PurePerms extends PluginBase
         $this->messages = new PPMessages($this);
         $this->noeulAPI = new NoeulAPI($this);
         $this->userDataMgr = new UserDataManager($this);
-        if($this->getConfigValue("enable-multiworld-perms") === false)
-        {
-            $this->getLogger()->info($this->getMessage("logger_messages.onLoad_01"));
-            $this->getLogger()->info($this->getMessage("logger_messages.onLoad_02"));
-        }
-        else
-        {
-            $this->getLogger()->info($this->getMessage("logger_messages.onLoad_03"));
-        }
     }
     
     public function onEnable(): void
