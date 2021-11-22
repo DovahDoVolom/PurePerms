@@ -7,13 +7,7 @@ Guest:
   isDefault: true
   inheritance: []
   permissions:
-    - -essentials.kit
-    - -essentials.kit.other
-    - -pocketmine.command.me
-    - pchat.colored.format
-    - pchat.colored.nametag
     - pocketmine.command.list
-    - pperms.command.ppinfo
   worlds: []
 Admin:
   alias: 'adm'
@@ -35,12 +29,6 @@ Owner:
   permissions:
     - essentials
     - pocketmine.command
-    - pperms.command
-  worlds: []
-OP:
-  alias: 'op'
-  inheritance: []
-  permissions:
-    - '*'
+    - pocketmine.command.ban
   worlds: []
 ...
