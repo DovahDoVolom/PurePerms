@@ -21,7 +21,6 @@ use _64FF00\PurePerms\Commands\UnsetUPerm;
 use _64FF00\PurePerms\Commands\UsrInfo;
 use _64FF00\PurePerms\DataManager\UserDataManager;
 use _64FF00\PurePerms\DataProviders\SQLite3Provider;
-use _64FF00\PurePerms\Authentication\Auth;
 use _64FF00\PurePerms\DataProviders\DefaultProvider;
 use _64FF00\PurePerms\DataProviders\MySQLProvider;
 use _64FF00\PurePerms\DataProviders\ProviderInterface;
