@@ -11,7 +11,6 @@ use _64FF00\PurePerms\Commands\GrpInfo;
 use _64FF00\PurePerms\Commands\ListGPerms;
 use _64FF00\PurePerms\Commands\ListUPerms;
 use _64FF00\PurePerms\Commands\PPInfo;
-use _64FF00\PurePerms\Commands\PPSudo;
 use _64FF00\PurePerms\Commands\RmGroup;
 use _64FF00\PurePerms\Commands\RmParent;
 use _64FF00\PurePerms\Commands\SetGPerm;
@@ -22,7 +21,7 @@ use _64FF00\PurePerms\Commands\UnsetUPerm;
 use _64FF00\PurePerms\Commands\UsrInfo;
 use _64FF00\PurePerms\DataManager\UserDataManager;
 use _64FF00\PurePerms\DataProviders\SQLite3Provider;
-use _64FF00\PurePerms\Noeul\NoeulAPI;
+use _64FF00\PurePerms\Authentication\Auth;
 use _64FF00\PurePerms\DataProviders\DefaultProvider;
 use _64FF00\PurePerms\DataProviders\MySQLProvider;
 use _64FF00\PurePerms\DataProviders\ProviderInterface;
@@ -67,9 +66,6 @@ class PurePerms extends PluginBase
     /** @var PPMessages $messages */
     private $messages;
 
-    /** @var NoeulAPI $noeulAPI */
-    private $noeulAPI;
-
     /** @var ProviderInterface $provider */
     private $provider;
 
@@ -83,7 +79,6 @@ class PurePerms extends PluginBase
         $this->saveDefaultConfig();
         $this->fixConfig();
         $this->messages = new PPMessages($this);
-        $this->noeulAPI = new NoeulAPI($this);
         $this->userDataMgr = new UserDataManager($this);
     }
     
@@ -112,10 +107,6 @@ class PurePerms extends PluginBase
             $config->set("disable-op", true);
         if(!$config->exists("enable-multiworld-perms"))
             $config->set("enable-multiworld-perms", false);
-        if(!$config->exists("enable-noeul-sixtyfour"))
-            $config->set("enable-noeul-sixtyfour", false);
-        if(!$config->exists("noeul-minimum-pw-length"))
-            $config->set("noeul-minimum-pw-length", 6);
         if(!$config->exists("superadmin-ranks"))
             $config->set("superadmin-ranks", ["OP"]);
         $this->saveConfig();
@@ -125,8 +116,6 @@ class PurePerms extends PluginBase
     private function registerCommands()
     {
         $commandMap = $this->getServer()->getCommandMap();
-        if($this->getNoeulAPI()->isNoeulEnabled())
-            $commandMap->register("pureperms", new PPSudo($this, "ppsudo", $this->getMessage("cmds.ppsudo.desc") . ' #64FF00'));
         $commandMap->register("pureperms", new AddGroup($this, "addgroup", $this->getMessage("cmds.addgroup.desc") . ' #64FF00'));
         $commandMap->register("pureperms", new AddParent($this, "addparent", $this->getMessage("cmds.addparent.desc") . ' #64FF00'));
         $commandMap->register("pureperms", new DefGroup($this, "defgroup", $this->getMessage("cmds.defgroup.desc") . ' #64FF00'));
@@ -350,13 +339,6 @@ class PurePerms extends PluginBase
         return $this->messages->getMessage($node, ...$vars);
     }
 
-    /**
-     * @return NoeulAPI
-     */
-    public function getNoeulAPI()
-    {
-        return $this->noeulAPI;
-    }
 
     /**
      * @param PPGroup $group

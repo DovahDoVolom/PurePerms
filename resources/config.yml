@@ -15,17 +15,9 @@ data-provider: json
 # English message resource by @64FF00 and @Samueljh1 (GitHub)
 default-language: en
 
-# Disable /op permission for all players
-# - true / false
-disable-op: true
-
 # Setting this option will allow you to use per-world permissions (Unstable)
 # - true / false
 enable-multiworld-perms: false
-
-# Enables 'Noeul', a 'pointless' security management system for PurePerms
-# - true / false
-enable-noeul-sixtyfour: false
 
 # MySQL Settings (Only configure this if you are going to use MySQL data provider)
 mysql-settings:

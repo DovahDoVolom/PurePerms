@@ -61,40 +61,6 @@ class PPListener implements Listener
         }
     }
 
-    public function onPlayerCommand(PlayerCommandPreprocessEvent $event)
-    {
-        $message = $event->getMessage();
-        $player = $event->getPlayer();
-
-        if(substr($message, 0, 1) === "/")
-        {
-            $command = substr($message, 1);
-            $args = explode(" ", $command);
-
-            if(!$this->plugin->getNoeulAPI()->isAuthed($event->getPlayer()))
-            {
-                $event->cancel();
-                if($args[0] === "ppsudo" or $args[0] === "help")
-                {
-                    $this->plugin->getServer()->dispatchCommand($player, $command);
-                }
-                else
-                {
-                    $this->plugin->getNoeulAPI()->sendAuthMsg($player);
-                }
-            }
-            else
-            {
-                $disableOp = $this->plugin->getConfigValue("disable-op");
-                if($disableOp and $args[0] === "op")
-                {
-                    $event->cancel();
-                    $player->sendMessage(new TranslationContainer(TextFormat::RED . "%commands.generic.permission"));
-                }
-            }
-        }
-    }
-
     /**
      * @param PlayerLoginEvent $event
      * @priority LOWEST
@@ -103,10 +69,6 @@ class PPListener implements Listener
     {
         $player = $event->getPlayer();
         $this->plugin->registerPlayer($player);
-        if($this->plugin->getNoeulAPI()->isNoeulEnabled())
-            $this->plugin->getNoeulAPI()->deAuth($player);
-        if(!$this->plugin->getNoeulAPI()->isAuthed($player))
-            $this->plugin->getNoeulAPI()->sendAuthMsg($player);
     }
 
     /**
