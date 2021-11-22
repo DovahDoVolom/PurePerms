@@ -27,10 +27,6 @@ mysql-settings:
   password: "YourPasswordGoesHere"
   db: "YourDBNameGoesHere"
   
-# Sets a minimum length for a Noeul password when registering a new account
-# - int  
-noeul-minimum-pw-length: 6
-  
 # Special thanks to @jazzwhistle for helping me with this cool feature! #JAZZWHISTLE-FTW
 # Ranks that can only be set on console
 # Also, users with a superadmin-rank can only have their rank changed on console
