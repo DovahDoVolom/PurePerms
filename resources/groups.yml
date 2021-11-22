@@ -14,7 +14,6 @@ Admin:
   inheritance:
     - Guest
   permissions:
-    - essentials.gamemode
     - pocketmine.broadcast
     - pocketmine.command.gamemode
     - pocketmine.command.give
