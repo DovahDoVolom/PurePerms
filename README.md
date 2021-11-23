@@ -5,7 +5,7 @@
 
 <p align="center">
     <img alt="GitHubrelease" src="https://img.shields.io/github/v/release/Vecnavium/PurePerms?label=release&sort=semver">
-      <img alt="Stars" src= "https://img.shields.io/github/stars/OP-D/Poggit-Download-Booster?style=for-the-badge">
+      <img alt="Stars" src= "https://img.shields.io/github/stars/Vecnavium/PurePerms?style=for-the-badge">
     <img href="https://discord.gg/6M9tGyWPjr"><img src="https://img.shields.io/discord/837701868649709568?label=discord&color=7289DA&logo=discord" alt="Discord" /></a>
 </p>
 
