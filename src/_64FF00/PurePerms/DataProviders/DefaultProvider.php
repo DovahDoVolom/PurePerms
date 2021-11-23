@@ -33,8 +33,8 @@ class DefaultProvider implements ProviderInterface
     public function __construct(PurePerms $plugin)
     {
         $this->plugin = $plugin;
-        $this->plugin->saveResource("groups.yml");
-        $this->groups = new Config($this->plugin->getDataFolder() . "groups.yml", Config::YAML);
+        $this->plugin->saveResource("ranks.yml");
+        $this->groups = new Config($this->plugin->getDataFolder() . "ranks.yml", Config::YAML);
         if(empty($this->groups->getAll())){
 			throw new RuntimeException($this->plugin->getMessage("logger_messages.YAMLProvider_InvalidGroupsSettings"));
 		}
