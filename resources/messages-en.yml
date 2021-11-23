@@ -16,7 +16,7 @@ cmds:
     desc: "Allows you to set default rank."
     usage: "Usage: /defrank <rank> [world]"
     messages:
-      defgroup_successfully: "Default rank has been successfully set to %var0%."
+      defranks_successfully: "Default rank has been successfully set to %var0%."
       rank_not_exist: "rank %var0% does NOT exist."
       level_not_exist: "World %var0% does NOT exist."
   plperms:
@@ -36,22 +36,22 @@ cmds:
       ppinfo_console: "You are currently using PurePerms v%var0% by %var1%."
       ppinfo_player: "This server is using PurePerms v%var0% by %var1%."
   rmrank:
-    desc: "Removes a rank from the groups list."
+    desc: "Removes a rank from the ranks list."
     usage: "Usage: /rmrank <rank>"
     messages:
-      group_removed_successfully: "Removed %var0% from the rank list successfully."
-      group_not_exist: "rank %var0% does NOT exist."
-      invalid_group_name: "Invalid rank Name."
+      ranks_removed_successfully: "Removed %var0% from the rank list successfully."
+      ranks_not_exist: "rank %var0% does NOT exist."
+      invalid_ranks_name: "Invalid rank Name."
   setrank:
     desc: "Sets a rank for the user."
     usage: "Usage: /setrank <player> <rank> <exp_time> [world]"
     messages:
       access_denied_01: "You don't have permission to set a player's rank to %var0%."
-      access_denied_02: "You don't have permission to change rank of a player with group %var0%."
-      group_not_exist: "Rank %var0% does NOT exist."
+      access_denied_02: "You don't have permission to change rank of a player with ranks %var0%."
+      ranks_not_exist: "Rank %var0% does NOT exist."
       level_not_exist: "World %var0% does NOT exist."
-      on_player_group_change: "Your rank has been changed to a / an %var0%!"
-      setgroup_successfully: "Added %var0% to the rank successfully."
+      on_player_ranks_change: "Your rank has been changed to a / an %var0%!"
+      setranks_successfully: "Added %var0% to the rank successfully."
   setuperm: 
     desc: "Adds a permission to the user."
     usage: "Usage: /setuperm <player> <permission> [world]"
@@ -66,9 +66,9 @@ cmds:
       uperm_removed_successfully: "Removed permission %var0% from %var1% successfully."
 logger_messages:
   getConfigValue_01: "Key %var0% not found in config.yml."
-  getDefaultGroup_01: "More than one default group was declared in the groups file."
-  getDefaultGroup_02: "No default group was found in the groups file."
-  getDefaultGroup_03: "Setting the default group automatically."
+  getDefaultGroup_01: "More than one default ranks was declared in the ranks file."
+  getDefaultGroup_02: "No default ranks was found in the rankss file."
+  getDefaultGroup_03: "Setting the default ranks automatically."
   getGroup_01: "Group %var0% not found."
   getGroup_02: "Group %var0% has invalid or corrupted data."
   registerPlayer: "Registering player %var0%..."
@@ -77,5 +77,5 @@ logger_messages:
   setProvider_SQLITE3: "Data provider is set to SQLITe3."
   setProvider_NotFound: "Provider %var0% does NOT exist. Setting the data provider to default."
   unregisterPlayer: "Unregistering player %var0%..."
-  YAMLProvider_InvalidGroupsSettings: "INVALID GROUPS.YML SETTINGS: Please check if you have an invalid or corrupted groups.yml."
+  YAMLProvider_InvalidGroupsSettings: "INVALID GROUPS.YML SETTINGS: Please check if you have an invalid or corrupted ranks.yml."
 ...
