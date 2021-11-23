@@ -20,8 +20,8 @@ Command | Description | Permission
 `/ppinfo` | Shows info about PurePerms. | pperms.command.ppinfo
 `/delrank <rank>` | Removes a rank from the rank list. | pperms.command.delrank
 `/setrank <player> <rank> [world]` | Sets rank for the user. | pperms.command.setrank
-`/unsetuperm <rank> <permission> [world]` | Removes a permission from the user. | pperms.command.unsetgperm
-`/setuperm <player> <permission> [world]` | Adds a permission to the user. | pperms.command.unsetuperm
+`/unsetuperm <rank> <permission> [world]` | Removes a permission from the user. | pperms.command.unsetuperm
+`/setuperm <player> <permission> [world]` | Adds a permission to the user. | pperms.command.setuperm
 
 # Features
 
