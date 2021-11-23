@@ -14,7 +14,7 @@ use pocketmine\plugin\PluginOwned;
 use pocketmine\plugin\PluginOwnedTrait;
 use pocketmine\utils\TextFormat;
 
-class SetGroup extends Command implements PluginOwned
+class SetRank extends Command implements PluginOwned
 {
 	use PluginOwnedTrait;
     /*
@@ -41,7 +41,7 @@ class SetGroup extends Command implements PluginOwned
     {
         $this->plugin = $plugin;
         parent::__construct($name, $description);
-        $this->setPermission("pperms.command.setgroup");
+        $this->setPermission("pperms.command.setrank");
     }
 
     /**
@@ -59,14 +59,14 @@ class SetGroup extends Command implements PluginOwned
         
         if(count($args) < 2 || count($args) > 4)
         {
-            $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.setgroup.usage"));
+            $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.setrank.usage"));
             return true;
         }
         $player = $this->plugin->getPlayer($args[0]);
         $group = $this->plugin->getGroup($args[1]);
         if($group === null)
         {
-            $sender->sendMessage(TextFormat::RED . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.setgroup.messages.group_not_exist", $args[1]));
+            $sender->sendMessage(TextFormat::RED . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.setrank.messages.rank_not_exist", $args[1]));
             return true;
         }
 
@@ -79,7 +79,7 @@ class SetGroup extends Command implements PluginOwned
             $world = $this->plugin->getServer()->getWorldManager()->getWorldByName($args[3]);
             if($world === null)
             {
-                $sender->sendMessage(TextFormat::RED . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.setgroup.messages.level_not_exist", $args[3]));
+                $sender->sendMessage(TextFormat::RED . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.setrank.messages.level_not_exist", $args[3]));
                 return true;
             }
 
@@ -96,26 +96,26 @@ class SetGroup extends Command implements PluginOwned
         {
             if(isset($tmpSuperAdminRanks[$group->getName()]))
             {
-                $sender->sendMessage(TextFormat::RED . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.setgroup.messages.access_denied_01", $group->getName()));
+                $sender->sendMessage(TextFormat::RED . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.setrank.messages.access_denied_01", $group->getName()));
                 return true;
             }
 
             $userGroup = $this->plugin->getUserDataMgr()->getGroup($player, $WorldName);
             if(isset($tmpSuperAdminRanks[$userGroup->getName()]))
             {
-                $sender->sendMessage(TextFormat::RED . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.setgroup.messages.access_denied_02", $userGroup->getName()));
+                $sender->sendMessage(TextFormat::RED . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.setrank.messages.access_denied_02", $userGroup->getName()));
                 return true;
             }
         }
 
         $this->plugin->getUserDataMgr()->setGroup($player, $group, $WorldName, $expTime);
         
-        $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.setgroup.messages.setgroup_successfully", $player->getName()));
+        $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.setrank.messages.setrank_successfully", $player->getName()));
         
         if($player instanceof Player)
         {
             if(!$this->plugin->getConfigValue("enable-multiworld-perms") || ($this->plugin->getConfigValue("enable-multiworld-perms") and $WorldName === $player->getWorld()->getDisplayName()))
-                $player->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.setgroup.messages.on_player_group_change", strtolower($group->getName())));
+                $player->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.setrank.messages.on_player_rank_change", strtolower($group->getName())));
         }
 
         return true;

@@ -11,7 +11,7 @@ use pocketmine\plugin\PluginOwned;
 use pocketmine\plugin\PluginOwnedTrait;
 use pocketmine\utils\TextFormat;
 
-class SetUPerm extends Command implements PluginOwned
+class RmRank extends Command implements PluginOwned
 {
 	use PluginOwnedTrait;
     /*
@@ -38,7 +38,7 @@ class SetUPerm extends Command implements PluginOwned
     {
         $this->plugin = $plugin;
         parent::__construct($name, $description);
-        $this->setPermission("pperms.command.setuperm");
+        $this->setPermission("pperms.command.rmrank");
     }
 
     /**
@@ -51,29 +51,26 @@ class SetUPerm extends Command implements PluginOwned
     {
         if(!$this->testPermission($sender))
             return false;
-        if(count($args) < 2 || count($args) > 3)
+        if(!isset($args[0]) || count($args) > 1)
         {
-            $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.setuperm.usage"));
+            $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.rmrank.usage"));
             return true;
         }
-        
-        $player = $this->plugin->getPlayer($args[0]);
-        $permission = $args[1];
-        $WorldName = null;
-        if(isset($args[2]))
-        {
-            $world = $this->plugin->getServer()->getWorldManager()->getWorldByName($args[2]);
-            if($world === null)
-            {
-                $sender->sendMessage(TextFormat::RED . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.setuperm.messages.level_not_exist", $args[2]));
-                return true;
-            }
 
-            $WorldName = $world->getDisplayName();
+        $result = $this->plugin->removeGroup($args[0]);
+        if($result === PurePerms::SUCCESS)
+        {
+            $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.rmrank.messages.group_removed_successfully", $args[0]));
+        }
+        elseif($result === PurePerms::INVALID_NAME)
+        {
+            $sender->sendMessage(TextFormat::RED . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.rmrank.messages.invalid_group_name", $args[0]));
+        }
+        else
+        {
+            $sender->sendMessage(TextFormat::RED . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.rmrank.messages.group_not_exist", $args[0]));
         }
         
-        $this->plugin->getUserDataMgr()->setPermission($player, $permission, $WorldName);
-        $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.setuperm.messages.uperm_added_successfully", $permission, $player->getName()));
         return true;
     }
     

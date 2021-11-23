@@ -11,7 +11,7 @@ use pocketmine\plugin\PluginOwned;
 use pocketmine\plugin\PluginOwnedTrait;
 use pocketmine\utils\TextFormat;
 
-class AddGroup extends Command implements PluginOwned
+class UnSetUserPerm extends Command implements PluginOwned
 {
 	use PluginOwnedTrait;
     /*
@@ -38,7 +38,7 @@ class AddGroup extends Command implements PluginOwned
     {
         $this->plugin = $plugin;
         parent::__construct($name, $description);
-        $this->setPermission("pperms.command.addgroup");
+        $this->setPermission("pperms.command.unsetuperm");
     }
 
     /**
@@ -51,26 +51,29 @@ class AddGroup extends Command implements PluginOwned
     {
         if(!$this->testPermission($sender))
             return false;
-        if(!isset($args[0]) || count($args) > 1)
+        if(count($args) < 2 || count($args) > 3)
         {
-            $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.addgroup.usage"));
+            $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.unsetuperm.usage"));
             return true;
         }
-
-        $result = $this->plugin->addGroup($args[0]);
-        if($result === PurePerms::SUCCESS)
-        {
-            $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.addgroup.messages.group_added_successfully", $args[0]));
-        }
-        elseif($result === PurePerms::ALREADY_EXISTS)
-        {
-            $sender->sendMessage(TextFormat::RED . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.addgroup.messages.group_already_exists", $args[0]));
-        }
-        else
-        {
-            $sender->sendMessage(TextFormat::RED . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.addgroup.messages.invalid_group_name", $args[0]));
-        }
         
+        $player = $this->plugin->getPlayer($args[0]);
+        $permission = $args[1];
+        $WorldName = null;
+        
+        if(isset($args[2]))
+        {
+            $world = $this->plugin->getServer()->getWorldManager()->getWorldByName($args[2]);
+            if($world === null)
+            {
+                $sender->sendMessage(TextFormat::RED . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.unsetgperm.messages.level_not_exist", $args[2]));
+                return true;
+            }
+
+            $WorldName = $world->getDisplayName();
+        }
+        $this->plugin->getUserDataMgr()->unsetPermission($player, $permission, $WorldName);
+        $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.unsetuperm.messages.uperm_removed_successfully", $permission, $player->getName()));
         return true;
     }
     

@@ -11,48 +11,33 @@ permissions:
   pperms:
     default: op
     description: "PurePerms by 64FF00! (Twitter: @64FF00)"
-  pperms.command:
+  plperms.command:
     default: op
     description: "Allows you to use all PurePerms commands."
-  pperms.command.addgroup:
+  pperms.command.addrank:
     default: op
-    description: "Allows you to add a new group to the groups list."
-  pperms.command.addparent:
+    description: "Allows you to add a new rank"
+  pperms.command.defrank:
     default: op
-    description: "Allows you to add a group to another group inheritance list."
-  pperms.command.defgroup:
-    default: op
-    description: "Allows you to set the default group manually."
-  pperms.command.fperms:
+    description: "Allows you to set the default rank manually."
+  pperms.command.plperms:
     default: op
     description: "Allows you to find permissions for a specific plugin."
-  pperms.command.groups:
+  pperms.command.rank:
     default: op
-    description: "Allows you to see a list of all groups."
-  pperms.command.listgperms:
-    default: op
-    description: "Allows you to see a list of all permissions from a group."
+    description: "Allows you to see a list of all rank."
   pperms.command.listuperms:
     default: op
     description: "Allows you to see a list of all permissions from a user."
   pperms.command.ppinfo:
     default: true
     description: "Allows you to get current PurePerms information."
-  pperms.command.grpinfo:
+  pperms.command.rmrank:
     default: op
-    description: "Nothing"
-  pperms.command.rmgroup:
+    description: "Allows you to remove a rank from the ranks list."
+  pperms.command.setrank:
     default: op
-    description: "Allows you to remove a group from the groups list."
-  pperms.command.rmparent:
-    default: op
-    description: "Allows you to remove a group from another group inheritance list."
-  pperms.command.setgperm:
-    default: op
-    description: "Allows you to add a permission to the group."
-  pperms.command.setgroup:
-    default: op
-    description: "Allows you to set group for a user."
+    description: "Allows you to set rank for a user."
   pperms.command.setuperm:
     default: op
     description: "Allows you to add a permission to a user."
@@ -62,12 +47,3 @@ permissions:
   pperms.command.unsetuperm:
     default: op
     description: "Allows you to remove a permission from the user."
-  pperms.command.usrinfo:
-    default: op
-    description: "Allows you to see info about a user."
-  pperms.noeul:
-    default: op
-    description: "Allows you to access all 'Noeul' related features."
-  pperms.noeul.ppsudo:
-    default: op
-    description: "Allows you to use the Noeul 'ppsudo' command."

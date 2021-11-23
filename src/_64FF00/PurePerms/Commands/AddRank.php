@@ -11,7 +11,7 @@ use pocketmine\plugin\PluginOwned;
 use pocketmine\plugin\PluginOwnedTrait;
 use pocketmine\utils\TextFormat;
 
-class DefGroup extends Command implements PluginOwned
+class AddRank extends Command implements PluginOwned
 {
 	use PluginOwnedTrait;
     /*
@@ -38,7 +38,7 @@ class DefGroup extends Command implements PluginOwned
     {
         $this->plugin = $plugin;
         parent::__construct($name, $description);
-        $this->setPermission("pperms.command.defgroup");
+        $this->setPermission("pperms.command.addrank");
     }
 
     /**
@@ -51,33 +51,25 @@ class DefGroup extends Command implements PluginOwned
     {
         if(!$this->testPermission($sender))
             return false;
-
-        if(!isset($args[0]) || count($args) > 2)
+        if(!isset($args[0]) || count($args) > 1)
         {
-            $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.defgroup.usage"));
+            $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.addrank.usage"));
             return true;
         }
 
-        $group = $this->plugin->getGroup($args[0]);
-        if($group === null)
+        $result = $this->plugin->addGroup($args[0]);
+        if($result === PurePerms::SUCCESS)
         {
-            $sender->sendMessage(TextFormat::RED . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.defgroup.messages.group_not_exist", $args[0]));
-            return true;
+            $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.addrank.messages.rank_added_successfully", $args[0]));
         }
-        $WorldName = null;
-        if(isset($args[1]))
+        elseif($result === PurePerms::ALREADY_EXISTS)
         {
-            $World = $this->plugin->getServer()->getWorldManager()->getWorldByName($args[1]);
-            if($World === null)
-            {
-                $sender->sendMessage(TextFormat::RED . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.defgroup.messages.level_not_exist", $args[1]));
-                return true;
-            }
-
-            $WorldName = $World->getDisplayName();
+            $sender->sendMessage(TextFormat::RED . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.rank.messages.rank_already_exists", $args[0]));
         }
-        $this->plugin->setDefaultGroup($group, $WorldName);
-        $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.defgroup.messages.defgroup_successfully", $args[0]));
+        else
+        {
+            $sender->sendMessage(TextFormat::RED . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.addrank.messages.invalid_rank_name", $args[0]));
+        }
         
         return true;
     }

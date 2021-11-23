@@ -11,7 +11,7 @@ use pocketmine\plugin\PluginOwned;
 use pocketmine\plugin\PluginOwnedTrait;
 use pocketmine\utils\TextFormat;
 
-class Groups extends Command implements PluginOwned
+class SetUserPerm extends Command implements PluginOwned
 {
 	use PluginOwnedTrait;
     /*
@@ -38,7 +38,7 @@ class Groups extends Command implements PluginOwned
     {
         $this->plugin = $plugin;
         parent::__construct($name, $description);
-        $this->setPermission("pperms.command.groups");
+        $this->setPermission("pperms.command.setuperm");
     }
 
     /**
@@ -51,13 +51,29 @@ class Groups extends Command implements PluginOwned
     {
         if(!$this->testPermission($sender))
             return false;
-
-        $result = [];
-        foreach($this->plugin->getGroups() as $group)
+        if(count($args) < 2 || count($args) > 3)
         {
-            $result[] = $group->getName();
+            $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.setuperm.usage"));
+            return true;
         }
-        $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.groups.messages.all_registered_groups", implode(", ", $result)));
+        
+        $player = $this->plugin->getPlayer($args[0]);
+        $permission = $args[1];
+        $WorldName = null;
+        if(isset($args[2]))
+        {
+            $world = $this->plugin->getServer()->getWorldManager()->getWorldByName($args[2]);
+            if($world === null)
+            {
+                $sender->sendMessage(TextFormat::RED . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.setuperm.messages.level_not_exist", $args[2]));
+                return true;
+            }
+
+            $WorldName = $world->getDisplayName();
+        }
+        
+        $this->plugin->getUserDataMgr()->setPermission($player, $permission, $WorldName);
+        $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.setuperm.messages.uperm_added_successfully", $permission, $player->getName()));
         return true;
     }
     

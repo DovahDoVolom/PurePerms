@@ -11,7 +11,7 @@ use pocketmine\plugin\PluginOwned;
 use pocketmine\plugin\PluginOwnedTrait;
 use pocketmine\utils\TextFormat;
 
-class RmGroup extends Command implements PluginOwned
+class ListRanks extends Command implements PluginOwned
 {
 	use PluginOwnedTrait;
     /*
@@ -38,7 +38,7 @@ class RmGroup extends Command implements PluginOwned
     {
         $this->plugin = $plugin;
         parent::__construct($name, $description);
-        $this->setPermission("pperms.command.rmgroup");
+        $this->setPermission("pperms.command.ranks");
     }
 
     /**
@@ -51,26 +51,13 @@ class RmGroup extends Command implements PluginOwned
     {
         if(!$this->testPermission($sender))
             return false;
-        if(!isset($args[0]) || count($args) > 1)
-        {
-            $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.rmgroup.usage"));
-            return true;
-        }
 
-        $result = $this->plugin->removeGroup($args[0]);
-        if($result === PurePerms::SUCCESS)
+        $result = [];
+        foreach($this->plugin->getGroups() as $group)
         {
-            $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.rmgroup.messages.group_removed_successfully", $args[0]));
+            $result[] = $group->getName();
         }
-        elseif($result === PurePerms::INVALID_NAME)
-        {
-            $sender->sendMessage(TextFormat::RED . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.rmgroup.messages.invalid_group_name", $args[0]));
-        }
-        else
-        {
-            $sender->sendMessage(TextFormat::RED . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.rmgroup.messages.group_not_exist", $args[0]));
-        }
-        
+        $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.ranks.messages.all_registered_ranks", implode(", ", $result)));
         return true;
     }
     
