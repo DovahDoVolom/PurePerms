@@ -3,22 +3,14 @@
 namespace _64FF00\PurePerms;
 
 use _64FF00\PurePerms\Commands\AddGroup;
-use _64FF00\PurePerms\Commands\AddParent;
 use _64FF00\PurePerms\Commands\DefGroup;
 use _64FF00\PurePerms\Commands\FPerms;
 use _64FF00\PurePerms\Commands\Groups;
-use _64FF00\PurePerms\Commands\GrpInfo;
-use _64FF00\PurePerms\Commands\ListGPerms;
-use _64FF00\PurePerms\Commands\ListUPerms;
 use _64FF00\PurePerms\Commands\PPInfo;
 use _64FF00\PurePerms\Commands\RmGroup;
-use _64FF00\PurePerms\Commands\RmParent;
-use _64FF00\PurePerms\Commands\SetGPerm;
 use _64FF00\PurePerms\Commands\SetGroup;
 use _64FF00\PurePerms\Commands\SetUPerm;
-use _64FF00\PurePerms\Commands\UnsetGPerm;
 use _64FF00\PurePerms\Commands\UnsetUPerm;
-use _64FF00\PurePerms\Commands\UsrInfo;
 use _64FF00\PurePerms\DataManager\UserDataManager;
 use _64FF00\PurePerms\DataProviders\SQLite3Provider;
 use _64FF00\PurePerms\DataProviders\DefaultProvider;
@@ -116,22 +108,14 @@ class PurePerms extends PluginBase
     {
         $commandMap = $this->getServer()->getCommandMap();
         $commandMap->register("pureperms", new AddGroup($this, "addgroup", $this->getMessage("cmds.addgroup.desc") . ' #64FF00'));
-        $commandMap->register("pureperms", new AddParent($this, "addparent", $this->getMessage("cmds.addparent.desc") . ' #64FF00'));
         $commandMap->register("pureperms", new DefGroup($this, "defgroup", $this->getMessage("cmds.defgroup.desc") . ' #64FF00'));
         $commandMap->register("pureperms", new FPerms($this, "fperms", $this->getMessage("cmds.fperms.desc") . ' #64FF00'));
         $commandMap->register("pureperms", new Groups($this, "groups", $this->getMessage("cmds.groups.desc") . ' #64FF00'));
-        $commandMap->register("pureperms", new GrpInfo($this, "grpinfo", $this->getMessage("cmds.grpinfo.desc") . ' #64FF00'));
-        $commandMap->register("pureperms", new ListGPerms($this, "listgperms", $this->getMessage("cmds.listgperms.desc") . ' #64FF00'));
-        $commandMap->register("pureperms", new ListUPerms($this, "listuperms", $this->getMessage("cmds.listuperms.desc") . ' #64FF00'));
         $commandMap->register("pureperms", new PPInfo($this, "ppinfo", $this->getMessage("cmds.ppinfo.desc") . ' #64FF00'));
         $commandMap->register("pureperms", new RmGroup($this, "rmgroup", $this->getMessage("cmds.rmgroup.desc") . ' #64FF00'));
-        $commandMap->register("pureperms", new RmParent($this, "rmparent", $this->getMessage("cmds.rmparent.desc") . ' #64FF00'));
-        $commandMap->register("pureperms", new SetGPerm($this, "setgperm", $this->getMessage("cmds.setgperm.desc") . ' #64FF00'));
         $commandMap->register("pureperms", new SetGroup($this, "setgroup", $this->getMessage("cmds.setgroup.desc") . ' #64FF00'));
         $commandMap->register("pureperms", new SetUPerm($this, "setuperm", $this->getMessage("cmds.setuperm.desc") . ' #64FF00'));
-        $commandMap->register("pureperms", new UnsetGPerm($this, "unsetgperm", $this->getMessage("cmds.unsetgperm.desc") . ' #64FF00'));
         $commandMap->register("pureperms", new UnsetUPerm($this, "unsetuperm", $this->getMessage("cmds.unsetuperm.desc") . ' #64FF00'));
-        $commandMap->register("pureperms", new UsrInfo($this, "usrinfo", $this->getMessage("cmds.usrinfo.desc") . ' #64FF00'));
 
     }
 
