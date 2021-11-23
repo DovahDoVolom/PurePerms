@@ -15,7 +15,7 @@ data-provider: json
 # English message resource by @64FF00 and @Samueljh1 (GitHub)
 default-language: en
 
-# Setting this option will allow you to use per-world permissions (Unstable)
+# Setting this option will allow you to use per-world permissions
 # - true / false
 enable-multiworld-perms: false
 
