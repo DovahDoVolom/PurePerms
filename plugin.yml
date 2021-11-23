@@ -23,7 +23,7 @@ permissions:
   pperms.command.plperms:
     default: op
     description: "Allows you to find permissions for a specific plugin."
-  pperms.command.rank:
+  pperms.command.ranks:
     default: op
     description: "Allows you to see a list of all rank."
   pperms.command.listuperms:
