@@ -1,8 +1,13 @@
-# General
+<p align="center">
+    <a href="https://github.com/Vecnavium/PurePerms"><img src="https://github.com/Vecnavium/PurePerms/blob/stable/icon.png"></img></a><br>
+    <b>Manage your permissions like you did on Bukkit. The best permissions manager for PocketMine-MP.</b>
+</p>
 
-PurePerms by 64FF00 is a permissions manager for PocketMine-MP. 
-
-It can be used in conjunction with PureChat to display players groups in chat.
+<p align="center">
+    <img alt="GitHubrelease" src="https://img.shields.io/github/v/release/Vecnavium/PurePerms?label=release&sort=semver">
+      <img alt="Stars" src= "https://img.shields.io/github/stars/Vecnavium/PurePerms?style=for-the-badge">
+    <a href="https://discord.gg/6M9tGyWPjr"><img src="https://img.shields.io/discord/837701868649709568?label=discord&color=7289DA&logo=discord" alt="Discord" /></a>
+</p>
 
 # Commands
 
