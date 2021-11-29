@@ -16,7 +16,7 @@ cmds:
     desc: "Allows you to set default rank."
     usage: "Usage: /defrank <rank> [world]"
     messages:
-      defranks_successfully: "Default rank has been successfully set to %var0%."
+      defrank_successfully: "Default rank has been successfully set to %var0%."
       rank_not_exist: "rank %var0% does NOT exist."
       level_not_exist: "World %var0% does NOT exist."
   plperms:
