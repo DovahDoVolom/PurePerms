@@ -55,7 +55,7 @@ class PLPerms extends Command implements PluginOwned
             return false;
         if(!isset($args[0]) || count($args) > 2)
         {
-            $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.fperms.usage"));
+            $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.plperms.usage"));
             return true;
         }
         

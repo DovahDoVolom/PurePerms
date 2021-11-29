@@ -60,15 +60,15 @@ class RmRank extends Command implements PluginOwned
         $result = $this->plugin->removeGroup($args[0]);
         if($result === PurePerms::SUCCESS)
         {
-            $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.rmrank.messages.group_removed_successfully", $args[0]));
+            $sender->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.rmrank.messages.ranks_removed_successfully", $args[0]));
         }
         elseif($result === PurePerms::INVALID_NAME)
         {
-            $sender->sendMessage(TextFormat::RED . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.rmrank.messages.invalid_group_name", $args[0]));
+            $sender->sendMessage(TextFormat::RED . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.rmrank.messages.invalid_ranks_name", $args[0]));
         }
         else
         {
-            $sender->sendMessage(TextFormat::RED . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.rmrank.messages.group_not_exist", $args[0]));
+            $sender->sendMessage(TextFormat::RED . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.rmrank.messages.ranks_not_exist", $args[0]));
         }
         
         return true;
