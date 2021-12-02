@@ -68,7 +68,6 @@ class PurePerms extends PluginBase
     public function onLoad(): void
     {
         $this->saveDefaultConfig();
-        $this->fixConfig();
         $this->messages = new PPMessages($this);
         $this->userDataMgr = new UserDataManager($this);
     }
@@ -87,21 +86,6 @@ class PurePerms extends PluginBase
         $this->unregisterPlayers();
         if($this->isValidProvider())
             $this->provider->close();
-    }
-
-    private function fixConfig()
-    {
-        $config = $this->getConfig();
-        if(!$config->exists("default-language"))
-            $config->set("default-language", "en");
-        if(!$config->exists("disable-op"))
-            $config->set("disable-op", true);
-        if(!$config->exists("enable-multiworld-perms"))
-            $config->set("enable-multiworld-perms", false);
-        if(!$config->exists("superadmin-ranks"))
-            $config->set("superadmin-ranks", ["OP"]);
-        $this->saveConfig();
-        $this->reloadConfig();
     }
 
     private function registerCommands()
