@@ -4,7 +4,6 @@ namespace _64FF00\PurePerms\DataProviders;
 use _64FF00\PurePerms\PPGroup;
 use _64FF00\PurePerms\PurePerms;
 use pocketmine\player\IPlayer;
-use SQLite3;
 
 class SQLite3Provider implements ProviderInterface
 {
