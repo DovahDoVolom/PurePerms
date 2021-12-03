@@ -1,7 +1,10 @@
 <?php
 namespace _64FF00\PurePerms\DataProviders;
 
+use _64FF00\PurePerms\PPGroup;
 use _64FF00\PurePerms\PurePerms;
+use pocketmine\player\IPlayer;
+use SQLite3;
 
 class SQLite3Provider implements ProviderInterface
 {
@@ -36,4 +39,29 @@ class SQLite3Provider implements ProviderInterface
     {
         //
     }
+
+    public function getGroupData(PPGroup $group){
+    }
+
+    public function getGroupsData(){
+    }
+
+    public function getPlayerData(IPlayer $player){
+    }
+
+    public function getUsers(){
+    }
+
+    public function setGroupData(PPGroup $group, array $tempGroupData){
+    }
+
+    public function setGroupsData(array $tempGroupsData){
+    }
+
+    public function setPlayerData(IPlayer $player, array $tempPlayerData){
+    }
+
+    public function close(){
+    }
+
 }
