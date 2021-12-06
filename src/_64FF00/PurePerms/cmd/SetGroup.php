@@ -7,14 +7,16 @@ use _64FF00\PurePerms\PurePerms;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\command\ConsoleCommandSender;
-use pocketmine\command\PluginIdentifiableCommand;
 
-use pocketmine\Player;
+use pocketmine\player\Player;
 use pocketmine\plugin\Plugin;
+use pocketmine\plugin\PluginOwned;
+use pocketmine\plugin\PluginOwnedTrait;
 use pocketmine\utils\TextFormat;
 
-class SetGroup extends Command implements PluginIdentifiableCommand
+class SetGroup extends Command implements PluginOwned
 {
+	use PluginOwnedTrait;
     /*
         PurePerms by 64FF00 (Twitter: @64FF00)
 
@@ -84,7 +86,7 @@ class SetGroup extends Command implements PluginIdentifiableCommand
         
         if(isset($args[3]))
         {
-            $level = $this->plugin->getServer()->getLevelByName($args[3]);
+            $level = $this->plugin->getServer()->getWorldManager()->getWorldByName($args[3]);
             
             if($level === null)
             {
@@ -93,7 +95,7 @@ class SetGroup extends Command implements PluginIdentifiableCommand
                 return true;
             }
             
-            $levelName = $level->getName();
+            $levelName = $level->getDisplayName();
         }
 
         $superAdminRanks = $this->plugin->getConfigValue("superadmin-ranks");
@@ -128,7 +130,7 @@ class SetGroup extends Command implements PluginIdentifiableCommand
         
         if($player instanceof Player)
         {
-            if(!$this->plugin->getConfigValue("enable-multiworld-perms") || ($this->plugin->getConfigValue("enable-multiworld-perms") and $levelName === $player->getLevel()->getName()))
+            if(!$this->plugin->getConfigValue("enable-multiworld-perms") || ($this->plugin->getConfigValue("enable-multiworld-perms") and $levelName === $player->getWorld()->getDisplayName()))
                 $player->sendMessage(TextFormat::GREEN . PurePerms::MAIN_PREFIX . ' ' . $this->plugin->getMessage("cmds.setgroup.messages.on_player_group_change", strtolower($group->getName())));
         }
 

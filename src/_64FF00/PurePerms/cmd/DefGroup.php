@@ -6,12 +6,14 @@ use _64FF00\PurePerms\PurePerms;
 
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
-use pocketmine\command\PluginIdentifiableCommand;
 use pocketmine\plugin\Plugin;
+use pocketmine\plugin\PluginOwned;
+use pocketmine\plugin\PluginOwnedTrait;
 use pocketmine\utils\TextFormat;
 
-class DefGroup extends Command implements PluginIdentifiableCommand
+class DefGroup extends Command implements PluginOwned
 {
+	use PluginOwnedTrait;
     /*
         PurePerms by 64FF00 (Twitter: @64FF00)
 
@@ -72,7 +74,7 @@ class DefGroup extends Command implements PluginIdentifiableCommand
 
         if(isset($args[1]))
         {
-            $level = $this->plugin->getServer()->getLevelByName($args[1]);
+            $level = $this->plugin->getServer()->getWorldManager()->getWorldByName($args[1]);
 
             if($level === null)
             {
@@ -81,7 +83,7 @@ class DefGroup extends Command implements PluginIdentifiableCommand
                 return true;
             }
 
-            $levelName = $level->getName();
+            $levelName = $level->getDisplayName();
         }
 
         $this->plugin->setDefaultGroup($group, $levelName);

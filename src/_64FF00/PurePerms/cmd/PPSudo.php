@@ -6,14 +6,16 @@ use _64FF00\PurePerms\PurePerms;
 
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
-use pocketmine\command\PluginIdentifiableCommand;
 use pocketmine\plugin\Plugin;
-use pocketmine\Player;
 
+use pocketmine\plugin\PluginOwned;
+use pocketmine\plugin\PluginOwnedTrait;
 use pocketmine\utils\TextFormat;
+use pocketmine\player\Player;
 
-class PPSudo extends Command implements PluginIdentifiableCommand
+class PPSudo extends Command implements PluginOwned
 {
+	use PluginOwnedTrait;
     /*
        PurePerms by 64FF00 (Twitter: @64FF00)
 

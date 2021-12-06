@@ -5,12 +5,12 @@ namespace _64FF00\PurePerms;
 use _64FF00\PurePerms\event\PPGroupChangedEvent;
 use _64FF00\PurePerms\event\PPRankExpiredEvent;
 use pocketmine\event\Listener;
-use pocketmine\event\entity\EntityLevelChangeEvent;
+use pocketmine\event\entity\EntityTeleportEvent;
 use pocketmine\event\player\PlayerCommandPreprocessEvent;
 use pocketmine\event\player\PlayerQuitEvent;
 use pocketmine\event\player\PlayerLoginEvent;
 use pocketmine\lang\TranslationContainer;
-use pocketmine\Player;
+use pocketmine\player\Player;
 use pocketmine\utils\TextFormat;
 
 class PPListener implements Listener
@@ -50,16 +50,16 @@ class PPListener implements Listener
     }
 
     /**
-     * @param EntityLevelChangeEvent $event
+     * @param EntityTeleportEvent $event
      * @priority MONITOR
      */
-    public function onLevelChange(EntityLevelChangeEvent $event)
+    public function onLevelChange(EntityTeleportEvent $event)
     {
         if($event->isCancelled()) return;
 
         $player = $event->getEntity();
         if($player instanceof Player) {
-            $this->plugin->updatePermissions($player, $event->getTarget()->getName());
+            $this->plugin->updatePermissions($player, $event->getTo()->getWorld()->getDisplayName());
         }
     }
 
@@ -75,7 +75,7 @@ class PPListener implements Listener
 
             if(!$this->plugin->getNoeulAPI()->isAuthed($event->getPlayer()))
             {
-                $event->setCancelled(true);
+                $event->cancel();
 
                 if($args[0] === "ppsudo" or $args[0] === "help")
                 {
@@ -92,7 +92,7 @@ class PPListener implements Listener
 
                 if($disableOp and $args[0] === "op")
                 {
-                    $event->setCancelled(true);
+                    $event->cancel();
 
                     $player->sendMessage(new TranslationContainer(TextFormat::RED . "%commands.generic.permission"));
                 }

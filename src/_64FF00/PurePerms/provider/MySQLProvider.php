@@ -6,7 +6,8 @@ use _64FF00\PurePerms\PurePerms;
 use _64FF00\PurePerms\PPGroup;
 use _64FF00\PurePerms\task\PPMySQLTask;
 
-use pocketmine\IPlayer;
+use pocketmine\player\IPlayer;
+use RuntimeException;
 
 class MySQLProvider implements ProviderInterface
 {
@@ -37,13 +38,13 @@ class MySQLProvider implements ProviderInterface
         $mySQLSettings = $this->plugin->getConfigValue("mysql-settings");
 
         if(!isset($mySQLSettings["host"]) || !isset($mySQLSettings["port"]) || !isset($mySQLSettings["user"]) || !isset($mySQLSettings["password"]) || !isset($mySQLSettings["db"]))
-            throw new \RuntimeException("Failed to connect to the MySQL database: Invalid MySQL settings");
+            throw new RuntimeException("Failed to connect to the MySQL database: Invalid MySQL settings");
 
 
         $this->db = new \mysqli($mySQLSettings["host"], $mySQLSettings["user"], $mySQLSettings["password"], $mySQLSettings["db"], $mySQLSettings["port"]);
 
         if($this->db->connect_error)
-            throw new \RuntimeException("Failed to connect to the MySQL database: " . $this->db->connect_error);
+            throw new RuntimeException("Failed to connect to the MySQL database: " . $this->db->connect_error);
 
         $resource = $this->plugin->getResource("mysql_deploy_01.sql");
 

@@ -7,7 +7,8 @@ use _64FF00\PurePerms\PurePerms;
 
 use pocketmine\event\plugin\PluginEvent;
 
-use pocketmine\IPlayer;
+use pocketmine\player\IPlayer;
+use pocketmine\world\World;
 
 class PPGroupChangedEvent extends PluginEvent
 {
@@ -30,18 +31,18 @@ class PPGroupChangedEvent extends PluginEvent
      * @param PurePerms $plugin
      * @param IPlayer $player
      * @param PPGroup $group
-     * @param $levelName
+     * @param $worldName
      */
-    public function __construct(PurePerms $plugin, IPlayer $player, PPGroup $group, $levelName)
+    public function __construct(PurePerms $plugin, IPlayer $player, PPGroup $group, ?string $worldName)
     {
         parent::__construct($plugin);
 
         $this->group = $group;
         $this->player = $player;
-        $this->levelName = $levelName;
+        $this->worldName = $worldName;
     }
 
-    /**
+	/**
      * @return PPGroup
      */
     public function getGroup()
@@ -50,19 +51,19 @@ class PPGroupChangedEvent extends PluginEvent
     }
 
     /**
-     * @return \pocketmine\level\Level
+     * @return World
      */
     public function getLevel()
     {
-        return $this->getPlugin()->getServer()->getLevelByName($this->levelName);
+        return $this->getPlugin()->getServer()->getWorldManager()->getWorldByName($this->worldName);
     }
 
     /**
      * @return string
      */
-    public function getLevelName()
+    public function getWorldName(): ?string
     {
-        return $this->levelName;
+        return $this->worldName;
     }
 
     /**

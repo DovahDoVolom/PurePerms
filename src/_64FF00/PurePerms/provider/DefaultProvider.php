@@ -5,9 +5,10 @@ namespace _64FF00\PurePerms\provider;
 use _64FF00\PurePerms\PurePerms;
 use _64FF00\PurePerms\PPGroup;
 
-use pocketmine\IPlayer;
+use pocketmine\player\IPlayer;
 
 use pocketmine\utils\Config;
+use RuntimeException;
 
 class DefaultProvider implements ProviderInterface
 {
@@ -37,8 +38,9 @@ class DefaultProvider implements ProviderInterface
 
         $this->groups = new Config($this->plugin->getDataFolder() . "groups.yml", Config::YAML);
 
-        if(empty($this->groups->getAll()))
-            throw new \RuntimeException($this->plugin->getMessage("logger_messages.YAMLProvider_InvalidGroupsSettings"));
+        if(empty($this->groups->getAll())){
+			throw new RuntimeException($this->plugin->getMessage("logger_messages.YAMLProvider_InvalidGroupsSettings"));
+		}
 
         $this->plugin->saveResource("players.yml");
 

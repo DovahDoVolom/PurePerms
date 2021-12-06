@@ -3,17 +3,18 @@
 namespace _64FF00\PurePerms\cmd;
 
 use _64FF00\PurePerms\PurePerms;
-use _64FF00\PurePerms\PPGroup;
 use pocketmine\plugin\Plugin;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\command\ConsoleCommandSender;
-use pocketmine\command\PluginIdentifiableCommand;
 
+use pocketmine\plugin\PluginOwned;
+use pocketmine\plugin\PluginOwnedTrait;
 use pocketmine\utils\TextFormat;
 
-class ListGPerms extends Command implements PluginIdentifiableCommand
+class ListGPerms extends Command implements PluginOwned
 {
+	use PluginOwnedTrait;
     /*
         PurePerms by 64FF00 (Twitter: @64FF00)
 
@@ -74,7 +75,7 @@ class ListGPerms extends Command implements PluginIdentifiableCommand
         
         if(isset($args[2]))
         {
-            $level = $this->plugin->getServer()->getLevelByName($args[2]);
+            $level = $this->plugin->getServer()->getWorldManager()->getWorldByName($args[2]);
             
             if($level == null)
             {
@@ -83,7 +84,7 @@ class ListGPerms extends Command implements PluginIdentifiableCommand
                 return true;
             }
             
-            $levelName = $level->getName();
+            $levelName = $level->getDisplayName();
         }
         
         $permissions = $group->getGroupPermissions($levelName);

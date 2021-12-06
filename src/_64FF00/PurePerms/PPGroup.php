@@ -47,7 +47,7 @@ class PPGroup
     {
         $tempGroupData = $this->getData();
 
-        if($this == $group || in_array($this->getName(), $group->getParentGroups()))
+        if($this === $group || in_array($this->getName(), $group->getParentGroups()))
             return false;
 
         $tempGroupData["inheritance"][] = $group->getName();
@@ -377,9 +377,9 @@ class PPGroup
         
         if($isMultiWorldPermsEnabled and isset($tempGroupData["worlds"]))
         {
-            foreach($this->plugin->getServer()->getLevels() as $level)
+            foreach($this->plugin->getServer()->getWorldManager()->getWorlds() as $level)
             {
-                $levelName = $level->getName();
+                $levelName = $level->getDisplayName();
                         
                 if(isset($tempGroupData["worlds"][$levelName]))
                 {

@@ -5,9 +5,10 @@ namespace _64FF00\PurePerms\provider;
 use _64FF00\PurePerms\PurePerms;
 use _64FF00\PurePerms\PPGroup;
 
-use pocketmine\IPlayer;
+use pocketmine\player\IPlayer;
 
 use pocketmine\utils\Config;
+use RuntimeException;
 
 class YamlV1Provider implements ProviderInterface
 {
@@ -25,6 +26,8 @@ class YamlV1Provider implements ProviderInterface
     */
 
     private $groups, $userDataFolder;
+
+    private PurePerms $plugin;
 
     /**
      * @param PurePerms $plugin
@@ -160,7 +163,7 @@ class YamlV1Provider implements ProviderInterface
         $userData = $this->getPlayerConfig($player, true);
 
         if(!$userData instanceof Config)
-            throw new \RuntimeException("Failed to update player data: Invalid data type (" . get_class($userData) . ")");
+            throw new RuntimeException("Failed to update player data: Invalid data type (" . get_class($userData) . ")");
 
         $userData->setAll($tempUserData);
 

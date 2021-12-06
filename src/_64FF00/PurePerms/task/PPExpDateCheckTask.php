@@ -22,6 +22,8 @@ class PPExpDateCheckTask extends Task
           888  888    "Y8888P"        888  888        888        "Y8888P"   "Y8888P"
     */
 
+	private PurePerms $plugin;
+
     /**
      * @param PurePerms $plugin
      */
@@ -30,20 +32,17 @@ class PPExpDateCheckTask extends Task
         $this->plugin = $plugin;
     }
 
-    /**
-     * @param $currentTick
-     */
-    public function onRun(int $currentTick)
+    public function onRun():void
     {
         foreach($this->plugin->getServer()->getOnlinePlayers() as $player)
         {
             if(time() === $this->plugin->getUserDataMgr()->getNode($player, "expTime"))
             {
-                $levelName = $this->plugin->getConfigValue("enable-multiworld-perms") ? $player->getLevel()->getName() : null;
+                $levelName = $this->plugin->getConfigValue("enable-multiworld-perms") ? $player->getWorld()->getDisplayName() : null;
 
                 $event = new PPRankExpiredEvent($this->plugin, $player, $levelName);
 
-                $this->plugin->getServer()->getPluginManager()->callEvent($event);
+                $event->call();
             }
         }
     }
