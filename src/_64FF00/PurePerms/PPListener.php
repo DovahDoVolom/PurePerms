@@ -9,7 +9,7 @@ use pocketmine\event\entity\EntityTeleportEvent;
 use pocketmine\event\player\PlayerCommandPreprocessEvent;
 use pocketmine\event\player\PlayerQuitEvent;
 use pocketmine\event\player\PlayerLoginEvent;
-use pocketmine\lang\TranslationContainer;
+use pocketmine\lang\Translatable;
 use pocketmine\player\Player;
 use pocketmine\utils\TextFormat;
 
@@ -94,7 +94,7 @@ class PPListener implements Listener
                 {
                     $event->cancel();
 
-                    $player->sendMessage(new TranslationContainer(TextFormat::RED . "%commands.generic.permission"));
+                    $player->sendMessage(new Translatable(TextFormat::RED . "%commands.generic.permission"));
                 }
             }
         }
