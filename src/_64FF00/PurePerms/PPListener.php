@@ -9,7 +9,7 @@ use pocketmine\event\entity\EntityTeleportEvent;
 use pocketmine\event\player\PlayerCommandPreprocessEvent;
 use pocketmine\event\player\PlayerQuitEvent;
 use pocketmine\event\player\PlayerLoginEvent;
-use pocketmine\lang\TranslationContainer;
+use pocketmine\lang\Translatable;
 use pocketmine\player\Player;
 use pocketmine\utils\TextFormat;
 
@@ -58,6 +58,43 @@ class PPListener implements Listener
         $player = $event->getEntity();
         if($player instanceof Player) {
             $this->plugin->updatePermissions($player, $event->getTo()->getWorld()->getDisplayName());
+        }
+    }
+
+    public function onPlayerCommand(PlayerCommandPreprocessEvent $event)
+    {
+        $message = $event->getMessage();
+        $player = $event->getPlayer();
+
+        if(substr($message, 0, 1) === "/")
+        {
+            $command = substr($message, 1);
+            $args = explode(" ", $command);
+
+            if(!$this->plugin->getNoeulAPI()->isAuthed($event->getPlayer()))
+            {
+                $event->cancel();
+
+                if($args[0] === "ppsudo" or $args[0] === "help")
+                {
+                    $this->plugin->getServer()->dispatchCommand($player, $command);
+                }
+                else
+                {
+                    $this->plugin->getNoeulAPI()->sendAuthMsg($player);
+                }
+            }
+            else
+            {
+                $disableOp = $this->plugin->getConfigValue("disable-op");
+
+                if($disableOp and $args[0] === "op")
+                {
+                    $event->cancel();
+
+                    $player->sendMessage(new Translatable(TextFormat::RED . "%commands.generic.permission"));
+                }
+            }
         }
     }
 
