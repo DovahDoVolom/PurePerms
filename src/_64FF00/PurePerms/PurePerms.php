@@ -111,13 +111,6 @@ class PurePerms extends PluginBase
         $providerName = $this->getConfigValue("data-provider");
         switch(strtolower($providerName))
         {
-            case "mysql":
-                $provider = new MySQLProvider($this);
-
-                if($onEnable === true)
-                    $this->getLogger()->notice($this->getMessage("logger_messages.setProvider_MySQL"));
-                break;
-
             case "sqlite3":
                 $provider = new SQLite3Provider($this);
                 if($onEnable === true)

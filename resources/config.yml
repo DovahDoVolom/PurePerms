@@ -6,7 +6,7 @@
 ---
 # Set default data provider for PurePerms
 # - json (JSON Database)
-# - mysql (MYSQL Database) (UNTESTED)
+# - mysql (MYSQL Database) (Temporarily removed)
 # - sqlite3 (SQLITe3 Database)
 data-provider: json
 
