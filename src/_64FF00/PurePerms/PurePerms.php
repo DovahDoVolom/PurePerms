@@ -2,44 +2,29 @@
 
 namespace _64FF00\PurePerms;
 
-use _64FF00\PurePerms\cmd\AddGroup;
-use _64FF00\PurePerms\cmd\AddParent;
-use _64FF00\PurePerms\cmd\DefGroup;
-use _64FF00\PurePerms\cmd\FPerms;
-use _64FF00\PurePerms\cmd\Groups;
-use _64FF00\PurePerms\cmd\GrpInfo;
-use _64FF00\PurePerms\cmd\ListGPerms;
-use _64FF00\PurePerms\cmd\ListUPerms;
-use _64FF00\PurePerms\cmd\PPInfo;
-use _64FF00\PurePerms\cmd\PPReload;
-use _64FF00\PurePerms\cmd\PPSudo;
-use _64FF00\PurePerms\cmd\RmGroup;
-use _64FF00\PurePerms\cmd\RmParent;
-use _64FF00\PurePerms\cmd\SetGPerm;
-use _64FF00\PurePerms\cmd\SetGroup;
-use _64FF00\PurePerms\cmd\SetUPerm;
-use _64FF00\PurePerms\cmd\UnsetGPerm;
-use _64FF00\PurePerms\cmd\UnsetUPerm;
-use _64FF00\PurePerms\cmd\UsrInfo;
-use _64FF00\PurePerms\data\UserDataManager;
-use _64FF00\PurePerms\noeul\NoeulAPI;
-use _64FF00\PurePerms\provider\DefaultProvider;
-use _64FF00\PurePerms\provider\MySQLProvider;
-use _64FF00\PurePerms\provider\ProviderInterface;
-use _64FF00\PurePerms\provider\YamlV1Provider;
-use _64FF00\PurePerms\task\PPExpDateCheckTask;
+use _64FF00\PurePerms\Commands\AddRank;
+use _64FF00\PurePerms\Commands\DefRank;
+use _64FF00\PurePerms\Commands\PLPerms;
+use _64FF00\PurePerms\Commands\ListRanks;
+use _64FF00\PurePerms\Commands\PPInfo;
+use _64FF00\PurePerms\Commands\RmRank;
+use _64FF00\PurePerms\Commands\UnSetUserPerm;
+use _64FF00\PurePerms\Commands\SetUserPerm;
+use _64FF00\PurePerms\Commands\SetRank;
+use _64FF00\PurePerms\DataManager\UserDataManager;
+use _64FF00\PurePerms\DataProviders\SQLite3Provider;
+use _64FF00\PurePerms\DataProviders\DefaultProvider;
+use _64FF00\PurePerms\DataProviders\MySQLProvider;
+use _64FF00\PurePerms\DataProviders\ProviderInterface;
+use _64FF00\PurePerms\DataProviders\JsonProvider;
+use _64FF00\PurePerms\Task\PPExpDateCheckTask;
 
 use pocketmine\permission\PermissionManager;
 use pocketmine\player\IPlayer;
-
 use pocketmine\world\World;
-
 use pocketmine\permission\DefaultPermissions;
-
 use pocketmine\player\Player;
-
 use pocketmine\plugin\PluginBase;
-
 use Ramsey\Uuid\Uuid;
 use RuntimeException;
 
@@ -72,9 +57,6 @@ class PurePerms extends PluginBase
     /** @var PPMessages $messages */
     private $messages;
 
-    /** @var NoeulAPI $noeulAPI */
-    private $noeulAPI;
-
     /** @var ProviderInterface $provider */
     private $provider;
 
@@ -86,98 +68,38 @@ class PurePerms extends PluginBase
     public function onLoad(): void
     {
         $this->saveDefaultConfig();
-
-        $this->fixConfig();
-
         $this->messages = new PPMessages($this);
-
-        $this->noeulAPI = new NoeulAPI($this);
-
         $this->userDataMgr = new UserDataManager($this);
-
-        if($this->getConfigValue("enable-multiworld-perms") === false)
-        {
-            $this->getLogger()->info($this->getMessage("logger_messages.onLoad_01"));
-            $this->getLogger()->info($this->getMessage("logger_messages.onLoad_02"));
-        }
-        else
-        {
-            $this->getLogger()->info($this->getMessage("logger_messages.onLoad_03"));
-        }
     }
     
     public function onEnable(): void
     {
         $this->registerCommands();
-
         $this->setProvider();
-
         $this->registerPlayers();
-
         $this->getServer()->getPluginManager()->registerEvents(new PPListener($this), $this);
-
         $this->getScheduler()->scheduleRepeatingTask(new PPExpDateCheckTask($this), 72000);
     }
 
     public function onDisable(): void
     {
         $this->unregisterPlayers();
-
         if($this->isValidProvider())
             $this->provider->close();
-    }
-
-    private function fixConfig()
-    {
-        $config = $this->getConfig();
-
-        if(!$config->exists("default-language"))
-            $config->set("default-language", "en");
-
-        if(!$config->exists("disable-op"))
-            $config->set("disable-op", true);
-
-        if(!$config->exists("enable-multiworld-perms"))
-            $config->set("enable-multiworld-perms", false);
-
-        if(!$config->exists("enable-noeul-sixtyfour"))
-            $config->set("enable-noeul-sixtyfour", false);
-
-        if(!$config->exists("noeul-minimum-pw-length"))
-            $config->set("noeul-minimum-pw-length", 6);
-
-        if(!$config->exists("superadmin-ranks"))
-            $config->set("superadmin-ranks", ["OP"]);
-
-        $this->saveConfig();
-        $this->reloadConfig();
     }
 
     private function registerCommands()
     {
         $commandMap = $this->getServer()->getCommandMap();
-
-        if($this->getNoeulAPI()->isNoeulEnabled())
-            $commandMap->register("pureperms", new PPSudo($this, "ppsudo", $this->getMessage("cmds.ppsudo.desc") . ' #64FF00'));
-
-        $commandMap->register("pureperms", new AddGroup($this, "addgroup", $this->getMessage("cmds.addgroup.desc") . ' #64FF00'));
-        $commandMap->register("pureperms", new AddParent($this, "addparent", $this->getMessage("cmds.addparent.desc") . ' #64FF00'));
-        $commandMap->register("pureperms", new DefGroup($this, "defgroup", $this->getMessage("cmds.defgroup.desc") . ' #64FF00'));
-        $commandMap->register("pureperms", new FPerms($this, "fperms", $this->getMessage("cmds.fperms.desc") . ' #64FF00'));
-        $commandMap->register("pureperms", new Groups($this, "groups", $this->getMessage("cmds.groups.desc") . ' #64FF00'));
-        $commandMap->register("pureperms", new GrpInfo($this, "grpinfo", $this->getMessage("cmds.grpinfo.desc") . ' #64FF00'));
-        $commandMap->register("pureperms", new ListGPerms($this, "listgperms", $this->getMessage("cmds.listgperms.desc") . ' #64FF00'));
-        $commandMap->register("pureperms", new ListUPerms($this, "listuperms", $this->getMessage("cmds.listuperms.desc") . ' #64FF00'));
+        $commandMap->register("pureperms", new AddRank($this, "addrank", $this->getMessage("cmds.addgroup.desc") . ' #64FF00'));
+        $commandMap->register("pureperms", new DefRank($this, "defrank", $this->getMessage("cmds.defgroup.desc") . ' #64FF00'));
+        $commandMap->register("pureperms", new PLPerms($this, "plperms", $this->getMessage("cmds.fperms.desc") . ' #64FF00'));
+        $commandMap->register("pureperms", new ListRanks($this, "listranks", $this->getMessage("cmds.groups.desc") . ' #64FF00'));
         $commandMap->register("pureperms", new PPInfo($this, "ppinfo", $this->getMessage("cmds.ppinfo.desc") . ' #64FF00'));
-        $commandMap->register("pureperms", new PPReload($this, "ppreload", $this->getMessage("cmds.ppreload.desc") . ' #64FF00'));
-        $commandMap->register("pureperms", new RmGroup($this, "rmgroup", $this->getMessage("cmds.rmgroup.desc") . ' #64FF00'));
-        $commandMap->register("pureperms", new RmParent($this, "rmparent", $this->getMessage("cmds.rmparent.desc") . ' #64FF00'));
-        $commandMap->register("pureperms", new SetGPerm($this, "setgperm", $this->getMessage("cmds.setgperm.desc") . ' #64FF00'));
-        $commandMap->register("pureperms", new SetGroup($this, "setgroup", $this->getMessage("cmds.setgroup.desc") . ' #64FF00'));
-        $commandMap->register("pureperms", new SetUPerm($this, "setuperm", $this->getMessage("cmds.setuperm.desc") . ' #64FF00'));
-        $commandMap->register("pureperms", new UnsetGPerm($this, "unsetgperm", $this->getMessage("cmds.unsetgperm.desc") . ' #64FF00'));
-        $commandMap->register("pureperms", new UnsetUPerm($this, "unsetuperm", $this->getMessage("cmds.unsetuperm.desc") . ' #64FF00'));
-        $commandMap->register("pureperms", new UsrInfo($this, "usrinfo", $this->getMessage("cmds.usrinfo.desc") . ' #64FF00'));
+        $commandMap->register("pureperms", new RmRank($this, "rmrank", $this->getMessage("cmds.rmgroup.desc") . ' #64FF00'));
+        $commandMap->register("pureperms", new SetRank($this, "setrank", $this->getMessage("cmds.setgroup.desc") . ' #64FF00'));
+        $commandMap->register("pureperms", new SetUserPerm($this, "setuperm", $this->getMessage("cmds.setuperm.desc") . ' #64FF00'));
+        $commandMap->register("pureperms", new UnSetUserPerm($this, "unsetuperm", $this->getMessage("cmds.unsetuperm.desc") . ' #64FF00'));
 
     }
 
@@ -187,49 +109,26 @@ class PurePerms extends PluginBase
     private function setProvider($onEnable = true)
     {
         $providerName = $this->getConfigValue("data-provider");
-
         switch(strtolower($providerName))
         {
-            case "mysql":
-
-                $provider = new MySQLProvider($this);
-
+            case "sqlite3":
+                $provider = new SQLite3Provider($this);
                 if($onEnable === true)
-                    $this->getLogger()->notice($this->getMessage("logger_messages.setProvider_MySQL"));
-
+                    $this->getLogger()->notice($this->getMessage("logger_messages.setProvider_SQLITE3"));
                 break;
-
-            case "yamlv1":
-
-                $provider = new YamlV1Provider($this);
-
+            case "json":
+                $provider = new JsonProvider($this);
                 if($onEnable === true)
-                    $this->getLogger()->notice($this->getMessage("logger_messages.setProvider_YAMLv1"));
-
+                    $this->getLogger()->notice($this->getMessage("logger_messages.setProvider_JSON"));
                 break;
-
-            case "yamlv2":
-
-                $provider = new DefaultProvider($this);
-
-                if($onEnable === true)
-                    $this->getLogger()->notice($this->getMessage("logger_messages.setProvider_YAMLv2"));
-
-                break;
-
             default:
-
                 $provider = new DefaultProvider($this);
-
                 if($onEnable === true)
                     $this->getLogger()->warning($this->getMessage("logger_messages.setProvider_NotFound", "'$providerName'"));
-
                 break;
         }
-
         if($provider instanceof ProviderInterface)
             $this->provider = $provider;
-
         $this->updateGroups();
     }
 
@@ -251,13 +150,10 @@ class PurePerms extends PluginBase
     public function addGroup($groupName)
     {
         $groupsData = $this->getProvider()->getGroupsData();
-
         if(!$this->isValidGroupName($groupName))
             return self::INVALID_NAME;
-
         if(isset($groupsData[$groupName]))
             return self::ALREADY_EXISTS;
-
         $groupsData[$groupName] = [
             "alias" => "",
             "isDefault" => false,
@@ -268,11 +164,8 @@ class PurePerms extends PluginBase
             "worlds" => [
             ]
         ];
-
         $this->getProvider()->setGroupsData($groupsData);
-
         $this->updateGroups();
-
         return self::SUCCESS;
     }
 
@@ -285,7 +178,6 @@ class PurePerms extends PluginBase
     {
         if(preg_match("/([0-9]+)d([0-9]+)h([0-9]+)m/", $date, $result_array) and count($result_array) === 4)
             return time() + ($result_array[1] * 86400) + ($result_array[2] * 3600) + ($result_array[3] * 60);
-
         return -1;
     }
 
@@ -296,10 +188,8 @@ class PurePerms extends PluginBase
     public function getAttachment(Player $player)
     {
         $uniqueId = $this->getValidUUID($player);
-
         if(!isset($this->attachments[$uniqueId]))
             throw new RuntimeException("Tried to calculate permissions on " .  $player->getName() . " using null attachment");
-
         return $this->attachments[$uniqueId];
     }
 
@@ -310,7 +200,6 @@ class PurePerms extends PluginBase
     public function getConfigValue($key)
     {
         $value = $this->getConfig()->getNested($key);
-
         if($value === null)
         {
             $this->getLogger()->warning($this->getMessage("logger_messages.getConfigValue_01", $key));
@@ -322,16 +211,15 @@ class PurePerms extends PluginBase
     }
 
     /**
-     * @param null $levelName
+     * @param null $WorldName
      * @return PPGroup|null
      */
-    public function getDefaultGroup($levelName = null)
+    public function getDefaultGroup($WorldName = null)
     {
         $defaultGroups = [];
-
         foreach($this->getGroups() as $defaultGroup)
         {
-            if($defaultGroup->isDefault($levelName))
+            if($defaultGroup->isDefault($WorldName))
                 $defaultGroups[] = $defaultGroup;
         }
 
@@ -356,7 +244,7 @@ class PurePerms extends PluginBase
             {
                 if(count($tempGroup->getParentGroups()) === 0)
                 {
-                    $this->setDefaultGroup($tempGroup, $levelName);
+                    $this->setDefaultGroup($tempGroup, $WorldName);
 
                     return $tempGroup;
                 }
@@ -380,9 +268,7 @@ class PurePerms extends PluginBase
                 if($group->getAlias() === $groupName)
                     return $group;
             }
-
             $this->getLogger()->debug($this->getMessage("logger_messages.getGroup_01", $groupName));
-
             return null;
         }
 
@@ -392,7 +278,6 @@ class PurePerms extends PluginBase
         if(empty($group->getData()))
         {
             $this->getLogger()->warning($this->getMessage("logger_messages.getGroup_02", $groupName));
-
             return null;
         }
 
@@ -406,7 +291,6 @@ class PurePerms extends PluginBase
     {
         if($this->isGroupsLoaded !== true)
             throw new RuntimeException("No groups loaded, maybe a provider error?");
-
         return $this->groups;
     }
 
@@ -415,13 +299,6 @@ class PurePerms extends PluginBase
         return $this->messages->getMessage($node, ...$vars);
     }
 
-    /**
-     * @return NoeulAPI
-     */
-    public function getNoeulAPI()
-    {
-        return $this->noeulAPI;
-    }
 
     /**
      * @param PPGroup $group
@@ -430,14 +307,12 @@ class PurePerms extends PluginBase
     public function getOnlinePlayersInGroup(PPGroup $group)
     {
         $users = [];
-
         foreach($this->getServer()->getOnlinePlayers() as $player)
         {
-            foreach($this->getServer()->getWorldManager()->getWorlds() as $level)
+            foreach($this->getServer()->getWorldManager()->getWorlds() as $World)
             {
-                $levelName = $level->getDisplayName();
-
-                if($this->userDataMgr->getGroup($player, $levelName) === $group)
+                $WorldName = $World->getDisplayName();
+                if($this->userDataMgr->getGroup($player, $WorldName) === $group)
                     $users[] = $player;
             }
         }
@@ -447,16 +322,15 @@ class PurePerms extends PluginBase
 
     /**
      * @param IPlayer $player
-     * @param $levelName
+     * @param $WorldName
      * @return array
      */
-    public function getPermissions(IPlayer $player, $levelName)
+    public function getPermissions(IPlayer $player, $WorldName)
     {
         // TODO: Fix this
-        $group = $this->userDataMgr->getGroup($player, $levelName);
-
-        $groupPerms = $group->getGroupPermissions($levelName);
-        $userPerms = $this->userDataMgr->getUserPermissions($player, $levelName);
+        $group = $this->userDataMgr->getGroup($player, $WorldName);
+        $groupPerms = $group->getGroupPermissions($WorldName);
+        $userPerms = $this->userDataMgr->getUserPermissions($player, $WorldName);
 
         return array_merge($groupPerms, $userPerms);
     }
@@ -468,7 +342,6 @@ class PurePerms extends PluginBase
     public function getPlayer($userName)
     {
         $player = $this->getServer()->getPlayerByPrefix($userName);
-
         return $player instanceof Player ? $player : $this->getServer()->getOfflinePlayer($userName);
     }
 
@@ -524,10 +397,8 @@ class PurePerms extends PluginBase
     public function getValidUUID(Player $player)
     {
         $uuid = $player->getUniqueId();
-
         if($uuid instanceof Uuid)
             return $uuid->toString();
-
         $this->getLogger()->debug("Invalid UUID detected! *cri* (userName: " . $player->getName() . ", isConnected: " . ($player->isConnected() ? "true" : "false") . ", isOnline: " . ($player->isOnline() ? "true" : "false") . ", isValid: " . (Uuid::isValid($uuid) ? "true" : "false") .  ")");
 
         return null;
@@ -549,7 +420,6 @@ class PurePerms extends PluginBase
     {
         if(!isset($this->provider) || ($this->provider === null) || !($this->provider instanceof ProviderInterface))
             return false;
-
         return true;
     }
 
@@ -559,15 +429,11 @@ class PurePerms extends PluginBase
     public function registerPlayer(Player $player)
     {
         $this->getLogger()->debug($this->getMessage("logger_messages.registerPlayer", $player->getName()));
-
         $uniqueId = $this->getValidUUID($player);
-
         if(!isset($this->attachments[$uniqueId]))
         {
             $attachment = $player->addAttachment($this);
-
             $this->attachments[$uniqueId] = $attachment;
-
             $this->updatePermissions($player);
         }
     }
@@ -580,21 +446,6 @@ class PurePerms extends PluginBase
         }
     }
 
-    public function reload()
-    {
-        $this->reloadConfig();
-        $this->saveDefaultConfig();
-
-        $this->messages->reloadMessages();
-
-        $this->setProvider(false);
-
-        foreach($this->getServer()->getOnlinePlayers() as $player)
-        {
-            $this->updatePermissions($player);
-        }
-    }
-
     /**
      * @param $groupName
      * @return bool
@@ -603,30 +454,24 @@ class PurePerms extends PluginBase
     {
         if(!$this->isValidGroupName($groupName))
             return self::INVALID_NAME;
-
         $groupsData = $this->getProvider()->getGroupsData();
-
         if(!isset($groupsData[$groupName]))
             return self::NOT_FOUND;
-
         unset($groupsData[$groupName]);
-
         $this->getProvider()->setGroupsData($groupsData);
-
         $this->updateGroups();
-
         return self::SUCCESS;
     }
 
     /**
      * @param PPGroup $group
-     * @param $levelName
+     * @param $WorldName
      */
-    public function setDefaultGroup(PPGroup $group, $levelName = null)
+    public function setDefaultGroup(PPGroup $group, $WorldName = null)
     {
         foreach($this->getGroups() as $currentGroup)
         {
-            if($levelName === null)
+            if($WorldName === null)
             {
                 $isDefault = $currentGroup->getNode("isDefault");
 
@@ -635,25 +480,24 @@ class PurePerms extends PluginBase
             }
             else
             {
-                $isDefault = $currentGroup->getWorldNode($levelName, "isDefault");
-
+                $isDefault = $currentGroup->getWorldNode($WorldName, "isDefault");
                 if($isDefault)
-                    $currentGroup->removeWorldNode($levelName, "isDefault");
+                    $currentGroup->removeWorldNode($WorldName, "isDefault");
             }
         }
 
-        $group->setDefault($levelName);
+        $group->setDefault($WorldName);
     }
 
     /**
      * @param IPlayer $player
      * @param PPGroup $group
-     * @param null $levelName
+     * @param null $WorldName
      * @param int $time
      */
-    public function setGroup(IPlayer $player, PPGroup $group, $levelName = null, $time = -1)
+    public function setGroup(IPlayer $player, PPGroup $group, $WorldName = null, $time = -1)
     {
-        $this->userDataMgr->setGroup($player, $group, $levelName, $time);
+        $this->userDataMgr->setGroup($player, $group, $WorldName, $time);
     }
 
     public function sortGroupData()
@@ -664,12 +508,11 @@ class PurePerms extends PluginBase
 
             if($this->getConfigValue("enable-multiworld-perms"))
             {
-                /** @var World $level */
-                foreach($this->getServer()->getWorldManager()->getWorlds() as $level)
+                /** @var World $World */
+                foreach($this->getServer()->getWorldManager()->getWorlds() as $World)
                 {
-                    $levelName = $level->getDisplayName();
-
-                    $ppGroup->createWorldData($levelName);
+                    $WorldName = $World->getDisplayName();
+                    $ppGroup->createWorldData($WorldName);
                 }
             }
         }
@@ -679,41 +522,34 @@ class PurePerms extends PluginBase
     {
         if(!$this->isValidProvider())
             throw new RuntimeException("Failed to load groups: Invalid data provider");
-
         // Make group list empty first to reload it
         $this->groups = [];
-
         foreach(array_keys($this->getProvider()->getGroupsData()) as $groupName)
         {
             $this->groups[$groupName] = new PPGroup($this, $groupName);
         }
-
         if(empty($this->groups))
             throw new RuntimeException("No groups found, I guess there's definitely something wrong with your data provider... *cough cough*");
-
         $this->isGroupsLoaded = true;
-
         $this->sortGroupData();
     }
 
     /**
      * @param IPlayer $player
-     * @param string|null $levelName
+     * @param string|null $WorldName
      */
-    public function updatePermissions(IPlayer $player, string $levelName = null)
+    public function updatePermissions(IPlayer $player, string $WorldName = null)
     {
         if($player instanceof Player)
         {
             if($this->getConfigValue("enable-multiworld-perms") == null) {
-                $levelName = null;
-            }elseif($levelName == null) {
-                $levelName = $player->getWorld()->getDisplayName();
+                $WorldName = null;
+            }elseif($WorldName == null) {
+                $WorldName = $player->getWorld()->getDisplayName();
             }
-
             $permissions = [];
-
             /** @var string $permission */
-            foreach($this->getPermissions($player, $levelName) as $permission)
+            foreach($this->getPermissions($player, $WorldName) as $permission)
             {
                 if($permission === '*')
                 {
@@ -725,7 +561,6 @@ class PurePerms extends PluginBase
                 else
                 {
                     $isNegative = substr($permission, 0, 1) === "-";
-
                     if($isNegative)
                         $permission = substr($permission, 1);
 
@@ -734,12 +569,9 @@ class PurePerms extends PluginBase
             }
 
             $permissions[self::CORE_PERM] = true;
-
             /** @var \pocketmine\permission\PermissionAttachment $attachment */
             $attachment = $this->getAttachment($player);
-
             $attachment->clearPermissions();
-
             $attachment->setPermissions($permissions);
         }
     }
@@ -762,15 +594,12 @@ class PurePerms extends PluginBase
     public function unregisterPlayer(Player $player)
     {
         $this->getLogger()->debug($this->getMessage("logger_messages.unregisterPlayer", $player->getName()));
-
         $uniqueId = $this->getValidUUID($player);
-
         // Do not try to remove attachments with invalid unique ids
         if($uniqueId !== null)
         {
             if(isset($this->attachments[$uniqueId]))
                 $player->removeAttachment($this->attachments[$uniqueId]);
-
             unset($this->attachments[$uniqueId]);
         }
     }

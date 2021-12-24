@@ -2,8 +2,8 @@
 
 namespace _64FF00\PurePerms;
 
-use _64FF00\PurePerms\event\PPGroupChangedEvent;
-use _64FF00\PurePerms\event\PPRankExpiredEvent;
+use _64FF00\PurePerms\EventManager\PPGroupChangedEvent;
+use _64FF00\PurePerms\EventManager\PPRankExpiredEvent;
 use pocketmine\event\Listener;
 use pocketmine\event\entity\EntityTeleportEvent;
 use pocketmine\event\player\PlayerCommandPreprocessEvent;
@@ -45,7 +45,6 @@ class PPListener implements Listener
     public function onGroupChanged(PPGroupChangedEvent $event)
     {
         $player = $event->getPlayer();
-
         $this->plugin->updatePermissions($player);
     }
 
@@ -56,7 +55,6 @@ class PPListener implements Listener
     public function onLevelChange(EntityTeleportEvent $event)
     {
         if($event->isCancelled()) return;
-
         $player = $event->getEntity();
         if($player instanceof Player) {
             $this->plugin->updatePermissions($player, $event->getTo()->getWorld()->getDisplayName());
@@ -107,14 +105,7 @@ class PPListener implements Listener
     public function onPlayerLogin(PlayerLoginEvent $event)
     {
         $player = $event->getPlayer();
-
         $this->plugin->registerPlayer($player);
-
-        if($this->plugin->getNoeulAPI()->isNoeulEnabled())
-            $this->plugin->getNoeulAPI()->deAuth($player);
-
-        if(!$this->plugin->getNoeulAPI()->isAuthed($player))
-            $this->plugin->getNoeulAPI()->sendAuthMsg($player);
     }
 
     /**
@@ -124,7 +115,6 @@ class PPListener implements Listener
     public function onPlayerQuit(PlayerQuitEvent $event)
     {
         $player = $event->getPlayer();
-
         $this->plugin->unregisterPlayer($player);
     }
 
@@ -135,7 +125,6 @@ class PPListener implements Listener
     public function onRankExpired(PPRankExpiredEvent $event)
     {
         $player = $event->getPlayer();
-
         $this->plugin->setGroup($player, $this->plugin->getDefaultGroup());
     }
 }
