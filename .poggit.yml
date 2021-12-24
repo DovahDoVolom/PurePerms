@@ -1,8 +1,7 @@
---- # Poggit-CI Manifest. Open the CI at https://poggit.pmmp.io/ci/Vecnavium/PurePerms 
-build-by-default: true
+--- # Poggit-CI Manifest. Open the CI at https://poggit.pmmp.io/ci/poggit-orphanage/PurePerms
 branches:
-- stable
 - master
+- multiworld-fix
 projects:
   PurePerms:
     path: ""
