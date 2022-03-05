@@ -384,14 +384,9 @@ class PurePerms extends PluginBase
      * @param Player $player
      * @return null|string
      */
-    public function getValidUUID(Player $player)
+    public function getValidUUID(Player $player) : string
     {
-        $uuid = $player->getUniqueId();
-        if($uuid instanceof Uuid)
-            return $uuid->toString();
-        $this->getLogger()->debug("Invalid UUID detected! *cri* (userName: " . $player->getName() . ", isConnected: " . ($player->isConnected() ? "true" : "false") . ", isOnline: " . ($player->isOnline() ? "true" : "false") . ", isValid: " . (Uuid::isValid($uuid) ? "true" : "false") .  ")");
-
-        return null;
+		return $player->getUniqueId()->toString();
     }
 
     /**
@@ -585,13 +580,9 @@ class PurePerms extends PluginBase
     {
         $this->getLogger()->debug($this->getMessage("logger_messages.unregisterPlayer", $player->getName()));
         $uniqueId = $this->getValidUUID($player);
-        // Do not try to remove attachments with invalid unique ids
-        if($uniqueId !== null)
-        {
-            if(isset($this->attachments[$uniqueId]))
-                $player->removeAttachment($this->attachments[$uniqueId]);
-            unset($this->attachments[$uniqueId]);
-        }
+		if(isset($this->attachments[$uniqueId]))
+			$player->removeAttachment($this->attachments[$uniqueId]);
+		unset($this->attachments[$uniqueId]);
     }
 
     public function unregisterPlayers()
