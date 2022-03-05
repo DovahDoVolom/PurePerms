@@ -93,7 +93,7 @@ class PurePerms extends PluginBase
         $commandMap = $this->getServer()->getCommandMap();
         $commandMap->register("pureperms", new AddRank($this, "addrank", $this->getMessage("cmds.addgroup.desc") . ' #64FF00'));
         $commandMap->register("pureperms", new DefRank($this, "defrank", $this->getMessage("cmds.defgroup.desc") . ' #64FF00'));
-        $commandMap->register("pureperms", new PLPerms($this, "plperms", $this->getMessage("cmds.fperms.desc") . ' #64FF00'));
+        $commandMap->register("pureperms", new PLPerms($this, "plperms", $this->getMessage("cmds.plperms.desc") . ' #64FF00'));
         $commandMap->register("pureperms", new ListRanks($this, "listranks", $this->getMessage("cmds.groups.desc") . ' #64FF00'));
         $commandMap->register("pureperms", new PPInfo($this, "ppinfo", $this->getMessage("cmds.ppinfo.desc") . ' #64FF00'));
         $commandMap->register("pureperms", new RmRank($this, "rmrank", $this->getMessage("cmds.rmgroup.desc") . ' #64FF00'));
@@ -348,19 +348,9 @@ class PurePerms extends PluginBase
     /**
      * @return array
      */
-    public function getPocketMinePerms()
+    public function getPocketMinePerms() : array
     {
-        if($this->pmDefaultPerms === [])
-        {
-            /** @var \pocketmine\permission\Permission $permission */
-            foreach(PermissionManager::getInstance()->getPermissions() as $permission)
-            {
-                if(strpos($permission->getName(), DefaultPermissions::ROOT) !== false)
-                    $this->pmDefaultPerms[] = $permission;
-            }
-        }
-
-        return $this->pmDefaultPerms;
+        return array_keys(PermissionManager::getInstance()->getPermissions());
     }
 
     /**
@@ -394,14 +384,9 @@ class PurePerms extends PluginBase
      * @param Player $player
      * @return null|string
      */
-    public function getValidUUID(Player $player)
+    public function getValidUUID(Player $player) : string
     {
-        $uuid = $player->getUniqueId();
-        if($uuid instanceof Uuid)
-            return $uuid->toString();
-        $this->getLogger()->debug("Invalid UUID detected! *cri* (userName: " . $player->getName() . ", isConnected: " . ($player->isConnected() ? "true" : "false") . ", isOnline: " . ($player->isOnline() ? "true" : "false") . ", isValid: " . (Uuid::isValid($uuid) ? "true" : "false") .  ")");
-
-        return null;
+		return $player->getUniqueId()->toString();
     }
 
     /**
@@ -595,13 +580,9 @@ class PurePerms extends PluginBase
     {
         $this->getLogger()->debug($this->getMessage("logger_messages.unregisterPlayer", $player->getName()));
         $uniqueId = $this->getValidUUID($player);
-        // Do not try to remove attachments with invalid unique ids
-        if($uniqueId !== null)
-        {
-            if(isset($this->attachments[$uniqueId]))
-                $player->removeAttachment($this->attachments[$uniqueId]);
-            unset($this->attachments[$uniqueId]);
-        }
+		if(isset($this->attachments[$uniqueId]))
+			$player->removeAttachment($this->attachments[$uniqueId]);
+		unset($this->attachments[$uniqueId]);
     }
 
     public function unregisterPlayers()
