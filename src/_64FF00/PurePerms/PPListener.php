@@ -71,29 +71,13 @@ class PPListener implements Listener
             $command = substr($message, 1);
             $args = explode(" ", $command);
 
-            if(!$this->plugin->getNoeulAPI()->isAuthed($event->getPlayer()))
+            $disableOp = $this->plugin->getConfigValue("disable-op");
+
+            if($disableOp and $args[0] === "op")
             {
                 $event->cancel();
 
-                if($args[0] === "ppsudo" or $args[0] === "help")
-                {
-                    $this->plugin->getServer()->dispatchCommand($player, $command);
-                }
-                else
-                {
-                    $this->plugin->getNoeulAPI()->sendAuthMsg($player);
-                }
-            }
-            else
-            {
-                $disableOp = $this->plugin->getConfigValue("disable-op");
-
-                if($disableOp and $args[0] === "op")
-                {
-                    $event->cancel();
-
-                    $player->sendMessage(new Translatable(TextFormat::RED . "%commands.generic.permission"));
-                }
+                $player->sendMessage(new Translatable(TextFormat::RED . "%commands.generic.permission"));
             }
         }
     }
