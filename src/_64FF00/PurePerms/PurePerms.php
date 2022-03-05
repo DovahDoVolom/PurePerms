@@ -93,7 +93,7 @@ class PurePerms extends PluginBase
         $commandMap = $this->getServer()->getCommandMap();
         $commandMap->register("pureperms", new AddRank($this, "addrank", $this->getMessage("cmds.addgroup.desc") . ' #64FF00'));
         $commandMap->register("pureperms", new DefRank($this, "defrank", $this->getMessage("cmds.defgroup.desc") . ' #64FF00'));
-        $commandMap->register("pureperms", new PLPerms($this, "plperms", $this->getMessage("cmds.fperms.desc") . ' #64FF00'));
+        $commandMap->register("pureperms", new PLPerms($this, "plperms", $this->getMessage("cmds.plperms.desc") . ' #64FF00'));
         $commandMap->register("pureperms", new ListRanks($this, "listranks", $this->getMessage("cmds.groups.desc") . ' #64FF00'));
         $commandMap->register("pureperms", new PPInfo($this, "ppinfo", $this->getMessage("cmds.ppinfo.desc") . ' #64FF00'));
         $commandMap->register("pureperms", new RmRank($this, "rmrank", $this->getMessage("cmds.rmgroup.desc") . ' #64FF00'));
