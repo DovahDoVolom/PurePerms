@@ -348,19 +348,9 @@ class PurePerms extends PluginBase
     /**
      * @return array
      */
-    public function getPocketMinePerms()
+    public function getPocketMinePerms() : array
     {
-        if($this->pmDefaultPerms === [])
-        {
-            /** @var \pocketmine\permission\Permission $permission */
-            foreach(PermissionManager::getInstance()->getPermissions() as $permission)
-            {
-                if(strpos($permission->getName(), DefaultPermissions::ROOT) !== false)
-                    $this->pmDefaultPerms[] = $permission;
-            }
-        }
-
-        return $this->pmDefaultPerms;
+        return array_keys(PermissionManager::getInstance()->getPermissions());
     }
 
     /**
