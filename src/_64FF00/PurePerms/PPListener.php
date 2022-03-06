@@ -2,7 +2,7 @@
 
 namespace _64FF00\PurePerms;
 
-use _64FF00\PurePerms\EventManager\PPGroupChangedEvent;
+use _64FF00\PurePerms\EventManager\PPRankChangedEvent;
 use _64FF00\PurePerms\EventManager\PPRankExpiredEvent;
 use pocketmine\event\Listener;
 use pocketmine\event\entity\EntityTeleportEvent;
@@ -42,7 +42,7 @@ class PPListener implements Listener
      * @param PPGroupChangedEvent $event
      * @priority LOWEST
      */
-    public function onGroupChanged(PPGroupChangedEvent $event)
+    public function onGroupChanged(PPRankChangedEvent $event)
     {
         $player = $event->getPlayer();
         $this->plugin->updatePermissions($player);

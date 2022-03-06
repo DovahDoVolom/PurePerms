@@ -10,7 +10,7 @@ use pocketmine\event\plugin\PluginEvent;
 use pocketmine\player\IPlayer;
 use pocketmine\world\World;
 
-class PPGroupChangedEvent extends PluginEvent
+class PPRankChangedEvent extends PluginEvent
 {
     /*
         PurePerms by 64FF00 (Twitter: @64FF00)

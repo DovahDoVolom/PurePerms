@@ -4,7 +4,7 @@ namespace _64FF00\PurePerms\DataManager;
 
 use _64FF00\PurePerms\PPGroup;
 use _64FF00\PurePerms\PurePerms;
-use _64FF00\PurePerms\EventManager\PPGroupChangedEvent;
+use _64FF00\PurePerms\EventManager\PPRankChangedEvent;
 
 use pocketmine\player\IPlayer;
 
@@ -156,7 +156,7 @@ class UserDataManager
             $this->setWorldData($player, $WorldName, $worldData);
         }
 
-        $event = new PPGroupChangedEvent($this->plugin, $player, $group, $WorldName);
+        $event = new PPRankChangedEvent($this->plugin, $player, $group, $WorldName);
 
         $event->call();
     }

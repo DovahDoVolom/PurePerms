@@ -10,6 +10,8 @@
 # - sqlite3 (SQLITe3 Database)
 data-provider: json
 
+disable-op: false
+
 # Set the default language for PurePerms
 # - en
 # English message resource by @64FF00 and @Samueljh1 (GitHub)
