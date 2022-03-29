@@ -3,11 +3,8 @@
     <b>Manage your permissions like you did on Bukkit. The best permissions manager for PocketMine-MP.</b>
 </p>
 
-<p align="center">
-    <img alt="GitHubrelease" src="https://img.shields.io/github/v/release/Vecnavium/PurePerms?label=release&sort=semver">
-      <img alt="Stars" src= "https://img.shields.io/github/stars/Vecnavium/PurePerms?style=for-the-badge">
-    <a href="https://discord.gg/6M9tGyWPjr"><img src="https://img.shields.io/discord/837701868649709568?label=discord&color=7289DA&logo=discord" alt="Discord" /></a>
-</p>
+
+It's time for everyone to use alternatives as PurePerms & PureChat is outdated in a sense of the features itself and the functionality. The official alternatives that are actually better than PurePerms and PureChat are the following: [GroupsAPI](https://github.com/alvin0319/GroupsAPI) & [RankSystem](https://github.com/IvanCraft623/RankSystem)
 
 # Commands
 
@@ -29,3 +26,6 @@ Command | Description | Permission
 - Multi-rank inheritance system to allow you to inherit rank permissions
 - Supports JSON, SQLITe3 + MySQL providers
 - Provides simple and flexible PurePerms usage and stable.
+
+    [GroupsAPI](https://github.com/alvin0319/GroupsAPI)
+    [RankSystem](https://github.com/IvanCraft623/RankSystem)
