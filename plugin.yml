@@ -1,34 +1,49 @@
+
+# PurePerms by 64FF00 (xktiverz@gmail.com, @64ff00 for Twitter)
+
 name: PurePerms
 main: _64FF00\PurePerms\PurePerms
-version: "INDEV"
-api: [1.7.0]
-load: STARTUP
-author: 64FF00
-website: https://github.com/64FF00/PurePerms
+version: 2.0.2
+api: [4.0.0]
+load: POSTWORLD
+author: "Vecnavium , 64FF00 & ProjectInfinity"
 permissions:
   pperms:
-    description: ""
-    children:
-      pperms.command:
-        description: ""
-        children:
-          pperms.command.addgroup:
-            description: ""
-          pperms.command.grouplist:
-            description: ""
-          pperms.command.ppinfo:
-            description: ""
-          pperms.command.ppreload:
-            description: ""
-          pperms.command.removegroup:
-            description: ""
-          pperms.command.setgperm:
-            description: ""
-          pperms.command.setgroup:
-            description: ""
-          pperms.command.setuperm:
-            description: ""
-          pperms.command.unsetgperm:
-            description: ""
-          pperms.command.unsetuperm:
-            description: ""
+    default: op
+    description: "PurePerms by 64FF00! (Twitter: @64FF00)"
+  plperms.command:
+    default: op
+    description: "Allows you to use all PurePerms commands."
+  pperms.command.addrank:
+    default: op
+    description: "Allows you to add a new rank"
+  pperms.command.defrank:
+    default: op
+    description: "Allows you to set the default rank manually."
+  pperms.command.plperms:
+    default: op
+    description: "Allows you to find permissions for a specific plugin."
+  pperms.command.ranks:
+    default: op
+    description: "Allows you to see a list of all rank."
+  pperms.command.listuperms:
+    default: op
+    description: "Allows you to see a list of all permissions from a user."
+  pperms.command.ppinfo:
+    default: true
+    description: "Allows you to get current PurePerms information."
+  pperms.command.rmrank:
+    default: op
+    description: "Allows you to remove a rank from the ranks list."
+  pperms.command.setrank:
+    default: op
+    description: "Allows you to set rank for a user."
+  pperms.command.setuperm:
+    default: op
+    description: "Allows you to add a permission to a user."
+  pperms.command.unsetgperm:
+    default: op
+    description: "Allows you to remove a permission from the group."
+  pperms.command.unsetuperm:
+    default: op
+    description: "Allows you to remove a permission from the user."
